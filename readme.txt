@@ -1,0 +1,1 @@
+The blue boxes are the ground truth and the colored ones are the detections
