@@ -10,23 +10,10 @@
 /ImgOut/Batch2-Comparison10.jpg
 /ImgOut/Batch2-Comparison11.jpg
 /ImgOut/Batch2-Comparison12.jpg
-/Dataset/image/
-/Dataset/maskHardF/
-/Dataset/maskHardG/
-/Dataset/maskHardN/
-/Dataset/maskSecurityF/
-/Dataset/maskSecurityG/
-/Dataset/maskSecurityN/
+
 /LesionDataset/LesionDataset/
 /LesionDataset/labels/
 /LesionDataset/images/
-/Dataset/maskHardJ/
-/Dataset/maskSecurityJ/
 /LesionDataset/
-/SuperviselyData/
-/SuperviselyDataFilippo/
-/SuperviselyDataGiuseppe/
-/SuperviselyDataNicolas/
-/TESTEST/
 
-/Dataset/
+/annotationData/

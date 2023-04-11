@@ -1,13 +1,8 @@
 import json
 from functions import *
-
-import numpy as np
 from PIL import Image, ImageDraw
 import cv2
-import pandas as pd
-import pygsheets
 
-common_path = 'SuperviselyData'
 maskHarddir = 'maskHard'
 maskSecudir = 'maskSecurity'
 
@@ -28,14 +23,12 @@ def mydraw(drawHS, imageHS, polygon, cl):
     return maskHard, maskSecu
 
 
-prList = []
-dsList = []
-vidList = []
-
-createDIR('image')
+counter = 0
+data_folder = 'annotationData/'  # The destination folder
+createDIR(data_folder, 'image')
 for firstname in ['N', 'J', 'G', 'F']:
-    createDIR(maskHarddir + firstname)
-    createDIR(maskSecudir + firstname)
+    createDIR('annotationData/', maskHarddir + firstname)
+    createDIR('annotationData/', maskSecudir + firstname)
 json_eval = open('Evaluation3.json')
 eval = json.load(json_eval)
 evals = eval['evals']
@@ -45,7 +38,6 @@ ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 for project in api.project.get_list(ws.id):  # for each project
     if project.name != 'Endometriosis_WS1':
         continue
-
     for ds in api.dataset.get_list(project.id):
         evalfr = evals[0]
         for evalfr in evals:
@@ -169,18 +161,18 @@ for project in api.project.get_list(ws.id):  # for each project
                     fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
                     vidname = evalfr['frame']
                     # save frame as png file
-                    cv2.imwrite('Dataset/image/' + fr_names[0], fr_extracted[0])
+                    cv2.imwrite(data_folder + 'image/' + fr_names[0], fr_extracted[0])
                     # save the masks
                     if Hardexists:
-                        maskHardN.save('Dataset/' + maskHarddir + 'N/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskHardJ.save('Dataset/' + maskHarddir + 'J/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskHardG.save('Dataset/' + maskHarddir + 'G/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskHardF.save('Dataset/' + maskHarddir + 'F/' + vidname + "_%d.png" % fr['index'], 'PNG')
+                        maskHardN.save(data_folder + maskHarddir + 'N/' + vidname + "_%d.png" % fr['index'], 'PNG')
+                        maskHardJ.save(data_folder + maskHarddir + 'J/' + vidname + "_%d.png" % fr['index'], 'PNG')
+                        maskHardG.save(data_folder + maskHarddir + 'G/' + vidname + "_%d.png" % fr['index'], 'PNG')
+                        maskHardF.save(data_folder + maskHarddir + 'F/' + vidname + "_%d.png" % fr['index'], 'PNG')
                     if Secuexists:
-                        maskSecuN.save('Dataset/' + maskSecudir + 'N/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskSecuJ.save('Dataset/' + maskSecudir + 'J/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskSecuG.save('Dataset/' + maskSecudir + 'G/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskSecuF.save('Dataset/' + maskSecudir + 'F/' + vidname + "_%d.png" % fr['index'], 'PNG')  #
-                    prList.append(project)
-                    dsList.append(ds)
-                    vidList.append(vidname)
+                        maskSecuN.save(data_folder + maskSecudir + 'N/' + vidname + "_%d.png" % fr['index'], 'PNG')
+                        maskSecuJ.save(data_folder + maskSecudir + 'J/' + vidname + "_%d.png" % fr['index'], 'PNG')
+                        maskSecuG.save(data_folder + maskSecudir + 'G/' + vidname + "_%d.png" % fr['index'], 'PNG')
+                        maskSecuF.save(data_folder + maskSecudir + 'F/' + vidname + "_%d.png" % fr['index'], 'PNG')  #
+                    counter += 1
+
+print(str(counter) + ' images, masks are saved in ' + data_folder)

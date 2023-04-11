@@ -1,9 +1,9 @@
 import os
 
 
-def createDIR(name_dir):
+def createDIR(folder,name_dir):
     # create new directory for images
-    path = 'Dataset/' + name_dir
+    path = folder + name_dir
     isExist = os.path.exists(path)
     if not isExist:
         os.makedirs(path)
