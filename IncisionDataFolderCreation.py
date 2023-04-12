@@ -1,10 +1,14 @@
 import json
+import shutil
+
 from functions import *
 from PIL import Image, ImageDraw
 import cv2
 
-maskHarddir = 'maskHard'
-maskSecudir = 'maskSecurity'
+batch_num = 7
+data_folder = 'annotationData/'  # The destination folder
+maskHarddir = 'maskTreat'
+maskSecudir = 'maskCheck'
 
 
 def mydraw(drawHS, imageHS, polygon, cl):
@@ -24,19 +28,19 @@ def mydraw(drawHS, imageHS, polygon, cl):
 
 
 counter = 0
-data_folder = 'annotationData/'  # The destination folder
+shutil.rmtree(data_folder)
 createDIR(data_folder, 'image')
 for firstname in ['N', 'J', 'G', 'F']:
-    createDIR('annotationData/', maskHarddir + firstname)
-    createDIR('annotationData/', maskSecudir + firstname)
-json_eval = open('Evaluation3.json')
+    createDIR(data_folder, maskHarddir + firstname)
+    createDIR(data_folder, maskSecudir + firstname)
+json_eval = open('Evaluation' + str(batch_num) + '.json')
 eval = json.load(json_eval)
 evals = eval['evals']
 api, tm = get_supervisely_team()
 ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
 for project in api.project.get_list(ws.id):  # for each project
-    if project.name != 'Endometriosis_WS1':
+    if project.name != 'Endometriosis_WS6' and project.name != 'Endometriosis_WS7':
         continue
     for ds in api.dataset.get_list(project.id):
         evalfr = evals[0]
@@ -76,19 +80,18 @@ for project in api.project.get_list(ws.id):  # for each project
                     drawSecuG = ImageDraw.Draw(image_SecuG)
                     drawHardF = ImageDraw.Draw(image_HardF)
                     drawSecuF = ImageDraw.Draw(image_SecuF)
-                    maskHardN = image_HardN.convert("L")
 
                     maskHardN = image_HardN.convert("L")
-                    maskSecuN = image_HardN.convert("L")
+                    maskSecuN = image_SecuN.convert("L")
 
-                    maskHardJ = image_HardN.convert("L")
-                    maskSecuJ = image_HardN.convert("L")
+                    maskHardJ = image_HardJ.convert("L")
+                    maskSecuJ = image_SecuJ.convert("L")
 
-                    maskHardG = image_HardN.convert("L")
-                    maskSecuG = image_HardN.convert("L")
+                    maskHardG = image_HardG.convert("L")
+                    maskSecuG = image_SecuG.convert("L")
 
-                    maskHardF = image_HardN.convert("L")
-                    maskSecuF = image_HardN.convert("L")
+                    maskHardF = image_HardF.convert("L")
+                    maskSecuF = image_SecuF.convert("L")
 
                     dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3}
                     Hardexists = False
@@ -161,18 +164,18 @@ for project in api.project.get_list(ws.id):  # for each project
                     fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
                     vidname = evalfr['frame']
                     # save frame as png file
-                    cv2.imwrite(data_folder + 'image/' + fr_names[0], fr_extracted[0])
+                    cv2.imwrite(data_folder + 'image/' + fr_names[0], cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
                     # save the masks
                     if Hardexists:
-                        maskHardN.save(data_folder + maskHarddir + 'N/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskHardJ.save(data_folder + maskHarddir + 'J/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskHardG.save(data_folder + maskHarddir + 'G/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskHardF.save(data_folder + maskHarddir + 'F/' + vidname + "_%d.png" % fr['index'], 'PNG')
+                        maskHardN.save(data_folder + maskHarddir + 'N/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
+                        maskHardJ.save(data_folder + maskHarddir + 'J/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
+                        maskHardG.save(data_folder + maskHarddir + 'G/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
+                        maskHardF.save(data_folder + maskHarddir + 'F/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
                     if Secuexists:
-                        maskSecuN.save(data_folder + maskSecudir + 'N/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskSecuJ.save(data_folder + maskSecudir + 'J/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskSecuG.save(data_folder + maskSecudir + 'G/' + vidname + "_%d.png" % fr['index'], 'PNG')
-                        maskSecuF.save(data_folder + maskSecudir + 'F/' + vidname + "_%d.png" % fr['index'], 'PNG')  #
+                        maskSecuN.save(data_folder + maskSecudir + 'N/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
+                        maskSecuJ.save(data_folder + maskSecudir + 'J/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
+                        maskSecuG.save(data_folder + maskSecudir + 'G/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
+                        maskSecuF.save(data_folder + maskSecudir + 'F/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')  #
                     counter += 1
 
 print(str(counter) + ' images, masks are saved in ' + data_folder)

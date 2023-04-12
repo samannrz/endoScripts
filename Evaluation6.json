@@ -1,0 +1,88 @@
+{
+    "evals": [
+        {
+            "frame": "2021-09-09_045914_VID003_trim1.mp4",
+            "index": [
+                250
+            ]
+        },
+        {
+            "frame": "2021-09-09_045914_VID003_trim1.mp4",
+            "index": [
+                103
+            ]
+        },
+        {
+            "frame": "VID001_B_trim.mp4",
+            "index": [
+                465
+            ]
+        },
+        {
+            "frame": "2022-04-28_090817_VID003_Trim.mp4",
+            "index": [
+                465
+            ]
+        },
+        {
+            "frame": "2022-06-20_082157_VID001_Trim.mp4",
+            "index": [
+                556
+            ]
+        },
+        {
+            "frame": "surgery08_Ch2_001_V_trim1.mp4",
+            "index": [
+                462
+            ]
+        },
+        {
+            "frame": "surgery09_2021-10-06_054340_VID002_trim.mp4",
+            "index": [
+                35
+            ]
+        },
+        {
+            "frame": "surgery13_2021-10-12_075954_VID001_trim.mp4",
+            "index": [
+                494
+            ]
+        },
+        {
+            "frame": "surgery14_2021-05-26_072651_VID001_trim1.mp4",
+            "index": [
+                6
+            ]
+        },
+        {
+            "frame": "surgery15_Ch2_002_V_trim2.mp4",
+            "index": [
+                1594
+            ]
+        },
+        {
+            "frame": "surgery16_2022-05-26_051947_VID001_trim1.mp4",
+            "index": [
+                172
+            ]
+        },
+        {
+            "frame": "surgery17_2021-05-11_112546_VID001_trim1.mp4",
+            "index": [
+                384
+            ]
+        },
+        {
+            "frame": "surgery23_Video_001_trim5.mp4",
+            "index": [
+                336
+            ]
+        },
+        {
+            "frame": "surgery24_2022-03-23_061004_VID002_trim2.mp4",
+            "index": [
+                456
+            ]
+        }
+    ]
+}

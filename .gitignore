@@ -1,15 +1,4 @@
-/ImgOut/Batch2-Comparison1.jpg
-/ImgOut/Batch2-Comparison2.jpg
-/ImgOut/Batch2-Comparison3.jpg
-/ImgOut/Batch2-Comparison4.jpg
-/ImgOut/Batch2-Comparison5.jpg
-/ImgOut/Batch2-Comparison6.jpg
-/ImgOut/Batch2-Comparison7.jpg
-/ImgOut/Batch2-Comparison8.jpg
-/ImgOut/Batch2-Comparison9.jpg
-/ImgOut/Batch2-Comparison10.jpg
-/ImgOut/Batch2-Comparison11.jpg
-/ImgOut/Batch2-Comparison12.jpg
+
 
 /LesionDataset/LesionDataset/
 /LesionDataset/labels/
@@ -17,3 +6,4 @@
 /LesionDataset/
 
 /annotationData/
+/ImgOut/

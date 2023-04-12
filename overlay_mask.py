@@ -2,13 +2,13 @@ from PIL import Image
 import numpy as np
 
 
-def overlayMask(image_orig, mask1):
+def overlayMask(image_orig, mask1, mask_color=(255, 0, 0)):
     bg = image_orig.convert('RGB')
 
     overlay = mask1.convert('RGB')
-    overlay = reColor(overlay, (255, 0, 0))  # I change the mask to red
+    overlay = reColor(overlay, mask_color)  # change the mask color
     mask1 = overlay.convert('L')
-    mask1 = mask1.point(lambda p: 80 if p < 225 else 0)  # if the point is white it is become transparent
+    mask1 = mask1.point(lambda p: 80 if p < 250 else 0)  # if the point is white it is become transparent
 
     bg.paste(overlay, None, mask1)  # paste the overlay to image when a mask exists
     return bg
@@ -25,10 +25,10 @@ def reColor(mask, color):
     return mask2
 
 
-# Main:
-image_orig = Image.open(
-    '/media/saman/data/PycharmProjects/endoDetection/Dataset/image/2021-12-06_004908_VID001_Trim.mp4_59.jpg')
-maskH_N = Image.open(
-    '/media/saman/data/PycharmProjects/endoDetection/Dataset/maskHardF/2021-12-06_004908_VID001_Trim.mp4_59.png')
-o = overlayMask(image_orig, maskH_N)
-o.show()
+def main(original_image_path, mask_path):
+    # Main:
+    image_orig = Image.open(original_image_path)
+    mask = Image.open(mask_path)
+    # You can change the mask color by setting a the mask_color parameter to a defined (r,g,b)
+    o = overlayMask(image_orig, mask)
+    o.show()
