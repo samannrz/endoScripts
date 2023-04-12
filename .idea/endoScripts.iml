@@ -12,6 +12,8 @@
       <excludeFolder url="file://$MODULE_DIR$/Dataset/maskSecurityG" />
       <excludeFolder url="file://$MODULE_DIR$/Dataset/maskSecurityJ" />
       <excludeFolder url="file://$MODULE_DIR$/Dataset/maskSecurityN" />
+      <excludeFolder url="file://$MODULE_DIR$/ImgOut" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationData" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (general_env)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
