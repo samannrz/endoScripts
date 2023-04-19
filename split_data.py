@@ -1,3 +1,4 @@
+import datetime
 import os
 import random
 import shutil
@@ -26,8 +27,9 @@ def remove_redundant_data(files, sample_rate):
     return select_file, select_frame
 
 
-dir_path = '/data/projects/dataset/LesionDatasetImages'
-dict_file = 'data_split'
+dir_path = '/data/projects/datasets/LesionDatasetImages'
+
+dict_file = 'data_split_'+str(datetime.date.today())
 split_dict = {'train': [], 'test': [], 'valid': []}
 
 # List all the png files in the directory
@@ -62,7 +64,7 @@ print('Num of surgeries: %s' % num_surgeries)
 # Shuffle the list of surgery files
 random.shuffle(unique_surgeries)
 # Split the list of surgery files into three parts
-train_surg, valid_surg, test_surg = np.split(unique_surgeries, [int(num_surgeries * 0.87), int(num_surgeries * 0.95)])
+train_surg, valid_surg, test_surg = np.split(unique_surgeries, [int(num_surgeries * 0.88), int(num_surgeries * 0.94)])
 print('Num of Train surgeries: %d' %len(train_surg))
 print('Num of Test surgeries: %d' %len(test_surg))
 print('Num of Valid surgeries: %d' %len(valid_surg))
@@ -76,6 +78,10 @@ for f in valid_surg:
 split_dict['train']=train_files
 split_dict['test'] =test_files
 split_dict['valid']=valid_files
+split_dict['train_surg'] = train_surg
+split_dict['test_surg'] = test_surg
+split_dict['valid_surg'] = valid_surg
+
 
 #### Finalyzing ######
 print('Num of Train files: %d' %len(train_files))
@@ -85,3 +91,5 @@ print('Total files sum: %d' % (len(valid_files)+len(train_files)+len(test_files)
 with open(dict_file + '.pkl', 'wb') as fp:
     pickle.dump(split_dict, fp)
     print('dictionary saved successfully to %s' % dict_file + '.pkl')
+
+import split_data_stats

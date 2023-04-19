@@ -67,5 +67,5 @@ def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_df):
         pass
     wks_write = sh.worksheet_by_title(sheet_name)
     wks_write.clear('A1', None, '*')
-    wks_write.set_dataframe(data_df, (1, 1), encoding='utf-8', fit=True)
+    wks_write.set_dataframe(data_df, (1, 1), encoding='utf-8', fit=True, copy_index=True)
     wks_write.frozen_rows = 1
