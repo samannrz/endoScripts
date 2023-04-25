@@ -8,12 +8,12 @@ CLASSES_DICT = {
 image_path = '/data/projects/datasets/LesionDatasetImages'
 label_path = '/data/projects/datasets/LesionLabelsYOLO'
 NUM_TO_VISUALIZE = 20
-detect_path = '/data/projects/yolov5/runs/detect/exp3/'
+detect_path = '/data/projects/yolov5/runs/detect/exp27/'
 
 
 def find_key(num):
     for k, v in CLASSES_DICT.items():
-        if v == num:
+        if int(v) == int(num):
             return k
 
 
@@ -24,13 +24,6 @@ def visualize_sample(image, annot_file):
         box = [0] * 4
         for line in f:
             string = line.split(' ')
-            if annot_file == '2021-04-07_064027_VID003_trim1.mp4_00107.txt':
-                print('hey')
-                print(line)
-                print(string)
-            else:
-                continue
-
             label = find_key(string[0])
             width = float(string[3])
             height = float(string[4][:-1])
@@ -43,13 +36,13 @@ def visualize_sample(image, annot_file):
             cv2.rectangle(
                 image,
                 (int(box[0]), int(box[1])), (int(box[2]), int(box[3])),
-                (0, 255, 0), 2
+                (255, 0, 0), 4
             )
             cv2.putText(
                 image, label, (int(box[0]), int(box[1] - 5)),
-                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 1
+                cv2.FONT_HERSHEY_SIMPLEX, .7, (255, 0, 0), 2
             )
-        # cv2.imwrite(detect_path + image_name, image)
+        cv2.imwrite(detect_path + image_name, image)
 
 
 images = os.listdir(detect_path)

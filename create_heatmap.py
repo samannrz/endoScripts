@@ -7,10 +7,10 @@ import matplotlib.pyplot as plt
 
 # Load the three black and white masks
 image_dir = 'annotationData/image'
-mask1_dir = 'annotationData/maskCheckN'
-mask2_dir = 'annotationData/maskCheckJ'
-mask3_dir = 'annotationData/maskCheckG'
-mask4_dir = 'annotationData/maskCheckF'
+mask1_dir = 'annotationData/maskTreatN'
+mask2_dir = 'annotationData/maskTreatJ'
+mask3_dir = 'annotationData/maskTreatG'
+mask4_dir = 'annotationData/maskTreatF'
 image_name = '2022-03-02_042629_VID001_11367_11595.mp4_00047.png'
 dest_folder = 'heatmap/'
 mask1 = 1 - plt.imread(os.path.join(mask1_dir, image_name))
