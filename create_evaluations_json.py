@@ -190,59 +190,158 @@
 # 		}
 # 	]
 # }
-##----Batch 7----------------------------------------
+# ##----Batch 7----------------------------------------
+# dict ={ 'evals':[
+# 		{'frame':'surgery27_Video_001_trim1.mp4',
+# 		 'index': [422]
+# 		},
+# 		{'frame':'Surgery28_2021-08-26_075748_VID002_Trim.mp4',
+# 		 'index': [1600]
+# 		},
+# 		{'frame':'Surgery31_Ch2_001_V_Trim.mp4',
+# 		 'index': [66]
+# 		},
+# 		{'frame':'surgery32_ch1_video_01_trim1.mp4',
+# 		 'index': [234]
+# 		},
+# 		{'frame':'Surgery33_Video_001_trim1.mp4',
+# 		 'index': [585]
+# 		},
+# 		{'frame':'Surgery35_2021-09-16_064524_VID001_Trim.mp4',
+# 		 'index': [908]
+# 		},
+# 		{'frame':'surgery37_Video_001_trim.mp4',
+# 		 'index': [166]
+# 		},
+# 		{'frame':'surgery40_ch1_video_01_trim.mp4',
+# 		 'index': [140]
+# 		},
+# 		{'frame':'surgery41_Video_001_trim1.mp4',
+# 		 'index': [245]
+# 		},
+# 		{'frame':'2022-03-02_042629_VID001_11367_11595.mp4',
+# 		 'index': [47]
+# 		},
+# 		{'frame':'2022-03-16_032148_VID001_5570_6820.mp4',
+# 		 'index': [1591]
+# 		},
+# 		{'frame':'2022-03-23_001702_VID001_0_227.mp4',
+# 		 'index': [0]
+# 		},
+# 		{'frame':'FCF1_GY_20220608-022_VID001_anon_0_760.mkv',
+# 		 'index': [82]
+# 		},
+# 		{'frame':'FCF1_GY_20220608-022_VID001_anon_0_760.mkv',
+# 		 'index': [89]
+# 		},
+# 		{'frame':'FCF1_GY_20220613-025_VID001_anon_12913_13673.mp4',
+# 		 'index': [472]
+# 		}
+# 	]
+# }
+##----Batch 8----------------------------------------
 dict ={ 'evals':[
-		{'frame':'surgery27_Video_001_trim1.mp4',
-		 'index': [422]
+		{'frame':'FCF1_GY_20220517-020_VID001_anon_760_1772.mkv',
+		 'index': [339]
 		},
-		{'frame':'Surgery28_2021-08-26_075748_VID002_Trim.mp4',
-		 'index': [1600]
+		{'frame':'FCF1_GY_20220517-020_VID002_anon_2279_3038.mkv',
+		 'index': [134]
 		},
-		{'frame':'Surgery31_Ch2_001_V_Trim.mp4',
-		 'index': [66]
+		{'frame':'FCF1_GY_20220608-022_VID001_anon_1013_1266.mkv',
+		 'index': [143]
 		},
-		{'frame':'surgery32_ch1_video_01_trim1.mp4',
-		 'index': [234]
+		{'frame':'FCF1_GY_20220609-023_VID004_anon_5824_6330.mp4',
+		 'index': [133]
 		},
-		{'frame':'Surgery33_Video_001_trim1.mp4',
-		 'index': [585]
+		{'frame':'FCF1_GY_20220610-024_VID001_anon_3038_3798.mp4',
+		 'index': [450]
 		},
-		{'frame':'Surgery35_2021-09-16_064524_VID001_Trim.mp4',
-		 'index': [908]
+		{'frame':'FCF1_GY_20220610-024_VID001_anon_5317_6836.mp4',
+		 'index': [459]
 		},
-		{'frame':'surgery37_Video_001_trim.mp4',
-		 'index': [166]
+		{'frame':'FCF1_GY_20220613-025_VID001_anon_10634_11394.mp4',
+		 'index': [354]
 		},
-		{'frame':'surgery40_ch1_video_01_trim.mp4',
-		 'index': [140]
+		{'frame':'bsp1_GY_20230406_002_VID001_trim1.mp4',
+		 'index': [183]
 		},
-		{'frame':'surgery41_Video_001_trim1.mp4',
-		 'index': [245]
+		{'frame':'bsp1_GY_20230406_006_VID001_trim1.mp4',
+		 'index': [39]
 		},
-		{'frame':'2022-03-02_042629_VID001_11367_11595.mp4',
-		 'index': [47]
+		{'frame':'bsp1_GY_20230407_002_VID002_trim1.mp4',
+		 'index': [319]
 		},
-		{'frame':'2022-03-16_032148_VID001_5570_6820.mp4',
-		 'index': [1591]
+		{'frame':'bsp1_GY_20230425_002_VID001_trim1.mp4',
+		 'index': [91]
 		},
-		{'frame':'2022-03-23_001702_VID001_0_227.mp4',
-		 'index': [0]
+		{'frame':'FCF1_GY_20220913-034_VID008_anon_trim1.mp4',
+		 'index': [1562]
 		},
-		{'frame':'FCF1_GY_20220608-022_VID001_anon_0_760.mkv',
-		 'index': [82]
+		{'frame':'FCF1_GY_20220916-035_VID003_anon_trim1.mp4',
+		 'index': [486]
 		},
-		{'frame':'FCF1_GY_20220608-022_VID001_anon_0_760.mkv',
-		 'index': [89]
+		{'frame':'FCF1_GY_20220921-036_VID002_anon_trim1.mp4',
+		 'index': [311]
 		},
-		{'frame':'FCF1_GY_20220613-025_VID001_anon_12913_13673.mp4',
-		 'index': [472]
+		{'frame':'FCF1_GY_20221024_041_VID016_anon_trim1.mp4',
+		 'index': [153]
 		}
 	]
 }
-
+###########################
+# dict ={ 'evals':[
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'',
+# 		 'index': []
+# 		},
+# 		{'frame':'4',
+# 		 'index': []
+# 		}
+# 	]
+# }
+#
+######################
 import json
 json_object = json.dumps(dict, indent=4)
-batch_num = 7
+batch_num = 8
 # Writing to sample.json
 with open('Evaluation' + str(batch_num)+'.json', 'w') as outfile:
 	outfile.write(json_object)

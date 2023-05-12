@@ -8,7 +8,7 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 7
+batch_num = 8
 common_path = 'annotationData/'
 dest_folder = 'ImgOut'
 plot_ann = 1
@@ -237,10 +237,18 @@ for j in range(math.ceil(lenimg / batch_size)):
                     2 * batch_size * 1080 + space_height * (batch_size + 1)),
                                 (255, 255, 255))
 
-        # Paste the images onto the white background
+        if image_overlayed_ref1.width <1920:
+            newsize = (1920, 1080)
+            image_overlayed_ref1 = image_overlayed_ref1.resize(newsize)
+            image_overlayed_ref2 = image_overlayed_ref2.resize(newsize)
+            image_overlayed_ann2 = image_overlayed_ann2.resize(newsize)
+            image_overlayed_ann1 = image_overlayed_ann1.resize(newsize)
+            image_orig = image_orig.resize(newsize)
         WIDTH = image_overlayed_ref1.width
         HEIGHT = image_orig.height
         # print(WIDTH)
+        # Paste the images onto the white background
+
         im3.paste(image_orig, (0, hh + space_height))
         im3.paste(image_overlayed_ref1, (WIDTH + 10, hh + space_height))
         im3.paste(image_overlayed_ref2, (2 * WIDTH + 20, hh + space_height))
@@ -287,7 +295,6 @@ for j in range(math.ceil(lenimg / batch_size)):
         HNJstat.append(HNJ)
         SNJstat.append(SNJ)
         MNJstat.append(MNJ)
-
 
     im3.save(dest_folder +'/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg")
 

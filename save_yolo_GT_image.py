@@ -8,7 +8,7 @@ CLASSES_DICT = {
 image_path = '/data/projects/datasets/LesionDatasetImages'
 label_path = '/data/projects/datasets/LesionLabelsYOLO'
 NUM_TO_VISUALIZE = 20
-detect_path = '/data/projects/yolov5/runs/detect/exp27/'
+detect_path = '/data/projects/yolov5/runs/detect/exp42/'
 
 
 def find_key(num):

@@ -5,7 +5,7 @@ from functions import *
 from PIL import Image, ImageDraw
 import cv2
 
-batch_num = 7
+batch_num = 8
 data_folder = 'annotationData/'  # The destination folder
 maskHarddir = 'maskTreat'
 maskSecudir = 'maskCheck'
@@ -40,7 +40,7 @@ api, tm = get_supervisely_team()
 ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
 for project in api.project.get_list(ws.id):  # for each project
-    if project.name != 'Endometriosis_WS6' and project.name != 'Endometriosis_WS7':
+    if project.name != 'Endometriosis_WS8' and project.name != 'Endometriosis_WS7':
         continue
     for ds in api.dataset.get_list(project.id):
         evalfr = evals[0]

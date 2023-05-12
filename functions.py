@@ -17,10 +17,10 @@ def find(name, path):
         if name in files:
             return os.path.join(root, name)
 
-
+import cv2
 def extractFrame(video, frame_number):
     vidcap = cv2.VideoCapture(video)
-    vidcap.set(cv2.CAP_PROP_POS_FRAMES, frame_number - 1)
+    vidcap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
     res, frame = vidcap.read()
     return frame
 
