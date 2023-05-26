@@ -5,11 +5,14 @@ from functions import *
 from PIL import Image, ImageDraw
 import cv2
 
-batch_num = 8
+batch_num = 100
 data_folder = 'annotationData/'  # The destination folder
+data_folder = '/data/DATA/DELPHI_incision/'  # The destination folder
+
 maskHarddir = 'maskTreat'
 maskSecudir = 'maskCheck'
-
+dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
+        'incision.consensus': 4}
 
 def mydraw(drawHS, imageHS, polygon, cl):
     if cl == 'Hard Zone':
@@ -30,18 +33,23 @@ def mydraw(drawHS, imageHS, polygon, cl):
 counter = 0
 shutil.rmtree(data_folder)
 createDIR(data_folder, 'image')
-for firstname in ['N', 'J', 'G', 'F']:
+for firstname in [s[0].upper() for s in list(dict.keys())]:
     createDIR(data_folder, maskHarddir + firstname)
     createDIR(data_folder, maskSecudir + firstname)
-json_eval = open('Evaluation' + str(batch_num) + '.json')
+if batch_num == 100:
+    json_eval = open('Evaluation_all' + '.json')
+else:
+    json_eval = open('Evaluation' + str(batch_num) + '.json')
 eval = json.load(json_eval)
 evals = eval['evals']
+print(len(evals))
 api, tm = get_supervisely_team()
 ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
+
 for project in api.project.get_list(ws.id):  # for each project
-    if project.name != 'Endometriosis_WS8' and project.name != 'Endometriosis_WS7':
-        continue
+    # if project.name != 'Endometriosis_WS8' and project.name != 'Endometriosis_WS7':
+    #     continue
     for ds in api.dataset.get_list(project.id):
         evalfr = evals[0]
         for evalfr in evals:
@@ -70,6 +78,11 @@ for project in api.project.get_list(ws.id):  # for each project
                                             (255, 255, 255))
                     image_SecuF = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
                                             (255, 255, 255))
+                    image_HardC = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
+                                            (255, 255, 255))
+                    image_SecuC = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
+                                            (255, 255, 255))
+
 
                     #                 # Create a draw object
                     drawHardN = ImageDraw.Draw(image_HardN)
@@ -80,6 +93,8 @@ for project in api.project.get_list(ws.id):  # for each project
                     drawSecuG = ImageDraw.Draw(image_SecuG)
                     drawHardF = ImageDraw.Draw(image_HardF)
                     drawSecuF = ImageDraw.Draw(image_SecuF)
+                    drawHardC = ImageDraw.Draw(image_HardC)
+                    drawSecuC = ImageDraw.Draw(image_SecuC)
 
                     maskHardN = image_HardN.convert("L")
                     maskSecuN = image_SecuN.convert("L")
@@ -93,7 +108,9 @@ for project in api.project.get_list(ws.id):  # for each project
                     maskHardF = image_HardF.convert("L")
                     maskSecuF = image_SecuF.convert("L")
 
-                    dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3}
+                    maskHardC = image_HardC.convert("L")
+                    maskSecuC = image_SecuC.convert("L")
+
                     Hardexists = False
                     Secuexists = False
                     if fr['index'] not in evalfr['index']:
@@ -158,6 +175,18 @@ for project in api.project.get_list(ws.id):  # for each project
                                 drawSecuF.polygon(polygon, fill=(0, 0, 0))
                                 maskSecuF = image_SecuF.convert("L")
                                 Secuexists = True
+                        elif dict[Annotator] == 4:
+                            if classobj == 'To Treat':
+                                # Draw the polygon on the image
+                                drawHardC.polygon(polygon, fill=(0, 0, 0))
+                                # Convert the image to a mask
+                                maskHardC = image_HardC.convert("L")
+                                Hardexists = True
+                            elif classobj == 'To Check':
+                                # Draw the polygon on the image
+                                drawSecuC.polygon(polygon, fill=(0, 0, 0))
+                                maskSecuC = image_SecuC.convert("L")
+                                Secuexists = True
 
                     # save masks and images
                     # extract the image frame
@@ -167,15 +196,37 @@ for project in api.project.get_list(ws.id):  # for each project
                     cv2.imwrite(data_folder + 'image/' + fr_names[0], cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
                     # save the masks
                     if Hardexists:
-                        maskHardN.save(data_folder + maskHarddir + 'N/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
-                        maskHardJ.save(data_folder + maskHarddir + 'J/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
-                        maskHardG.save(data_folder + maskHarddir + 'G/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
-                        maskHardF.save(data_folder + maskHarddir + 'F/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
+                        maskHardN.save(
+                            data_folder + maskHarddir + 'N/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
+                            'PNG')
+                        maskHardJ.save(
+                            data_folder + maskHarddir + 'J/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
+                            'PNG')
+                        maskHardG.save(
+                            data_folder + maskHarddir + 'G/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
+                            'PNG')
+                        maskHardF.save(
+                            data_folder + maskHarddir + 'F/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
+                            'PNG')
+                        maskHardC.save(
+                            data_folder + maskHarddir + 'I/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
+                            'PNG')
                     if Secuexists:
-                        maskSecuN.save(data_folder + maskSecudir + 'N/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
-                        maskSecuJ.save(data_folder + maskSecudir + 'J/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
-                        maskSecuG.save(data_folder + maskSecudir + 'G/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')
-                        maskSecuF.save(data_folder + maskSecudir + 'F/' + vidname + '_'+str(fr['index']).zfill(5)+ '.png', 'PNG')  #
+                        maskSecuN.save(
+                            data_folder + maskSecudir + 'N/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
+                            'PNG')
+                        maskSecuJ.save(
+                            data_folder + maskSecudir + 'J/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
+                            'PNG')
+                        maskSecuG.save(
+                            data_folder + maskSecudir + 'G/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
+                            'PNG')
+                        maskSecuF.save(
+                            data_folder + maskSecudir + 'F/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
+                            'PNG')  #
+                        maskSecuC.save(
+                            data_folder + maskSecudir + 'I/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
+                            'PNG')  #
                     counter += 1
 
 print(str(counter) + ' images, masks are saved in ' + data_folder)

@@ -345,3 +345,19 @@ batch_num = 8
 # Writing to sample.json
 with open('Evaluation' + str(batch_num)+'.json', 'w') as outfile:
 	outfile.write(json_object)
+
+def merge_evaluations(file_names):
+	new_dict = {'evals': []}
+	for f in file_names:
+		json_eval = open(f)
+		eval = json.load(json_eval)
+		evals = eval['evals']
+		for e in evals:
+			new_dict['evals'].append(e)
+
+
+	json_object = json.dumps(new_dict, indent=4)
+	with open('Evaluation_all' + '.json', 'w') as o:
+		o.write(json_object)
+
+merge_evaluations(['Evaluation3.json','Evaluation4.json','Evaluation5.json','Evaluation6.json','Evaluation7.json','Evaluation8.json'])

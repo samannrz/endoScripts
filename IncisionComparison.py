@@ -14,7 +14,7 @@ dest_folder = 'ImgOut'
 plot_ann = 1
 
 
-def overlayMask(image_orig, mask1, mask2):
+def overlayMasks(image_orig, mask1, mask2):
     # This function takes the two masks and overlay them to the image_orig
     bg = image_orig.convert('RGB')
 
@@ -219,10 +219,10 @@ for j in range(math.ceil(lenimg / batch_size)):
         except ZeroDivisionError:
             MNJ = 1
 
-        image_overlayed_ref1 = overlayMask(image_orig, maskH_N, maskS_N)
-        image_overlayed_ref2 = overlayMask(image_orig, maskH_J, maskS_J)
-        image_overlayed_ann1 = overlayMask(image_orig, maskH_G, maskS_G)
-        image_overlayed_ann2 = overlayMask(image_orig, maskH_F, maskS_F)
+        image_overlayed_ref1 = overlayMasks(image_orig, maskH_N, maskS_N)
+        image_overlayed_ref2 = overlayMasks(image_orig, maskH_J, maskS_J)
+        image_overlayed_ann1 = overlayMasks(image_orig, maskH_G, maskS_G)
+        image_overlayed_ann2 = overlayMasks(image_orig, maskH_F, maskS_F)
 
         if batchstart:
             batchstart = False

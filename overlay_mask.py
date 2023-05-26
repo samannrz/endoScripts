@@ -25,10 +25,13 @@ def reColor(mask, color):
     return mask2
 
 
+
+
+
 def main(original_image_path, mask_path):
     # Main:
     image_orig = Image.open(original_image_path)
     mask = Image.open(mask_path)
-    # You can change the mask color by setting a the mask_color parameter to a defined (r,g,b)
+    # You can change the mask color by setting the mask_color parameter to a defined (r,g,b)
     o = overlayMask(image_orig, mask)
     o.show()
