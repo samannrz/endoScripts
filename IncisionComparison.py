@@ -8,7 +8,7 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 8
+batch_num = 9
 common_path = 'annotationData/'
 dest_folder = 'ImgOut'
 plot_ann = 1

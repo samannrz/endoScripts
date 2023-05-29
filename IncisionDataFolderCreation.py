@@ -5,9 +5,9 @@ from functions import *
 from PIL import Image, ImageDraw
 import cv2
 
-batch_num = 100
+batch_num = 9
 data_folder = 'annotationData/'  # The destination folder
-data_folder = '/data/DATA/DELPHI_incision/'  # The destination folder
+# data_folder = '/data/DATA/DELPHI_incision/'  # The destination folder
 
 maskHarddir = 'maskTreat'
 maskSecudir = 'maskCheck'

@@ -4,7 +4,7 @@ import pygsheets
 
 def createDIR(folder, name_dir):
     # create new directory for images
-    path = folder + name_dir
+    path = os.path.join(folder, name_dir)
     isExist = os.path.exists(path)
     if not isExist:
         os.makedirs(path)
