@@ -239,56 +239,105 @@
 # 		}
 # 	]
 # }
-##----Batch 8----------------------------------------
+# ##----Batch 8----------------------------------------
+# dict = {'evals': [
+#     {'frame': 'FCF1_GY_20220517-020_VID001_anon_760_1772.mkv',
+#      'index': [339]
+#      },
+#     {'frame': 'FCF1_GY_20220517-020_VID002_anon_2279_3038.mkv',
+#      'index': [134]
+#      },
+#     {'frame': 'FCF1_GY_20220608-022_VID001_anon_1013_1266.mkv',
+#      'index': [143]
+#      },
+#     {'frame': 'FCF1_GY_20220609-023_VID004_anon_5824_6330.mp4',
+#      'index': [133]
+#      },
+#     {'frame': 'FCF1_GY_20220610-024_VID001_anon_3038_3798.mp4',
+#      'index': [450]
+#      },
+#     {'frame': 'FCF1_GY_20220610-024_VID001_anon_5317_6836.mp4',
+#      'index': [459]
+#      },
+#     {'frame': 'FCF1_GY_20220613-025_VID001_anon_10634_11394.mp4',
+#      'index': [354]
+#      },
+#     {'frame': 'bsp1_GY_20230406_002_VID001_trim1.mp4',
+#      'index': [183]
+#      },
+#     {'frame': 'bsp1_GY_20230406_006_VID001_trim1.mp4',
+#      'index': [39]
+#      },
+#     {'frame': 'bsp1_GY_20230407_002_VID002_trim1.mp4',
+#      'index': [319]
+#      },
+#     {'frame': 'bsp1_GY_20230425_002_VID001_trim1.mp4',
+#      'index': [91]
+#      },
+#     {'frame': 'FCF1_GY_20220913-034_VID008_anon_trim1.mp4',
+#      'index': [1562]
+#      },
+#     {'frame': 'FCF1_GY_20220916-035_VID003_anon_trim1.mp4',
+#      'index': [486]
+#      },
+#     {'frame': 'FCF1_GY_20220921-036_VID002_anon_trim1.mp4',
+#      'index': [311]
+#      },
+#     {'frame': 'FCF1_GY_20221024_041_VID016_anon_trim1.mp4',
+#      'index': [153]
+#      }
+# ]
+# }
+############ Batch9 ###############
 dict ={ 'evals':[
-		{'frame':'FCF1_GY_20220517-020_VID001_anon_760_1772.mkv',
-		 'index': [339]
+		{'frame':'HBU1-GY-20230412_001_VID001_trim1.mp4',
+		 'index': [944]
 		},
-		{'frame':'FCF1_GY_20220517-020_VID002_anon_2279_3038.mkv',
+		{'frame':'HBU1-GY-20230412_002_VID001_trim1.mp4',
+		 'index': [218]
+		},
+		{'frame':'HBU1-GY-20230412_004_VID001_trim1.mp4',
+		 'index': [1662]
+		},
+		{'frame':'bsp1_GY_20230407_003_VID001_trim3.mp4',
+		 'index': [247]
+		},
+		{'frame':'bsp1_GY_20230407_004_VID001_trim1.mp4',
+		 'index': [96]
+		},
+		{'frame':'bsp1_GY_20230425_003_VID001_trim1.mp4',
+		 'index': [680]
+		},
+		{'frame':'FCF1_GY_20220713_026_VID003_trim1.mp4',
+		 'index': [86]
+		},
+		{'frame':'FCF1_GY_20220725-028_VID002_trim1.mp4',
+		 'index': [753]
+		},
+		{'frame':'FCF1_GY_20220817_031_VID001_trim2.mp4',
+		 'index': [94]
+		},
+		{'frame':'FCF1_GY_20220819_032_VID002_anon_trim1.mp4',
+		 'index': [0]
+		},
+		{'frame':'FCF1_GY_20221014_038_VID001_anon_trim1.mp4',
+		 'index': [428]
+		},
+		{'frame':'FCF1_GY_20221017_040_VID001_anon_trim1.mp4',
 		 'index': [134]
 		},
-		{'frame':'FCF1_GY_20220608-022_VID001_anon_1013_1266.mkv',
-		 'index': [143]
+		{'frame':'FCF1_GY_20221026_044_VID002_anon_trim1.mp4',
+		 'index': [293]
 		},
-		{'frame':'FCF1_GY_20220609-023_VID004_anon_5824_6330.mp4',
-		 'index': [133]
+		{'frame':'FCF1_GY_20221123_045_VID004_anon_trim1.mp4',
+		 'index': [1748]
 		},
-		{'frame':'FCF1_GY_20220610-024_VID001_anon_3038_3798.mp4',
-		 'index': [450]
-		},
-		{'frame':'FCF1_GY_20220610-024_VID001_anon_5317_6836.mp4',
-		 'index': [459]
-		},
-		{'frame':'FCF1_GY_20220613-025_VID001_anon_10634_11394.mp4',
-		 'index': [354]
-		},
-		{'frame':'bsp1_GY_20230406_002_VID001_trim1.mp4',
-		 'index': [183]
-		},
-		{'frame':'bsp1_GY_20230406_006_VID001_trim1.mp4',
-		 'index': [39]
-		},
-		{'frame':'bsp1_GY_20230407_002_VID002_trim1.mp4',
-		 'index': [319]
-		},
-		{'frame':'bsp1_GY_20230425_002_VID001_trim1.mp4',
-		 'index': [91]
-		},
-		{'frame':'FCF1_GY_20220913-034_VID008_anon_trim1.mp4',
-		 'index': [1562]
-		},
-		{'frame':'FCF1_GY_20220916-035_VID003_anon_trim1.mp4',
-		 'index': [486]
-		},
-		{'frame':'FCF1_GY_20220921-036_VID002_anon_trim1.mp4',
-		 'index': [311]
-		},
-		{'frame':'FCF1_GY_20221024_041_VID016_anon_trim1.mp4',
-		 'index': [153]
+		{'frame':'FCF1_GY_20230208_067_VID001_anon_trim1.mp4',
+		 'index': [5]
 		}
 	]
 }
-###########################
+######################
 # dict ={ 'evals':[
 # 		{'frame':'',
 # 		 'index': []
@@ -332,32 +381,34 @@ dict ={ 'evals':[
 # 		{'frame':'',
 # 		 'index': []
 # 		},
-# 		{'frame':'4',
+# 		{'frame':'',
 # 		 'index': []
 # 		}
 # 	]
 # }
-#
+
 ######################
 import json
+
 json_object = json.dumps(dict, indent=4)
-batch_num = 8
+batch_num = 9
 # Writing to sample.json
-with open('Evaluation' + str(batch_num)+'.json', 'w') as outfile:
-	outfile.write(json_object)
+with open('Evaluation' + str(batch_num) + '.json', 'w') as outfile:
+    outfile.write(json_object)
+
 
 def merge_evaluations(file_names):
-	new_dict = {'evals': []}
-	for f in file_names:
-		json_eval = open(f)
-		eval = json.load(json_eval)
-		evals = eval['evals']
-		for e in evals:
-			new_dict['evals'].append(e)
+    new_dict = {'evals': []}
+    for f in file_names:
+        json_eval = open(f)
+        eval = json.load(json_eval)
+        evals = eval['evals']
+        for e in evals:
+            new_dict['evals'].append(e)
 
+    json_object = json.dumps(new_dict, indent=4)
+    with open('Evaluation_all' + '.json', 'w') as o:
+        o.write(json_object)
 
-	json_object = json.dumps(new_dict, indent=4)
-	with open('Evaluation_all' + '.json', 'w') as o:
-		o.write(json_object)
-
-merge_evaluations(['Evaluation3.json','Evaluation4.json','Evaluation5.json','Evaluation6.json','Evaluation7.json','Evaluation8.json'])
+# merge_evaluations(['Evaluation3.json','Evaluation4.json','Evaluation5.json','Evaluation6.json','Evaluation7.json',
+# 'Evaluation8.json'])
