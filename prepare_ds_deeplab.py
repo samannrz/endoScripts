@@ -5,26 +5,30 @@ import numpy as np
 from PIL import Image
 
 from overlay_mask import reColor
+dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
+        'incision.consensus': 4}
+annotator = 4
+orig_path = '/data/DATA/incision/'+str(annotator) + '/'
+dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/orig_data/train_images'
+dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/orig_data/train_masks'
 
-orig_path = '/data/DATA/DELPHI_incision/'
-dest_path_orig = '/data/projects/DeeplabV3/input/incision/orig_data/train_images'
-dest_path_mask = '/data/projects/DeeplabV3/input/incision/orig_data/train_masks'
 
 # moving original images
 orig_path_image = orig_path + 'image'
 for image in os.listdir(orig_path_image):
+    print(os.path.join(dest_path_orig, image))
     shutil.copy(os.path.join(orig_path_image, image), os.path.join(dest_path_orig, image))
 
 
 # moving masks
-path_mask_check = os.path.join(orig_path, 'maskCheckI')
+path_mask_check = os.path.join(orig_path, 'mask/Check/')
 for mask_check in os.listdir(path_mask_check):
     mask = Image.open(os.path.join(path_mask_check, mask_check))
     mask = mask.convert('RGB')
     mask = reColor(mask, color2=(0, 128, 0))
     mask.save(os.path.join(dest_path_mask, mask_check))
 #
-path_mask_treat = os.path.join(orig_path, 'maskTreatI')
+path_mask_treat = os.path.join(orig_path, 'mask/Treat/')
 
 
 
@@ -48,5 +52,4 @@ for mask_treat in os.listdir(path_mask_treat):
 
         mask = Image.fromarray(data)
     mask.save(os.path.join(dest_path_mask, mask_treat))
-
 

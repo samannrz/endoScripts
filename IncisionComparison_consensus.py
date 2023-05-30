@@ -1,3 +1,5 @@
+import shutil
+
 from PIL import Image
 import os
 from functions import createDIR, overlayMasks_incision
@@ -88,3 +90,4 @@ for i in range(lenimg):
     image_overlayed_ann1.save(os.path.join(dest_folder, namevid + '_' + frnumber + '_3.png'))
     image_overlayed_ann2.save(os.path.join(dest_folder, namevid + '_' + frnumber + '_4.png'))
     image_overlayed_C.save(os.path.join(dest_folder, namevid + '_' + frnumber + '_5.png'))
+    shutil.copy(os.path.join(common_path, 'image', images[i]), os.path.join(dest_folder, namevid + '_' + frnumber + '_0.png'))

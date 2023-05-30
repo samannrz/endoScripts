@@ -11,6 +11,7 @@ from statistics import mean
 
 batch_num = 9
 common_path = 'annotationData/'
+machine_path = '/data/projects/IncisionDeepLab/outputs_ep300/inference_results'
 dest_folder = 'ImgOut'
 plot_ann = 1
 
@@ -267,6 +268,10 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         im3.paste(image_overlayed_ann1, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_ann2, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
+
+        image_machine = Image.open(os.path.join(machine_path, images[i]))
+        im3.paste(image_machine, (0, hh + 2 * space_height + HEIGHT - 100))
+
         draw = ImageDraw.Draw(im3)
         font = ImageFont.truetype("arial.ttf", 50)
         # Draw the text on the image
