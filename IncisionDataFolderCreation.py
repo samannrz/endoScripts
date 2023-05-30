@@ -5,29 +5,14 @@ from functions import *
 from PIL import Image, ImageDraw
 import cv2
 
-batch_num = 9
-data_folder = 'annotationData/'  # The destination folder
-# data_folder = '/data/DATA/DELPHI_incision/'  # The destination folder
+batch_num = 100
+#data_folder = 'annotationData/'  # The destination folder
+data_folder = '/data/DATA/DELPHI_incision/'  # The destination folder
 
 maskHarddir = 'maskTreat'
 maskSecudir = 'maskCheck'
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'incision.consensus': 4}
-
-def mydraw(drawHS, imageHS, polygon, cl):
-    if cl == 'Hard Zone':
-        # Draw the polygon on the image
-        drawHS.polygon(polygon, fill=(0, 0, 0))
-        # Convert the image to a mask
-        maskHard = imageHS.convert("L")
-        Hardexists = True
-    elif cl == 'Security Zone':
-        # Draw the polygon on the image
-        drawHS.polygon(polygon, fill=(0, 0, 0))
-        maskSecu = imageHS.convert("L")
-        Secuexists = True
-
-    return maskHard, maskSecu
 
 
 counter = 0
@@ -63,25 +48,25 @@ for project in api.project.get_list(ws.id):  # for each project
                 for fr in frames:
                     # Create an image with a white background
                     image_HardN = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                            (255, 255, 255))
+                                            (0, 0, 0))
                     image_SecuN = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                            (255, 255, 255))
+                                            (0, 0, 0))
                     image_HardJ = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                            (255, 255, 255))
+                                            (0, 0, 0))
                     image_SecuJ = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                            (255, 255, 255))
+                                            (0, 0, 0))
                     image_HardG = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                            (255, 255, 255))
+                                            (0, 0, 0))
                     image_SecuG = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                            (255, 255, 255))
+                                            (0, 0, 0))
                     image_HardF = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                            (255, 255, 255))
+                                            (0, 0, 0))
                     image_SecuF = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                            (255, 255, 255))
+                                            (0, 0, 0))
                     image_HardC = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                            (255, 255, 255))
+                                            (0, 0, 0))
                     image_SecuC = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                            (255, 255, 255))
+                                            (0, 0, 0))
 
 
                     #                 # Create a draw object
@@ -130,13 +115,13 @@ for project in api.project.get_list(ws.id):  # for each project
                         if dict[Annotator] == 0:
                             if classobj == 'To Treat':
                                 # Draw the polygon on the image
-                                drawHardN.polygon(polygon, fill=(0, 0, 0))
+                                drawHardN.polygon(polygon, fill=(255, 255, 255))
                                 # Convert the image to a mask
                                 maskHardN = image_HardN.convert("L")
                                 Hardexists = True
                             elif classobj == 'To Check':
                                 # Draw the polygon on the image
-                                drawSecuN.polygon(polygon, fill=(0, 0, 0))
+                                drawSecuN.polygon(polygon, fill=(255, 255, 255))
                                 maskSecuN = image_SecuN.convert("L")
                                 Secuexists = True
                         elif dict[Annotator] == 1:
@@ -148,43 +133,43 @@ for project in api.project.get_list(ws.id):  # for each project
                                 Hardexists = True
                             elif classobj == 'To Check':
                                 # Draw the polygon on the image
-                                drawSecuJ.polygon(polygon, fill=(0, 0, 0))
+                                drawSecuJ.polygon(polygon, fill=(255, 255, 255))
                                 maskSecuJ = image_SecuJ.convert("L")
                                 Secuexists = True
                         elif dict[Annotator] == 2:
                             if classobj == 'To Treat':
                                 # Draw the polygon on the image
-                                drawHardG.polygon(polygon, fill=(0, 0, 0))
+                                drawHardG.polygon(polygon, fill=(255, 255, 255))
                                 # Convert the image to a mask
                                 maskHardG = image_HardG.convert("L")
                                 Hardexists = True
                             elif classobj == 'To Check':
                                 # Draw the polygon on the image
-                                drawSecuG.polygon(polygon, fill=(0, 0, 0))
+                                drawSecuG.polygon(polygon, fill=(255, 255, 255))
                                 maskSecuG = image_SecuG.convert("L")
                                 Secuexists = True
                         elif dict[Annotator] == 3:
                             if classobj == 'To Treat':
                                 # Draw the polygon on the image
-                                drawHardF.polygon(polygon, fill=(0, 0, 0))
+                                drawHardF.polygon(polygon, fill=(255, 255, 255))
                                 # Convert the image to a mask
                                 maskHardF = image_HardF.convert("L")
                                 Hardexists = True
                             elif classobj == 'To Check':
                                 # Draw the polygon on the image
-                                drawSecuF.polygon(polygon, fill=(0, 0, 0))
+                                drawSecuF.polygon(polygon, fill=(255, 255, 255))
                                 maskSecuF = image_SecuF.convert("L")
                                 Secuexists = True
                         elif dict[Annotator] == 4:
                             if classobj == 'To Treat':
                                 # Draw the polygon on the image
-                                drawHardC.polygon(polygon, fill=(0, 0, 0))
+                                drawHardC.polygon(polygon, fill=(255, 255, 255))
                                 # Convert the image to a mask
                                 maskHardC = image_HardC.convert("L")
                                 Hardexists = True
                             elif classobj == 'To Check':
                                 # Draw the polygon on the image
-                                drawSecuC.polygon(polygon, fill=(0, 0, 0))
+                                drawSecuC.polygon(polygon, fill=(255, 255, 255))
                                 maskSecuC = image_SecuC.convert("L")
                                 Secuexists = True
 

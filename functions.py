@@ -1,6 +1,10 @@
 import os
-import pygsheets
 
+import numpy as np
+import pygsheets
+from PIL import Image
+
+from overlay_mask import reColor
 
 def createDIR(folder, name_dir):
     # create new directory for images
@@ -69,3 +73,28 @@ def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_df):
     wks_write.clear('A1', None, '*')
     wks_write.set_dataframe(data_df, (1, 1), encoding='utf-8', fit=True, copy_index=True)
     wks_write.frozen_rows = 1
+
+def overlayMasks_incision(image_orig, mask1, mask2):
+    # This function takes the two masks and overlay them to the image_orig
+    bg = image_orig.convert('RGB')
+
+    overlay = mask1.convert('RGB')
+    overlay = reColor(overlay, color2=(255, 0, 0))
+
+    overlay2 = mask2.convert('RGB')
+    overlay2 = reColor(overlay2, color2=(0, 255, 0))
+
+
+    # Replace (255,255,0) with (255,0,0)
+    data1 = np.array(overlay)  # "data" is a height x width x 4 numpy array
+    data2 = np.array(overlay2)  # "data" is a height x width x 4 numpy array
+    data = data1 + data2
+    red, green, blue = data.T  # Temporarily unpack the bands for readability
+    two_colored_areas = (red == 255) & (blue == 0) & (green == 255)
+    data[two_colored_areas.T] = (255, 0, 0)  # Transpose back neede
+    overlay_final = Image.fromarray(data)
+    mask_final = overlay_final.convert('L')
+    mask_final = mask_final.point(lambda p: 60 if p > 5 else 0)
+
+    bg.paste(overlay_final, None, mask_final)
+    return bg

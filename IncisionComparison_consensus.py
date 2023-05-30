@@ -1,42 +1,13 @@
-import numpy as np
-from PIL import Image, ImageDraw, ImageFont
-import math
+from PIL import Image
 import os
-import pandas as pd
-from functions import write_to_gsheet, createDIR
-import datetime
-from overlay_mask import reColor
-from statistics import mean
+from functions import createDIR, overlayMasks_incision
 
-batch_num = 100
 common_path = '/data/DATA/DELPHI_incision'
 dest_folder = '/data/DATA/DELPHI_incision/consensus'
-plot_ann = 1
-
-
-def overlayMasks(image_orig, mask1, mask2):
-    # This function takes the two masks and overlay them to the image_orig
-    bg = image_orig.convert('RGB')
-
-    overlay2 = mask2.convert('RGB')
-    overlay2 = reColor(overlay2, (0, 255, 0))
-    mask2 = overlay2.convert('L')
-    mask2 = mask2.point(lambda p: 50 if p < 255 else 0)
-
-    overlay = mask1.convert('RGB')
-    overlay = reColor(overlay, (255, 0, 0))
-    mask1 = overlay.convert('L')
-    mask1 = mask1.point(lambda p: 80 if p < 225 else 0)
-
-
-
-    bg.paste(overlay, None, mask1)
-    bg.paste(overlay2, None, mask2)
-    return bg
 
 
 def initializeMask(size):
-    a = Image.new(mode="RGBA", size=(size[0], size[1]), color="white")
+    a = Image.new(mode="RGBA", size=(size[0], size[1]), color="black")
     return a
 
 
@@ -103,21 +74,17 @@ for i in range(lenimg):
     except:
         print('There is no Security Zone on Consensus\'s annot on ' + images[i][:-4])
 
-    image_overlayed_ref1 = overlayMasks(image_orig, maskH_N, maskS_N)
-    image_overlayed_ref2 = overlayMasks(image_orig, maskH_J, maskS_J)
-    image_overlayed_ann1 = overlayMasks(image_orig, maskH_G, maskS_G)
-    image_overlayed_ann2 = overlayMasks(image_orig, maskH_F, maskS_F)
-    image_overlayed_C = overlayMasks(image_orig, maskH_C, maskS_C)
-
+    image_overlayed_ref1 = overlayMasks_incision(image_orig, maskH_N, maskS_N)
+    image_overlayed_ref2 = overlayMasks_incision(image_orig, maskH_J, maskS_J)
+    image_overlayed_ann1 = overlayMasks_incision(image_orig, maskH_G, maskS_G)
+    image_overlayed_ann2 = overlayMasks_incision(image_orig, maskH_F, maskS_F)
+    image_overlayed_C = overlayMasks_incision(image_orig, maskH_C, maskS_C)
 
     imagename = images[i][:-4]
     namevid, _, frnumber = imagename.rpartition('_')
-    print('writing images to ', os.path.join(dest_folder, namevid + '_' + frnumber + '_1.png'))
+    print('writing images to ', os.path.join(dest_folder, namevid + '_' + frnumber + '_i.png'))
     image_overlayed_ref1.save(os.path.join(dest_folder, namevid + '_' + frnumber + '_1.png'))
     image_overlayed_ref2.save(os.path.join(dest_folder, namevid + '_' + frnumber + '_2.png'))
     image_overlayed_ann1.save(os.path.join(dest_folder, namevid + '_' + frnumber + '_3.png'))
     image_overlayed_ann2.save(os.path.join(dest_folder, namevid + '_' + frnumber + '_4.png'))
     image_overlayed_C.save(os.path.join(dest_folder, namevid + '_' + frnumber + '_5.png'))
-
-
-

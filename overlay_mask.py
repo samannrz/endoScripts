@@ -14,18 +14,15 @@ def overlayMask(image_orig, mask1, mask_color=(255, 0, 0)):
     return bg
 
 
-def reColor(mask, color):
+def reColor(mask, color1=(255, 255, 255), color2=(255, 0, 0)):  # this function replaces color1 with color2 in mask
     data = np.array(mask)  # "data" is a height x width x 4 numpy array
     red, green, blue = data.T  # Temporarily unpack the bands for readability
 
     # Replace white with red... (leaves alpha values alone...)
-    black_areas = (red == 0) & (blue == 0) & (green == 0)
-    data[black_areas.T] = color  # Transpose back needed
+    black_areas = (red == color1[0]) & (blue == color1[2]) & (green == color1[1])
+    data[black_areas.T] = color2  # Transpose back needed
     mask2 = Image.fromarray(data)
     return mask2
-
-
-
 
 
 def main(original_image_path, mask_path):

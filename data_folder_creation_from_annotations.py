@@ -7,7 +7,7 @@ ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
 ANNOTATOR_DICT = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
                   'incision.consensus': 4}
-ANNOTATORS = [4]
+ANNOTATORS = [0]
 dest_path = '/data/DATA/incision'
 for i in ANNOTATORS:
     createDIR(dest_path, str(i))
