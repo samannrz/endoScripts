@@ -1,7 +1,7 @@
 import pygsheets
 
 sheet_id_JL = '1mnzXSZkhnKa67_aRjVHb8HvjZ3cH7rrakRfNUHsVS7o'
-sheet_id_G = '1QErFg8OXCMLTS5DhEn-yvmHXigaDKAXhZV0OwAsCR_w'
+sheet_id_G = '1OAbAP1CRr-iukQMTxx58n8TrJjil6lDhd-GK7X9ZK_8' #'1QErFg8OXCMLTS5DhEn-yvmHXigaDKAXhZV0OwAsCR_w'
 gc = pygsheets.authorize(service_file='keycode/my-gpysheets-3d8d13442005.json')
 sh = gc.open_by_key(sheet_id_G)
 wks = sh.sheet1
@@ -36,7 +36,7 @@ while video_name_new:
 #     wks.update_value('A' + str(hh), wks.cell('A' + str(hh)).value + '.VOB')
 #     hh = hh + 1
 
-print(script_lines)
-with open('/data/Videos/endodata/extract_bash_G.sh', 'w') as f:
+# print(script_lines)
+with open('/data/Videos/endodata/extract_bash_G_2.sh', 'w') as f:
     f.write('#!/bin/sh\n')
     f.write(script_lines)

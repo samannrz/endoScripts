@@ -7,16 +7,16 @@ from PIL import Image
 from overlay_mask import reColor
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'incision.consensus': 4}
-annotator = 4
+annotator = 5
 orig_path = '/data/DATA/incision/'+str(annotator) + '/'
-dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/orig_data/train_images'
-dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/orig_data/train_masks'
+dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/orig_data5/train_images'
+dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/orig_data5/train_masks'
 
 
 # moving original images
 orig_path_image = orig_path + 'image'
 for image in os.listdir(orig_path_image):
-    print(os.path.join(dest_path_orig, image))
+    # print(os.path.join(dest_path_orig, image))
     shutil.copy(os.path.join(orig_path_image, image), os.path.join(dest_path_orig, image))
 
 

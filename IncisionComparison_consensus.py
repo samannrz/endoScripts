@@ -5,7 +5,8 @@ import os
 from functions import createDIR, overlayMasks_incision
 
 common_path = '/data/DATA/DELPHI_incision'
-dest_folder = '/data/DATA/DELPHI_incision/consensus'
+common_path = 'annotationData'
+dest_folder = '/data/DATA/DELPHI_incision/consensus8'
 
 
 def initializeMask(size):
@@ -14,7 +15,7 @@ def initializeMask(size):
 
 
 images = os.listdir(common_path + '/image')
-createDIR('', dest_folder)
+# createDIR('', dest_folder)
 lenimg = len(images)
 print('There are %d images' % lenimg)
 

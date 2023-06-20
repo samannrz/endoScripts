@@ -9,9 +9,10 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 9
+batch_num = 8
 common_path = 'annotationData/'
 machine_path = '/data/projects/IncisionDeepLab/outputs_ep300/inference_results'
+machine_path = '/data/projects/IncisionDeepLab/outputs/inference_results'
 dest_folder = 'ImgOut'
 plot_ann = 1
 
@@ -25,7 +26,6 @@ def overlayMasks_incision(image_orig, mask1, mask2):
 
     overlay2 = mask2.convert('RGB')
     overlay2 = reColor(overlay2, color2=(0, 255, 0))
-
 
     # Replace (255,255,0) with (255,0,0)
     data1 = np.array(overlay)  # "data" is a height x width x 4 numpy array
@@ -270,7 +270,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         im3.paste(image_overlayed_ann2, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
 
         image_machine = Image.open(os.path.join(machine_path, images[i]))
-        im3.paste(image_machine, (0, hh + 2 * space_height + HEIGHT - 100))
+        im3.paste(image_machine.resize((1920, 1080)), (0, hh + 2 * space_height + HEIGHT - 100))
 
         draw = ImageDraw.Draw(im3)
         font = ImageFont.truetype("arial.ttf", 50)
@@ -306,7 +306,8 @@ for j in range(math.ceil(lenimg / batch_size)):
         SNJstat.append(SNJ)
         MNJstat.append(MNJ)
 
-    cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg", cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
+    cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg",
+                cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
 
 #  im3.save(dest_folder +'/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg")
 

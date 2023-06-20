@@ -5,7 +5,7 @@ from functions import *
 from PIL import Image, ImageDraw
 import cv2
 
-batch_num = 9
+batch_num = 8
 
 
 if batch_num == 100:
