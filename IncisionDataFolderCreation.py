@@ -5,7 +5,7 @@ from functions import *
 from PIL import Image, ImageDraw
 import cv2
 
-batch_num = 8
+batch_num = 9
 
 
 if batch_num == 100:
@@ -131,7 +131,7 @@ for project in api.project.get_list(ws.id):  # for each project
                         elif dict[Annotator] == 1:
                             if classobj == 'To Treat':
                                 # Draw the polygon on the image
-                                drawHardJ.polygon(polygon, fill=(0, 0, 0))
+                                drawHardJ.polygon(polygon, fill=(255, 255, 255))
                                 # Convert the image to a mask
                                 maskHardJ = image_HardJ.convert("L")
                                 Hardexists = True

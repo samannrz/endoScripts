@@ -6,7 +6,7 @@ from functions import createDIR, overlayMasks_incision
 
 common_path = '/data/DATA/DELPHI_incision'
 common_path = 'annotationData'
-dest_folder = '/data/DATA/DELPHI_incision/consensus8'
+dest_folder = '/data/DATA/DELPHI_incision/consensus9'
 
 
 def initializeMask(size):

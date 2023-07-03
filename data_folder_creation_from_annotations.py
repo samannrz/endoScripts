@@ -1,3 +1,5 @@
+# This script goes through all the supervisely videos and extracts all the check and treat masks of the selected annotators
+# Please define a list of the annotators that you wish to create the data: ANNOTATORS = []
 from functions import *
 import numpy
 from PIL import Image, ImageDraw

@@ -9,13 +9,13 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 8
+batch_num = 9
 common_path = 'annotationData/'
 machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
-machine_path = '/data/projects/IncisionDeepLab/outputs/inference_results'
+# machine_path = '/data/projects/IncisionDeepLab/outputs/inference_results'
 dest_folder = 'ImgOut'
-draw_machine_prediction = False
+plot_ann = 1
 
 
 def overlayMasks_incision(image_orig, mask1, mask2):
@@ -261,18 +261,73 @@ for j in range(math.ceil(lenimg / batch_size)):
             image_orig = image_orig.resize(newsize)
         WIDTH = image_overlayed_ref1.width
         HEIGHT = image_orig.height
+
+        image_machine = Image.open(os.path.join(machine_path, images[i]))
         # Paste the images onto the white background
+        if images[i] == 'FCF1_GY_20220819_032_VID002_anon_trim1.mp4_00000.png':
+            im3.paste(image_orig, (0, hh + space_height))
+            im3.paste(image_overlayed_ref2, (WIDTH + 10, hh + space_height))
+            draw.text((image_overlayed_ann1.width, hh + 1.1 * space_height), 'Jean-Luc', fill=(255, 255, 255), font=font)
 
-        im3.paste(image_orig, (0, hh + space_height))
-        im3.paste(image_overlayed_ref1, (WIDTH + 10, hh + space_height))
-        im3.paste(image_overlayed_ref2, (2 * WIDTH + 20, hh + space_height))
+            im3.paste(image_overlayed_ann2, (2 * WIDTH + 20, hh + space_height))
+            draw.text((2*image_overlayed_ann1.width, hh + 1.1 * space_height), 'Filippo', fill=(255, 255, 255), font=font)
 
-        im3.paste(image_overlayed_ann1, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
-        im3.paste(image_overlayed_ann2, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
+            im3.paste(image_overlayed_ann1, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
+            draw.text((image_overlayed_ann1.width, HEIGHT+hh + 1.1* space_height), 'Giuseppe', fill=(255, 255, 255), font=font)
 
-        if draw_machine_prediction:
-            image_machine = Image.open(os.path.join(machine_path, images[i]))
-            im3.paste(image_machine.resize((1920, 1080)), (0, hh + 2 * space_height + HEIGHT - 100))
+            im3.paste(image_machine.resize((1920, 1080)), (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
+            draw.text((2*image_overlayed_ann1.width, HEIGHT+hh + 1.1* space_height), 'Machine', fill=(255, 255, 0), font=font)
+
+            im3.paste(image_overlayed_ref1, (0, hh + 2 * space_height + HEIGHT - 100))
+            draw.text((0*image_overlayed_ann1.width, HEIGHT+hh + 1.1* space_height), 'Nicolas', fill=(255, 255, 255), font=font)
+
+        elif images[i] == 'HBU1-GY-20230412_002_VID001_trim1.mp4_00218.png':
+            im3.paste(image_orig, (0, hh + space_height))
+            im3.paste(image_overlayed_ref1, (WIDTH + 10, hh + space_height))
+            draw.text((image_overlayed_ann1.width, hh + 1.1 * space_height), 'Nicolas', fill=(255, 255, 255), font=font)
+
+            im3.paste(image_overlayed_ann1, (2 * WIDTH + 20, hh + space_height))
+            draw.text((2*image_overlayed_ann1.width, hh + 1.1 * space_height), 'Giuseppe', fill=(255, 255, 255), font=font)
+
+            im3.paste(image_machine.resize((1920, 1080)), (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
+            draw.text((image_overlayed_ann1.width, HEIGHT+hh + 1.1* space_height), 'Machine', fill=(255, 255, 0), font=font)
+
+            im3.paste(image_overlayed_ref2, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
+            draw.text((2*image_overlayed_ann1.width, HEIGHT+hh + 1.1* space_height), 'Jean-Luc', fill=(255, 255, 255), font=font)
+
+
+            im3.paste(image_overlayed_ann2, (0, hh + 2 * space_height + HEIGHT - 100))
+            draw.text((0*image_overlayed_ann1.width, HEIGHT+hh + 1.1* space_height), 'Filippo', fill=(255, 255, 255), font=font)
+
+
+        elif images[i] == 'FCF1_GY_20221017_040_VID001_anon_trim1.mp4_00134.png':
+            im3.paste(image_orig, (0, hh + space_height))
+            im3.paste(image_overlayed_ref1, (WIDTH + 10, hh + space_height))
+            draw.text((image_overlayed_ann1.width, hh + 1.1 * space_height), 'Nicolas', fill=(255, 255, 255), font=font)
+
+            im3.paste(image_machine.resize((1920, 1080)), (2 * WIDTH + 20, hh + space_height))
+            draw.text((2*image_overlayed_ann1.width, hh + 1.1 * space_height), 'Machine', fill=(255, 255, 0), font=font)
+
+            im3.paste(image_overlayed_ann2, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
+            draw.text((image_overlayed_ann1.width, HEIGHT+hh + 1.1* space_height), 'Filippo', fill=(255, 255, 255), font=font)
+
+            im3.paste(image_overlayed_ann1, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
+            draw.text((2*image_overlayed_ann1.width, HEIGHT+hh + 1.1* space_height), 'Giuseppe', fill=(255, 255, 255), font=font)
+
+            im3.paste(image_overlayed_ref2, (0, hh + 2 * space_height + HEIGHT - 100))
+            draw.text((0*image_overlayed_ann1.width, HEIGHT+hh + 1.1* space_height), 'Jean-Luc', fill=(255, 255, 255), font=font)
+
+
+        else:
+            im3.paste(image_orig, (0, hh + space_height))
+            im3.paste(image_overlayed_ref1, (WIDTH + 10, hh + space_height))
+            im3.paste(image_overlayed_ref2, (2 * WIDTH + 20, hh + space_height))
+
+            im3.paste(image_overlayed_ann1, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
+            im3.paste(image_overlayed_ann2, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
+
+            # image_machine = Image.open(os.path.join(machine_path, images[i]))
+            # im3.paste(image_machine.resize((1920, 1080)), (0, hh + 2 * space_height + HEIGHT - 100))
 
         draw = ImageDraw.Draw(im3)
         font = ImageFont.truetype("arial.ttf", 50)
