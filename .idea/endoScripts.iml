@@ -13,7 +13,7 @@
       <excludeFolder url="file://$MODULE_DIR$/Dataset/maskSecurityJ" />
       <excludeFolder url="file://$MODULE_DIR$/Dataset/maskSecurityN" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9 (general_env)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (endoenv) (3)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">
