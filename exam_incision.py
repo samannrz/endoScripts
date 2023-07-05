@@ -8,7 +8,7 @@ import cv2
 
 data_folder = 'Exam/'  # The destination folder
 consensus_path = '/Users/saman/Downloads/consensus_2'
-annotator_examed = 'user'
+annotator_examed = 'Ervin.Kallfa'
 annotator_ref = 'saman.noorzadeh'
 
 maskHarddir = 'maskTreat'
@@ -197,7 +197,7 @@ for i in range(len(images)):
               font=font1)
     draw.text((1 * image_overlayed_ann.width, hh + .5 * space_height-40), 'Treat Score:' + str(AR_treat), fill=(0, 0, 0),
               font=font, color=color_treat)
-    draw.text((2 * image_overlayed_ann.width, hh + .5 * space_height-40), 'Check Score:' + str(AR_check), fill=(0, 0, 0),
+    draw.text((1.5 * image_overlayed_ann.width, hh + .5 * space_height-40), 'Check Score:' + str(AR_check), fill=(0, 0, 0),
               font=font, color=color_check)
     hh = hh + HEIGHT + space_height
 
