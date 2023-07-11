@@ -288,7 +288,7 @@
 #      }
 # ]
 # }
-############ Batch9 ###############
+############ Batch 9 ###############
 # dict ={ 'evals':[
 # 		{'frame':'HBU1-GY-20230412_001_VID001_trim1.mp4',
 # 		 'index': [944]
@@ -337,7 +337,57 @@
 # 		}
 # 	]
 # }
-######################
+########### Batch 10 ###############
+
+dict ={ 'evals':[
+		{'frame':'FCF1_GY_20230209_068_VID002_anon_trim1.mp4',
+		 'index': [161]
+		},
+		{'frame':'FCF1_GY_20230214_069_VID001_anon_trim1.mp4',
+		 'index': [217]
+		},
+		{'frame':'FCF1_GY_20230221_070_VID001_anon_trim1.mp4',
+		 'index': [57]
+		},
+		{'frame':'FCF1_GY_20230227_072_VID001_anon_trim1.mp4',
+		 'index': [105]
+		},
+		{'frame':'FCF1_GY_20230301_075_VID001_anon_trim1.mp4',
+		 'index': [168]
+		},
+		{'frame':'FCF1_GY_20230323_076_VID001_anon_trim1.mp4',
+		 'index': [243]
+		},
+		{'frame':'GAT2_GY_20221110_005_VID002_trim1.mp4',
+		 'index': [205]
+		},
+		{'frame':'GAT2_GY_20221115_003_VID006_trim1.mp4',
+		 'index': [66]
+		},
+		{'frame':'P-0001_Video002_trim_1.mp4',
+		 'index': [17]
+		},
+		{'frame':'P-0005_Video001_trim_1.mp4',
+		 'index': [90]
+		},
+		{'frame':'P-0024_Video001_trim_2.mp4',
+		 'index': [758]
+		},
+		{'frame':'P-0119_Video001_trim.mp4',
+		 'index': [469]
+		},
+		{'frame':'P-0316_Video001_trim_1.mp4',
+		 'index': [1123]
+		},
+		{'frame':'P-0316_Video003_trim_2.mp4',
+		 'index': [331]
+		},
+		{'frame':'P-0399 2_Trim.mp4',
+		 'index': [930]
+		}
+	]
+}
+#####################"
 # dict ={ 'evals':[
 # 		{'frame':'',
 # 		 'index': []
@@ -387,15 +437,14 @@
 # 	]
 # }
 
-
 ######################
 import json
-#
-# json_object = json.dumps(dict, indent=4)
-# batch_num = 9
-# # Writing to sample.json
-# with open('Evaluation' + str(batch_num) + '.json', 'w') as outfile:
-#     outfile.write(json_object)
+
+json_object = json.dumps(dict, indent=4)
+batch_num = 10
+# Writing to sample.json
+with open('Evaluation' + str(batch_num) + '.json', 'w') as outfile:
+    outfile.write(json_object)
 
 
 def merge_evaluations(file_names):
@@ -411,4 +460,4 @@ def merge_evaluations(file_names):
     with open('Evaluation_all' + '.json', 'w') as o:
         o.write(json_object)
 
-merge_evaluations(['Evaluation3.json','Evaluation4.json','Evaluation5.json','Evaluation6.json','Evaluation7.json'])
+# merge_evaluations(['Evaluation3.json','Evaluation4.json','Evaluation5.json','Evaluation6.json','Evaluation7.json'])

@@ -9,7 +9,7 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 8
+batch_num = 10
 common_path = 'annotationData/'
 machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'

@@ -6,15 +6,22 @@ from functions import *
 from PIL import Image, ImageDraw, ImageFont
 import cv2
 
+exam_dataset_id = 2765 # V1-Session1=2739 V1-Session2=2765
 data_folder = 'Exam/'  # The destination folder
 consensus_path = '/Users/saman/Downloads/consensus_2'
+consensus_path = '/data/DATA/DELPHI_incision/all_consensus'
+
 annotator_examed = 'Ervin.Kallfa'
 annotator_ref = 'saman.noorzadeh'
 
 maskHarddir = 'maskTreat'
 maskSecudir = 'maskCheck'
 
+if os.path.exists(os.path.join(data_folder, 'image')):
+    shutil.rmtree(os.path.join(data_folder, 'image'))
+
 createDIR(data_folder, 'image')
+createDIR(data_folder, 'Res')
 createDIR(data_folder, maskHarddir + annotator_examed[0])
 createDIR(data_folder, maskHarddir + annotator_ref[0])
 createDIR(data_folder, maskSecudir + annotator_examed[0])
@@ -22,12 +29,12 @@ createDIR(data_folder, maskSecudir + annotator_ref[0])
 api, tm = get_supervisely_team()
 AR_list=[]
 images = os.listdir(consensus_path)
-for vd in api.video.get_list(2739):
+for vd in api.video.get_list(exam_dataset_id):
     # print(vd.name)
     index = [im for im in images if im.startswith(vd.name)]
     index = int(index[0][-11:-6])
 
-    video_api = api.video.get_info_by_name(2739, vd.name)
+    video_api = api.video.get_info_by_name(exam_dataset_id, vd.name)
     annotation = api.video.annotation.download(video_api.id)
     frames = annotation['frames']  # frame is the annotation info (type: list of dict) on that frame
     image_Hard_ann = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
@@ -110,10 +117,10 @@ def initializeMask(size):
 
 
 space_height = 120
-hh = 0
+hh = 100
 
 images = os.listdir(data_folder + 'image')
-im3 = Image.new("RGB", (3 * 1920 + 20, (len(images)) * 1080 + space_height * len(images)), (255, 255, 255))
+im3 = Image.new("RGB", (3 * 1920 + 20, hh+ (len(images)) * 1080 + space_height * len(images)), (255, 255, 255))
 
 for i in range(len(images)):
     image_orig = Image.open(os.path.join(data_folder, 'image', images[i]))
@@ -199,7 +206,13 @@ for i in range(len(images)):
               font=font, color=color_treat)
     draw.text((1.5 * image_overlayed_ann.width, hh + .5 * space_height-40), 'Check Score:' + str(AR_check), fill=(0, 0, 0),
               font=font, color=color_check)
+    draw.text((2.4 * image_overlayed_ann.width, 0 + .5 * space_height - 40), 'Ground Truth' ,
+              fill=(0, 0, 0),
+              font=font, color=color_check)
+    draw.text((1.3 * image_overlayed_ann.width, 0 + .5 * space_height - 40), annotator_examed ,
+              fill=(0, 0, 0),
+              font=font, color=color_check)
     hh = hh + HEIGHT + space_height
 
-cv2.imwrite(data_folder + '/Res/' + "exam_final.jpg", cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
+cv2.imwrite(data_folder + '/Res/' + annotator_examed+"_exam_final_session2.jpg", cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
 print('FINAL SCORE: ',sum(AR_list)/len(AR_list))
