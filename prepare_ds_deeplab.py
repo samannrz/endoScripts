@@ -9,8 +9,8 @@ dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'fi
         'incision.consensus': 4}
 annotator = 5
 orig_path = '/data/DATA/incision/'+str(annotator) + '/'
-dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/orig_data5/train_images'
-dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/orig_data5/train_masks'
+dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_images'
+dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_masks'
 
 
 # moving original images

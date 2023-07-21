@@ -1,9 +1,9 @@
 import pygsheets
 
 sheet_id_JL = '1Wqb8E23iM8BdcDZKnENggVoHf-9mlMbqBcDxi-p8j80'
-sheet_id_G = '1OAbAP1CRr-iukQMTxx58n8TrJjil6lDhd-GK7X9ZK_8' #'1QErFg8OXCMLTS5DhEn-yvmHXigaDKAXhZV0OwAsCR_w'
+sheet_id_G = '1OAbAP1CRr-iukQMTxx58n8TrJjil6lDhd-GK7X9ZK_8'  # '1QErFg8OXCMLTS5DhEn-yvmHXigaDKAXhZV0OwAsCR_w'
 gc = pygsheets.authorize(service_file='keycode/my-gpysheets-3d8d13442005.json')
-sh = gc.open_by_key(sheet_id_G)
+sh = gc.open_by_key(sheet_id_JL)
 wks = sh.sheet1
 
 script_lines = ''
@@ -20,7 +20,7 @@ while video_name_new:
         script_lines = script_lines + 'ffmpeg -i /data/Videos/endodata/orig/' + video_name_new + ' -ss ' \
                        + start_time + ' -to ' + end_time + ' -c:v copy /data/Videos/endodata/sequ/' + video_name_new[
                                                                                                       :-4] \
-                       + '_trim' + str(j) +  '.mp4' + '\n' #video_name_new[-4:] or .mp4
+                       + '_trim' + str(j) + '.mp4' + '\n'  # video_name_new[-4:] or .mp4
     video_name_old = video_name_new
     i += 1
     video_name_new = wks.cell('A' + str(i)).value

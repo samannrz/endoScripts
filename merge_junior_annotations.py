@@ -11,18 +11,26 @@ from overlay_mask import reColor
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'incision.consensus': 4}
 
-orig_path1 = '/data/DATA/incision/' + str(2) + '/'
-orig_path2 = '/data/DATA/incision/' + str(3) + '/'
-savepath = '/data/DATA/incision/5/'
+base_path = '/data/DATA/incision/'
+orig_path1 = os.path.join(base_path, str(2))
+orig_path2 = os.path.join(base_path, str(3))
+savepath = os.path.join(base_path,'5')
 
-shutil.rmtree('/data/DATA/incision/5')
-createDIR('/data/DATA/incision', '5')
-createDIR('/data/DATA/incision/5', 'mask')
-createDIR('/data/DATA/incision/5', 'image')
-createDIR('/data/DATA/incision/5/mask/', 'Treat')
-createDIR('/data/DATA/incision/5/mask/', 'Check')
+base_path = '/data/DATA/incision/temp'
+orig_path1 = os.path.join(base_path, str(2))
+orig_path2 = os.path.join(base_path, str(3))
+savepath = os.path.join(base_path,'5')
 
-orig_path_image1 = orig_path1 + 'image'
+
+if os.path.exists(savepath):
+    shutil.rmtree(savepath)
+createDIR(base_path, '5')
+createDIR(savepath, 'mask')
+createDIR(savepath, 'image')
+createDIR(os.path.join(savepath,'mask'), 'Treat')
+createDIR(os.path.join(savepath,'mask'), 'Check')
+
+orig_path_image1 = os.path.join(orig_path1, 'image')
 path_mask_check1 = os.path.join(orig_path1, 'mask/Check/')
 path_mask_check2 = os.path.join(orig_path2, 'mask/Check/')
 path_mask_treat1 = os.path.join(orig_path1, 'mask/Treat/')
@@ -70,4 +78,4 @@ for name in images_intersect:
 
     cv2.imwrite(os.path.join(savepath, 'mask/Treat', name), mask_treat)
     cv2.imwrite(os.path.join(savepath, 'mask/Check', name), mask_check)
-    shutil.copy(os.path.join(orig_path_image1, name), os.path.join(savepath,'image', name))
+    shutil.copy(os.path.join(orig_path_image1, name), os.path.join(savepath, 'image', name))
