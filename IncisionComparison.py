@@ -9,11 +9,11 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 9
+batch_num = 11
 common_path = 'annotationData/'
-machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
+# machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
-machine_path = '/data/DATA/Incision_predictions/Batch8-9/final'
+machine_path = '/data/DATA/Incision_predictions/Batch11/all/final'
 dest_folder = 'ImgOut'
 draw_machine_prediction = True
 

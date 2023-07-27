@@ -14,7 +14,7 @@ def reColor(mask, color1=(128, 0, 0), color2=(100, 0, 0)):  # this function repl
     return data
 
 
-mask_path = '/data/projects/IncisionDeepLab/input/incision/orig_data_consensus_supervisely/ann'
+mask_path = '/data/projects/IncisionDeepLab/input/incision/Batch9-4/mask'
 for mask in os.listdir(mask_path):
     image = cv2.imread(os.path.join(mask_path, mask))
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
