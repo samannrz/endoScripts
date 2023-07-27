@@ -339,109 +339,109 @@
 # }
 ########### Batch 10 ###############
 
-dict ={ 'evals':[
-		{'frame':'FCF1_GY_20230209_068_VID002_anon_trim1.mp4',
-		 'index': [161]
-		},
-		{'frame':'FCF1_GY_20230214_069_VID001_anon_trim1.mp4',
-		 'index': [217]
-		},
-		{'frame':'FCF1_GY_20230221_070_VID001_anon_trim1.mp4',
-		 'index': [57]
-		},
-		{'frame':'FCF1_GY_20230227_072_VID001_anon_trim1.mp4',
-		 'index': [105]
-		},
-		{'frame':'FCF1_GY_20230301_075_VID001_anon_trim1.mp4',
-		 'index': [168]
-		},
-		{'frame':'FCF1_GY_20230323_076_VID001_anon_trim1.mp4',
-		 'index': [243]
-		},
-		{'frame':'GAT2_GY_20221110_005_VID002_trim1.mp4',
-		 'index': [205]
-		},
-		{'frame':'GAT2_GY_20221115_003_VID006_trim1.mp4',
-		 'index': [66]
-		},
-		{'frame':'P-0001_Video002_trim_1.mp4',
-		 'index': [17]
-		},
-		{'frame':'P-0005_Video001_trim_1.mp4',
-		 'index': [90]
-		},
-		{'frame':'P-0024_Video001_trim_2.mp4',
-		 'index': [758]
-		},
-		{'frame':'P-0119_Video001_trim.mp4',
-		 'index': [469]
-		},
-		{'frame':'P-0316_Video001_trim_1.mp4',
-		 'index': [1123]
-		},
-		{'frame':'P-0316_Video003_trim_2.mp4',
-		 'index': [331]
-		},
-		{'frame':'P-0399 2_Trim.mp4',
-		 'index': [930]
-		}
-	]
-}
-#####################"
 # dict ={ 'evals':[
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'FCF1_GY_20230209_068_VID002_anon_trim1.mp4',
+# 		 'index': [161]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'FCF1_GY_20230214_069_VID001_anon_trim1.mp4',
+# 		 'index': [217]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'FCF1_GY_20230221_070_VID001_anon_trim1.mp4',
+# 		 'index': [57]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'FCF1_GY_20230227_072_VID001_anon_trim1.mp4',
+# 		 'index': [105]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'FCF1_GY_20230301_075_VID001_anon_trim1.mp4',
+# 		 'index': [168]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'FCF1_GY_20230323_076_VID001_anon_trim1.mp4',
+# 		 'index': [243]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'GAT2_GY_20221110_005_VID002_trim1.mp4',
+# 		 'index': [205]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'GAT2_GY_20221115_003_VID006_trim1.mp4',
+# 		 'index': [66]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'P-0001_Video002_trim_1.mp4',
+# 		 'index': [17]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'P-0005_Video001_trim_1.mp4',
+# 		 'index': [90]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'P-0024_Video001_trim_2.mp4',
+# 		 'index': [758]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'P-0119_Video001_trim.mp4',
+# 		 'index': [469]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'P-0316_Video001_trim_1.mp4',
+# 		 'index': [1123]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'P-0316_Video003_trim_2.mp4',
+# 		 'index': [331]
 # 		},
-# 		{'frame':'',
-# 		 'index': []
+# 		{'frame':'P-0399 2_Trim.mp4',
+# 		 'index': [930]
 # 		}
 # 	]
 # }
+##########Batch 11 ###########"
+dict ={ 'evals':[
+		{'frame':'bsp1_GY_20230601_004_VID002_trim1.mp4',
+		 'index': [246]
+		},
+		{'frame':'bsp1_GY_20230601_005_VID003_trim1.mp4',
+		 'index': [127]
+		},
+		{'frame':'bsp1_GY_20230601_008_VID001_trim1.mp4',
+		 'index': [107]
+		},
+		{'frame':'bsp1_GY_20230601_012_VID001_trim1.mp4',
+		 'index': [317]
+		},
+		{'frame':'bsp1_GY_20230601_030_VID002_trim1.mp4',
+		 'index': [200]
+		},
+		{'frame':'bsp1_GY_20230601_031_VID001_trim1.mp4',
+		 'index': [1116]
+		},
+		{'frame':'bsp1_GY_20230601_032_VID001_trim1.mp4',
+		 'index': [3567]
+		},
+		{'frame':'bsp1_GY_20230601_033_VID001_trim1.mp4',
+		 'index': [264]
+		},
+		{'frame':'bsp1_GY_20230601_033_VID001_trim1.mp4',
+		 'index': [0]
+		},
+		{'frame':'bsp1_GY_20230601_034_VID001_trim1.mp4',
+		 'index': [87]
+		},
+		{'frame':'bsp1_GY_20230601_036_VID001_trim1.mp4',
+		 'index': [289]
+		},
+		{'frame':'bsp1_GY_20230601_037_VID001_trim1.mp4',
+		 'index': [283]
+		},
+		{'frame':'bsp1_GY_20230601_038_VID001_trim1.mp4',
+		 'index': [1630]
+		},
+		{'frame':'bsp1_GY_20230601_039_VID001_trim1.mp4',
+		 'index': [1939]
+		},
+		{'frame':'GAT2_GY_20221109_004_VID002_trim1.mp4',
+		 'index': [0]
+		}
+	]
+}
 
 ######################
 import json
 
 json_object = json.dumps(dict, indent=4)
-batch_num = 10
+batch_num = 11
 # Writing to sample.json
 with open('Evaluation' + str(batch_num) + '.json', 'w') as outfile:
     outfile.write(json_object)

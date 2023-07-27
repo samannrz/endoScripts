@@ -2,16 +2,16 @@ import os
 import random
 import shutil
 
-source_folder = '/data/projects/IncisionDeepLab/input/incision/orig_data_all/train_images'
-source_label = '/data/projects/IncisionDeepLab/input/incision/orig_data_all/train_masks'
-destination_path = '/data/projects/IncisionDeepLab/input/incision/orig_data_all/valid_images'
-destination_label = '/data/projects/IncisionDeepLab/input/incision/orig_data_all/valid_masks'
+source_folder = '/data/projects/IncisionDeepLab/input/incision/orig_data2/train_images'
+source_label = '/data/projects/IncisionDeepLab/input/incision/orig_data2/train_masks'
+destination_path = '/data/projects/IncisionDeepLab/input/incision/orig_data2/valid_images'
+destination_label = '/data/projects/IncisionDeepLab/input/incision/orig_data2/valid_masks'
 
 # Get a list of all files in the source folder
 all_files = os.listdir(source_folder)
 
 # Randomly select 166 images
-selected_images = random.sample(all_files, 200)
+selected_images = random.sample(all_files, 150)
 
 # Move the selected images to the destination folder
 for image in selected_images:
