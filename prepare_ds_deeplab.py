@@ -12,8 +12,8 @@ orig_path = '/data/DATA/incision/'+str(annotator) + '/'
 orig_path = 'annotationData/'
 dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_images'
 dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_masks'
-dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/Batch9-4/image'
-dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/Batch9-4/mask'
+dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/Batch10-4/image'
+dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/Batch10-4/mask'
 
 # moving original images
 orig_path_image = orig_path + 'image'
