@@ -9,7 +9,8 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 11
+# batch_num = 3
+from IncisionDataFolderCreation import batch_num
 common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
@@ -341,7 +342,9 @@ data_df = pd.DataFrame(
      'FF-JLP Merge': MFJstat, 'GG-JLP Treat': HGJstat, 'GG-JLP Check': SGJstat,
      'GG-JLP Merge': MGJstat, 'NB-JLP Treat': HNJstat, 'NB-JLP Check': SNJstat,
      'NB-JLP Merge': MNJstat})
-sfpath = 'keycode/my-gpysheets-3d8d13442005.json'
-sheetID = '1HiWuZGv5_Y_BjxnV2gIgDN2VA7WVawuvUd545Wr5FlY'
-sheetName = str(datetime.date.today()) + '-Batch' + str(batch_num)
-write_to_gsheet(sfpath, sheetID, sheetName, data_df)
+# sfpath = 'keycode/my-gpysheets-3d8d13442005.json'
+# sheetID = '1HiWuZGv5_Y_BjxnV2gIgDN2VA7WVawuvUd545Wr5FlY'
+# sheetName = str(datetime.date.today()) + '-Batch' + str(batch_num)
+# write_to_gsheet(sfpath, sheetID, sheetName, data_df)
+data_df.to_pickle('batch'+str(batch_num)+'.pkl')
+print('batch'+str(batch_num)+'.pkl saved')
