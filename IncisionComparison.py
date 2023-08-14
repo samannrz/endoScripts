@@ -15,7 +15,7 @@ common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
 machine_path = '/data/DATA/Incision_predictions/Batch11/all/final'
 dest_folder = 'ImgOut'
-draw_machine_prediction = True
+draw_machine_prediction = False
 
 
 def overlayMasks_incision(image_orig, mask1, mask2):
@@ -142,62 +142,62 @@ for j in range(math.ceil(lenimg / batch_size)):
             H2N = round((np.count_nonzero(maskH_2_array & maskH_N_array) / np.count_nonzero(
                 maskH_2_array | maskH_N_array)) * 100, 2)
         except ZeroDivisionError:
-            H2N = 1
+            H2N = 100
         try:
             # score of Hard zones with ANNOT.1 & Nicolas
             H1N = round((np.count_nonzero(maskH_1_array & maskH_N_array) / np.count_nonzero(
                 maskH_1_array | maskH_N_array)) * 100, 2)
         except ZeroDivisionError:
-            H1N = 1
+            H1N = 100
         try:
             # score of Hard zones with ANNOT.2 & JL
             H2J = round((np.count_nonzero(maskH_2_array & maskH_J_array) / np.count_nonzero(
                 maskH_2_array | maskH_J_array)) * 100, 2)
         except ZeroDivisionError:
-            H2J = 1
+            H2J = 100
         try:
             # score of Hard zones with ANNOT.1 & JL
             H1J = round((np.count_nonzero(maskH_1_array & maskH_J_array) / np.count_nonzero(
                 maskH_1_array | maskH_J_array)) * 100, 2)
         except ZeroDivisionError:
-            H1J = 1
+            H1J = 100
         try:
             # score of Check zones with ANNOT.1 & Nicolas
             S1N = round((np.count_nonzero(maskS_1_array & maskS_N_array) / np.count_nonzero(
                 maskS_1_array | maskS_N_array)) * 100, 2)
         except ZeroDivisionError:
-            S1N = 1
+            S1N = 100
         try:
             # score of Check zones with ANNOT.2 & Nicolas
             S2N = round((np.count_nonzero(maskS_2_array & maskS_N_array) / np.count_nonzero(
                 maskS_2_array | maskS_N_array)) * 100, 2)
         except ZeroDivisionError:
-            S2N = 1
+            S2N = 100
         try:
             # score of Check zones with ANNOT.1 & Jean-Luc
             S1J = round((np.count_nonzero(maskS_1_array & maskS_J_array) / np.count_nonzero(
                 maskS_1_array | maskS_J_array)) * 100, 2)
         except ZeroDivisionError:
-            S1J = 1
+            S1J = 100
         try:
             # score of Check zones with ANNOT.2 & Jean-Luc
             S2J = round((np.count_nonzero(maskS_2_array & maskS_J_array) / np.count_nonzero(
                 maskS_2_array | maskS_J_array)) * 100, 2)
         except ZeroDivisionError:
-            S2J = 1
+            S2J = 100
         try:
             # score of Hard zones with Jean-Luc and Nicolas
             HNJ = round((np.count_nonzero(maskH_N_array & maskH_J_array) / np.count_nonzero(
                 maskH_N_array | maskH_J_array)) * 100, 2)
         except ZeroDivisionError:
-            HNJ = 1
+            HNJ = 100
 
         try:
             # score of Check zones with Jean-Luc and Nicolas
             SNJ = round((np.count_nonzero(maskS_N_array & maskS_J_array) / np.count_nonzero(
                 maskS_N_array | maskS_J_array)) * 100, 2)
         except ZeroDivisionError:
-            SNJ = 1
+            SNJ = 100
             # Merged zones
         merge1 = maskS_1_array | maskH_1_array
         merge2 = maskS_2_array | maskH_2_array
@@ -208,31 +208,32 @@ for j in range(math.ceil(lenimg / batch_size)):
             M1N = round((np.count_nonzero(mergeN & merge1) / np.count_nonzero(
                 mergeN | merge1)) * 100, 2)
         except ZeroDivisionError:
-            M1N = 1
+            M1N = 100
         try:
             # score of merged zones with Annot.2 and Nicolas
             M2N = round((np.count_nonzero(mergeN & merge2) / np.count_nonzero(
                 mergeN | merge2)) * 100, 2)
+
         except ZeroDivisionError:
-            M2N = 1
+            M2N = 100
         try:
             # score of merged zones with Annot.1 and Jean-Luc
             M1J = round((np.count_nonzero(mergeJ & merge1) / np.count_nonzero(
                 mergeJ | merge1)) * 100, 2)
         except ZeroDivisionError:
-            M1J = 1
+            M1J = 100
         try:
             # score of merged zones with Annot.1 and Jean-Luc
             M2J = round((np.count_nonzero(mergeJ & merge2) / np.count_nonzero(
                 mergeJ | merge2)) * 100, 2)
         except ZeroDivisionError:
-            M2J = 1
+            M2J = 100
         try:
             # score of merged zones with Nicolas and Jean-Luc
             MNJ = round((np.count_nonzero(mergeJ & mergeN) / np.count_nonzero(
                 mergeJ | mergeN)) * 100, 2)
         except ZeroDivisionError:
-            MNJ = 1
+            MNJ = 100
 
         image_overlayed_ref1 = overlayMasks_incision(image_orig, maskH_N, maskS_N)
         image_overlayed_ref2 = overlayMasks_incision(image_orig, maskH_J, maskS_J)
