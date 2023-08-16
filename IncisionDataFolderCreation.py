@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw
 import cv2
 
 # batch_num = 3
-for batch_num in [3, 4, 5, 6, 7, 8, 9, 10]:
+for batch_num in [3, 4, 5, 6, 7, 8, 9, 10,11]:
 
     if batch_num == 100:
         data_folder = '/data/DATA/DELPHI_incision/'  # The destination folder
@@ -217,5 +217,5 @@ for batch_num in [3, 4, 5, 6, 7, 8, 9, 10]:
                         counter += 1
 
     print('Batch_num ' + str(batch_num) + ' : ' + str(counter) + ' images, masks are saved in ' + data_folder)
-    with open("IncisionComparison.py") as f:
+    with open("comparison_consensus.py.py") as f:
         exec(f.read())

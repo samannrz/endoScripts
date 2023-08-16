@@ -11,6 +11,7 @@ from statistics import mean
 
 # batch_num = 3
 from IncisionDataFolderCreation import batch_num
+
 common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
@@ -73,6 +74,19 @@ MFJstat = []
 MNJstat = []
 HNJstat = []
 SNJstat = []
+HCFstat = []
+SCFstat = []
+MCFstat = []
+HCNstat = []
+SCNstat = []
+MCNstat = []
+HCGstat = []
+SCGstat = []
+MCGstat = []
+HCJstat = []
+SCJstat = []
+MCJstat = []
+
 
 for j in range(math.ceil(lenimg / batch_size)):
     counter = 1
@@ -128,6 +142,14 @@ for j in range(math.ceil(lenimg / batch_size)):
             maskS_F = Image.open(os.path.join(common_path, 'maskCheckF', images[i][:-4] + '.png'))
         except:
             print('There is no Security Zone on Filippo\'s annot on ' + images[i][:-4])
+        try:
+            maskH_C = Image.open(os.path.join(common_path, 'maskTreatI', images[i][:-4] + '.png'))
+        except:
+            print('There is no Hard Zone on Consensus\'s annot on ' + images[i][:-4])
+        try:
+            maskS_C = Image.open(os.path.join(common_path, 'maskCheckI', images[i][:-4] + '.png'))
+        except:
+            print('There is no Security Zone on Consensus\'s annot on ' + images[i][:-4])
 
         maskH_N_array = np.array(maskH_N.convert('1'))
         maskS_N_array = np.array(maskS_N.convert('1'))
@@ -137,6 +159,8 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskS_1_array = np.array(maskS_G.convert('1'))
         maskH_2_array = np.array(maskH_F.convert('1'))
         maskS_2_array = np.array(maskS_F.convert('1'))
+        maskH_C_array = np.array(maskH_C.convert('1'))
+        maskS_C_array = np.array(maskS_C.convert('1'))
 
         try:
             # score of Hard zones with ANNOT.2 & Nicolas
@@ -204,6 +228,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         merge2 = maskS_2_array | maskH_2_array
         mergeN = maskS_N_array | maskH_N_array
         mergeJ = maskS_J_array | maskH_J_array
+        mergeC = maskS_C_array | maskH_C_array
         try:
             # score of merged zones with Annot.1 and Nicolas
             M1N = round((np.count_nonzero(mergeN & merge1) / np.count_nonzero(
@@ -236,6 +261,8 @@ for j in range(math.ceil(lenimg / batch_size)):
         except ZeroDivisionError:
             MNJ = 100
 
+
+#########################
         image_overlayed_ref1 = overlayMasks_incision(image_orig, maskH_N, maskS_N)
         image_overlayed_ref2 = overlayMasks_incision(image_orig, maskH_J, maskS_J)
         image_overlayed_ann1 = overlayMasks_incision(image_orig, maskH_G, maskS_G)
@@ -310,6 +337,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         SNJstat.append(SNJ)
         MNJstat.append(MNJ)
 
+
     cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg",
                 cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
 
@@ -346,5 +374,5 @@ data_df = pd.DataFrame(
 # sheetID = '1HiWuZGv5_Y_BjxnV2gIgDN2VA7WVawuvUd545Wr5FlY'
 # sheetName = str(datetime.date.today()) + '-Batch' + str(batch_num)
 # write_to_gsheet(sfpath, sheetID, sheetName, data_df)
-data_df.to_pickle('batch'+str(batch_num)+'.pkl')
-print('batch'+str(batch_num)+'.pkl saved')
+data_df.to_pickle('batch' + str(batch_num) + '.pkl')
+print('batch' + str(batch_num) + '.pkl saved')
