@@ -217,5 +217,5 @@ for batch_num in [3, 4, 5, 6, 7, 8, 9, 10,11]:
                         counter += 1
 
     print('Batch_num ' + str(batch_num) + ' : ' + str(counter) + ' images, masks are saved in ' + data_folder)
-    with open("comparison_consensus.py") as f:
+    with open("comparison_consensus.py.py") as f:
         exec(f.read())

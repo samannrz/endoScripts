@@ -9,8 +9,8 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-# batch_num = 3
-from IncisionDataFolderCreation import batch_num
+batch_num = 11
+# from IncisionDataFolderCreation import batch_num
 
 common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
@@ -267,6 +267,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         image_overlayed_ref2 = overlayMasks_incision(image_orig, maskH_J, maskS_J)
         image_overlayed_ann1 = overlayMasks_incision(image_orig, maskH_G, maskS_G)
         image_overlayed_ann2 = overlayMasks_incision(image_orig, maskH_F, maskS_F)
+        image_overlayed_cons = overlayMasks_incision(image_orig, maskH_C, maskS_C)
 
         if batchstart:
             batchstart = False
@@ -288,6 +289,8 @@ for j in range(math.ceil(lenimg / batch_size)):
             image_overlayed_ann2 = image_overlayed_ann2.resize(newsize)
             image_overlayed_ann1 = image_overlayed_ann1.resize(newsize)
             image_orig = image_orig.resize(newsize)
+            image_overlayed_cons = image_overlayed_cons.resize(newsize)
+
         WIDTH = image_overlayed_ref1.width
         HEIGHT = image_orig.height
         # Paste the images onto the white background
@@ -298,7 +301,8 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         im3.paste(image_overlayed_ann1, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_ann2, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
-
+        cv2.imwrite(dest_folder+'/' + images[i]+ ".jpg",
+                    cv2.cvtColor(np.array(image_overlayed_cons), cv2.COLOR_BGR2RGB))
         if draw_machine_prediction:
             image_machine = Image.open(os.path.join(machine_path, images[i]))
             im3.paste(image_machine.resize((1920, 1080)), (0, hh + 2 * space_height + HEIGHT - 100))
@@ -340,6 +344,7 @@ for j in range(math.ceil(lenimg / batch_size)):
 
     cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg",
                 cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
+
 
 #  im3.save(dest_folder +'/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg")
 

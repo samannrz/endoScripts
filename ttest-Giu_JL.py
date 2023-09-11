@@ -30,12 +30,13 @@ fn_treat_11 = np.array(b11['GG-JLP Treat'])[:-1]
 fn_treat_345 = np.concatenate((fn_treat_3, fn_treat_4, fn_treat_5))
 fn_treat_678 = np.concatenate((fn_treat_6, fn_treat_7, fn_treat_8))
 fn_treat_91011 = np.concatenate((fn_treat_9, fn_treat_10, fn_treat_11))
-t_stat, p_val = stats.ttest_ind(np.concatenate((fn_treat_7, fn_treat_8)),
+res = stats.mannwhitneyu(np.concatenate((fn_treat_3, fn_treat_4)),
                                 np.concatenate((fn_treat_9, fn_treat_10)))
-# t_stat, p_val = stats.ttest_ind(fn_treat_345, fn_treat_678)
+
 print('Treat')
-print("t-statistic = " + str(t_stat))
-print("p-value = " + str(p_val))
+print(res)
+# print("t-statistic = " + str(t_stat))
+# print("p-value = " + str(p_val))
 #####################
 # Treat
 
@@ -56,14 +57,14 @@ fn_check_678 = np.concatenate((fn_check_6, fn_check_7, fn_check_8))
 fn_check_91011 = np.concatenate((fn_check_9, fn_check_10, fn_check_11))
 
 
-t_stat, p_val = stats.ttest_ind(np.concatenate((fn_check_7, fn_check_8)),
+res = stats.mannwhitneyu(np.concatenate((fn_check_3, fn_check_4)),
                                 np.concatenate((fn_check_9, fn_check_10)))
-# t_stat, p_val = stats.ttest_ind(fn_check_345, fn_check_678)
+# res = stats.mannwhitneyu(fn_check_345, fn_check_678)
 
 print('Check')
 
-print("t-statistic = " + str(t_stat))
-print("p-value = " + str(p_val))
+# print("t-statistic = " + str(t_stat))
+# print("p-value = " + str(p_val))
 #########
 fn_merge_3 = np.array(b3['GG-JLP Merge'])[:-1]
 fn_merge_4 = np.array(b4['GG-JLP Merge'])[:-1]
@@ -81,10 +82,10 @@ fn_merge_345 = np.concatenate((fn_merge_3, fn_merge_4, fn_merge_5))
 fn_merge_678 = np.concatenate((fn_merge_6, fn_merge_7, fn_merge_8))
 fn_merge_91011 = np.concatenate((fn_merge_9, fn_merge_10, fn_merge_11))
 
-t_stat, p_val = stats.ttest_ind(np.concatenate((fn_merge_7, fn_merge_8)),
+res = stats.mannwhitneyu(np.concatenate((fn_merge_3, fn_merge_4)),
                                 np.concatenate((fn_merge_9, fn_merge_10)))
 
-# t_stat, p_val = stats.ttest_ind(fn_merge_345, fn_merge_678)
+# res = stats.mannwhitneyu(fn_merge_345, fn_merge_678)
 print('merge')
-print("t-statistic = " + str(t_stat))
-print("p-value = " + str(p_val))
+# print("t-statistic = " + str(t_stat))
+# print("p-value = " + str(p_val))
