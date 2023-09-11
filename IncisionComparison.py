@@ -374,5 +374,5 @@ data_df = pd.DataFrame(
 # sheetID = '1HiWuZGv5_Y_BjxnV2gIgDN2VA7WVawuvUd545Wr5FlY'
 # sheetName = str(datetime.date.today()) + '-Batch' + str(batch_num)
 # write_to_gsheet(sfpath, sheetID, sheetName, data_df)
-data_df.to_pickle('batch' + str(batch_num) + '.pkl')
+# data_df.to_pickle('batch' + str(batch_num) + '.pkl')
 print('batch' + str(batch_num) + '.pkl saved')
