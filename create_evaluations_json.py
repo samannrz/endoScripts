@@ -388,51 +388,94 @@
 # 	]
 # }
 ##########Batch 11 ###########"
+# dict ={ 'evals':[
+# 		{'frame':'bsp1_GY_20230601_004_VID002_trim1.mp4',
+# 		 'index': [246]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_005_VID003_trim1.mp4',
+# 		 'index': [127]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_008_VID001_trim1.mp4',
+# 		 'index': [107]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_012_VID001_trim1.mp4',
+# 		 'index': [317]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_030_VID002_trim1.mp4',
+# 		 'index': [200]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_031_VID001_trim1.mp4',
+# 		 'index': [1116]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_032_VID001_trim1.mp4',
+# 		 'index': [3567]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_033_VID001_trim1.mp4',
+# 		 'index': [264]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_033_VID001_trim1.mp4',
+# 		 'index': [0]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_034_VID001_trim1.mp4',
+# 		 'index': [87]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_036_VID001_trim1.mp4',
+# 		 'index': [289]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_037_VID001_trim1.mp4',
+# 		 'index': [283]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_038_VID001_trim1.mp4',
+# 		 'index': [1630]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_039_VID001_trim1.mp4',
+# 		 'index': [1939]
+# 		},
+# 		{'frame':'GAT2_GY_20221109_004_VID002_trim1.mp4',
+# 		 'index': [0]
+# 		}
+# 	]
+# }
+##########Batch 21 ###########"
 dict ={ 'evals':[
-		{'frame':'bsp1_GY_20230601_004_VID002_trim1.mp4',
-		 'index': [246]
+		{'frame':'bsp1_GY_20230601_005_VID003_trim6.mp4',
+		 'index': [15]
 		},
-		{'frame':'bsp1_GY_20230601_005_VID003_trim1.mp4',
-		 'index': [127]
+		{'frame':'bsp1_GY_20230601_005_VID003_trim6.mp4',
+		 'index': [292]
 		},
-		{'frame':'bsp1_GY_20230601_008_VID001_trim1.mp4',
-		 'index': [107]
+		{'frame':'bsp1_GY_20230601_008_VID001_trim3.mp4',
+		 'index': [102]
 		},
-		{'frame':'bsp1_GY_20230601_012_VID001_trim1.mp4',
-		 'index': [317]
+		{'frame':'bsp1_GY_20230601_014_VID002_trim1.mp4',
+		 'index': [72]
 		},
-		{'frame':'bsp1_GY_20230601_030_VID002_trim1.mp4',
-		 'index': [200]
-		},
-		{'frame':'bsp1_GY_20230601_031_VID001_trim1.mp4',
-		 'index': [1116]
-		},
-		{'frame':'bsp1_GY_20230601_032_VID001_trim1.mp4',
-		 'index': [3567]
-		},
-		{'frame':'bsp1_GY_20230601_033_VID001_trim1.mp4',
-		 'index': [264]
-		},
-		{'frame':'bsp1_GY_20230601_033_VID001_trim1.mp4',
+		{'frame':'bsp1_GY_20230601_015_VID001_trim1.mp4',
 		 'index': [0]
 		},
-		{'frame':'bsp1_GY_20230601_034_VID001_trim1.mp4',
-		 'index': [87]
+		{'frame':'bsp1_GY_20230601_018_VID001_trim3.mp4',
+		 'index': [184]
 		},
-		{'frame':'bsp1_GY_20230601_036_VID001_trim1.mp4',
-		 'index': [289]
+		{'frame':'bsp1_GY_20230601_024_VID002_trim1.mp4',
+		 'index': [155]
 		},
-		{'frame':'bsp1_GY_20230601_037_VID001_trim1.mp4',
-		 'index': [283]
+		{'frame':'bsp1_GY_20230601_025_VID001_trim1.mp4',
+		 'index': [207]
 		},
-		{'frame':'bsp1_GY_20230601_038_VID001_trim1.mp4',
-		 'index': [1630]
+		{'frame':'bsp1_GY_20230601_026_VID001_trim1.mp4',
+		 'index': [352]
 		},
-		{'frame':'bsp1_GY_20230601_039_VID001_trim1.mp4',
-		 'index': [1939]
+		{'frame':'bsp1_GY_20230601_030_VID002_trim2.mp4',
+		 'index': [3043]
 		},
-		{'frame':'GAT2_GY_20221109_004_VID002_trim1.mp4',
-		 'index': [0]
+		{'frame':'IBO1_GY_20220505_001_VID001_trim1.mp4',
+		 'index': [30]
+		},
+		{'frame':'IBO1_GY_20220505_001_VID002_trim3.mp4',
+		 'index': [92]
+		},
+		{'frame':'IBO1_GY_20220505_001_VID006_trim1.mp4',
+		 'index': [12006]
 		}
 	]
 }
@@ -441,7 +484,7 @@ dict ={ 'evals':[
 import json
 
 json_object = json.dumps(dict, indent=4)
-batch_num = 11
+batch_num = 21
 # Writing to sample.json
 with open('Evaluation' + str(batch_num) + '.json', 'w') as outfile:
     outfile.write(json_object)
