@@ -142,7 +142,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         im3.paste(image_overlayed_ER, (WIDTH + 10, hh + 3 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_EB, (2*WIDTH + 20, hh + 3 * space_height + HEIGHT - 100))
 
-        if not draw_machine_prediction:
+        if draw_machine_prediction:
             image_machine = Image.open(os.path.join(machine_path, images[i]))
             im3.paste(image_machine.resize((1920, 1080)), (2*WIDTH, hh + space_height))
 
