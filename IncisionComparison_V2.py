@@ -112,20 +112,20 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskS_EB = initializeMask(image_orig.size)
 
         try:
-            maskH_N = Image.open(os.path.join(common_path, 'maskTreat', images[i][:-4] + '.png'))
+            maskH_N = Image.open(os.path.join(common_path, 'maskTreat_nicolas.bourdel', images[i][:-4] + '.png'))
         except:
             print('There is no Hard Zone on Nicolas\'s annot on ' + images[i][:-4])
         try:
-            maskS_N = Image.open(os.path.join(common_path, 'maskCheckN', images[i][:-4] + '.png'))
+            maskS_N = Image.open(os.path.join(common_path, 'maskCheck_nicolas.bourdel'', images[i][:-4] + '.png'))
         except:
             print('There is no Security Zone on Nicolas\'s annot on ' + images[i][:-4])
         #### Jean Luc ####
         try:
-            maskH_J = Image.open(os.path.join(common_path, 'maskTreatJ', images[i][:-4] + '.png'))
+            maskH_J = Image.open(os.path.join(common_path, 'maskTreat_Jean-Luc.Pouly', images[i][:-4] + '.png'))
         except:
             print('There is no Hard Zone on Jean Luc\'s annot on ' + images[i][:-4])
         try:
-            maskS_J = Image.open(os.path.join(common_path, 'maskCheckJ', images[i][:-4] + '.png'))
+            maskS_J = Image.open(os.path.join(common_path, 'maskCheck_Jean-Luc.Pouly', images[i][:-4] + '.png'))
         except:
             print('There is no Security Zone on Jean Luc\'s annot on ' + images[i][:-4])
         #### Giuseppe ####
@@ -134,7 +134,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         except:
             print('There is no Hard Zone on Giuseppe\'s annot on ' + images[i][:-4])
         try:
-            maskS_G = Image.open(os.path.join(common_path, 'maskCheckG', images[i][:-4] + '.png'))
+            maskS_G = Image.open(os.path.join(common_path, 'maskCheck_Jean-Luc.Pouly', images[i][:-4] + '.png'))
         except:
             print('There is no Security Zone on Giuseppe\'s annot on ' + images[i][:-4])
         #### Filippo ####
