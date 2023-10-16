@@ -100,9 +100,9 @@ for batch_num in [21]:
                             cv2.imwrite(data_folder + 'image/' + fr_names[0],
                                         cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
                         # save the masks
-                        maskTreat.save(os.path.join(data_folder + maskTreatdir + '_' + annotator,
+                        maskTreat.save(os.path.join(data_folder + maskTreatdir + '_' + annotator[:2],
                                                     vidname + '_' + str(fr['index']).zfill(5) + '.png'), 'PNG')
-                        maskCheck.save(os.path.join(data_folder + maskCheckdir + '_' + annotator,
+                        maskCheck.save(os.path.join(data_folder + maskCheckdir + '_' + annotator[:2],
                                                     vidname + '_' + str(fr['index']).zfill(5) + '.png'), 'PNG')
 
                         counter += 1
