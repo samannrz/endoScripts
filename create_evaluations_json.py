@@ -474,8 +474,8 @@ dict ={ 'evals':[
 		{'frame':'IBO1_GY_20220505_001_VID002_trim3.mp4',
 		 'index': [92]
 		},
-		{'frame':'IBO1_GY_20220505_001_VID006_trim1.mp4',
-		 'index': [12006]
+		{'frame':'bsp1_GY_20230601_022_VID002_trim1.mp4',
+		 'index': [286]
 		}
 	]
 }
