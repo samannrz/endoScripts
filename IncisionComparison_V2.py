@@ -133,7 +133,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         if draw_machine_prediction:
             im3.paste(image_orig, (1*WIDTH, hh + space_height))
         else:
-            im3.paste(image_orig, (1.5*WIDTH, hh + space_height))
+            im3.paste(image_orig, (int(0.5*WIDTH), hh + space_height))
 
         im3.paste(image_overlayed_N, (0, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_J, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
