@@ -8,8 +8,9 @@ import cv2
 # batch_num = 3
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'Ervin.Kalfa': 4, 'ebbe.thinggaard': 5}
-annotator = 'ebbe.thinggaard'
+annotator = 'Ervin.Kalfa'
 save_image = False
+remove_all_folders = False
 for batch_num in [21]:
 
     data_folder = 'annotationData/'  # The destination folder
@@ -18,7 +19,8 @@ for batch_num in [21]:
     maskCheckdir = 'maskCheck'
 
     counter = 0
-    shutil.rmtree(data_folder)
+    if remove_all_folders:
+        shutil.rmtree(data_folder)
     createDIR(data_folder, 'image')
     createDIR(data_folder, maskTreatdir + '_'+ annotator)
     createDIR(data_folder, maskCheckdir + '_'+ annotator)
