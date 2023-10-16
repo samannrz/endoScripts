@@ -57,35 +57,6 @@ print('There are %d images' % lenimg)
 batch_size = 2
 space_height = 120
 ep = 1e-15
-nameList = []
-frameList = []
-HFNstat = []
-SFNstat = []
-HFJstat = []
-SFJstat = []
-HGNstat = []
-SGNstat = []
-HGJstat = []
-SGJstat = []
-MGNstat = []
-MGJstat = []
-MFNstat = []
-MFJstat = []
-MNJstat = []
-HNJstat = []
-SNJstat = []
-HCFstat = []
-SCFstat = []
-MCFstat = []
-HCNstat = []
-SCNstat = []
-MCNstat = []
-HCGstat = []
-SCGstat = []
-MCGstat = []
-HCJstat = []
-SCJstat = []
-MCJstat = []
 
 
 for j in range(math.ceil(lenimg / batch_size)):

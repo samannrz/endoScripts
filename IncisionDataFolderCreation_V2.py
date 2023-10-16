@@ -9,7 +9,7 @@ import cv2
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'Ervin.Kalfa': 4, 'ebbe.thinggaard': 5}
 annotator =  'filippo.ferrari'
-save_image = False
+save_image = True
 remove_all_folders = False
 for batch_num in [21]:
 
