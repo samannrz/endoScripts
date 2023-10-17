@@ -163,6 +163,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         namevid, _, frnumber = imagename.rpartition('_')
         if j==2:
             break
+    break
 
     cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg",
                 cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
