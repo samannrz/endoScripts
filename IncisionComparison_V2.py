@@ -9,7 +9,7 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 11
+batch_num = 21
 # from IncisionDataFolderCreation import batch_num
 
 common_path = 'annotationData/'
@@ -58,7 +58,6 @@ batch_size = 2
 space_height = 120
 ep = 1e-15
 
-
 for j in range(math.ceil(lenimg / batch_size)):
     counter = 1
     batchstart = True
@@ -97,7 +96,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskH_EB = Image.open(os.path.join(common_path, 'maskTreat_Er', images[i][:-4] + '.png'))
         maskS_EB = Image.open(os.path.join(common_path, 'maskCheck_Er', images[i][:-4] + '.png'))
 
-#########################
+        #########################
         image_overlayed_N = overlayMasks_incision(image_orig, maskH_N, maskS_N)
         image_overlayed_J = overlayMasks_incision(image_orig, maskH_J, maskS_J)
         image_overlayed_G = overlayMasks_incision(image_orig, maskH_G, maskS_G)
@@ -128,25 +127,24 @@ for j in range(math.ceil(lenimg / batch_size)):
             image_overlayed_ER = image_overlayed_ER.resize(newsize)
             image_orig = image_orig.resize(newsize)
 
-
         WIDTH = image_orig.width
         HEIGHT = image_orig.height
         # Paste the images onto the white background
         if draw_machine_prediction:
-            im3.paste(image_orig, (1*WIDTH, hh + space_height))
+            im3.paste(image_orig, (1 * WIDTH, hh + space_height))
         else:
-            im3.paste(image_orig, (int(0.5*WIDTH), hh + space_height))
+            im3.paste(image_orig, (int(0.5 * WIDTH), hh + space_height))
 
         im3.paste(image_overlayed_N, (0, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_J, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
-        im3.paste(image_overlayed_G, (2*WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
+        im3.paste(image_overlayed_G, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_F, (0, hh + 3 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_ER, (WIDTH + 10, hh + 3 * space_height + HEIGHT - 100))
-        im3.paste(image_overlayed_EB, (2*WIDTH + 20, hh + 3 * space_height + HEIGHT - 100))
+        im3.paste(image_overlayed_EB, (2 * WIDTH + 20, hh + 3 * space_height + HEIGHT - 100))
 
         if draw_machine_prediction:
             image_machine = Image.open(os.path.join(machine_path, images[i]))
-            im3.paste(image_machine.resize((1920, 1080)), (2*WIDTH, hh + space_height))
+            im3.paste(image_machine.resize((1920, 1080)), (2 * WIDTH, hh + space_height))
 
         draw = ImageDraw.Draw(im3)
         font = ImageFont.truetype("arial.ttf", 50)
@@ -161,13 +159,11 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         imagename = images[i][:-4]
         namevid, _, frnumber = imagename.rpartition('_')
-        if j==2:
+        if j == 2:
             break
-    break
 
     cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg",
                 cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
-
 
 #  im3.save(dest_folder +'/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg")
 
