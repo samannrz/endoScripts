@@ -154,7 +154,7 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         namevid, _, frnumber = imagename.rpartition('_')
         draw.text((0 / 2 * WIDTH, hh + .5 * space_height), namevid, fill=(0, 0, 0), font=font)
-        hh = hh + 2 * image_orig.height + space_height
+        hh = hh + 3 * HEIGHT + space_height
 
         counter += 1
 
