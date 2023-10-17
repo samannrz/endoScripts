@@ -161,7 +161,7 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         imagename = images[i][:-4]
         namevid, _, frnumber = imagename.rpartition('_')
-        if j==3:
+        if j==2:
             break
 
     cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg",
