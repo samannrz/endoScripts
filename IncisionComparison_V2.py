@@ -138,9 +138,10 @@ for j in range(math.ceil(lenimg / batch_size)):
         im3.paste(image_overlayed_N, (0, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_J, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_G, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
-        im3.paste(image_overlayed_F, (0, hh + 3 * space_height + HEIGHT - 100))
-        im3.paste(image_overlayed_ER, (WIDTH + 10, hh + 3 * space_height + HEIGHT - 100))
-        im3.paste(image_overlayed_EB, (2 * WIDTH + 20, hh + 3 * space_height + HEIGHT - 100))
+
+        im3.paste(image_overlayed_F, (0, hh + 3 * space_height + 2*HEIGHT - 100))
+        im3.paste(image_overlayed_ER, (WIDTH + 10, hh + 3 * space_height + 2*HEIGHT - 100))
+        im3.paste(image_overlayed_EB, (2 * WIDTH + 20, hh + 3 * space_height + 2*HEIGHT - 100))
 
         if draw_machine_prediction:
             image_machine = Image.open(os.path.join(machine_path, images[i]))
