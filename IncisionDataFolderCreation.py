@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw
 import cv2
 
 # batch_num = 3
-for batch_num in [11]:
+for batch_num in [21]:
 
     if batch_num == 100:
         data_folder = '/data/DATA/DELPHI_incision/'  # The destination folder

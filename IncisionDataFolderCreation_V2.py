@@ -47,10 +47,10 @@ for batch_num in [21]:
                         continue  # go to the next jsonfile (and next video)
                     for fr in frames:
                         # Create an image with a white background
-
+                        print(video_api.name)
+                        print(annotation['size']['height'], annotation['size']['width'])
                         image_Treat = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
                                                 (0, 0, 0))
-
                         image_Check = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
                                                 (0, 0, 0))
 
@@ -94,7 +94,8 @@ for batch_num in [21]:
                         # extract the image frame
                         fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
                         vidname = evalfr['frame']
-                        print(vidname)
+
+
                         # save frame as png file
                         if save_image:
                             cv2.imwrite(data_folder + 'image/' + fr_names[0],
