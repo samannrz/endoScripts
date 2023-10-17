@@ -68,7 +68,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         if i > lenimg - 1:
             break
         image_orig = Image.open(os.path.join(common_path, 'image', images[i]))
-
+        print('Original',image_orig.size)
         maskH_N = initializeMask(image_orig.size)
         maskS_N = initializeMask(image_orig.size)
         maskH_F = initializeMask(image_orig.size)
@@ -84,10 +84,12 @@ for j in range(math.ceil(lenimg / batch_size)):
         print(os.path.join(common_path, 'maskTreat_ni', images[i][:-4] + '.png'))
 
         maskH_N = Image.open(os.path.join(common_path, 'maskTreat_ni', images[i][:-4] + '.png'))
+        print('Nicolas',maskH_N.size)
         maskS_N = Image.open(os.path.join(common_path, 'maskCheck_ni', images[i][:-4] + '.png'))
         maskH_J = Image.open(os.path.join(common_path, 'maskTreat_Je', images[i][:-4] + '.png'))
         maskS_J = Image.open(os.path.join(common_path, 'maskCheck_Je', images[i][:-4] + '.png'))
         maskH_G = Image.open(os.path.join(common_path, 'maskTreat_gi', images[i][:-4] + '.png'))
+        print('Giuseppe',maskH_G.size)
         maskS_G = Image.open(os.path.join(common_path, 'maskCheck_gi', images[i][:-4] + '.png'))
         maskH_F = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
         maskS_F = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
