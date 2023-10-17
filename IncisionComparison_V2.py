@@ -81,9 +81,9 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskS_ER = initializeMask(image_orig.size)
         maskH_EB = initializeMask(image_orig.size)
         maskS_EB = initializeMask(image_orig.size)
+        print(os.path.join(common_path, 'maskTreat_ni', images[i][:-4] + '.png'))
 
         maskH_N = Image.open(os.path.join(common_path, 'maskTreat_ni', images[i][:-4] + '.png'))
-        print(os.path.join(common_path, 'maskTreat_ni', images[i][:-4] + '.png'))
         maskS_N = Image.open(os.path.join(common_path, 'maskCheck_ni', images[i][:-4] + '.png'))
         maskH_J = Image.open(os.path.join(common_path, 'maskTreat_Je', images[i][:-4] + '.png'))
         maskS_J = Image.open(os.path.join(common_path, 'maskCheck_Je', images[i][:-4] + '.png'))
