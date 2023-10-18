@@ -7,8 +7,9 @@ import cv2
 
 # batch_num = 3
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
-        'Ervin.Kalfa': 4, 'ebbe.thinggaard': 5}
-annotator =  'filippo.ferrari'
+        'Ervin.Kallfa': 4, 'ebbe.thinggaard': 5}
+# annotator = 'Jean-Luc.Pouly'
+print(annotator)
 save_image = True
 remove_all_folders = False
 for batch_num in [21]:
@@ -22,8 +23,8 @@ for batch_num in [21]:
     if remove_all_folders:
         shutil.rmtree(data_folder)
     createDIR(data_folder, 'image')
-    createDIR(data_folder, maskTreatdir + '_'+ annotator[:2])
-    createDIR(data_folder, maskCheckdir + '_'+ annotator[:2])
+    createDIR(data_folder, maskTreatdir + '_' + annotator[:2])
+    createDIR(data_folder, maskCheckdir + '_' + annotator[:2])
 
     json_eval = open('Evaluation' + str(batch_num) + '.json')
     eval = json.load(json_eval)
@@ -47,10 +48,21 @@ for batch_num in [21]:
                         continue  # go to the next jsonfile (and next video)
                     for fr in frames:
                         # Create an image with a white background
+                        # print(video_api.name)
+                        # print(video_api.frame_width, video_api.frame_height)
+                        fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
+                        old_width = video_api.frame_width
+                        new_width = fr_extracted[0].shape[1]
+
+                        old_height = video_api.frame_height
+                        new_height = fr_extracted[0].shape[0]
+                        if annotation['size']['height'] != fr_extracted[0].shape[0]:
+                            print(fr_names[0])
+                        annotation['size']['height'] = fr_extracted[0].shape[0]
+                        annotation['size']['width'] = fr_extracted[0].shape[1]
 
                         image_Treat = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
                                                 (0, 0, 0))
-
                         image_Check = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
                                                 (0, 0, 0))
 
@@ -75,6 +87,9 @@ for batch_num in [21]:
                                 continue
 
                             frcoor = fig['geometry']['points']['exterior']
+                            for cr in frcoor:
+                                cr[1]=(cr[1]/old_height)*new_height
+                                cr[0] = (cr[0] / old_width) * new_width
                             polygon = [tuple(coor) for coor in frcoor]
                             if dict[Annotator] != dict[annotator]:
                                 continue
@@ -92,22 +107,22 @@ for batch_num in [21]:
                                     Secuexists = True
                         # save masks and images
                         # extract the image frame
-                        fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
+
                         vidname = evalfr['frame']
-                        print(vidname)
+
                         # save frame as png file
                         if save_image:
                             cv2.imwrite(data_folder + 'image/' + fr_names[0],
                                         cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
                         # save the masks
                         cv2.imwrite(os.path.join(data_folder + maskTreatdir + '_' + annotator[:2],
-                                                    vidname + '_' + str(fr['index']).zfill(5) + '.png'),
+                                                 vidname + '_' + str(fr['index']).zfill(5) + '.png'),
                                     cv2.cvtColor(np.array(maskTreat), cv2.COLOR_BGR2RGB))
                         # maskTreat.save(os.path.join(data_folder + maskTreatdir + '_' + annotator[:2],
                         #                             vidname + '_' + str(fr['index']).zfill(5) + '.png'), 'PNG')
                         # maskCheck.save(os.path.join(data_folder + maskCheckdir + '_' + annotator[:2],
                         #                             vidname + '_' + str(fr['index']).zfill(5) + '.png'), 'PNG')
-                        cv2.imwrite(os.path.join(data_folder + maskTreatdir + '_' + annotator[:2],
+                        cv2.imwrite(os.path.join(data_folder + maskCheckdir + '_' + annotator[:2],
                                                  vidname + '_' + str(fr['index']).zfill(5) + '.png'),
                                     cv2.cvtColor(np.array(maskCheck), cv2.COLOR_BGR2RGB))
 
