@@ -240,8 +240,28 @@ Treat_matrix_flat = np.mean(Treat_rates, axis=0)
 Treat_matrix = Treat_matrix_flat.reshape(6,6)
 Check_matrix_flat = np.mean(Check_rates, axis=0)
 Check_matrix = Check_matrix_flat.reshape(6,6)
-plt.imshow(Treat_matrix,cmap = 'viridis')
-plt.colorbar()
+# Create a figure and axis
+fig, ax = plt.subplots()
+
+# Create a heatmap with a custom color map
+cax = ax.matshow(matrix, cmap='YlGnBu', origin='lower')
+
+# Add a color bar
+cbar = plt.colorbar(cax)
+
+# Add grid lines
+ax.set_xticks(np.arange(Treat_matrix.shape[1])-0.5, minor=False)
+ax.set_yticks(np.arange(Treat_matrix.shape[0])-0.5, minor=False)
+ax.grid(which='minor', color='w', linestyle='-', linewidth=2)
+
+# Set axis labels
+ax.set_xticklabels([])
+ax.set_yticklabels([])
+
+# Set title
+plt.title('Matrix Plot')
+
+# Show the plot
 plt.show()
 #  im3.save(dest_folder +'/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg")
 
