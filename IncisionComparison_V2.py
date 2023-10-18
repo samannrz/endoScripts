@@ -242,7 +242,7 @@ Check_matrix_flat = np.mean(Check_rates, axis=0)
 Check_matrix = Check_matrix_flat.reshape(6,6)
 plt.imshow(Treat_matrix,cmap = 'viridis')
 plt.colorbar()
-plt.show
+plt.show()
 #  im3.save(dest_folder +'/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg")
 
 # im3.close()
