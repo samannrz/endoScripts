@@ -244,7 +244,7 @@ Check_matrix = Check_matrix_flat.reshape(6,6)
 fig, ax = plt.subplots()
 
 # Create a heatmap with a custom color map
-cax = ax.matshow(matrix, cmap='YlGnBu', origin='lower')
+cax = ax.matshow(Treat_matrix, cmap='YlGnBu', origin='lower')
 
 # Add a color bar
 cbar = plt.colorbar(cax)
