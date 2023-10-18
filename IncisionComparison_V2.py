@@ -86,16 +86,16 @@ def calculate_agreements(maskH_N, maskH_J, maskH_G, maskH_F, maskH_ER, maskH_EB,
           calculate_score(maskH_J, maskH_F), calculate_score(maskH_J, maskH_ER), calculate_score(maskH_J, maskH_EB),
 
           calculate_score(maskH_G, maskH_N), calculate_score(maskH_G, maskH_J), calculate_score(maskH_G, maskH_G),
-          calculate_score(maskH_G, maskH_F), calculate_score(maskH_G, maskH_ER), calculate_score(maskH_G, maskH_EB),
+          calculate_score(maskH_G, maskH_F), calculate_score(maskH_G, maskH_F), calculate_score(maskH_G, maskH_ER),
 
           calculate_score(maskH_F, maskH_N), calculate_score(maskH_F, maskH_J), calculate_score(maskH_F, maskH_G),
-          calculate_score(maskH_F, maskH_F), calculate_score(maskH_F, maskH_F), calculate_score(maskH_F, maskH_EB),
+          calculate_score(maskH_F, maskH_F), calculate_score(maskH_F, maskH_F), calculate_score(maskH_F, maskH_ER),
 
           calculate_score(maskH_ER, maskH_N), calculate_score(maskH_ER, maskH_J), calculate_score(maskH_ER, maskH_G),
-          calculate_score(maskH_ER, maskH_F), calculate_score(maskH_ER, maskH_F), calculate_score(maskH_ER, maskH_EB),
+          calculate_score(maskH_ER, maskH_F), calculate_score(maskH_ER, maskH_F), calculate_score(maskH_ER, maskH_ER),
 
           calculate_score(maskH_EB, maskH_N), calculate_score(maskH_EB, maskH_J), calculate_score(maskH_EB, maskH_G),
-          calculate_score(maskH_EB, maskH_F), calculate_score(maskH_EB, maskH_ER), calculate_score(maskH_EB, maskH_EB),
+          calculate_score(maskH_EB, maskH_F), calculate_score(maskH_EB, maskH_F), calculate_score(maskH_EB, maskH_ER),
           ]
     C1 = [calculate_score(maskS_N, maskS_N), calculate_score(maskS_N, maskS_J), calculate_score(maskS_N, maskS_G),
           calculate_score(maskS_N, maskS_F), calculate_score(maskS_N, maskS_ER), calculate_score(maskS_N, maskS_EB),
@@ -104,16 +104,16 @@ def calculate_agreements(maskH_N, maskH_J, maskH_G, maskH_F, maskH_ER, maskH_EB,
           calculate_score(maskS_J, maskS_F), calculate_score(maskS_J, maskS_ER), calculate_score(maskS_J, maskS_EB),
 
           calculate_score(maskS_G, maskS_N), calculate_score(maskS_G, maskS_J), calculate_score(maskS_G, maskS_G),
-          calculate_score(maskS_G, maskS_F), calculate_score(maskS_G, maskS_ER), calculate_score(maskS_G, maskS_EB),
+          calculate_score(maskS_G, maskS_F), calculate_score(maskS_G, maskS_F), calculate_score(maskS_G, maskS_ER),
 
           calculate_score(maskS_F, maskS_N), calculate_score(maskS_F, maskS_J), calculate_score(maskS_F, maskS_G),
-          calculate_score(maskS_F, maskS_F), calculate_score(maskS_F, maskS_ER), calculate_score(maskS_F, maskS_EB),
+          calculate_score(maskS_F, maskS_F), calculate_score(maskS_F, maskS_F), calculate_score(maskS_F, maskS_ER),
 
           calculate_score(maskS_ER, maskS_N), calculate_score(maskS_ER, maskS_J), calculate_score(maskS_ER, maskS_G),
-          calculate_score(maskS_ER, maskS_F), calculate_score(maskS_ER, maskS_F), calculate_score(maskS_ER, maskS_EB),
+          calculate_score(maskS_ER, maskS_F), calculate_score(maskS_ER, maskS_F), calculate_score(maskS_ER, maskS_ER),
 
           calculate_score(maskS_EB, maskS_N), calculate_score(maskS_EB, maskS_J), calculate_score(maskS_EB, maskS_G),
-          calculate_score(maskS_EB, maskS_F), calculate_score(maskS_EB, maskS_ER), calculate_score(maskS_EB, maskS_EB),
+          calculate_score(maskS_EB, maskS_F), calculate_score(maskS_EB, maskS_F), calculate_score(maskS_EB, maskS_ER),
           ]
     return T1, C1
 
@@ -240,8 +240,28 @@ Treat_matrix_flat = np.mean(Treat_rates, axis=0)
 Treat_matrix = Treat_matrix_flat.reshape(6,6)
 Check_matrix_flat = np.mean(Check_rates, axis=0)
 Check_matrix = Check_matrix_flat.reshape(6,6)
-plt.imshow(Treat_matrix,cmap = 'viridis')
-plt.colorbar()
+# Create a figure and axis
+fig, ax = plt.subplots()
+
+# Create a heatmap with a custom color map
+cax = ax.matshow(Treat_matrix, cmap='YlGnBu', origin='lower')
+
+# Add a color bar
+cbar = plt.colorbar(cax)
+
+# Add grid lines
+ax.set_xticks(np.arange(Treat_matrix.shape[1])-0.5, minor=False)
+ax.set_yticks(np.arange(Treat_matrix.shape[0])-0.5, minor=False)
+ax.grid(which='minor', color='w', linestyle='-', linewidth=2)
+
+# Set axis labels
+ax.set_xticklabels([])
+ax.set_yticklabels([])
+
+# Set title
+plt.title('Matrix Plot')
+
+# Show the plot
 plt.show()
 #  im3.save(dest_folder +'/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg")
 
