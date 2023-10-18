@@ -86,16 +86,16 @@ def calculate_agreements(maskH_N, maskH_J, maskH_G, maskH_F, maskH_ER, maskH_EB,
           calculate_score(maskH_J, maskH_F), calculate_score(maskH_J, maskH_ER), calculate_score(maskH_J, maskH_EB),
 
           calculate_score(maskH_G, maskH_N), calculate_score(maskH_G, maskH_J), calculate_score(maskH_G, maskH_G),
-          calculate_score(maskH_G, maskH_F), calculate_score(maskH_G, maskH_F), calculate_score(maskH_G, maskH_ER),
+          calculate_score(maskH_G, maskH_F), calculate_score(maskH_G, maskH_ER), calculate_score(maskH_G, maskH_EB),
 
           calculate_score(maskH_F, maskH_N), calculate_score(maskH_F, maskH_J), calculate_score(maskH_F, maskH_G),
-          calculate_score(maskH_F, maskH_F), calculate_score(maskH_F, maskH_F), calculate_score(maskH_F, maskH_ER),
+          calculate_score(maskH_F, maskH_F), calculate_score(maskH_F, maskH_ER), calculate_score(maskH_F, maskH_EB),
 
           calculate_score(maskH_ER, maskH_N), calculate_score(maskH_ER, maskH_J), calculate_score(maskH_ER, maskH_G),
-          calculate_score(maskH_ER, maskH_F), calculate_score(maskH_ER, maskH_F), calculate_score(maskH_ER, maskH_ER),
+          calculate_score(maskH_ER, maskH_F), calculate_score(maskH_ER, maskH_ER), calculate_score(maskH_ER, maskH_EB),
 
           calculate_score(maskH_EB, maskH_N), calculate_score(maskH_EB, maskH_J), calculate_score(maskH_EB, maskH_G),
-          calculate_score(maskH_EB, maskH_F), calculate_score(maskH_EB, maskH_F), calculate_score(maskH_EB, maskH_ER),
+          calculate_score(maskH_EB, maskH_F), calculate_score(maskH_EB, maskH_ER), calculate_score(maskH_EB, maskH_EB),
           ]
     C1 = [calculate_score(maskS_N, maskS_N), calculate_score(maskS_N, maskS_J), calculate_score(maskS_N, maskS_G),
           calculate_score(maskS_N, maskS_F), calculate_score(maskS_N, maskS_ER), calculate_score(maskS_N, maskS_EB),
@@ -104,16 +104,16 @@ def calculate_agreements(maskH_N, maskH_J, maskH_G, maskH_F, maskH_ER, maskH_EB,
           calculate_score(maskS_J, maskS_F), calculate_score(maskS_J, maskS_ER), calculate_score(maskS_J, maskS_EB),
 
           calculate_score(maskS_G, maskS_N), calculate_score(maskS_G, maskS_J), calculate_score(maskS_G, maskS_G),
-          calculate_score(maskS_G, maskS_F), calculate_score(maskS_G, maskS_F), calculate_score(maskS_G, maskS_ER),
+          calculate_score(maskS_G, maskS_F), calculate_score(maskS_G, maskS_ER), calculate_score(maskS_G, maskS_EB),
 
           calculate_score(maskS_F, maskS_N), calculate_score(maskS_F, maskS_J), calculate_score(maskS_F, maskS_G),
-          calculate_score(maskS_F, maskS_F), calculate_score(maskS_F, maskS_F), calculate_score(maskS_F, maskS_ER),
+          calculate_score(maskS_F, maskS_F), calculate_score(maskS_F, maskS_ER), calculate_score(maskS_F, maskS_ERB),
 
           calculate_score(maskS_ER, maskS_N), calculate_score(maskS_ER, maskS_J), calculate_score(maskS_ER, maskS_G),
-          calculate_score(maskS_ER, maskS_F), calculate_score(maskS_ER, maskS_F), calculate_score(maskS_ER, maskS_ER),
+          calculate_score(maskS_ER, maskS_F), calculate_score(maskS_ER, maskS_ER), calculate_score(maskS_ER, maskS_EB),
 
           calculate_score(maskS_EB, maskS_N), calculate_score(maskS_EB, maskS_J), calculate_score(maskS_EB, maskS_G),
-          calculate_score(maskS_EB, maskS_F), calculate_score(maskS_EB, maskS_F), calculate_score(maskS_EB, maskS_ER),
+          calculate_score(maskS_EB, maskS_F), calculate_score(maskS_EB, maskS_ER), calculate_score(maskS_EB, maskS_EB),
           ]
     return T1, C1
 
