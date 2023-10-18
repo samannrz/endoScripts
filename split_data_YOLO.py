@@ -5,12 +5,12 @@ import datetime
 
 label_path = '/data/projects/datasets/LesionLabelsYOLO'
 image_path = '/data/projects/datasets/LesionDatasetImages'
-test_image_path = '/data/projects/datasets/coco128/images/test'
-train_image_path = '/data/projects/datasets/coco128/images/train2017'
-valid_image_path = '/data/projects/datasets/coco128/images/valid'
-train_label_path = '/data/projects/datasets/coco128/labels/train2017'
-test_label_path = '/data/projects/datasets/coco128/labels/test'
-valid_label_path = '/data/projects/datasets/coco128/labels/valid'
+test_image_path = '/data/projects/datasets/coco128-2023-09-15/images/test'
+train_image_path = '/data/projects/datasets/coco128-2023-09-15/images/train2017'
+valid_image_path = '/data/projects/datasets/coco128-2023-09-15/images/valid'
+train_label_path = '/data/projects/datasets/coco128-2023-09-15/labels/train2017'
+test_label_path = '/data/projects/datasets/coco128-2023-09-15/labels/test'
+valid_label_path = '/data/projects/datasets/coco128-2023-09-15/labels/valid'
 if os.path.exists(test_image_path):
     shutil.rmtree(test_image_path)
     shutil.rmtree(test_label_path)

@@ -9,8 +9,6 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-# batch_num = 3
-from IncisionDataFolderCreation import batch_num
 
 common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
@@ -148,6 +146,12 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskH_C_array = np.array(maskH_C.convert('1'))
         maskS_C_array = np.array(maskS_C.convert('1'))
 
+        merge1 = maskS_1_array | maskH_1_array
+        merge2 = maskS_2_array | maskH_2_array
+        mergeN = maskS_N_array | maskH_N_array
+        mergeJ = maskS_J_array | maskH_J_array
+        mergeC = maskS_C_array | maskH_C_array
+
 
 ####### CONSENSUS SCORES #########
         def score_cal(zone1, zone2):
@@ -220,8 +224,8 @@ sfpath = 'keycode/my-gpysheets-3d8d13442005.json'
 # sheetID = '1HiWuZGv5_Y_BjxnV2gIgDN2VA7WVawuvUd545Wr5FlY'
 # sheetName = str(datetime.date.today()) + '-Batch' + str(batch_num)
 # write_to_gsheet(sfpath, sheetID, sheetName, data_df)
-data_df.to_pickle('batch' + str(batch_num) + '.pkl')
-print('batch' + str(batch_num) + '.pkl saved')
+data_df.to_pickle('c_batch' + str(batch_num) + '.pkl')
+print('c_batch' + str(batch_num) + '.pkl saved')
 
-sheetID = '1PeZuOl_tUKS_j6-5-DDoOd9b-iUVVEZC9Ff9cZ7jp-0'
-write_to_gsheet(sfpath, sheetID, str(batch_num), data_df)
+# sheetID = '1PeZuOl_tUKS_j6-5-DDoOd9b-iUVVEZC9Ff9cZ7jp-0'
+# write_to_gsheet(sfpath, sheetID, str(batch_num), data_df)

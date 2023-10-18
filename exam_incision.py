@@ -6,12 +6,12 @@ from functions import *
 from PIL import Image, ImageDraw, ImageFont
 import cv2
 
-exam_dataset_id = 2765 # V1-Session1=2739 V1-Session2=2765
+exam_dataset_id = 2739  # V1-Session1=2739 V1-Session2=2765
 data_folder = 'Exam/'  # The destination folder
 consensus_path = '/Users/saman/Downloads/consensus_2'
 consensus_path = '/data/DATA/DELPHI_incision/all_consensus'
 
-annotator_examed = 'Ervin.Kallfa'
+annotator_examed = 'ebbe.thinggaard'
 annotator_ref = 'saman.noorzadeh'
 
 maskHarddir = 'maskTreat'
@@ -27,7 +27,7 @@ createDIR(data_folder, maskHarddir + annotator_ref[0])
 createDIR(data_folder, maskSecudir + annotator_examed[0])
 createDIR(data_folder, maskSecudir + annotator_ref[0])
 api, tm = get_supervisely_team()
-AR_list=[]
+AR_list = []
 images = os.listdir(consensus_path)
 for vd in api.video.get_list(exam_dataset_id):
     # print(vd.name)
@@ -120,7 +120,7 @@ space_height = 120
 hh = 100
 
 images = os.listdir(data_folder + 'image')
-im3 = Image.new("RGB", (3 * 1920 + 20, hh+ (len(images)) * 1080 + space_height * len(images)), (255, 255, 255))
+im3 = Image.new("RGB", (3 * 1920 + 20, hh + (len(images)) * 1080 + space_height * len(images)), (255, 255, 255))
 
 for i in range(len(images)):
     image_orig = Image.open(os.path.join(data_folder, 'image', images[i]))
@@ -189,11 +189,10 @@ for i in range(len(images)):
     font = ImageFont.truetype("arial.ttf", 100)
     color_check = 'red'
     color_treat = 'red'
-    if AR_check>25:
+    if AR_check > 25:
         color_check = 'green'
-    if AR_treat >25:
+    if AR_treat > 25:
         color_treat = 'green'
-
 
     # Draw the text on the image
     imagename = images[i][:-4]
@@ -202,17 +201,19 @@ for i in range(len(images)):
 
     draw.text((0.01 * image_overlayed_ann.width, hh + .5 * space_height), namevid + '_' + str(frnumber), fill=(0, 0, 0),
               font=font1)
-    draw.text((1 * image_overlayed_ann.width, hh + .5 * space_height-40), 'Treat Score:' + str(AR_treat), fill=(0, 0, 0),
+    draw.text((1 * image_overlayed_ann.width, hh + .5 * space_height - 40), 'Treat Score:' + str(AR_treat),
+              fill=(0, 0, 0),
               font=font, color=color_treat)
-    draw.text((1.5 * image_overlayed_ann.width, hh + .5 * space_height-40), 'Check Score:' + str(AR_check), fill=(0, 0, 0),
-              font=font, color=color_check)
-    draw.text((2.4 * image_overlayed_ann.width, 0 + .5 * space_height - 40), 'Ground Truth' ,
+    draw.text((1.5 * image_overlayed_ann.width, hh + .5 * space_height - 40), 'Check Score:' + str(AR_check),
               fill=(0, 0, 0),
               font=font, color=color_check)
-    draw.text((1.3 * image_overlayed_ann.width, 0 + .5 * space_height - 40), annotator_examed ,
+    draw.text((2.4 * image_overlayed_ann.width, 0 + .5 * space_height - 40), 'Ground Truth',
+              fill=(0, 0, 0),
+              font=font, color=color_check)
+    draw.text((1.3 * image_overlayed_ann.width, 0 + .5 * space_height - 40), annotator_examed,
               fill=(0, 0, 0),
               font=font, color=color_check)
     hh = hh + HEIGHT + space_height
 
-cv2.imwrite(data_folder + '/Res/' + annotator_examed+"_exam_final_session2.jpg", cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
-print('FINAL SCORE: ',sum(AR_list)/len(AR_list))
+cv2.imwrite(data_folder + '/Res/' + annotator_examed + "_session1.jpg", cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
+print('FINAL SCORE: ', sum(AR_list) / len(AR_list))
