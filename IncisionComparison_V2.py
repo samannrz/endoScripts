@@ -17,7 +17,7 @@ common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
 machine_path = '/data/DATA/Incision_predictions/Batch11/all/final'
-dest_folder = 'ImgOut2'
+dest_folder = 'ImgOut3'
 draw_machine_prediction = False
 
 
@@ -62,7 +62,7 @@ print('There are %d images' % lenimg)
 batch_size = 2
 space_height = 150
 ep = 1e-15
-save_image = False
+save_image = True
 
 
 def calculate_score(mask1, mask2):
@@ -107,7 +107,7 @@ def calculate_agreements(maskH_N, maskH_J, maskH_G, maskH_F, maskH_ER, maskH_EB,
           calculate_score(maskS_G, maskS_F), calculate_score(maskS_G, maskS_ER), calculate_score(maskS_G, maskS_EB),
 
           calculate_score(maskS_F, maskS_N), calculate_score(maskS_F, maskS_J), calculate_score(maskS_F, maskS_G),
-          calculate_score(maskS_F, maskS_F), calculate_score(maskS_F, maskS_ER), calculate_score(maskS_F, maskS_ERB),
+          calculate_score(maskS_F, maskS_F), calculate_score(maskS_F, maskS_ER), calculate_score(maskS_F, maskS_EB),
 
           calculate_score(maskS_ER, maskS_N), calculate_score(maskS_ER, maskS_J), calculate_score(maskS_ER, maskS_G),
           calculate_score(maskS_ER, maskS_F), calculate_score(maskS_ER, maskS_ER), calculate_score(maskS_ER, maskS_EB),
@@ -238,45 +238,40 @@ for j in range(math.ceil(lenimg / batch_size)):
 
 Treat_matrix_flat = np.mean(Treat_rates, axis=0)
 Treat_matrix = Treat_matrix_flat.reshape(6,6)
+print(Treat_matrix)
 Check_matrix_flat = np.mean(Check_rates, axis=0)
 Check_matrix = Check_matrix_flat.reshape(6,6)
 # Create a figure and axis
 fig, ax = plt.subplots()
-
 # Create a heatmap with a custom color map
-cax = ax.matshow(Treat_matrix, cmap='YlGnBu', origin='lower')
-
+cax = ax.matshow(Treat_matrix, cmap='coolwarm', origin='lower')
 # Add a color bar
 cbar = plt.colorbar(cax)
-
 # Add grid lines
-ax.set_xticks(np.arange(Treat_matrix.shape[1])-0.5, minor=False)
-ax.set_yticks(np.arange(Treat_matrix.shape[0])-0.5, minor=False)
-ax.grid(which='minor', color='w', linestyle='-', linewidth=2)
-
+ax.set_xticks(np.arange(Treat_matrix.shape[1]), minor=False)
+ax.set_yticks(np.arange(Treat_matrix.shape[0]), minor=False)
+ax.grid(which='minor', color='w', linestyle='-', linewidth=0)
 # Set axis labels
-ax.set_xticklabels([])
-ax.set_yticklabels([])
-
+ax.set_xticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
+ax.set_yticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
+for i in range(Treat_matrix.shape[0]):
+    for j in range(Treat_matrix.shape[1]):
+        ax.text(j, i, str(round(Treat_matrix[i, j])), va='center', ha='center', color='black')
 # Set title
-plt.title('Matrix Plot')
-
+plt.title('Pair-wise agreement rate')
 # Show the plot
-plt.show()
-#  im3.save(dest_folder +'/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg")
-
-# im3.close()
-
-# data_df = pd.DataFrame(
-#     {'Vid. Name': nameList, '# frame': frameList, 'FF-NB Treat': HFNstat, 'FF-NB Check': SFNstat,
-#      'FF-NB Merge': MFNstat, 'GG-NB Treat': HGNstat, 'GG-NB Check': SGNstat,
-#      'GG-NB Merge': MGNstat, 'FF-JLP Treat': HFJstat, 'FF-JLP Check': SFJstat,
-#      'FF-JLP Merge': MFJstat, 'GG-JLP Treat': HGJstat, 'GG-JLP Check': SGJstat,
-#      'GG-JLP Merge': MGJstat, 'NB-JLP Treat': HNJstat, 'NB-JLP Check': SNJstat,
-#      'NB-JLP Merge': MNJstat})
-# # sfpath = 'keycode/my-gpysheets-3d8d13442005.json'
-# # sheetID = '1HiWuZGv5_Y_BjxnV2gIgDN2VA7WVawuvUd545Wr5FlY'
-# # sheetName = str(datetime.date.today()) + '-Batch' + str(batch_num)
-# # write_to_gsheet(sfpath, sheetID, sheetName, data_df)
-# data_df.to_pickle('batch' + str(batch_num) + '.pkl')
-# print('batch' + str(batch_num) + '.pkl saved')
+plt.savefig('Treat_rates.png')
+######################
+fig, ax = plt.subplots()
+cax = ax.matshow(Check_matrix, cmap='coolwarm', origin='lower')
+cbar = plt.colorbar(cax)
+ax.set_xticks(np.arange(Check_matrix.shape[1]), minor=False)
+ax.set_yticks(np.arange(Check_matrix.shape[0]), minor=False)
+ax.grid(which='minor', color='w', linestyle='-', linewidth=0)
+ax.set_xticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
+ax.set_yticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
+for i in range(Check_matrix.shape[0]):
+    for j in range(Check_matrix.shape[1]):
+        ax.text(j, i, str(round(Check_matrix[i, j])), va='center', ha='center', color='black')
+plt.title('Pair-wise agreement rate')
+plt.savefig('Check_rates.png')

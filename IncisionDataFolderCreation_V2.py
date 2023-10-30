@@ -8,7 +8,7 @@ import cv2
 # batch_num = 3
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'Ervin.Kallfa': 4, 'ebbe.thinggaard': 5}
-# annotator = 'Jean-Luc.Pouly'
+annotator = 'Jean-Luc.Pouly'
 print(annotator)
 save_image = True
 remove_all_folders = False
@@ -56,6 +56,9 @@ for batch_num in [21]:
 
                         old_height = video_api.frame_height
                         new_height = fr_extracted[0].shape[0]
+                        print(video_api.name)
+                        print(old_width,new_width)
+                        print(old_height, new_height)
                         if annotation['size']['height'] != fr_extracted[0].shape[0]:
                             print(fr_names[0])
                         annotation['size']['height'] = fr_extracted[0].shape[0]
@@ -88,8 +91,10 @@ for batch_num in [21]:
 
                             frcoor = fig['geometry']['points']['exterior']
                             for cr in frcoor:
+                            # if fr_names[0].startswith('bsp1_GY_20230601_015_VID001_trim1'):
                                 cr[1]=(cr[1]/old_height)*new_height
                                 cr[0] = (cr[0] / old_width) * new_width
+                                # print('NO')
                             polygon = [tuple(coor) for coor in frcoor]
                             if dict[Annotator] != dict[annotator]:
                                 continue
@@ -127,6 +132,7 @@ for batch_num in [21]:
                                     cv2.cvtColor(np.array(maskCheck), cv2.COLOR_BGR2RGB))
 
                         counter += 1
+
 
     print('Batch_num ' + str(batch_num) + ' : ' + str(
         counter) + ' images, masks are saved in ' + data_folder + ' : ' + annotator)
