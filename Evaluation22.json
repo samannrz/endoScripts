@@ -1,0 +1,94 @@
+{
+    "evals": [
+        {
+            "frame": "bsp1_GY_20230601_042_VID001_trim1.mp4",
+            "index": [
+                105
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_045_VID001_trim1.mp4",
+            "index": [
+                291
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_045_VID001_trim1.mp4",
+            "index": [
+                490
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20221125_046_VID001_trim1.mp4",
+            "index": [
+                762
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20221130_050_VID001_trim1.mp4",
+            "index": [
+                214
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20221130_051_VID002_trim1.mp4",
+            "index": [
+                174
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20221201_052_VID003_trim1.mp4",
+            "index": [
+                628
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20230120_053_VID002_trim2.mp4",
+            "index": [
+                7047
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20230124_054_VID001_trim1.mp4",
+            "index": [
+                180
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20230125_056_VID001_trim1.mp4",
+            "index": [
+                448
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20230126_057_VID002_trim1.mp4",
+            "index": [
+                181
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20230125_056_VID001_trim1.mp4",
+            "index": [
+                880
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20230126_058_VID001_trim1.mp4",
+            "index": [
+                303
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20230127_059_VID001_trim1.mp4",
+            "index": [
+                83
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20221125_046_VID003_trim1.mp4",
+            "index": [
+                250
+            ]
+        }
+    ]
+}
