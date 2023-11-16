@@ -10,8 +10,8 @@ ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 ANNOTATOR_DICT = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
                   'incision.consensus': 4}
 ANNOTATOR = 4
-dest_path = '/data/DATA/incision/temp'
-dest_path = '/Users/saman/Documents/data/DATA/incision/'
+dest_path = '/data/DATA/incision/'
+# dest_path = '/Users/saman/Documents/data/DATA/incision/'
 
 createDIR(dest_path, str(ANNOTATOR))
 createDIR(os.path.join(dest_path, str(ANNOTATOR)), 'mask')
@@ -40,14 +40,15 @@ def saveMask(classobj, polygon, vd, fr_name, save_path):
 
 
 for project in api.project.get_list(ws.id):  # for each project
-    # if project.name != 'Endometriosis_WS8' and project.name != 'Endometriosis_WS9' and project.name != 'Endometriosis_WS7':
-    #     continue
-
+    if project.name == 'Endometriosis_WS7' or  project.name == 'Endometriosis_WS1' or  project.name == 'Endometriosis_WS2' :
+        continue
+    print(project.name)
     for ds in api.dataset.get_list(project.id):
+        print(ds.name)
         for vd in api.video.get_list(ds.id):
             annotation = api.video.annotation.download(vd.id)
             frames = annotation['frames']  # frame is the annotation info (type: list of dict) on that frame
-
+            print(vd.name)
             for fr in frames:
                 # if vd.name + '_'+str(fr['index']).zfill(5)+'.png' not in list8_9:
                 #     continue
@@ -74,13 +75,13 @@ for project in api.project.get_list(ws.id):  # for each project
                     SAVE_SIGNAL = True
                 if SAVE_SIGNAL:
                     fr_names, fr_extracted = get_frames_from_api(api, vd.id, vd.name, [fr['index']])
+                    print(vd.name,fr['index'],ds.name,project.name)
+                    if not os.path.exists( os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0])):
+                        cv2.imwrite(os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0]),
+                                     cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
 
-                    # if not os.path.exists( os.path.join(dest_path_old, str(ANNOTATOR), 'image', fr_names[0])):
-                    cv2.imwrite(os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0]),
-                                 cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
-
-                    img_check.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Check', fr_names[0]))
-                    img_treat.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Treat', fr_names[0]))
-                    print('saved')
+                        img_check.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Check', fr_names[0]))
+                        img_treat.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Treat', fr_names[0]))
+                        print('saved')
 
 

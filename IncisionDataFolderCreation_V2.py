@@ -8,11 +8,11 @@ import cv2
 # batch_num = 3
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'Ervin.Kallfa': 4, 'ebbe.thinggaard': 5, 'incision.consensus': 6}
-annotator = 'incision.consensus'
+annotator ='Jean-Luc.Pouly'
 print(annotator)
 save_image = True
-remove_all_folders = False
-for batch_num in [21]:
+remove_all_folders = True
+for batch_num in [8]:
 
     data_folder = 'annotationData/'  # The destination folder
 
@@ -34,8 +34,8 @@ for batch_num in [21]:
     ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
     for project in api.project.get_list(ws.id):  # for each project
-        if project.name != 'Endometriosis_WS9':
-            continue
+        # if project.name != 'Endometriosis_WS9':
+        #     continue
         for ds in api.dataset.get_list(project.id):
             evalfr = evals[0]
             for evalfr in evals:
@@ -47,22 +47,8 @@ for batch_num in [21]:
                     if len(frames) < 1:  # if there is no annotation on the video
                         continue  # go to the next jsonfile (and next video)
                     for fr in frames:
-                        # Create an image with a white background
-                        # print(video_api.name)
-                        # print(video_api.frame_width, video_api.frame_height)
-                        fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
-                        old_width = video_api.frame_width
-                        new_width = fr_extracted[0].shape[1]
 
-                        old_height = video_api.frame_height
-                        new_height = fr_extracted[0].shape[0]
-                        print(video_api.name)
-                        print(old_width,new_width)
-                        print(old_height, new_height)
-                        if annotation['size']['height'] != fr_extracted[0].shape[0]:
-                            print(fr_names[0])
-                        annotation['size']['height'] = fr_extracted[0].shape[0]
-                        annotation['size']['width'] = fr_extracted[0].shape[1]
+
 
                         image_Treat = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
                                                 (0, 0, 0))
@@ -90,11 +76,7 @@ for batch_num in [21]:
                                 continue
 
                             frcoor = fig['geometry']['points']['exterior']
-                            for cr in frcoor:
-                            # if fr_names[0].startswith('bsp1_GY_20230601_015_VID001_trim1'):
-                                cr[1]=(cr[1]/old_height)*new_height
-                                cr[0] = (cr[0] / old_width) * new_width
-                                # print('NO')
+
                             polygon = [tuple(coor) for coor in frcoor]
                             if dict[Annotator] != dict[annotator]:
                                 continue
@@ -111,9 +93,10 @@ for batch_num in [21]:
                                     maskCheck = image_Check.convert("L")
                                     Secuexists = True
                         # save masks and images
+                        vidname = evalfr['frame']
                         # extract the image frame
 
-                        vidname = evalfr['frame']
+                        fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
 
                         # save frame as png file
                         if save_image:

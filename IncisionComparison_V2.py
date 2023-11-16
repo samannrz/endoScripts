@@ -16,7 +16,7 @@ batch_num = 21
 common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
-machine_path = '/data/DATA/Incision_predictions/Batch11/all/final'
+machine_path = '/data/DATA/Incision_predictions/Batch22-model1-21/final'
 dest_folder = 'ImgOut3'
 draw_machine_prediction = False
 
@@ -60,7 +60,6 @@ Check_rates = np.zeros((lenimg, nb_ann * nb_ann))
 r = 0
 print('There are %d images' % lenimg)
 batch_size = 2
-space_height = 150
 ep = 1e-15
 save_image = True
 
@@ -196,7 +195,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         HEIGHT = image_orig.height
         # Paste the images onto the white background
         if draw_machine_prediction:
-            im3.paste(image_orig, (int(0.5 * WIDTH), hh + space_height))
+            im3.paste(image_orig, (int(0.49 * WIDTH), hh + space_height))
         else:
             im3.paste(image_orig, (int(1 * WIDTH), hh + space_height))
 
@@ -209,23 +208,25 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         if draw_machine_prediction:
             image_machine = Image.open(os.path.join(machine_path, images[i]))
-            im3.paste(image_machine.resize((1920, 1080)), (1.5 * WIDTH, hh + space_height))
+            im3.paste(image_machine.resize((1920, 1080)), (round(1.51 * WIDTH), hh + space_height))
 
         draw = ImageDraw.Draw(im3)
         font = ImageFont.truetype("arial.ttf", 50)
 
-        draw.text((1 / 2 * WIDTH, hh + space_height + HEIGHT), 'N', fill=(240, 60, 240), font=font)
-        draw.text((3 / 2 * WIDTH + 10, hh + space_height + HEIGHT), 'J', fill=(240, 60, 240), font=font)
-        draw.text((5 / 2 * WIDTH + 20, hh + space_height + HEIGHT), 'G', fill=(240, 60, 240), font=font)
-        draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50), 'F', fill=(240, 60, 240), font=font)
-        draw.text((3 / 2 * WIDTH + 10, hh + space_height + 2 * HEIGHT + 50), 'Er', fill=(240, 60, 240), font=font)
-        draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50), 'Eb', fill=(240, 60, 240), font=font)
+        draw.text((1 / 2 * WIDTH, hh + space_height + HEIGHT), 'Nicolas', fill=(240, 60, 240), font=font)
+        draw.text((3 / 2 * WIDTH + 10, hh + space_height + HEIGHT), 'Jean', fill=(240, 60, 240), font=font)
+        draw.text((5 / 2 * WIDTH + 20, hh + space_height + HEIGHT), 'Guiseppe', fill=(240, 60, 240), font=font)
+        draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50), 'Filippo', fill=(240, 60, 240), font=font)
+        draw.text((3 / 2 * WIDTH + 10, hh + space_height + 2 * HEIGHT + 50), 'Ervin', fill=(240, 60, 240), font=font)
+        draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50), 'Ebbe', fill=(240, 60, 240), font=font)
 
         # Draw the text on the image
         imagename = images[i][:-4]
 
         namevid, _, frnumber = imagename.rpartition('_')
-        draw.text((0 / 2 * WIDTH, hh + int(0.5 * HEIGHT)), namevid + '_' + frnumber, fill=(0, 0, 0), font=font)
+        draw.text((0 / 2 * WIDTH, hh + int(0 * HEIGHT)), namevid + '_' + frnumber, fill=(0, 0, 0), font=font)
+        space_height = 150
+
         hh = hh + 3 * HEIGHT + space_height + 30
 
         counter += 1
