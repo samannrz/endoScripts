@@ -10,7 +10,7 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 21
+batch_num = 9
 # from IncisionDataFolderCreation import batch_num
 
 common_path = 'annotationData/'
@@ -60,6 +60,7 @@ Check_rates = np.zeros((lenimg, nb_ann * nb_ann))
 r = 0
 print('There are %d images' % lenimg)
 batch_size = 2
+space_height = 150
 ep = 1e-15
 save_image = True
 
@@ -148,10 +149,10 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskS_G = Image.open(os.path.join(common_path, 'maskCheck_gi', images[i][:-4] + '.png'))
         maskH_F = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
         maskS_F = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
-        maskH_ER = Image.open(os.path.join(common_path, 'maskTreat_Er', images[i][:-4] + '.png'))
-        maskS_ER = Image.open(os.path.join(common_path, 'maskCheck_Er', images[i][:-4] + '.png'))
-        maskH_EB = Image.open(os.path.join(common_path, 'maskTreat_eb', images[i][:-4] + '.png'))
-        maskS_EB = Image.open(os.path.join(common_path, 'maskCheck_eb', images[i][:-4] + '.png'))
+        maskH_ER = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
+        maskS_ER = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
+        maskH_EB = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
+        maskS_EB = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
 
         #########################
         image_overlayed_N = overlayMasks_incision(image_orig, maskH_N, maskS_N)
@@ -203,8 +204,8 @@ for j in range(math.ceil(lenimg / batch_size)):
         im3.paste(image_overlayed_J, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_G, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_F, (0, hh + 3 * space_height + 2 * HEIGHT - 200))
-        im3.paste(image_overlayed_ER, (WIDTH + 10, hh + 3 * space_height + 2 * HEIGHT - 200))
-        im3.paste(image_overlayed_EB, (2 * WIDTH + 20, hh + 3 * space_height + 2 * HEIGHT - 200))
+        # im3.paste(image_overlayed_ER, (WIDTH + 10, hh + 3 * space_height + 2 * HEIGHT - 200))
+        # im3.paste(image_overlayed_EB, (2 * WIDTH + 20, hh + 3 * space_height + 2 * HEIGHT - 200))
 
         if draw_machine_prediction:
             image_machine = Image.open(os.path.join(machine_path, images[i]))

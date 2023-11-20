@@ -1,6 +1,6 @@
 import pygsheets
 
-sheet_id = '11e7eDQZcPBAAgFsTG364kiMY7Jw8bftkvVUnbXVS7Zc'
+sheet_id = '1rkSd-86iS1k8og1ehRsJ5pKc6qyOfanf'
 
 gc = pygsheets.authorize(service_file='keycode/my-gpysheets-3d8d13442005.json')
 sh = gc.open_by_key(sheet_id)
@@ -37,6 +37,6 @@ while i < 128:
         script_lines = script_lines + '\n'
     video_name_full = video_name + '_' + video_num + '.mp4'
 
-with open('extract_bash_J_4.sh', 'w') as f:
+with open('extract_bash_G_3.sh', 'w') as f:
     f.write('#!/bin/sh\n')
     f.write(script_lines)
