@@ -16,7 +16,7 @@ common_path = 'annotationData/'
 machine_path = '/data/DATA/Incision_predictions/Batch11/all/final'
 dest_folder = 'ImgOut'
 draw_machine_prediction = False
-
+batch_num =22
 
 def overlayMasks_incision(image_orig, mask1, mask2):
     # This function takes the two masks and overlay them to the image_orig
@@ -70,6 +70,12 @@ MCGstat = []
 HCJstat = []
 SCJstat = []
 MCJstat = []
+HCErstat = []
+SCErstat = []
+MCErstat = []
+HCEbstat = []
+SCEbstat = []
+MCEbstat = []
 
 
 for j in range(math.ceil(lenimg / batch_size)):
@@ -154,14 +160,14 @@ for j in range(math.ceil(lenimg / batch_size)):
 
 
 ####### CONSENSUS SCORES #########
-        def score_cal(zone1, zone2):
-            try:
-                # score of  zones1 and 2
-                zone12_score = round((np.count_nonzero(zone1 & zone2) / np.count_nonzero(
-                    zone1 | zone2)) * 100, 2)
-            except ZeroDivisionError:
-                zone12_score = 100
-            return zone12_score
+        def score_cal(mask1, mask2):
+            epsilon = 1e-15
+            intersection = np.logical_and(mask1, mask2)
+            union = np.logical_or(mask1, mask2)
+            iou = np.sum(intersection) / (np.sum(union) + epsilon)
+            if np.sum(intersection) == 0 and np.sum(union) == 0:
+                iou = 1
+            return iou
 
 
         # score of Treat zones with consensus & Nicolas

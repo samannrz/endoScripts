@@ -1,18 +1,18 @@
 import pygsheets
 
-sheet_id = '1rkSd-86iS1k8og1ehRsJ5pKc6qyOfanf'
+sheet_id = '11e7eDQZcPBAAgFsTG364kiMY7Jw8bftkvVUnbXVS7Zc'
 
 gc = pygsheets.authorize(service_file='keycode/my-gpysheets-3d8d13442005.json')
 sh = gc.open_by_key(sheet_id)
 wks = sh[9]
 
 script_lines = ''
-i = 73
+i = 72
 j = 1
 video_num = wks.cell('D' + str(i)).value
 video_name = wks.cell('C' + str(i)).value
 video_name_full = video_name + '_' + video_num + '.mp4'
-while i < 128:
+while i < 81:
     print(i, video_name_full)
 
     start_time = wks.cell('E' + str(i)).value
@@ -37,6 +37,6 @@ while i < 128:
         script_lines = script_lines + '\n'
     video_name_full = video_name + '_' + video_num + '.mp4'
 
-with open('extract_bash_G_3.sh', 'w') as f:
+with open('extract_bash_Er_1.sh', 'w') as f:
     f.write('#!/bin/sh\n')
     f.write(script_lines)
