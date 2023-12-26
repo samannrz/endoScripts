@@ -210,7 +210,7 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         heatmap_Treat = create_heatmap(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array, maskH_EB_array, 'red')
         heatmap_Check = create_heatmap(
-            maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array, maskS_EB_array, 'green')
+            maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array, maskS_EB_array, 'red')
 
         dst = cv2.cvtColor(np.uint8(heatmap_Treat), cv2.COLOR_BGR2RGB)
         cv2.imwrite('ahmap.png',dst)
@@ -319,17 +319,20 @@ for j in range(math.ceil(lenimg / batch_size)):
     if save_image:
         cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg",
                     cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
-    break
+
 exit()
 Treat_matrix_flat = np.mean(Treat_rates, axis=0)
 Treat_matrix = Treat_matrix_flat.reshape(6,6)
 print(Treat_matrix)
 Check_matrix_flat = np.mean(Check_rates, axis=0)
 Check_matrix = Check_matrix_flat.reshape(6,6)
+maskk = np.tril(np.ones_like(Treat_matrix, dtype=bool))
+Treat_matrix_masked = np.where(mask, np.nan, Treat_matrix)
+
 # Create a figure and axis
 fig, ax = plt.subplots()
 # Create a heatmap with a custom color map
-cax = ax.matshow(Treat_matrix, cmap='coolwarm', origin='lower')
+cax = ax.matshow(Treat_matrix_masked, cmap='coolwarm', origin='lower')
 # Add a color bar
 cbar = plt.colorbar(cax)
 # Add grid lines
@@ -339,9 +342,11 @@ ax.grid(which='minor', color='w', linestyle='-', linewidth=0)
 # Set axis labels
 ax.set_xticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
 ax.set_yticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
-for i in range(Treat_matrix.shape[0]):
-    for j in range(Treat_matrix.shape[1]):
-        ax.text(j, i, str(round(Treat_matrix[i, j])), va='center', ha='center', color='black')
+for i in range(Treat_matrix_masked.shape[0]):
+    for j in range(Treat_matrix_masked.shape[1]):
+        if not mask[i, j]:
+            ax.text(j, i, str(round(Treat_matrix_masked[i, j])), va='center', ha='center', color='black')
+
 # Set title
 plt.title('Pair-wise agreement rate')
 # Show the plot
