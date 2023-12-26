@@ -1,4 +1,4 @@
-
+# in this version the consensensus of annottaors are also plot as heatmaps
 import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
@@ -266,6 +266,9 @@ for j in range(math.ceil(lenimg / batch_size)):
             image_overlayed_F = image_overlayed_F.resize(newsize)
             image_overlayed_EB = image_overlayed_EB.resize(newsize)
             image_overlayed_ER = image_overlayed_ER.resize(newsize)
+            bg_check = bg_check.resize(newsize)
+            bg_treat = bg_treat.resize(newsize)
+
             image_orig = image_orig.resize(newsize)
 
         WIDTH = image_orig.width
