@@ -166,18 +166,18 @@ for j in range(math.ceil(lenimg / batch_size)):
 
 
         ## Calculation of agreement images ##########
-        def create_heatmap(mask1,mask2,mask3,mask4,mask5,mask6, color_theme='red'):
+        def create_heatmap(mask1,mask2,mask3,mask4,mask5,mask6,color_theme='red'):
             num_masks = 0
             heatmap = np.ones((mask1.shape[0], mask1.shape[1], 3))
             if color_theme == 'red':
-                colors = [[255, 255, 255], [255, 213, 213], [255, 171, 171], [255, 129, 129], [255, 88, 88],
-                          [255, 46, 46], [255, 4, 4]]
+                colors = [[255, 255, 255], [210, 241, 250], [222, 250, 205], [253, 231, 118], [245, 182, 94],
+                          [237, 133, 69], [164, 14, 76]]
             else:
-                colors = [[255, 255, 255],[222, 243, 213], [188, 231, 172], [155, 219, 130], [122, 207, 88], [91, 188, 54],
-                          [71, 147, 42],]
+                colors = [[255, 255, 255],[247, 242, 198], [218, 243, 251], [229, 220, 249], [216, 246, 228], [184, 206, 169],
+                          [90, 101, 83],]
             for i in range(mask1.shape[0]):
                 for j in range(mask1.shape[1]):
-                    num_masks =  mask1[i, j] + mask2[i, j] + mask3[i, j]+ mask4[i, j]+ mask5[i, j]+ mask6[i, j]
+                    num_masks =  sum([mask1[i, j], mask2[i, j], mask3[i, j], mask4[i, j], mask5[i, j], mask6[i, j]])
                     if num_masks == 0:
                         # print(i,j)
                         heatmap[i, j] = colors[0]  # White color for unmasked pixels
@@ -191,7 +191,7 @@ for j in range(math.ceil(lenimg / batch_size)):
                         heatmap[i, j] = colors[4]  # Red color for pixels masked in all three images
                     elif num_masks == 5:
                         heatmap[i, j] = colors[5]  # Red color for pixels masked in all three images
-                    elif num_masks == 6:
+                    elif num_masks == nb_ann:
                         heatmap[i, j] = colors[6]  # Red color for pixels masked in all three images
             return heatmap
         maskH_N_array = np.array(maskH_N.convert('1'))
@@ -211,18 +211,23 @@ for j in range(math.ceil(lenimg / batch_size)):
         heatmap_Treat = create_heatmap(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array, maskH_EB_array, 'red')
         heatmap_Check = create_heatmap(
             maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array, maskS_EB_array, 'green')
-        cv2.imwrite('hmap.png',heatmap_Treat)
+
+        dst = cv2.cvtColor(np.uint8(heatmap_Treat), cv2.COLOR_BGR2RGB)
+        cv2.imwrite('ahmap.png',dst)
+
         print('heatmap_created')
+
+
         overlay = Image.fromarray(heatmap_Treat.astype('uint8'), 'RGB')
         bg_treat = image_orig.convert('RGB')
         mask = overlay.convert('L')
-        mask = mask.point(lambda p: 80 if p < 250 else 0)  # if the point is white it is become transparent
+        mask = mask.point(lambda p: 200 if p < 250 else 0)  # if the point is white it is become transparent
         bg_treat.paste(overlay, None, mask)  # paste the overlay to image when a mask exists
 
         overlay = Image.fromarray(heatmap_Check.astype('uint8'), 'RGB')
         bg_check = image_orig.convert('RGB')
         mask = overlay.convert('L')
-        mask = mask.point(lambda p: 80 if p < 250 else 0)  # if the point is white it is become transparent
+        mask = mask.point(lambda p: 200 if p < 250 else 0)  # if the point is white it is become transparent
         bg_check.paste(overlay, None, mask)  # paste the overlay to image when a mask exists
         bg_treat.save('ztreat.png')
         bg_check.save('zcheck.png')
@@ -278,6 +283,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         im3.paste(image_overlayed_ER, (WIDTH + 10, hh + 3 * space_height + 2 * HEIGHT - 200))
         im3.paste(image_overlayed_EB, (2 * WIDTH + 20, hh + 3 * space_height + 2 * HEIGHT - 200))
         im3.paste(bg_treat, (0, hh + 4 * space_height + 3 * HEIGHT - 300))
+        im3.paste(bg_check, (WIDTH + 10, hh + 4 * space_height + 3 * HEIGHT - 300))
 
 
         if draw_machine_prediction:
@@ -293,6 +299,8 @@ for j in range(math.ceil(lenimg / batch_size)):
         draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50), 'Filippo', fill=(240, 60, 240), font=font)
         draw.text((3 / 2 * WIDTH + 10, hh + space_height + 2 * HEIGHT + 50), 'Ervin', fill=(240, 60, 240), font=font)
         draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50), 'Ebbe', fill=(240, 60, 240), font=font)
+        draw.text((1 / 2 * WIDTH + 10, hh + space_height + 3 * HEIGHT + 100), 'Consensus Treat', fill=(240, 60, 240), font=font)
+        draw.text((3 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Consensus Check', fill=(240, 60, 240), font=font)
 
         # Draw the text on the image
         imagename = images[i][:-4]
@@ -307,10 +315,12 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         imagename = images[i][:-4]
         namevid, _, frnumber = imagename.rpartition('_')
+
     if save_image:
         cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg",
                     cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
-
+    break
+exit()
 Treat_matrix_flat = np.mean(Treat_rates, axis=0)
 Treat_matrix = Treat_matrix_flat.reshape(6,6)
 print(Treat_matrix)

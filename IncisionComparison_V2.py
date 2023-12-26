@@ -16,9 +16,10 @@ batch_num = 23
 common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
-machine_path = '/data/DATA/Incision_predictions/Batch22-model1-21/final'
+machine_path = '/data/DATA/Incision_predictions/Batch23-model1-21/final'
+machine_path = '/Users/saman/Desktop/Batch23-model1-21/final'
 dest_folder = 'ImgOut3'
-draw_machine_prediction = False
+draw_machine_prediction = True
 
 
 def overlayMasks_incision(image_orig, mask1, mask2):

@@ -8,7 +8,7 @@ import cv2
 # batch_num = 3
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'Ervin.Kallfa': 4, 'ebbe.thinggaard': 5, 'incision.consensus': 6}
-# annotator ='ebbe.thinggaard'
+#annotator ='ebbe.thinggaard'
 print(annotator)
 save_image = True
 remove_all_folders = False
