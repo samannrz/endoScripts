@@ -320,7 +320,6 @@ for j in range(math.ceil(lenimg / batch_size)):
         cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg",
                     cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
 
-exit()
 Treat_matrix_flat = np.mean(Treat_rates, axis=0)
 Treat_matrix = Treat_matrix_flat.reshape(6,6)
 print(Treat_matrix)
