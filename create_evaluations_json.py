@@ -580,89 +580,89 @@ dict ={ 'evals':[
 # 	]
 # }
 ######################
-######### Batch 23 #############
-dict ={ 'evals':[
-		{'frame':'FCF1_GY_20221201_052_VID004_trim2.mp4',
-		 'index': [618]
-		},
-		{'frame':'FCF1_GY_20230125_056_VID008_trim1.mp4',
-		 'index': [712]
-		},
-		{'frame':'FCF1_GY_20230126_057_VID009_trim1.mp4',
-		 'index': [49]
-		},
-		{'frame':'FCF1_GY_20230130_060_VID001_trim1.mp4',
-		 'index': [158]
-		},
-		{'frame':'FCF1_GY_20230130_061_VID001_trim1.mp4',
-		 'index': [907]
-		},
-		{'frame':'FCF1_GY_20230203_064_VID001_trim1.mp4',
-		 'index': [111]
-		},
-		{'frame':'FCF1_GY_20230203_064_VID001_trim1.mp4',
-		 'index': [229]
-		},
-		{'frame':'bsp1_GY_20230601_091_VID001_trim1.mp4',
-		 'index': [93]
-		},
-		{'frame':'bsp1_GY_20230601_095_VID001_trim1.mp4',
-		 'index': [486]
-		},
-		{'frame':'bsp1_GY_20230601_096_VID001_trim1.mp4',
-		 'index': [358]
-		},
-		{'frame':'bsp1_GY_20230601_098_VID001_trim1.mp4',
-		 'index': [206]
-		}
-	]
-}
+# ######### Batch 23 #############
+# dict ={ 'evals':[
+# 		{'frame':'FCF1_GY_20221201_052_VID004_trim2.mp4',
+# 		 'index': [618]
+# 		},
+# 		{'frame':'FCF1_GY_20230125_056_VID008_trim1.mp4',
+# 		 'index': [712]
+# 		},
+# 		{'frame':'FCF1_GY_20230130_060_VID001_trim1.mp4',
+# 		 'index': [158]
+# 		},
+# 		{'frame':'FCF1_GY_20230130_061_VID001_trim1.mp4',
+# 		 'index': [907]
+# 		},
+# 		{'frame':'FCF1_GY_20230203_064_VID001_trim1.mp4',
+# 		 'index': [111]
+# 		},
+# 		{'frame':'FCF1_GY_20230203_064_VID001_trim1.mp4',
+# 		 'index': [229]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_091_VID001_trim1.mp4',
+# 		 'index': [93]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_095_VID001_trim1.mp4',
+# 		 'index': [486]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_096_VID001_trim1.mp4',
+# 		 'index': [358]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_098_VID001_trim1.mp4',
+# 		 'index': [206]
+# 		}
+# 	]
+# }
 ######### Batch 24 #############
 dict ={ 'evals':[
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_051_VID001_trim1.mp4',
+		 'index': [535]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_051_VID002_trim2.mp4',
+		 'index': [176]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_051_VID002_trim2.mp4',
+		 'index': [1271]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_053_VID001_trim1.mp4',
+		 'index': [160]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_054_VID001_trim1.mp4',
+		 'index': [189]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_058_VID001_trim1.mp4',
+		 'index': [33]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_058_VID002_trim1.mp4',
+		 'index': [279]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_059_VID001_trim1.mp4',
+		 'index': [752]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_060_VID001_trim1.mp4',
+		 'index': [950]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_063_VID002_trim1.mp4',
+		 'index': [1409]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_064_VID001_trim1.mp4',
+		 'index': [340]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_068_VID001_trim1.mp4',
+		 'index': [306]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_069_VID001_trim1.mp4',
+		 'index': [538]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_070_VID003_trim1.mp4',
+		 'index': [846]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'bsp1_GY_20230601_096_VID002_trim1.mp4',
+		 'index': [317]
+		},
+		{'frame':'bsp1_GY_20230601_098_VID001_trim2.mp4',
+		 'index': [405]
 		}
 
 	]

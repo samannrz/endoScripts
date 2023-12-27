@@ -12,7 +12,7 @@ annotator ='nicolas.bourdel'
 print(annotator)
 save_image = True
 remove_all_folders = False
-for batch_num in [23]:
+for batch_num in [24]:
 
     data_folder = 'annotationData/'  # The destination folder
 
