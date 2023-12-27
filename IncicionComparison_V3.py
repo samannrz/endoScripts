@@ -18,7 +18,7 @@ common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
 machine_path = '/data/DATA/Incision_predictions/Batch22-model1-21/final'
-dest_folder = 'ImgOut3'
+dest_folder = 'ImgOut'
 draw_machine_prediction = False
 
 
@@ -151,10 +151,10 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskS_G = Image.open(os.path.join(common_path, 'maskCheck_gi', images[i][:-4] + '.png'))
         maskH_F = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
         maskS_F = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
-        maskH_ER = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
-        maskS_ER = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
-        maskH_EB = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
-        maskS_EB = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
+        maskH_ER = Image.open(os.path.join(common_path, 'maskTreat_Er', images[i][:-4] + '.png'))
+        maskS_ER = Image.open(os.path.join(common_path, 'maskCheck_Er', images[i][:-4] + '.png'))
+        maskH_EB = Image.open(os.path.join(common_path, 'maskTreat_eb', images[i][:-4] + '.png'))
+        maskS_EB = Image.open(os.path.join(common_path, 'maskCheck_eb', images[i][:-4] + '.png'))
 
         #########################
         image_overlayed_N = overlayMasks_incision(image_orig, maskH_N, maskS_N)
@@ -214,9 +214,6 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         dst = cv2.cvtColor(np.uint8(heatmap_Treat), cv2.COLOR_BGR2RGB)
         cv2.imwrite('ahmap.png',dst)
-
-        print('heatmap_created')
-
 
         overlay = Image.fromarray(heatmap_Treat.astype('uint8'), 'RGB')
         bg_treat = image_orig.convert('RGB')
@@ -328,13 +325,11 @@ Treat_matrix = Treat_matrix_flat.reshape(6,6)
 Check_matrix_flat = np.mean(Check_rates, axis=0)
 Check_matrix = Check_matrix_flat.reshape(6,6)
 ##################
-maskk = np.tril(np.ones_like(Treat_matrix, dtype=bool))
-Treat_matrix_masked = np.where(maskk, np.nan, Treat_matrix)
-
+Treat_matrix = np.tril(Treat_matrix)
 # Create a figure and axis
 fig, ax = plt.subplots()
 # Create a heatmap with a custom color map
-cax = ax.matshow(Treat_matrix_masked, cmap='coolwarm', origin='lower')
+cax = ax.matshow(Treat_matrix, cmap='coolwarm', origin='lower')
 # Add a color bar
 cbar = plt.colorbar(cax)
 # Add grid lines
@@ -344,23 +339,22 @@ ax.grid(which='minor', color='w', linestyle='-', linewidth=0)
 # Set axis labels
 ax.set_xticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
 ax.set_yticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
-for i in range(Treat_matrix_masked.shape[0]):
-    for j in range(Treat_matrix_masked.shape[1]):
-        if not maskk[i, j]:
-            ax.text(j, i, str(round(Treat_matrix_masked[i, j])), va='center', ha='center', color='black')
+for i in range(Treat_matrix.shape[0]):
+    for j in range(Treat_matrix.shape[1]):
+        if i>j:
+            ax.text(j, i, str(round(Treat_matrix[i, j])), va='center', ha='center', color='black')
 
 # Set title
 plt.title('Pair-wise agreement rate')
 # Show the plot
 plt.savefig('Treat_rates.png')
 ######################
-maskk = np.tril(np.ones_like(Check_matrix, dtype=bool))
-Check_matrix_masked = np.where(maskk, np.nan, Check_matrix)
+Check_matrix = np.tril(Check_matrix)
 
 # Create a figure and axis
 fig, ax = plt.subplots()
 # Create a heatmap with a custom color map
-cax = ax.matshow(Check_matrix_masked, cmap='coolwarm', origin='lower')
+cax = ax.matshow(Check_matrix, cmap='coolwarm', origin='lower')
 # Add a color bar
 cbar = plt.colorbar(cax)
 # Add grid lines
@@ -370,10 +364,10 @@ ax.grid(which='minor', color='w', linestyle='-', linewidth=0)
 # Set axis labels
 ax.set_xticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
 ax.set_yticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
-for i in range(Check_matrix_masked.shape[0]):
-    for j in range(Check_matrix_masked.shape[1]):
-        if not maskk[i, j]:
-            ax.text(j, i, str(round(Check_matrix_masked[i, j])), va='center', ha='center', color='black')
+for i in range(Check_matrix.shape[0]):
+    for j in range(Check_matrix.shape[1]):
+        if i>j:
+            ax.text(j, i, str(round(Check_matrix[i, j])), va='center', ha='center', color='black')
 
 plt.title('Pair-wise agreement rate')
 plt.savefig('Check_rates.png')

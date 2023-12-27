@@ -10,7 +10,7 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 23
+batch_num = 22
 # from IncisionDataFolderCreation import batch_num
 
 common_path = 'annotationData/'

@@ -20,7 +20,7 @@ os.makedirs(train_image_path)
 os.makedirs(valid_image_path)
 
 
-dict_file = 'data_split.pkl'
+dict_file = 'pkl_files/data_split.pkl'
 
 file = open(dict_file, 'rb')
 data_dict = pickle.load(file)

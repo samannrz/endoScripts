@@ -26,7 +26,7 @@ for batch_num in [23]:
     createDIR(data_folder, maskTreatdir + '_' + annotator[:2])
     createDIR(data_folder, maskCheckdir + '_' + annotator[:2])
 
-    json_eval = open('Evaluation' + str(batch_num) + '.json')
+    json_eval = open('Evaluations_json/'+'Evaluation' + str(batch_num) + '.json')
     eval = json.load(json_eval)
     evals = eval['evals']
     print(len(evals))

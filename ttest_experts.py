@@ -5,15 +5,15 @@ import pandas as pd
 #### Filippo and Nicolas ####
 # Treat
 
-b3 = pd.read_pickle("batch3.pkl")
-b4 = pd.read_pickle("batch4.pkl")
-b5 = pd.read_pickle("batch5.pkl")
-b6 = pd.read_pickle("batch6.pkl")
-b7 = pd.read_pickle("batch7.pkl")
-b8 = pd.read_pickle("batch8.pkl")
-b9 = pd.read_pickle("batch9.pkl")
-b10 = pd.read_pickle("batch10.pkl")
-b11 = pd.read_pickle("batch11.pkl")
+b3 = pd.read_pickle("pkl_files/batch3.pkl")
+b4 = pd.read_pickle("pkl_files/batch4.pkl")
+b5 = pd.read_pickle("pkl_files/batch5.pkl")
+b6 = pd.read_pickle("pkl_files/batch6.pkl")
+b7 = pd.read_pickle("pkl_files/batch7.pkl")
+b8 = pd.read_pickle("pkl_files/batch8.pkl")
+b9 = pd.read_pickle("pkl_files/batch9.pkl")
+b10 = pd.read_pickle("pkl_files/batch10.pkl")
+b11 = pd.read_pickle("pkl_files/batch11.pkl")
 
 fn_treat_3 = np.array(b3['NB-JLP Treat'])[:-1]
 fn_treat_4 = np.array(b4['NB-JLP Treat'])[:-1]

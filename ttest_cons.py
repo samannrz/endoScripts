@@ -4,15 +4,15 @@ import pandas as pd
 
 # Treat
 
-b3 = pd.read_pickle("c_batch3.pkl")
-b4 = pd.read_pickle("c_batch4.pkl")
-b5 = pd.read_pickle("c_batch5.pkl")
-b6 = pd.read_pickle("c_batch6.pkl")
-b7 = pd.read_pickle("c_batch7.pkl")
-b8 = pd.read_pickle("c_batch8.pkl")
-b9 = pd.read_pickle("c_batch9.pkl")
-b10 = pd.read_pickle("c_batch10.pkl")
-b11 = pd.read_pickle("c_batch11.pkl")
+b3 = pd.read_pickle("pkl_files/c_batch3.pkl")
+b4 = pd.read_pickle("pkl_files/c_batch4.pkl")
+b5 = pd.read_pickle("pkl_files/c_batch5.pkl")
+b6 = pd.read_pickle("pkl_files/c_batch6.pkl")
+b7 = pd.read_pickle("pkl_files/c_batch7.pkl")
+b8 = pd.read_pickle("pkl_files/c_batch8.pkl")
+b9 = pd.read_pickle("pkl_files/c_batch9.pkl")
+b10 = pd.read_pickle("pkl_files/c_batch10.pkl")
+b11 = pd.read_pickle("pkl_files/c_batch11.pkl")
 
 n_3 = np.array(b3.iloc[:, 2:5])[:-1]
 n_4 = np.array(b4.iloc[:, 2:5])[:-1]
@@ -43,15 +43,15 @@ print("p-value = " + str(p_val))
 ########JEAN LUC###########
 ##################
 print('\n Jean')
-b3 = pd.read_pickle("c_batch3.pkl")
-b4 = pd.read_pickle("c_batch4.pkl")
-b5 = pd.read_pickle("c_batch5.pkl")
-b6 = pd.read_pickle("c_batch6.pkl")
-b7 = pd.read_pickle("c_batch7.pkl")
-b8 = pd.read_pickle("c_batch8.pkl")
-b9 = pd.read_pickle("c_batch9.pkl")
-b10 = pd.read_pickle("c_batch10.pkl")
-b11 = pd.read_pickle("c_batch11.pkl")
+b3 = pd.read_pickle("pkl_files/c_batch3.pkl")
+b4 = pd.read_pickle("pkl_files/c_batch4.pkl")
+b5 = pd.read_pickle("pkl_files/c_batch5.pkl")
+b6 = pd.read_pickle("pkl_files/c_batch6.pkl")
+b7 = pd.read_pickle("pkl_files/c_batch7.pkl")
+b8 = pd.read_pickle("pkl_files/c_batch8.pkl")
+b9 = pd.read_pickle("pkl_files/c_batch9.pkl")
+b10 = pd.read_pickle("pkl_files/c_batch10.pkl")
+b11 = pd.read_pickle("pkl_files/c_batch11.pkl")
 
 j_3 = np.array(b3.iloc[:, 11:14])[:-1]
 j_4 = np.array(b4.iloc[:, 11:14])[:-1]
@@ -80,15 +80,15 @@ print("p-value = " + str(p_val))
 ########Giuseppe###########
 ##################
 print('\n Giuseppe')
-b3 = pd.read_pickle("c_batch3.pkl")
-b4 = pd.read_pickle("c_batch4.pkl")
-b5 = pd.read_pickle("c_batch5.pkl")
-b6 = pd.read_pickle("c_batch6.pkl")
-b7 = pd.read_pickle("c_batch7.pkl")
-b8 = pd.read_pickle("c_batch8.pkl")
-b9 = pd.read_pickle("c_batch9.pkl")
-b10 = pd.read_pickle("c_batch10.pkl")
-b11 = pd.read_pickle("c_batch11.pkl")
+b3 = pd.read_pickle("pkl_files/c_batch3.pkl")
+b4 = pd.read_pickle("pkl_files/c_batch4.pkl")
+b5 = pd.read_pickle("pkl_files/c_batch5.pkl")
+b6 = pd.read_pickle("pkl_files/c_batch6.pkl")
+b7 = pd.read_pickle("pkl_files/c_batch7.pkl")
+b8 = pd.read_pickle("pkl_files/c_batch8.pkl")
+b9 = pd.read_pickle("pkl_files/c_batch9.pkl")
+b10 = pd.read_pickle("pkl_files/c_batch10.pkl")
+b11 = pd.read_pickle("pkl_files/c_batch11.pkl")
 
 G_3 = np.array(b3.iloc[:, 5:8])[:-1]
 G_4 = np.array(b4.iloc[:, 5:8])[:-1]
@@ -117,15 +117,15 @@ print("p-value = " + str(p_val))
 ########Filippo###########
 ##################
 print('\n Filippo')
-b3 = pd.read_pickle("c_batch3.pkl")
-b4 = pd.read_pickle("c_batch4.pkl")
-b5 = pd.read_pickle("c_batch5.pkl")
-b6 = pd.read_pickle("c_batch6.pkl")
-b7 = pd.read_pickle("c_batch7.pkl")
-b8 = pd.read_pickle("c_batch8.pkl")
-b9 = pd.read_pickle("c_batch9.pkl")
-b10 = pd.read_pickle("c_batch10.pkl")
-b11 = pd.read_pickle("c_batch11.pkl")
+b3 = pd.read_pickle("pkl_files/c_batch3.pkl")
+b4 = pd.read_pickle("pkl_files/c_batch4.pkl")
+b5 = pd.read_pickle("pkl_files/c_batch5.pkl")
+b6 = pd.read_pickle("pkl_files/c_batch6.pkl")
+b7 = pd.read_pickle("pkl_files/c_batch7.pkl")
+b8 = pd.read_pickle("pkl_files/c_batch8.pkl")
+b9 = pd.read_pickle("pkl_files/c_batch9.pkl")
+b10 = pd.read_pickle("pkl_files/c_batch10.pkl")
+b11 = pd.read_pickle("pkl_files/c_batch11.pkl")
 
 F_3 = np.array(b3.iloc[:, 8:11])[:-1]
 F_4 = np.array(b4.iloc[:, 8:11])[:-1]
