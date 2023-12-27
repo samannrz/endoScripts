@@ -614,9 +614,6 @@ dict ={ 'evals':[
 		},
 		{'frame':'bsp1_GY_20230601_098_VID001_trim1.mp4',
 		 'index': [206]
-		},
-		{'frame':'bsp1_GY_20230601_099_VID001_trim1..mp4',
-		 'index': [175]
 		}
 	]
 }

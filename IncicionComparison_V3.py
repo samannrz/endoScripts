@@ -371,11 +371,3 @@ for i in range(Check_matrix.shape[0]):
 
 plt.title('Pair-wise agreement rate')
 plt.savefig('Check_rates.png')
-
-
-
-
-
-
-
-

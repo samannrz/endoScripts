@@ -12,12 +12,7 @@
                 712
             ]
         },
-        {
-            "frame": "FCF1_GY_20230126_057_VID009_trim1.mp4",
-            "index": [
-                49
-            ]
-        },
+
         {
             "frame": "FCF1_GY_20230130_060_VID001_trim1.mp4",
             "index": [
@@ -64,12 +59,6 @@
             "frame": "bsp1_GY_20230601_098_VID001_trim1.mp4",
             "index": [
                 206
-            ]
-        },
-        {
-            "frame": "bsp1_GY_20230601_099_VID001_trim1.mp4",
-            "index": [
-                175
             ]
         }
     ]
