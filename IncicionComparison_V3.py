@@ -11,15 +11,15 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 22
+batch_num = 24
 # from IncisionDataFolderCreation import batch_num
 
 common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
-machine_path = '/data/DATA/Incision_predictions/Batch22-model1-21/final'
+machine_path = '/data/DATA/Incision_predictions/Batch24-model1-21/final'
 dest_folder = 'ImgOut'
-draw_machine_prediction = False
+draw_machine_prediction = True
 
 
 def overlayMasks_incision(image_orig, mask1, mask2):
