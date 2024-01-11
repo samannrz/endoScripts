@@ -340,42 +340,43 @@ for j in range(math.ceil(lenimg / batch_size)):
         draw.text((1 / 2 * WIDTH + 10, hh + space_height + 3 * HEIGHT + 100), 'Consensus Treat', fill=(240, 60, 240), font=font)
         draw.text((3 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Consensus Check', fill=(240, 60, 240), font=font)
         rr=15
-        if index_Treat_max == 0:
-            draw.ellipse((1 / 2 * WIDTH-40 - rr, hh + space_height + HEIGHT+20- rr, 1 / 2 * WIDTH-40 + rr, hh + space_height + HEIGHT +20 + rr), fill=(255, 0, 0, 0))
-        if index_Treat_max == 1:
-            draw.ellipse((3 / 2 * WIDTH -30 - rr, hh + space_height + HEIGHT+20 - rr, 3 / 2 * WIDTH-30 + rr,hh + space_height + HEIGHT+20 + rr),
-                         fill=(255, 0, 0, 0))
-        if index_Treat_max == 2:
-            draw.ellipse((5 / 2 * WIDTH-20  - rr, hh + space_height + HEIGHT+20 - rr, 5 / 2 * WIDTH-20 + rr,hh + space_height + HEIGHT+20 + rr),
-                         fill=(255, 0, 0, 0))
-        if index_Treat_max == 3:
-            draw.ellipse((1 / 2 * WIDTH-40 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 1 / 2 * WIDTH -40+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
-                         fill=(255, 0, 0, 0))
-        if index_Treat_max == 4:
-            draw.ellipse((3 / 2 * WIDTH -30- rr, hh + space_height + 2 * HEIGHT + 70 - rr, 3 / 2 * WIDTH -30+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
-                         fill=(255, 0, 0, 0))
-        if index_Treat_max == 5:
-            draw.ellipse((5 / 2 * WIDTH-20 - rr, hh + space_height + 2*HEIGHT +70 - rr, 5 / 2 * WIDTH-20+ rr,hh + space_height + 2*HEIGHT+70 + rr),
-                         fill=(255, 0, 0, 0))
+        if j!=3:
+            if index_Treat_max == 0:
+                draw.ellipse((1 / 2 * WIDTH-40 - rr, hh + space_height + HEIGHT+20- rr, 1 / 2 * WIDTH-40 + rr, hh + space_height + HEIGHT +20 + rr), fill=(255, 0, 0, 0))
+            if index_Treat_max == 1:
+                draw.ellipse((3 / 2 * WIDTH -30 - rr, hh + space_height + HEIGHT+20 - rr, 3 / 2 * WIDTH-30 + rr,hh + space_height + HEIGHT+20 + rr),
+                             fill=(255, 0, 0, 0))
+            if index_Treat_max == 2:
+                draw.ellipse((5 / 2 * WIDTH-20  - rr, hh + space_height + HEIGHT+20 - rr, 5 / 2 * WIDTH-20 + rr,hh + space_height + HEIGHT+20 + rr),
+                             fill=(255, 0, 0, 0))
+            if index_Treat_max == 3:
+                draw.ellipse((1 / 2 * WIDTH-40 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 1 / 2 * WIDTH -40+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
+                             fill=(255, 0, 0, 0))
+            if index_Treat_max == 4:
+                draw.ellipse((3 / 2 * WIDTH -30- rr, hh + space_height + 2 * HEIGHT + 70 - rr, 3 / 2 * WIDTH -30+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
+                             fill=(255, 0, 0, 0))
+            if index_Treat_max == 5:
+                draw.ellipse((5 / 2 * WIDTH-20 - rr, hh + space_height + 2*HEIGHT +70 - rr, 5 / 2 * WIDTH-20+ rr,hh + space_height + 2*HEIGHT+70 + rr),
+                             fill=(255, 0, 0, 0))
 
 
-        if index_Check_max == 0:
-            draw.ellipse((1 / 2 * WIDTH - rr, hh + space_height + HEIGHT+20- rr, 1 / 2 * WIDTH + rr, hh + space_height + HEIGHT+20 + rr), fill=(10, 240, 10, 0))
-        if index_Check_max == 1:
-            draw.ellipse((3 / 2 * WIDTH +10 - rr, hh + space_height + HEIGHT+20 - rr, 3 / 2 * WIDTH + rr,hh + space_height + HEIGHT+20 + rr),
-                         fill=(10, 240, 10, 0))
-        if index_Check_max == 2:
-            draw.ellipse((5 / 2 * WIDTH +20 - rr, hh + space_height + HEIGHT+20 - rr, 5 / 2 * WIDTH +20+ rr,hh + space_height + HEIGHT+20 + rr),
-                         fill=(10, 240, 10, 0))
-        if index_Check_max == 3:
-            draw.ellipse((1 / 2 * WIDTH - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 1 / 2 * WIDTH+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
-                         fill=(10, 240, 10, 0))
-        if index_Check_max == 4:
-            draw.ellipse((3 / 2 * WIDTH +10- rr, hh + space_height + 2 * HEIGHT + 70 - rr, 3 / 2 * WIDTH +10+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
-                         fill=(10, 240, 10, 0))
-        if index_Check_max == 5:
-            draw.ellipse((5 / 2 * WIDTH +20 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 5 / 2 * WIDTH +20+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
-                         fill=(10, 240, 10, 0))
+            if index_Check_max == 0:
+                draw.ellipse((1 / 2 * WIDTH - rr, hh + space_height + HEIGHT+20- rr, 1 / 2 * WIDTH + rr, hh + space_height + HEIGHT+20 + rr), fill=(10, 240, 10, 0))
+            if index_Check_max == 1:
+                draw.ellipse((3 / 2 * WIDTH +10 - rr, hh + space_height + HEIGHT+20 - rr, 3 / 2 * WIDTH + rr,hh + space_height + HEIGHT+20 + rr),
+                             fill=(10, 240, 10, 0))
+            if index_Check_max == 2:
+                draw.ellipse((5 / 2 * WIDTH +20 - rr, hh + space_height + HEIGHT+20 - rr, 5 / 2 * WIDTH +20+ rr,hh + space_height + HEIGHT+20 + rr),
+                             fill=(10, 240, 10, 0))
+            if index_Check_max == 3:
+                draw.ellipse((1 / 2 * WIDTH - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 1 / 2 * WIDTH+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
+                             fill=(10, 240, 10, 0))
+            if index_Check_max == 4:
+                draw.ellipse((3 / 2 * WIDTH +10- rr, hh + space_height + 2 * HEIGHT + 70 - rr, 3 / 2 * WIDTH +10+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
+                             fill=(10, 240, 10, 0))
+            if index_Check_max == 5:
+                draw.ellipse((5 / 2 * WIDTH +20 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 5 / 2 * WIDTH +20+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
+                             fill=(10, 240, 10, 0))
 
 
 
