@@ -328,8 +328,6 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         draw = ImageDraw.Draw(im3)
         font = ImageFont.truetype("arial.ttf", 50)
-        index_Treat_max=score_Treat.index(np.nanmax(np.array(score_Treat)))
-        index_Check_max=score_Check.index(np.nanmax(np.array(score_Check)))
 
         draw.text((1 / 2 * WIDTH, hh + space_height + HEIGHT), 'Nicolas: '+str(score_Treat[0])+', '+str(score_Check[0]), fill=(240, 60, 240), font=font)
         draw.text((3 / 2 * WIDTH + 10, hh + space_height + HEIGHT), 'Jean: '+str(score_Treat[1])+', '+str(score_Check[1]), fill=(240, 60, 240), font=font)
@@ -341,6 +339,9 @@ for j in range(math.ceil(lenimg / batch_size)):
         draw.text((3 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Consensus Check', fill=(240, 60, 240), font=font)
         rr=15
         if j!=3:
+            index_Treat_max = score_Treat.index(np.nanmax(np.array(score_Treat)))
+            index_Check_max = score_Check.index(np.nanmax(np.array(score_Check)))
+
             if index_Treat_max == 0:
                 draw.ellipse((1 / 2 * WIDTH-40 - rr, hh + space_height + HEIGHT+20- rr, 1 / 2 * WIDTH-40 + rr, hh + space_height + HEIGHT +20 + rr), fill=(255, 0, 0, 0))
             if index_Treat_max == 1:
