@@ -161,12 +161,14 @@ def ref_score(*args):
             co+=1
         else:
             ref = ref + maskk
-    ref = cv2.normalize(ref, None, 0, 1, cv2.NORM_MINMAX)
-    ref = ref.flatten() / np.linalg.norm(ref.flatten())
+
     for maskk in args:
         maskk = maskk.astype(float)
         maskk = cv2.normalize(maskk, None, 0, 1, cv2.NORM_MINMAX)
         maskk = maskk.flatten() / np.linalg.norm(maskk.flatten())
+        ref = ref - mask
+        ref = cv2.normalize(ref, None, 0, 1, cv2.NORM_MINMAX)
+        ref = ref.flatten() / np.linalg.norm(ref.flatten())
         score.append(round( np.dot(ref.flatten(), maskk.flatten()),2))
         #print(np.dot(ref.flatten(), mask.flatten()))
     return score
@@ -332,7 +334,8 @@ for j in range(math.ceil(lenimg / batch_size)):
         draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50), 'Ebbe: '+str(score_Treat[5])+', '+str(score_Check[5]), fill=(240, 60, 240), font=font)
         draw.text((1 / 2 * WIDTH + 10, hh + space_height + 3 * HEIGHT + 100), 'Consensus Treat', fill=(240, 60, 240), font=font)
         draw.text((3 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Consensus Check', fill=(240, 60, 240), font=font)
-        draw.text((5 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'FINAL Consensus', fill=(240, 60, 240), font=font)
+        if final_consensus:
+            draw.text((5 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'FINAL Consensus', fill=(240, 60, 240), font=font)
 
         # Draw the text on the image
         imagename = images[i][:-4]
