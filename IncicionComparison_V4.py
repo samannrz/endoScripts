@@ -339,7 +339,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50), 'Ebbe: '+str(score_Treat[5])+', '+str(score_Check[5]), fill=(240, 60, 240), font=font)
         draw.text((1 / 2 * WIDTH + 10, hh + space_height + 3 * HEIGHT + 100), 'Consensus Treat', fill=(240, 60, 240), font=font)
         draw.text((3 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Consensus Check', fill=(240, 60, 240), font=font)
-        r=1
+        r=10
         if index_Treat_max == 0:
             draw.ellipse((1 / 2 * WIDTH - r, hh + space_height + HEIGHT- r, 1 / 2 * WIDTH + r, hh + space_height + HEIGHT + r), fill=(255, 0, 0, 0))
         if index_Treat_max == 1:
@@ -358,7 +358,7 @@ for j in range(math.ceil(lenimg / batch_size)):
             draw.ellipse((5 / 2 * WIDTH +20 - r, hh + space_height + HEIGHT - r, 5 / 2 * WIDTH +20+ r,hh + space_height + HEIGHT + r),
                          fill=(255, 0, 0, 0))
 
-            
+
         if index_Check_max == 0:
             draw.ellipse((1 / 2 * WIDTH - r, hh + space_height + HEIGHT- r, 1 / 2 * WIDTH + r, hh + space_height + HEIGHT + r), fill=(10, 240, 10, 0))
         if index_Check_max == 1:
