@@ -164,7 +164,7 @@ def ref_score(*args):
 
     for maskk in args:
         maskk = maskk.astype(float)
-        ref = ref - mask
+        ref = ref - maskk
         maskk = cv2.normalize(maskk, None, 0, 1, cv2.NORM_MINMAX)
         maskk = maskk.flatten() / np.linalg.norm(maskk.flatten())
 
