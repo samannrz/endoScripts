@@ -164,9 +164,10 @@ def ref_score(*args):
 
     for maskk in args:
         maskk = maskk.astype(float)
+        ref = ref - mask
         maskk = cv2.normalize(maskk, None, 0, 1, cv2.NORM_MINMAX)
         maskk = maskk.flatten() / np.linalg.norm(maskk.flatten())
-        ref = ref - mask
+
         ref = cv2.normalize(ref, None, 0, 1, cv2.NORM_MINMAX)
         ref = ref.flatten() / np.linalg.norm(ref.flatten())
         score.append(round( np.dot(ref.flatten(), maskk.flatten()),2))
