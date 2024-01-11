@@ -8,11 +8,11 @@ import cv2
 # batch_num = 3
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'Ervin.Kallfa': 4, 'ebbe.thinggaard': 5, 'incision.consensus': 6}
-# annotator ='nicolas.bourdel'
+# annotator ='incision.consensus'
 print(annotator)
-save_image = False
+save_image = True
 remove_all_folders = False
-for batch_num in [24]:
+for batch_num in [25]:
 
     data_folder = 'annotationData/'  # The destination folder
 
@@ -34,8 +34,8 @@ for batch_num in [24]:
     ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
     for project in api.project.get_list(ws.id):  # for each project
-        # if project.name != 'Endometriosis_WS9':
-        #     continue
+        if project.name != 'Endometriosis_WS9':
+            continue
         for ds in api.dataset.get_list(project.id):
             evalfr = evals[0]
             for evalfr in evals:
@@ -95,14 +95,25 @@ for batch_num in [24]:
                         # save masks and images
                         vidname = evalfr['frame']
                         # extract the image frame
-
                         fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
+                        maskCheck_array = np.array(maskCheck)
+                        maskTreat_array = np.array(maskTreat)
+                        # Perform pixel-wise logical AND
+                        result_array = np.logical_and(maskCheck_array, maskTreat_array)
+                        # Identify the indices where both masks are true
+                        rows, cols = np.where(result_array)
+                        background_value = 0
+                        # Update 'maskCheck' at the identified pixels to the background value
+                        maskCheck_array[rows, cols] = background_value
+                        # Convert the updated NumPy array back to a PIL Image
+                        maskCheck = Image.fromarray(maskCheck_array)
 
                         # save frame as png file
                         if save_image:
                             cv2.imwrite(data_folder + 'image/' + fr_names[0],
                                         cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
                         # save the masks
+
                         cv2.imwrite(os.path.join(data_folder + maskTreatdir + '_' + annotator[:2],
                                                  vidname + '_' + str(fr['index']).zfill(5) + '.png'),
                                     cv2.cvtColor(np.array(maskTreat), cv2.COLOR_BGR2RGB))

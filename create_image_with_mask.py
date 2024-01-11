@@ -6,8 +6,8 @@ from functions import createDIR, overlayMasks_incision
 
 common_path = '/Users/saman/Documents/data/DATA/incision/4'
 dest_folder = '/Users/saman/Documents/data/DATA/incision/4'
-common_path = '/Users/saman/Documents/data/DATA/incision/4/Batch23'
-dest_folder = '/Users/saman/Documents/data/DATA/incision/4/Batch23/final'
+common_path = '/Users/saman/Documents/data/DATA/incision/4/Batch24'
+dest_folder = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
 
 def initializeMask(size):
     a = Image.new(mode="RGBA", size=(size[0], size[1]), color="black")

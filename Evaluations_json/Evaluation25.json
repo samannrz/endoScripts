@@ -1,0 +1,94 @@
+{
+    "evals": [
+        {
+            "frame": "bsp1_GY_20230601_056_VID001_trim1.mp4",
+            "index": [
+                707
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_056_VID001_trim1.mp4",
+            "index": [
+                1247
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_075_VID001_trim1.mp4",
+            "index": [
+                52
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_075_VID001_trim2.mp4",
+            "index": [
+                295
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_075_VID001_trim5.mp4",
+            "index": [
+                1137
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_076_VID001_trim3.mp4",
+            "index": [
+                290
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_077_VID001_trim1.mp4",
+            "index": [
+                359
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_077_VID002_trim1.mp4",
+            "index": [
+                77
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_078_VID003_trim2.mp4",
+            "index": [
+                190
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_078_VID003_trim4.mp4",
+            "index": [
+                103
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_079_VID002_trim1.mp4",
+            "index": [
+                345
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_081_VID002_trim2.mp4",
+            "index": [
+                530
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_082_VID001_trim2.mp4",
+            "index": [
+                196
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_084_VID001_trim3.mp4",
+            "index": [
+                3295
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_085_VID002_trim1.mp4",
+            "index": [
+                88
+            ]
+        }
+    ]
+}

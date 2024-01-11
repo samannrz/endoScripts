@@ -614,64 +614,114 @@ dict ={ 'evals':[
 # 		}
 # 	]
 # }
-######### Batch 24 #############
+# ######### Batch 24 #############
+# dict ={ 'evals':[
+# 		{'frame':'bsp1_GY_20230601_051_VID001_trim1.mp4',
+# 		 'index': [535]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_051_VID002_trim2.mp4',
+# 		 'index': [176]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_051_VID002_trim2.mp4',
+# 		 'index': [1271]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_053_VID001_trim1.mp4',
+# 		 'index': [160]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_054_VID001_trim1.mp4',
+# 		 'index': [189]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_058_VID001_trim1.mp4',
+# 		 'index': [33]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_058_VID002_trim1.mp4',
+# 		 'index': [279]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_059_VID001_trim1.mp4',
+# 		 'index': [752]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_060_VID001_trim1.mp4',
+# 		 'index': [950]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_063_VID002_trim1.mp4',
+# 		 'index': [1409]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_064_VID001_trim1.mp4',
+# 		 'index': [340]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_068_VID001_trim1.mp4',
+# 		 'index': [306]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_069_VID001_trim1.mp4',
+# 		 'index': [538]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_070_VID003_trim1.mp4',
+# 		 'index': [846]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_096_VID002_trim1.mp4',
+# 		 'index': [317]
+# 		},
+# 		{'frame':'bsp1_GY_20230601_098_VID001_trim2.mp4',
+# 		 'index': [405]
+# 		}
+#
+# 	]
+# }
+######### Batch 25 #############
 dict ={ 'evals':[
-		{'frame':'bsp1_GY_20230601_051_VID001_trim1.mp4',
-		 'index': [535]
+		{'frame':'bsp1_GY_20230601_056_VID001_trim1.mp4',
+		 'index': [707]
 		},
-		{'frame':'bsp1_GY_20230601_051_VID002_trim2.mp4',
-		 'index': [176]
+		{'frame':'bsp1_GY_20230601_056_VID001_trim1.mp4',
+		 'index': [1247]
 		},
-		{'frame':'bsp1_GY_20230601_051_VID002_trim2.mp4',
-		 'index': [1271]
+		{'frame':'bsp1_GY_20230601_075_VID001_trim1.mp4',
+		 'index': [52]
 		},
-		{'frame':'bsp1_GY_20230601_053_VID001_trim1.mp4',
-		 'index': [160]
+		{'frame':'bsp1_GY_20230601_075_VID001_trim2.mp4',
+		 'index': [295]
 		},
-		{'frame':'bsp1_GY_20230601_054_VID001_trim1.mp4',
-		 'index': [189]
+		{'frame':'bsp1_GY_20230601_075_VID001_trim5.mp4',
+		 'index': [1137]
 		},
-		{'frame':'bsp1_GY_20230601_058_VID001_trim1.mp4',
-		 'index': [33]
+		{'frame':'bsp1_GY_20230601_076_VID001_trim3.mp4',
+		 'index': [290]
 		},
-		{'frame':'bsp1_GY_20230601_058_VID002_trim1.mp4',
-		 'index': [279]
+		{'frame':'bsp1_GY_20230601_077_VID001_trim1.mp4',
+		 'index': [359]
 		},
-		{'frame':'bsp1_GY_20230601_059_VID001_trim1.mp4',
-		 'index': [752]
+		{'frame':'bsp1_GY_20230601_077_VID002_trim1.mp4',
+		 'index': [77]
 		},
-		{'frame':'bsp1_GY_20230601_060_VID001_trim1.mp4',
-		 'index': [950]
+		{'frame':'bsp1_GY_20230601_078_VID003_trim2.mp4',
+		 'index': [190]
 		},
-		{'frame':'bsp1_GY_20230601_063_VID002_trim1.mp4',
-		 'index': [1409]
+		{'frame':'bsp1_GY_20230601_078_VID003_trim4.mp4',
+		 'index': [103]
 		},
-		{'frame':'bsp1_GY_20230601_064_VID001_trim1.mp4',
-		 'index': [340]
+		{'frame':'bsp1_GY_20230601_079_VID002_trim1.mp4',
+		 'index': [345]
 		},
-		{'frame':'bsp1_GY_20230601_068_VID001_trim1.mp4',
-		 'index': [306]
+		{'frame':'bsp1_GY_20230601_081_VID002_trim2.mp4',
+		 'index': [530]
 		},
-		{'frame':'bsp1_GY_20230601_069_VID001_trim1.mp4',
-		 'index': [538]
+		{'frame':'bsp1_GY_20230601_082_VID001_trim2.mp4',
+		 'index': [196]
 		},
-		{'frame':'bsp1_GY_20230601_070_VID003_trim1.mp4',
-		 'index': [846]
+		{'frame':'bsp1_GY_20230601_084_VID001_trim3.mp4',
+		 'index': [3295]
 		},
-		{'frame':'bsp1_GY_20230601_096_VID002_trim1.mp4',
-		 'index': [317]
+		{'frame':'bsp1_GY_20230601_085_VID002_trim1.mp4',
+		 'index': [88]
 		},
-		{'frame':'bsp1_GY_20230601_098_VID001_trim2.mp4',
-		 'index': [405]
-		}
-
 	]
 }
+######################
 ######################
 import json
 
 json_object = json.dumps(dict, indent=4)
-batch_num = 24
+batch_num = 25
 # Writing to sample.json
 with open('Evaluations_json/'+'Evaluation' + str(batch_num) + '.json', 'w') as outfile:
     outfile.write(json_object)

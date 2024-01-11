@@ -15,6 +15,8 @@ eb_score=[]
 
 for which_class in ['Treat','Check']:
     # Load the three black and white masks
+    image_name = 'bsp1_GY_20230601_054_VID001_trim1.mp4_00189.png'
+
     print(image_name)
 
     image_dir = 'annotationData/image'
@@ -25,20 +27,23 @@ for which_class in ['Treat','Check']:
     mask5_dir = 'annotationData/mask'+which_class+'_er'
     mask6_dir = 'annotationData/mask' + which_class + '_eb'
     mask_consensus_dir = 'annotationData/mask' + which_class + '_in'
-    mask_machine_dir = '/data/DATA/Incision_predictions/Batch8-9/all_data/mask/'+which_class
-    mask_machine_dir = '/Users/saman/Documents/data/DATA/incision/Batch22-model1-21/mask/'+which_class
+    # mask_machine_dir = '/data/DATA/Incision_predictions/Batch8-9/all_data/mask/'+which_class
+    # mask_machine_dir = '/Users/saman/Documents/data/DATA/incision/Batch22-model1-21/mask/'+which_class
 
     # image_name = 'FCF1_GY_20230127_059_VID001_trim1.mp4_00083.png'
     dest_folder = 'heatmap2/'
     mask1 = plt.imread(os.path.join(mask1_dir, image_name))
     mask1 = cv2.imread(os.path.join(mask1_dir, image_name), 0) / 255
+    print(type(mask1))
+    print(mask1.dtype)
+
     mask2 = cv2.imread(os.path.join(mask2_dir, image_name), 0) / 255
     mask3 = cv2.imread(os.path.join(mask3_dir, image_name), 0) / 255
     mask4 = cv2.imread(os.path.join(mask4_dir, image_name), 0) / 255
     mask5 = cv2.imread(os.path.join(mask5_dir, image_name), 0) / 255
     mask6 = cv2.imread(os.path.join(mask6_dir, image_name), 0) / 255
     mask_consensus = cv2.imread(os.path.join(mask_consensus_dir, image_name), 0) / 255
-    mask_machine = cv2.imread(os.path.join(mask_machine_dir, image_name), 0) / 255
+    # mask_machine = cv2.imread(os.path.join(mask_machine_dir, image_name), 0) / 255
 
 
     # Create a new numpy array to represent the heatmap
@@ -78,7 +83,7 @@ for which_class in ['Treat','Check']:
     mask5 = cv2.normalize(mask5, None, 0, 1, cv2.NORM_MINMAX)
     mask6 = cv2.normalize(mask6, None, 0, 1, cv2.NORM_MINMAX)
     mask_consensus = cv2.normalize(mask_consensus, None, 0, 1, cv2.NORM_MINMAX)
-    mask_machine = cv2.normalize(mask_machine, None, 0, 1, cv2.NORM_MINMAX)
+    # mask_machine = cv2.normalize(mask_machine, None, 0, 1, cv2.NORM_MINMAX)
 
     ref = ref.flatten()/np.linalg.norm(ref.flatten())
     mask1 = mask1.flatten()/np.linalg.norm(mask1.flatten())
@@ -88,7 +93,7 @@ for which_class in ['Treat','Check']:
     mask5 = mask5.flatten()/np.linalg.norm(mask5.flatten())
     mask6 = mask6.flatten()/np.linalg.norm(mask6.flatten())
     mask_consensus = mask_consensus.flatten()/np.linalg.norm(mask_consensus.flatten())
-    mask_machine = mask_machine.flatten()/np.linalg.norm(mask_machine.flatten())
+    # mask_machine = mask_machine.flatten()/np.linalg.norm(mask_machine.flatten())
 
 
 
@@ -105,7 +110,7 @@ for which_class in ['Treat','Check']:
     er_score.append(np.dot(ref.flatten(), mask5.flatten()))
     eb_score.append(np.dot(ref.flatten(), mask6.flatten()))
     co_score.append(np.dot(ref.flatten(), mask_consensus.flatten()))
-    ma_score.append(np.dot(ref.flatten(), mask_machine.flatten()))
+    # ma_score.append(np.dot(ref.flatten(), mask_machine.flatten()))
 
 
 #####################################vvv
@@ -178,7 +183,7 @@ image_overlayed_F = overlayMasks_incision(image_orig, maskH_F, maskS_F)
 image_overlayed_C = overlayMasks_incision(image_orig, maskH_C, maskS_C)
 image_overlayed_ER = overlayMasks_incision(image_orig, maskH_ER, maskS_ER)
 image_overlayed_EB = overlayMasks_incision(image_orig, maskH_EB, maskS_EB)
-image_overlayed_M = Image.open(os.path.join(mask_machine_dir[:-10]+'final/', image_name))
+# image_overlayed_M = Image.open(os.path.join(mask_machine_dir[:-10]+'final/', image_name))
 im3 = Image.new("RGB", (
     3 * 1920,
     4 * 1080+400),
@@ -192,7 +197,7 @@ if image_overlayed_N.width < 1920:
     image_overlayed_C = image_overlayed_C.resize(newsize)
     image_overlayed_ER = image_overlayed_ER.resize(newsize)
     image_overlayed_EB = image_overlayed_EB.resize(newsize)
-    image_overlayed_M = image_overlayed_M.resize(newsize)
+    # image_overlayed_M = image_overlayed_M.resize(newsize)
     image_orig = image_orig.resize(newsize)
 
 WIDTH = image_orig.width
