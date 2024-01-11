@@ -362,7 +362,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         if index_Check_max == 0:
             draw.ellipse((1 / 2 * WIDTH - r, hh + space_height + HEIGHT- r, 1 / 2 * WIDTH + r, hh + space_height + HEIGHT + r), fill=(10, 240, 10, 0))
         if index_Check_max == 1:
-            draw.ellipse((3 / 2 * WIDTH +10 - r, hh + space_height + HEIGHT - r, 1 / 2 * WIDTH + r,hh + space_height + HEIGHT + r),
+            draw.ellipse((3 / 2 * WIDTH +10 - r, hh + space_height + HEIGHT - r, 3 / 2 * WIDTH + r,hh + space_height + HEIGHT + r),
                          fill=(10, 240, 10, 0))
         if index_Check_max == 2:
             draw.ellipse((5 / 2 * WIDTH +20 - r, hh + space_height + HEIGHT - r, 5 / 2 * WIDTH +20+ r,hh + space_height + HEIGHT + r),
