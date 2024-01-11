@@ -22,7 +22,7 @@ dest_folder = 'ImgOut2'
 machine_path = '/Users/saman/Documents/data/DATA/final'
 final_consensus_path  = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
 draw_machine_prediction = False
-final_consensus = True
+final_consensus = False
 
 def overlayMasks_incision(image_orig, mask1, mask2):
     # This function takes the two masks and overlay them to the image_orig
