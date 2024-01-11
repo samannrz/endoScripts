@@ -281,7 +281,7 @@ for j in range(math.ceil(lenimg / batch_size)):
             if j > math.floor(lenimg / batch_size) - 1:
                 im3 = Image.new("RGB", (
                     3 * 1920 + 20,
-                    3 * (lenimg % batch_size) * 1080 + space_height * (lenimg % batch_size)),
+                    4 * (lenimg % batch_size) * 1080 + space_height * (lenimg % batch_size)),
                                 (255, 255, 255))
             else:
                 im3 = Image.new("RGB", (
@@ -328,6 +328,8 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         draw = ImageDraw.Draw(im3)
         font = ImageFont.truetype("arial.ttf", 50)
+        index_Treat_max=score_Treat.index(max(score_Treat))
+        index_Check_max=score_Check.index(max(score_Check))
 
         draw.text((1 / 2 * WIDTH, hh + space_height + HEIGHT), 'Nicolas: '+str(score_Treat[0])+', '+str(score_Check[0]), fill=(240, 60, 240), font=font)
         draw.text((3 / 2 * WIDTH + 10, hh + space_height + HEIGHT), 'Jean: '+str(score_Treat[1])+', '+str(score_Check[1]), fill=(240, 60, 240), font=font)
@@ -337,6 +339,47 @@ for j in range(math.ceil(lenimg / batch_size)):
         draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50), 'Ebbe: '+str(score_Treat[5])+', '+str(score_Check[5]), fill=(240, 60, 240), font=font)
         draw.text((1 / 2 * WIDTH + 10, hh + space_height + 3 * HEIGHT + 100), 'Consensus Treat', fill=(240, 60, 240), font=font)
         draw.text((3 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Consensus Check', fill=(240, 60, 240), font=font)
+        r=1
+        if index_Treat_max == 0:
+            draw.ellipse((1 / 2 * WIDTH - r, hh + space_height + HEIGHT- r, 1 / 2 * WIDTH + r, hh + space_height + HEIGHT + r), fill=(255, 0, 0, 0))
+        if index_Treat_max == 1:
+            draw.ellipse((3 / 2 * WIDTH +10 - r, hh + space_height + HEIGHT - r, 1 / 2 * WIDTH + r,hh + space_height + HEIGHT + r),
+                         fill=(255, 0, 0, 0))
+        if index_Treat_max == 2:
+            draw.ellipse((5 / 2 * WIDTH +20 - r, hh + space_height + HEIGHT - r, 5 / 2 * WIDTH +20+ r,hh + space_height + HEIGHT + r),
+                         fill=(255, 0, 0, 0))
+        if index_Treat_max == 3:
+            draw.ellipse((1 / 2 * WIDTH - r, hh + space_height + 2 * HEIGHT + 50 - r, 5 / 2 * WIDTH +20+ r,hh + space_height + 2 * HEIGHT + 50 + r),
+                         fill=(255, 0, 0, 0))
+        if index_Treat_max == 4:
+            draw.ellipse((3 / 2 * WIDTH +10- r, hh + space_height + 2 * HEIGHT + 50 - r, 3 / 2 * WIDTH +10+ r,hh + space_height + 2 * HEIGHT + 50 + r),
+                         fill=(255, 0, 0, 0))
+        if index_Treat_max == 5:
+            draw.ellipse((5 / 2 * WIDTH +20 - r, hh + space_height + HEIGHT - r, 5 / 2 * WIDTH +20+ r,hh + space_height + HEIGHT + r),
+                         fill=(255, 0, 0, 0))
+
+            
+        if index_Check_max == 0:
+            draw.ellipse((1 / 2 * WIDTH - r, hh + space_height + HEIGHT- r, 1 / 2 * WIDTH + r, hh + space_height + HEIGHT + r), fill=(10, 240, 10, 0))
+        if index_Check_max == 1:
+            draw.ellipse((3 / 2 * WIDTH +10 - r, hh + space_height + HEIGHT - r, 1 / 2 * WIDTH + r,hh + space_height + HEIGHT + r),
+                         fill=(10, 240, 10, 0))
+        if index_Check_max == 2:
+            draw.ellipse((5 / 2 * WIDTH +20 - r, hh + space_height + HEIGHT - r, 5 / 2 * WIDTH +20+ r,hh + space_height + HEIGHT + r),
+                         fill=(10, 240, 10, 0))
+        if index_Check_max == 3:
+            draw.ellipse((1 / 2 * WIDTH - r, hh + space_height + 2 * HEIGHT + 50 - r, 5 / 2 * WIDTH +20+ r,hh + space_height + 2 * HEIGHT + 50 + r),
+                         fill=(10, 240, 10, 0))
+        if index_Check_max == 4:
+            draw.ellipse((3 / 2 * WIDTH +10- r, hh + space_height + 2 * HEIGHT + 50 - r, 3 / 2 * WIDTH +10+ r,hh + space_height + 2 * HEIGHT + 50 + r),
+                         fill=(10, 240, 10, 0))
+        if index_Check_max == 5:
+            draw.ellipse((5 / 2 * WIDTH +20 - r, hh + space_height + HEIGHT - r, 5 / 2 * WIDTH +20+ r,hh + space_height + HEIGHT + r),
+                         fill=(10, 240, 10, 0))
+
+
+
+
         if final_consensus:
             draw.text((5 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'FINAL Consensus', fill=(240, 60, 240), font=font)
 
