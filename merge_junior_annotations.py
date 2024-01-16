@@ -14,17 +14,12 @@ dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'fi
 base_path = '/data/DATA/incision/'
 orig_path1 = os.path.join(base_path, str(2))
 orig_path2 = os.path.join(base_path, str(3))
-savepath = os.path.join(base_path,'5')
-
-base_path = '/data/DATA/incision/temp'
-orig_path1 = os.path.join(base_path, str(2))
-orig_path2 = os.path.join(base_path, str(3))
-savepath = os.path.join(base_path,'5')
+savepath = os.path.join(base_path,'23')
 
 
 if os.path.exists(savepath):
     shutil.rmtree(savepath)
-createDIR(base_path, '5')
+createDIR(savepath)
 createDIR(savepath, 'mask')
 createDIR(savepath, 'image')
 createDIR(os.path.join(savepath,'mask'), 'Treat')
@@ -35,13 +30,6 @@ path_mask_check1 = os.path.join(orig_path1, 'mask/Check/')
 path_mask_check2 = os.path.join(orig_path2, 'mask/Check/')
 path_mask_treat1 = os.path.join(orig_path1, 'mask/Treat/')
 path_mask_treat2 = os.path.join(orig_path2, 'mask/Treat/')
-# for mask_check1 in os.listdir(path_mask_check1):
-#     mask1 = cv2.imread(os.path.join(path_mask_check1, mask_check1))
-#     if os.path.exists(os.path.join(path_mask_check2, mask_check1)):
-#         mask2 = cv2.imread(os.path.join(path_mask_check2, mask_check1))
-#         # print(mask_check1)
-#         mask_treat = cv2.bitwise_and(mask1, mask2)
-#         cv2.imwrite(os.path.join(savepath,'mask/Treat',mask_check1),mask_treat)
 
 images1 = os.listdir(os.path.join(orig_path1, 'image/'))
 images2 = os.listdir(os.path.join(orig_path1, 'image/'))
