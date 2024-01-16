@@ -42,7 +42,8 @@ def saveMask(classobj, polygon, vd, fr_name, save_path):
 for project in api.project.get_list(ws.id):  # for each project
     # if project.name == 'Endometriosis_WS7' or  project.name == 'Endometriosis_WS1' or  project.name == 'Endometriosis_WS2' :
     #     continue
-    print(project)
+    if project.type != 'images':
+        continue
     print(project.name)
     for ds in api.dataset.get_list(project.id):
         print(ds.name)
@@ -58,7 +59,6 @@ for project in api.project.get_list(ws.id):  # for each project
                 polygon=[]
                 SAVE_SIGNAL = False
                 for fig in fr['figures']:
-
                     classobj = findClass(fig['objectId'], annotation['objects'])
                     annotator = fig['labelerLogin']
                     if classobj != 'To Treat' and classobj != 'To Check':
