@@ -34,9 +34,8 @@ path_mask_treat2 = os.path.join(orig_path2, 'mask/Treat/')
 
 images1 = os.listdir(os.path.join(orig_path1, 'image/'))
 images2 = os.listdir(os.path.join(orig_path2, 'image/'))
-images_intersect = list(set(images1).intersection(images2))
-
 images3 = os.listdir(os.path.join(base_path, str(4),'images'))
+
 images_intersect = set(images1).intersection(set(images2)) - set(images3)
 # Convert the resulting set to a list, if needed
 images_intersect_list = list(images_intersect)
