@@ -37,6 +37,8 @@ images_intersect = list(set(images1).intersection(images2))
 
 for name in images_intersect:
     print(name)
+    if name!= 'bsp1_GY_20230601_038_VID001_trim1.mp4_01630.png':
+        continue
     orig_image = cv2.imread(os.path.join(orig_path_image1, name))
     height, width, _ = orig_image.shape
 
