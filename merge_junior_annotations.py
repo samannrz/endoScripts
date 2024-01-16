@@ -64,6 +64,7 @@ for name in images_intersect:
         c2 = cv2.imread(os.path.join(path_mask_check2, name))
     else:
         c2 = np.zeros((height, width, 3), dtype=np.uint8)
+    print(orig_image.shape)
     print(t1.shape)
     print(t2.shape)
     mask_treat = cv2.bitwise_and(t1, t2)
