@@ -9,7 +9,7 @@ ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
 ANNOTATOR_DICT = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
                   'Ervin.Kallfa': 5, 'ebbe.thinggaard': 6, 'incision.consensus': 4}
-ANNOTATOR = 5
+ANNOTATOR = 6
 print(ANNOTATOR)
 dest_path = '/data/DATA/incision/'
 # dest_path = '/Users/saman/Documents/data/DATA/incision/'
