@@ -6,8 +6,8 @@ from functions import createDIR, overlayMasks_incision
 
 common_path = '/Users/saman/Documents/data/DATA/incision/4'
 dest_folder = '/Users/saman/Documents/data/DATA/incision/4'
-common_path = '/Users/saman/Documents/data/DATA/incision/4/Batch24'
-dest_folder = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
+common_path = '/Users/saman/Documents/data/DATA/incision/4/Batch25'
+dest_folder = '/Users/saman/Documents/data/DATA/incision/4/Batch25/final'
 
 def initializeMask(size):
     a = Image.new(mode="RGBA", size=(size[0], size[1]), color="black")
@@ -23,21 +23,21 @@ for i in range(lenimg):
 
     image_orig = Image.open(os.path.join(common_path, 'image', images[i]))
 
-    maskH_N = initializeMask(image_orig.size)
-    maskS_N = initializeMask(image_orig.size)
+    mask_Treat = initializeMask(image_orig.size)
+    maskS_Check = initializeMask(image_orig.size)
 
     try:
-        maskH_N = Image.open(os.path.join(common_path, 'mask/Treat', images[i][:-4] + '.png'))
+        mask_Treat = Image.open(os.path.join(common_path, 'mask/Treat', images[i][:-4] + '.png'))
     except:
         print('There is no Hard Zone on Nicolas\'s annot on ' + images[i][:-4])
     try:
-        maskS_N = Image.open(os.path.join(common_path, 'mask/Check', images[i][:-4] + '.png'))
+        mask_Check = Image.open(os.path.join(common_path, 'mask/Check', images[i][:-4] + '.png'))
     except:
         print('There is no Security Zone on Nicolas\'s annot on ' + images[i][:-4])
 
-    image_overlayed_ref1 = overlayMasks_incision(image_orig, maskH_N, maskS_N)
+    image_overlayed = overlayMasks_incision(image_orig, mask_Treat, mask_Check)
 
     imagename = images[i][:-4]
     namevid, _, frnumber = imagename.rpartition('_')
-    print('writing images to ', os.path.join(dest_folder, namevid + '_' + frnumber + '_i.png'))
-    image_overlayed_ref1.save(os.path.join(dest_folder, namevid + '_' + frnumber + '_1.png'))
+    print('writing images to ', os.path.join(dest_folder, namevid + '_' + frnumber + '.png'))
+    image_overlayed.save(os.path.join(dest_folder, namevid + '_' + frnumber + '.png'))
