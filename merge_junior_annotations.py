@@ -53,6 +53,7 @@ for name in images_intersect:
         print('yES2')
     else:
         t2 = np.zeros((height, width, 3), dtype=np.uint8)
+        print(os.path.join(path_mask_treat2, name))
         print('No2')
 
 
