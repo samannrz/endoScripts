@@ -6,14 +6,17 @@ from PIL import Image
 
 from overlay_mask import reColor
 
-def createDIR(folder, name_dir):
+def createDIR(*args):
     # create new directory for images
-    path = os.path.join(folder, name_dir)
+    path = ''
+    for name_dir in args:
+        path = os.path.join(path, name_dir)
+    print(path)
     isExist = os.path.exists(path)
     if not isExist:
         os.makedirs(path)
         print("The " + name_dir + " directory is created!")
-        return name_dir
+        return path
 
 
 def find(name, path):
