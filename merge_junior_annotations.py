@@ -51,9 +51,10 @@ for name in images_intersect:
     if os.path.exists(os.path.join(path_mask_treat2, name)):
         t2 = cv2.imread(os.path.join(path_mask_treat2, name))
         print('yES2')
-
     else:
         t2 = np.zeros((height, width, 3), dtype=np.uint8)
+        print('No2')
+
 
     if os.path.exists(os.path.join(path_mask_check1, name)):
         c1 = cv2.imread(os.path.join(path_mask_check1, name))
