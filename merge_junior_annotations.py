@@ -32,7 +32,7 @@ path_mask_treat1 = os.path.join(orig_path1, 'mask/Treat/')
 path_mask_treat2 = os.path.join(orig_path2, 'mask/Treat/')
 
 images1 = os.listdir(os.path.join(orig_path1, 'image/'))
-images2 = os.listdir(os.path.join(orig_path1, 'image/'))
+images2 = os.listdir(os.path.join(orig_path2, 'image/'))
 images_intersect = list(set(images1).intersection(images2))
 
 for name in images_intersect:
@@ -50,8 +50,6 @@ for name in images_intersect:
         t2 = cv2.imread(os.path.join(path_mask_treat2, name))
     else:
         t2 = np.zeros((height, width, 3), dtype=np.uint8)
-        print(os.path.join(path_mask_treat2, name))
-
 
     if os.path.exists(os.path.join(path_mask_check1, name)):
         c1 = cv2.imread(os.path.join(path_mask_check1, name))
