@@ -11,7 +11,6 @@ def createDIR(*args):
     path = ''
     for name_dir in args:
         path = os.path.join(path, name_dir)
-    print(path)
     isExist = os.path.exists(path)
     if not isExist:
         os.makedirs(path)

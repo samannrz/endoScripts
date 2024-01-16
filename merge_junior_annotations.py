@@ -44,11 +44,14 @@ for name in images_intersect:
 
     if os.path.exists(os.path.join(path_mask_treat1, name)):
         t1 = cv2.imread(os.path.join(path_mask_treat1, name))
+        print('yES1')
     else:
         t1 = np.zeros((height, width, 3), dtype=np.uint8)
 
     if os.path.exists(os.path.join(path_mask_treat2, name)):
         t2 = cv2.imread(os.path.join(path_mask_treat2, name))
+        print('yES2')
+
     else:
         t2 = np.zeros((height, width, 3), dtype=np.uint8)
 
@@ -61,8 +64,8 @@ for name in images_intersect:
         c2 = cv2.imread(os.path.join(path_mask_check2, name))
     else:
         c2 = np.zeros((height, width, 3), dtype=np.uint8)
-    print(t1.size)
-    print(t2.size)
+    print(t1.shape)
+    print(t2.shape)
     mask_treat = cv2.bitwise_and(t1, t2)
 
     mask_check = cv2.bitwise_or(cv2.bitwise_or(t1, t2), cv2.bitwise_or(t1, c2))
