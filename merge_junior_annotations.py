@@ -43,7 +43,8 @@ for name in images_intersect:
         continue
     orig_image = cv2.imread(os.path.join(orig_path_image1, name))
     height, width, _ = orig_image.shape
-
+    if width == 853:
+        width = 854
     if os.path.exists(os.path.join(path_mask_treat1, name)):
         t1 = cv2.imread(os.path.join(path_mask_treat1, name))
     else:
