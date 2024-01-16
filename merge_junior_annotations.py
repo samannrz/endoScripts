@@ -37,24 +37,21 @@ images_intersect = list(set(images1).intersection(images2))
 
 for name in images_intersect:
     # print(name)
-    if name!= 'bsp1_GY_20230601_038_VID001_trim1.mp4_01630.png':
+    if name== 'bsp1_GY_20230601_038_VID001_trim1.mp4_01630.png':
         continue
     orig_image = cv2.imread(os.path.join(orig_path_image1, name))
     height, width, _ = orig_image.shape
 
     if os.path.exists(os.path.join(path_mask_treat1, name)):
         t1 = cv2.imread(os.path.join(path_mask_treat1, name))
-        print('yES1')
     else:
         t1 = np.zeros((height, width, 3), dtype=np.uint8)
 
     if os.path.exists(os.path.join(path_mask_treat2, name)):
         t2 = cv2.imread(os.path.join(path_mask_treat2, name))
-        print('yES2')
     else:
         t2 = np.zeros((height, width, 3), dtype=np.uint8)
         print(os.path.join(path_mask_treat2, name))
-        print('No2')
 
 
     if os.path.exists(os.path.join(path_mask_check1, name)):
