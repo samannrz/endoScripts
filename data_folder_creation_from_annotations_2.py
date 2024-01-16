@@ -44,13 +44,12 @@ for project in api.project.get_list(ws.id):  # for each project
     #     continue
     if project.type != 'images':
         continue
-    print(project.name)
     for ds in api.dataset.get_list(project.id):
+        print(project.name)
         print(ds.name)
         for vd in api.video.get_list(ds.id):
             annotation = api.video.annotation.download(vd.id)
             frames = annotation['frames']  # frame is the annotation info (type: list of dict) on that frame
-            print(vd.name)
             for fr in frames:
                 # if vd.name + '_'+str(fr['index']).zfill(5)+'.png' not in list8_9:
                 #     continue
@@ -76,7 +75,7 @@ for project in api.project.get_list(ws.id):  # for each project
                     SAVE_SIGNAL = True
                 if SAVE_SIGNAL:
                     fr_names, fr_extracted = get_frames_from_api(api, vd.id, vd.name, [fr['index']])
-                    print(vd.name,fr['index'],ds.name,project.name)
+                    print(vd.name,fr['index'])
                     if not os.path.exists( os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0])):
                         cv2.imwrite(os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0]),
                                      cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
@@ -85,4 +84,4 @@ for project in api.project.get_list(ws.id):  # for each project
                         img_treat.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Treat', fr_names[0]))
                         print('saved')
 
-
+    print('\n')
