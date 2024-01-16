@@ -61,10 +61,10 @@ for name in images_intersect:
         c2 = cv2.imread(os.path.join(path_mask_check2, name))
     else:
         c2 = np.zeros((height, width, 3), dtype=np.uint8)
-
-    mask_treat = cv2.bitwise_and(t1, t2)
     print(t1.size)
     print(t2.size)
+    mask_treat = cv2.bitwise_and(t1, t2)
+
     mask_check = cv2.bitwise_or(cv2.bitwise_or(t1, t2), cv2.bitwise_or(t1, c2))
     mask_check = cv2.bitwise_or(mask_check, cv2.bitwise_or(t2, c1))
     mask_check = cv2.bitwise_or(mask_check, cv2.bitwise_or(c2, c1))
