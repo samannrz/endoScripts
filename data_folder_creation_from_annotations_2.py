@@ -8,8 +8,8 @@ api, tm = get_supervisely_team()
 ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
 ANNOTATOR_DICT = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
-                  'incision.consensus': 4}
-ANNOTATOR = 2
+                  'Ervin.Kallfa': 5, 'ebbe.thinggaard': 6, 'incision.consensus': 4}
+ANNOTATOR = 3
 print(ANNOTATOR)
 dest_path = '/data/DATA/incision/'
 # dest_path = '/Users/saman/Documents/data/DATA/incision/'
@@ -56,7 +56,7 @@ for project in api.project.get_list(ws.id):  # for each project
                 #     continue
                 img_treat = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']), (0, 0, 0))
                 img_check = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']), (0, 0, 0))
-                polygon=[]
+                polygon = []
                 SAVE_SIGNAL = False
                 for fig in fr['figures']:
                     classobj = findClass(fig['objectId'], annotation['objects'])
@@ -76,13 +76,12 @@ for project in api.project.get_list(ws.id):  # for each project
                     SAVE_SIGNAL = True
                 if SAVE_SIGNAL:
                     fr_names, fr_extracted = get_frames_from_api(api, vd.id, vd.name, [fr['index']])
-                    if not os.path.exists( os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0])):
+                    if not os.path.exists(os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0])):
                         cv2.imwrite(os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0]),
-                                     cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
+                                    cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
 
                         img_check.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Check', fr_names[0]))
                         img_treat.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Treat', fr_names[0]))
                         print(vd.name, fr['index'], ': SAVED')
-
 
     print('\n')
