@@ -39,6 +39,8 @@ for name in images_intersect:
     # print(name)
     if name== 'bsp1_GY_20230601_038_VID001_trim1.mp4_01630.png':
         continue
+    if name != 'bsp1_GY_20230406_006_VID001_trim2.mp4_00608.png':
+        continue
     orig_image = cv2.imread(os.path.join(orig_path_image1, name))
     height, width, _ = orig_image.shape
 
@@ -63,9 +65,9 @@ for name in images_intersect:
         c2 = cv2.imread(os.path.join(path_mask_check2, name))
     else:
         c2 = np.zeros((height, width, 3), dtype=np.uint8)
-    # print(orig_image.shape)
-    # print(t1.shape)
-    # print(t2.shape)
+    print(orig_image.shape)
+    print(t1.shape)
+    print(t2.shape)
     mask_treat = cv2.bitwise_and(t1, t2)
 
     mask_check = cv2.bitwise_or(cv2.bitwise_or(t1, t2), cv2.bitwise_or(t1, c2))
