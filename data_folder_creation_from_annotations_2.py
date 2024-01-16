@@ -9,7 +9,7 @@ ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
 ANNOTATOR_DICT = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
                   'incision.consensus': 4}
-ANNOTATOR = 4
+ANNOTATOR = 0ß
 dest_path = '/data/DATA/incision/'
 # dest_path = '/Users/saman/Documents/data/DATA/incision/'
 
@@ -75,13 +75,13 @@ for project in api.project.get_list(ws.id):  # for each project
                     SAVE_SIGNAL = True
                 if SAVE_SIGNAL:
                     fr_names, fr_extracted = get_frames_from_api(api, vd.id, vd.name, [fr['index']])
-                    print(vd.name,fr['index'])
                     if not os.path.exists( os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0])):
                         cv2.imwrite(os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0]),
                                      cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
 
                         img_check.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Check', fr_names[0]))
                         img_treat.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Treat', fr_names[0]))
-                        print('saved')
+                        print(vd.name, fr['index'], ': SAVED')
+
 
     print('\n')
