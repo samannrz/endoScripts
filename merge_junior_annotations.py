@@ -12,9 +12,9 @@ dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'fi
         'incision.consensus': 4}
 
 base_path = '/data/DATA/incision/'
-orig_path1 = os.path.join(base_path, str(1))
+orig_path1 = os.path.join(base_path, str(6))
 orig_path2 = os.path.join(base_path, str(5))
-savepath = os.path.join(base_path,'15')
+savepath = os.path.join(base_path,'56')
 
 
 if os.path.exists(savepath):
