@@ -26,6 +26,7 @@ createDIR(os.path.join(savepath,'mask'), 'Treat')
 createDIR(os.path.join(savepath,'mask'), 'Check')
 
 orig_path_image1 = os.path.join(orig_path1, 'image')
+orig_path_image2 = os.path.join(orig_path2, 'image')
 path_mask_check1 = os.path.join(orig_path1, 'mask/Check/')
 path_mask_check2 = os.path.join(orig_path2, 'mask/Check/')
 path_mask_treat1 = os.path.join(orig_path1, 'mask/Treat/')
@@ -70,3 +71,14 @@ for name in images_intersect:
     cv2.imwrite(os.path.join(savepath, 'mask/Treat', name), mask_treat)
     cv2.imwrite(os.path.join(savepath, 'mask/Check', name), mask_check)
     shutil.copy(os.path.join(orig_path_image1, name), os.path.join(savepath, 'image', name))
+
+import find_missing_images
+# Call the function to find and copy missing images
+find_missing_images(orig_path_image1, os.path.join(savepath, 'image'))
+find_missing_images(orig_path_image2, os.path.join(savepath, 'image'))
+
+find_missing_images(path_mask_treat1, os.path.join(savepath, 'mask/Treat'))
+find_missing_images(path_mask_treat2, os.path.join(savepath, 'mask/Treat'))
+
+find_missing_images(path_mask_check1, os.path.join(savepath, 'mask/Check'))
+find_missing_images(path_mask_check2, os.path.join(savepath, 'mask/Check'))
