@@ -36,6 +36,7 @@ images2 = os.listdir(os.path.join(orig_path1, 'image/'))
 images_intersect = list(set(images1).intersection(images2))
 
 for name in images_intersect:
+    print(name)
     orig_image = cv2.imread(os.path.join(orig_path_image1, name))
     height, width, _ = orig_image.shape
 
