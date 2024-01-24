@@ -7,12 +7,12 @@ sh = gc.open_by_key(sheet_id)
 wks = sh[9]
 
 script_lines = ''
-i = 72
+i = 51
 j = 1
 video_num = wks.cell('D' + str(i)).value
 video_name = wks.cell('C' + str(i)).value
 video_name_full = video_name + '_' + video_num + '.mp4'
-while i < 81:
+while i < 115:
     print(i, video_name_full)
 
     start_time = wks.cell('E' + str(i)).value
@@ -37,6 +37,6 @@ while i < 81:
         script_lines = script_lines + '\n'
     video_name_full = video_name + '_' + video_num + '.mp4'
 
-with open('extract_bash_Er_1.sh', 'w') as f:
+with open('extract_bash_WS10_CF_1.sh', 'w') as f:
     f.write('#!/bin/sh\n')
     f.write(script_lines)
