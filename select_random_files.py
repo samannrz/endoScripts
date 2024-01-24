@@ -4,8 +4,8 @@ import shutil
 
 source_folder = '/data/projects/IncisionDeepLab/input/incision/orig_data4/train_images'
 source_label = '/data/projects/IncisionDeepLab/input/incision/orig_data4/train_masks'
-destination_path = '/data/projects/IncisionDeepLab/input/incision/orig_data4/valid_images'
-destination_label = '/data/projects/IncisionDeepLab/input/incision/orig_data4/valid_masks'
+destination_path = '/data/projects/IncisionDeepLab/input/incision/orig_data4/test_images'
+destination_label = '/data/projects/IncisionDeepLab/input/incision/orig_data4/test_masks'
 
 # Get a list of all files in the source folder
 all_files = os.listdir(source_folder)
