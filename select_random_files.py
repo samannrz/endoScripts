@@ -4,14 +4,14 @@ import shutil
 
 source_folder = '/data/projects/IncisionDeepLab/input/incision/orig_dataall/train_images'
 source_label = '/data/projects/IncisionDeepLab/input/incision/orig_dataall/train_masks'
-destination_path = '/data/projects/IncisionDeepLab/input/incision/orig_dataall/test_images'
-destination_label = '/data/projects/IncisionDeepLab/input/incision/orig_dataall/test_masks'
+destination_path = '/data/projects/IncisionDeepLab/input/incision/orig_dataall/valid_images'
+destination_label = '/data/projects/IncisionDeepLab/input/incision/orig_dataall/valid_masks'
 
 # Get a list of all files in the source folder
 all_files = os.listdir(source_folder)
 
 # Randomly select x images
-selected_images = random.sample(all_files, 10)
+selected_images = random.sample(all_files, 140)
 
 # Move the selected images to the destination folder
 for image in selected_images:
