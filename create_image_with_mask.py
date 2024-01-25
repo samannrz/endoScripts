@@ -4,34 +4,38 @@ from PIL import Image
 import os
 from functions import createDIR, overlayMasks_incision
 
-common_path = '/Users/saman/Documents/data/DATA/incision/4'
-dest_folder = '/Users/saman/Documents/data/DATA/incision/4'
+
 common_path = '/Users/saman/Documents/data/DATA/incision/4/Batch25'
 dest_folder = '/Users/saman/Documents/data/DATA/incision/4/Batch25/final'
+dest_folder = '/data/projects/IncisionDeeplab/onputs/outputs_consensus_Batch1-25/test_consensus_inference/final_ref/'
+common_path = '/data/DATA/incision/4/all/'
+
+image_folder_name ='test_images'
+mask_folder_name ='test_masks'
 
 def initializeMask(size):
     a = Image.new(mode="RGBA", size=(size[0], size[1]), color="black")
     return a
 
 
-images = os.listdir(common_path + '/image')
+images = os.listdir(os.path.join(common_path,image_folder_name))
 # createDIR('', dest_folder)
 lenimg = len(images)
 print('There are %d images' % lenimg)
 
 for i in range(lenimg):
 
-    image_orig = Image.open(os.path.join(common_path, 'image', images[i]))
+    image_orig = Image.open(os.path.join(common_path, image_folder_name, images[i]))
 
     mask_Treat = initializeMask(image_orig.size)
     maskS_Check = initializeMask(image_orig.size)
 
     try:
-        mask_Treat = Image.open(os.path.join(common_path, 'mask/Treat', images[i][:-4] + '.png'))
+        mask_Treat = Image.open(os.path.join(common_path, mask_folder_name,'Treat', images[i][:-4] + '.png'))
     except:
         print('There is no Hard Zone on Nicolas\'s annot on ' + images[i][:-4])
     try:
-        mask_Check = Image.open(os.path.join(common_path, 'mask/Check', images[i][:-4] + '.png'))
+        mask_Check = Image.open(os.path.join(common_path, mask_folder_name,'Check', images[i][:-4] + '.png'))
     except:
         print('There is no Security Zone on Nicolas\'s annot on ' + images[i][:-4])
 
