@@ -11,7 +11,7 @@ dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'fi
 annotator ='incision.consensus'
 print(annotator)
 save_image = True
-remove_all_folders = True
+remove_all_folders = False
 for batch_num in ['_test']:
 
     data_folder = 'annotationData/'  # The destination folder
@@ -34,7 +34,7 @@ for batch_num in ['_test']:
     ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
     for project in api.project.get_list(ws.id):  # for each project
-        if project.name != 'Endometriosis_WS9':
+        if project.name != 'Endometriosis_WS8':
             continue
         for ds in api.dataset.get_list(project.id):
             evalfr = evals[0]
@@ -44,8 +44,14 @@ for batch_num in ['_test']:
                     video_api = api.video.get_info_by_name(ds.id, evalfr['frame'])
                     annotation = api.video.annotation.download(video_api.id)
                     frames = annotation['frames']  # frame is the annotation info (type: list of dict) on that frame
+                    vidname = evalfr['frame']
+                    # extract the image frame
+                    fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
+                    cv2.imwrite(data_folder + 'image/' + fr_names[0],
+                                cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
                     if len(frames) < 1:  # if there is no annotation on the video
                         continue  # go to the next jsonfile (and next video)
+
                     for fr in frames:
 
 
@@ -126,6 +132,7 @@ for batch_num in ['_test']:
                                     cv2.cvtColor(np.array(maskCheck), cv2.COLOR_BGR2RGB))
 
                         counter += 1
+
 
 
     print('Batch_num ' + str(batch_num) + ' : ' + str(
