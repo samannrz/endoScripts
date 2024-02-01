@@ -11,7 +11,7 @@ dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'fi
 #annotator ='incision.consensus'
 print(annotator)
 save_image = True
-remove_all_folders = True
+remove_all_folders = False
 for batch_num in [25]:
 
     data_folder = 'annotationData/'  # The destination folder
