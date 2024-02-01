@@ -11,7 +11,7 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 25
+batch_num = 24
 # from IncisionDataFolderCreation import batch_num
 
 common_path = 'annotationData/'
@@ -67,7 +67,7 @@ print('There are %d images' % lenimg)
 batch_size = 2
 space_height = 150
 ep = 1e-15
-save_image = True
+save_image = False
 
 
 def calculate_score(mask1, mask2):
