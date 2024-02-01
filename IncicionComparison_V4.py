@@ -433,7 +433,7 @@ for i in range(Treat_matrix.shape[0]):
 # Set title
 plt.title('Pair-wise agreement rate')
 # Show the plot
-plt.savefig('Treat_rates.png')
+plt.savefig('Treat_rates'+str(batch_num)+'.png')
 ######################
 Check_matrix = np.tril(Check_matrix)
 
@@ -456,4 +456,4 @@ for i in range(Check_matrix.shape[0]):
             ax.text(j, i, str(round(Check_matrix[i, j])), va='center', ha='center', color='black')
 
 plt.title('Pair-wise agreement rate')
-plt.savefig('Check_rates.png')
+plt.savefig('Check_rates'+str(batch_num)+'.png')
