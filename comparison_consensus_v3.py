@@ -6,7 +6,7 @@ from functions import write_to_gsheet
 from statistics import mean
 
 common_path = 'annotationData/'
-batch_num = 23
+batch_num = 24
 
 images = os.listdir(common_path + '/image')
 lenimg = len(images)

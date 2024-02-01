@@ -12,7 +12,7 @@ annotator ='incision.consensus'
 print(annotator)
 save_image = True
 remove_all_folders = False
-for batch_num in ['_test']:
+for batch_num in [24]:
 
     data_folder = 'annotationData/'  # The destination folder
 
@@ -34,7 +34,7 @@ for batch_num in ['_test']:
     ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
     for project in api.project.get_list(ws.id):  # for each project
-        if project.name != 'Endometriosis_WS8':
+        if project.name != 'Endometriosis_WS9':
             continue
         for ds in api.dataset.get_list(project.id):
             evalfr = evals[0]
