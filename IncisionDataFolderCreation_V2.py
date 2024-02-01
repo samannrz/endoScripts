@@ -102,17 +102,17 @@ for batch_num in [24]:
                         vidname = evalfr['frame']
                         # extract the image frame
                         fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
-                        maskCheck_array = np.array(maskCheck)
-                        maskTreat_array = np.array(maskTreat)
-                        # Perform pixel-wise logical AND
-                        result_array = np.logical_and(maskCheck_array, maskTreat_array)
-                        # Identify the indices where both masks are true
-                        rows, cols = np.where(result_array)
-                        background_value = 0
-                        # Update 'maskCheck' at the identified pixels to the background value
-                        maskCheck_array[rows, cols] = background_value
-                        # Convert the updated NumPy array back to a PIL Image
-                        maskCheck = Image.fromarray(maskCheck_array)
+                        # maskCheck_array = np.array(maskCheck)
+                        # maskTreat_array = np.array(maskTreat)
+                        # # Perform pixel-wise logical AND
+                        # result_array = np.logical_and(maskCheck_array, maskTreat_array)
+                        # # Identify the indices where both masks are true
+                        # rows, cols = np.where(result_array)
+                        # background_value = 0
+                        # # Update 'maskCheck' at the identified pixels to the background value
+                        # maskCheck_array[rows, cols] = background_value
+                        # # Convert the updated NumPy array back to a PIL Image
+                        # maskCheck = Image.fromarray(maskCheck_array)
 
                         # save frame as png file
                         if save_image:
