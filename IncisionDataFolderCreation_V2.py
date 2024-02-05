@@ -1,27 +1,34 @@
+import argparse
 import json
 import shutil
 
 from functions import *
 from PIL import Image, ImageDraw
 import cv2
+parser = argparse.ArgumentParser()
+parser.add_argument('--batch', help = 'batch number')
+parser.add_argument('--annotator',default= 'incision.consensus',help = 'the supervisely id of the annotator')
+parser.add_argument('--output',default= 'annotationData/',help = 'path of dest. folder')
+parser.add_argument('--outputtreat',default= 'maskTreat',help = 'path of dest. folder')
+parser.add_argument('--outputcheck',default= 'maskCheck',help = 'path of dest. folder')
+parser.add_argument('--project',default= [],help = 'supervisely projectname')
 
+
+args = parser.parse_args()
+annotator = args.annotator
+batch = args.batch
 # batch_num = 3
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'Ervin.Kallfa': 4, 'ebbe.thinggaard': 5, 'incision.consensus': 6}
-annotator ='incision.consensus'
+# annotator ='incision.consensus'
 print(annotator)
-save_image = True
-remove_all_folders = False
-for batch_num in [25]:
-
-    data_folder = 'annotationData/'  # The destination folder
-
-    maskTreatdir = 'maskTreat'
-    maskCheckdir = 'maskCheck'
+for batch_num in batch:
+    data_folder = args.output  # The destination folder
+    maskTreatdir = args.outputtreat
+    maskCheckdir = args.outputcheck
 
     counter = 0
-    if remove_all_folders:
-        shutil.rmtree(data_folder)
+
     createDIR(data_folder, 'image')
     createDIR(data_folder, maskTreatdir + '_' + annotator[:2])
     createDIR(data_folder, maskCheckdir + '_' + annotator[:2])
@@ -34,7 +41,7 @@ for batch_num in [25]:
     ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
     for project in api.project.get_list(ws.id):  # for each project
-        if project.name != 'Endometriosis_WS9':
+        if project.name != args.project:
             continue
         for ds in api.dataset.get_list(project.id):
             evalfr = evals[0]
@@ -53,9 +60,6 @@ for batch_num in [25]:
                         continue  # go to the next jsonfile (and next video)
 
                     for fr in frames:
-
-
-
                         image_Treat = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
                                                 (0, 0, 0))
                         image_Check = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
@@ -68,8 +72,6 @@ for batch_num in [25]:
                         maskTreat = image_Treat.convert("L")
                         maskCheck = image_Check.convert("L")
 
-                        Treatexists = False
-                        Checkexists = False
                         if fr['index'] not in evalfr['index']:
                             continue
 
@@ -133,9 +135,6 @@ for batch_num in [25]:
 
                         counter += 1
 
-
-
     print('Batch_num ' + str(batch_num) + ' : ' + str(
         counter) + ' images, masks are saved in ' + data_folder + ' : ' + annotator)
-    # with open("comparison_consensus.py.py") as f:
-    #     exec(f.read())
+
