@@ -43,6 +43,7 @@ for batch_num in batch:
     for project in api.project.get_list(ws.id):  # for each project
         if project.name != args.project:
             continue
+        print('Hello')
         for ds in api.dataset.get_list(project.id):
             evalfr = evals[0]
             for evalfr in evals:
