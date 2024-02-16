@@ -11,13 +11,13 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 25
+batch_num = 26
 # from IncisionDataFolderCreation import batch_num
 
 common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
-machine_path = '/data/DATA/Incision_predictions/Batch25-model1-21-model/final'
+machine_path = '/data/DATA/Incision_predictions/Batch26-model-consensus-Batch1-25/final'
 dest_folder = 'ImgOut2'
 # machine_path = '/Users/saman/Documents/data/DATA/final'
 final_consensus_path  = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
@@ -56,7 +56,7 @@ def initializeMask(size):
     return a
 
 
-nb_ann = 6
+nb_ann = 5
 images = os.listdir(common_path + '/image')
 createDIR('', dest_folder)
 lenimg = len(images)
@@ -332,7 +332,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         draw.text((1 / 2 * WIDTH, hh + space_height + HEIGHT), 'Nicolas: '+str(score_Treat[0])+', '+str(score_Check[0]), fill=(240, 60, 240), font=font)
         draw.text((3 / 2 * WIDTH + 10, hh + space_height + HEIGHT), 'Jean: '+str(score_Treat[1])+', '+str(score_Check[1]), fill=(240, 60, 240), font=font)
         draw.text((5 / 2 * WIDTH + 20, hh + space_height + HEIGHT), 'Guiseppe: '+str(score_Treat[2])+', '+str(score_Check[2]), fill=(240, 60, 240), font=font)
-        draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50), 'Filippo: '+str(score_Treat[3])+', '+str(score_Check[3]), fill=(240, 60, 240), font=font)
+        # draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50), 'Filippo: '+str(score_Treat[3])+', '+str(score_Check[3]), fill=(240, 60, 240), font=font)
         draw.text((3 / 2 * WIDTH + 10, hh + space_height + 2 * HEIGHT + 50), 'Ervin: '+str(score_Treat[4])+', '+str(score_Check[4]), fill=(240, 60, 240), font=font)
         draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50), 'Ebbe: '+str(score_Treat[5])+', '+str(score_Check[5]), fill=(240, 60, 240), font=font)
         draw.text((1 / 2 * WIDTH + 10, hh + space_height + 3 * HEIGHT + 100), 'Consensus Treat', fill=(240, 60, 240), font=font)
