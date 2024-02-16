@@ -269,9 +269,9 @@ for j in range(math.ceil(lenimg / batch_size)):
 
 
 
-        Treat_rates[r, :], Check_rates[r, :] = calculate_agreements(maskH_N, maskH_J, maskH_G, maskH_F, maskH_ER,
-                                                                    maskH_EB, maskS_N, maskS_J, maskS_G,
-                                                                    maskS_F, maskS_ER, maskS_EB)
+        # Treat_rates[r, :], Check_rates[r, :] = calculate_agreements(maskH_N, maskH_J, maskH_G, maskH_F, maskH_ER,
+        #                                                             maskH_EB, maskS_N, maskS_J, maskS_G,
+        #                                                             maskS_F, maskS_ER, maskS_EB)
         r += 1
         if not save_image:
             continue
@@ -406,54 +406,54 @@ for j in range(math.ceil(lenimg / batch_size)):
 ####################################################
 #### The Agreement Matrices between all annotators #####
 ####################################################
-Treat_matrix_flat = np.mean(Treat_rates, axis=0)
-Treat_matrix = Treat_matrix_flat.reshape(6,6)
-Check_matrix_flat = np.mean(Check_rates, axis=0)
-Check_matrix = Check_matrix_flat.reshape(6,6)
-##################
-Treat_matrix = np.tril(Treat_matrix)
-# Create a figure and axis
-fig, ax = plt.subplots()
-# Create a heatmap with a custom color map
-cax = ax.matshow(Treat_matrix, cmap='coolwarm', origin='lower')
-# Add a color bar
-cbar = plt.colorbar(cax)
-# Add grid lines
-ax.set_xticks(np.arange(Treat_matrix.shape[1]), minor=False)
-ax.set_yticks(np.arange(Treat_matrix.shape[0]), minor=False)
-ax.grid(which='minor', color='w', linestyle='-', linewidth=0)
-# Set axis labels
-ax.set_xticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
-ax.set_yticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
-for i in range(Treat_matrix.shape[0]):
-    for j in range(Treat_matrix.shape[1]):
-        if i>j:
-            ax.text(j, i, str(round(Treat_matrix[i, j])), va='center', ha='center', color='black')
-
-# Set title
-plt.title('Pair-wise agreement rate')
-# Show the plot
-plt.savefig('Treat_rates'+str(batch_num)+'.png')
-######################
-Check_matrix = np.tril(Check_matrix)
-
-# Create a figure and axis
-fig, ax = plt.subplots()
-# Create a heatmap with a custom color map
-cax = ax.matshow(Check_matrix, cmap='coolwarm', origin='lower')
-# Add a color bar
-cbar = plt.colorbar(cax)
-# Add grid lines
-ax.set_xticks(np.arange(Check_matrix.shape[1]), minor=False)
-ax.set_yticks(np.arange(Check_matrix.shape[0]), minor=False)
-ax.grid(which='minor', color='w', linestyle='-', linewidth=0)
-# Set axis labels
-ax.set_xticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
-ax.set_yticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
-for i in range(Check_matrix.shape[0]):
-    for j in range(Check_matrix.shape[1]):
-        if i>j:
-            ax.text(j, i, str(round(Check_matrix[i, j])), va='center', ha='center', color='black')
-
-plt.title('Pair-wise agreement rate')
-plt.savefig('Check_rates'+str(batch_num)+'.png')
+# Treat_matrix_flat = np.mean(Treat_rates, axis=0)
+# Treat_matrix = Treat_matrix_flat.reshape(6,6)
+# Check_matrix_flat = np.mean(Check_rates, axis=0)
+# Check_matrix = Check_matrix_flat.reshape(6,6)
+# ##################
+# Treat_matrix = np.tril(Treat_matrix)
+# # Create a figure and axis
+# fig, ax = plt.subplots()
+# # Create a heatmap with a custom color map
+# cax = ax.matshow(Treat_matrix, cmap='coolwarm', origin='lower')
+# # Add a color bar
+# cbar = plt.colorbar(cax)
+# # Add grid lines
+# ax.set_xticks(np.arange(Treat_matrix.shape[1]), minor=False)
+# ax.set_yticks(np.arange(Treat_matrix.shape[0]), minor=False)
+# ax.grid(which='minor', color='w', linestyle='-', linewidth=0)
+# # Set axis labels
+# ax.set_xticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
+# ax.set_yticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
+# for i in range(Treat_matrix.shape[0]):
+#     for j in range(Treat_matrix.shape[1]):
+#         if i>j:
+#             ax.text(j, i, str(round(Treat_matrix[i, j])), va='center', ha='center', color='black')
+#
+# # Set title
+# plt.title('Pair-wise agreement rate')
+# # Show the plot
+# plt.savefig('Treat_rates'+str(batch_num)+'.png')
+# ######################
+# Check_matrix = np.tril(Check_matrix)
+#
+# # Create a figure and axis
+# fig, ax = plt.subplots()
+# # Create a heatmap with a custom color map
+# cax = ax.matshow(Check_matrix, cmap='coolwarm', origin='lower')
+# # Add a color bar
+# cbar = plt.colorbar(cax)
+# # Add grid lines
+# ax.set_xticks(np.arange(Check_matrix.shape[1]), minor=False)
+# ax.set_yticks(np.arange(Check_matrix.shape[0]), minor=False)
+# ax.grid(which='minor', color='w', linestyle='-', linewidth=0)
+# # Set axis labels
+# ax.set_xticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
+# ax.set_yticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
+# for i in range(Check_matrix.shape[0]):
+#     for j in range(Check_matrix.shape[1]):
+#         if i>j:
+#             ax.text(j, i, str(round(Check_matrix[i, j])), va='center', ha='center', color='black')
+#
+# plt.title('Pair-wise agreement rate')
+# plt.savefig('Check_rates'+str(batch_num)+'.png')
