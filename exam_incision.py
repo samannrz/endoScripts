@@ -11,7 +11,7 @@ data_folder = 'Exam/'  # The destination folder
 consensus_path = '/Users/saman/Downloads/consensus_2'
 consensus_path = '/data/DATA/DELPHI_incision/all_consensus'
 
-annotator_examed = 'ebbe.thinggaard'
+annotator_examed = 'anne-sofie.petersen'
 annotator_ref = 'saman.noorzadeh'
 
 maskHarddir = 'maskTreat'

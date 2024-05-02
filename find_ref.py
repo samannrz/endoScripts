@@ -12,12 +12,12 @@ co_score=[]
 ma_score=[]
 for which_class in ['Treat','Check']:
     # Load the three black and white masks
-    image_dir = 'annotationData/image'
-    mask1_dir = 'annotationData/mask'+which_class+'_ni'
-    mask2_dir = 'annotationData/mask'+which_class+'_Je'
-    mask3_dir = 'annotationData/mask'+which_class+'_gi'
-    mask4_dir = 'annotationData/mask'+which_class+'_fi'
-    mask5_dir = 'annotationData/mask'+which_class+'_in'
+    image_dir = 'annotationData26/image'
+    mask1_dir = 'annotationData26/mask'+which_class+'_ni'
+    mask2_dir = 'annotationData26/mask'+which_class+'_Je'
+    mask3_dir = 'annotationData26/mask'+which_class+'_gi'
+    mask4_dir = 'annotationData26/mask'+which_class+'_fi'
+    mask5_dir = 'annotationData26/mask'+which_class+'_in'
     mask_machine_dir = '/data/DATA/Incision_predictions/Batch8-9/all_data/mask/'+which_class
     mask_machine_dir = '/Users/saman/Documents/data/DATA/incision/Batch22-model1-21/mask/'+which_class
 
@@ -141,16 +141,16 @@ maskS_J = initializeMask(image_orig.size)
 maskH_C = initializeMask(image_orig.size)
 maskS_C = initializeMask(image_orig.size)
 
-maskH_N = Image.open(os.path.join('annotationData', 'maskTreat_ni', image_name[:-4] + '.png'))
-maskS_N = Image.open(os.path.join('annotationData', 'maskCheck_ni', image_name[:-4] + '.png'))
-maskH_J = Image.open(os.path.join('annotationData', 'maskTreat_Je', image_name[:-4] + '.png'))
-maskS_J = Image.open(os.path.join('annotationData', 'maskCheck_Je', image_name[:-4] + '.png'))
-maskH_G = Image.open(os.path.join('annotationData', 'maskTreat_gi', image_name[:-4] + '.png'))
-maskS_G = Image.open(os.path.join('annotationData', 'maskCheck_gi', image_name[:-4] + '.png'))
-maskH_F = Image.open(os.path.join('annotationData', 'maskTreat_fi', image_name[:-4] + '.png'))
-maskS_F = Image.open(os.path.join('annotationData', 'maskCheck_fi', image_name[:-4] + '.png'))
-maskH_C = Image.open(os.path.join('annotationData', 'maskTreat_in', image_name[:-4] + '.png'))
-maskS_C = Image.open(os.path.join('annotationData', 'maskCheck_in', image_name[:-4] + '.png'))
+maskH_N = Image.open(os.path.join('annotationData26', 'maskTreat_ni', image_name[:-4] + '.png'))
+maskS_N = Image.open(os.path.join('annotationData26', 'maskCheck_ni', image_name[:-4] + '.png'))
+maskH_J = Image.open(os.path.join('annotationData26', 'maskTreat_Je', image_name[:-4] + '.png'))
+maskS_J = Image.open(os.path.join('annotationData26', 'maskCheck_Je', image_name[:-4] + '.png'))
+maskH_G = Image.open(os.path.join('annotationData26', 'maskTreat_gi', image_name[:-4] + '.png'))
+maskS_G = Image.open(os.path.join('annotationData26', 'maskCheck_gi', image_name[:-4] + '.png'))
+maskH_F = Image.open(os.path.join('annotationData26', 'maskTreat_fi', image_name[:-4] + '.png'))
+maskS_F = Image.open(os.path.join('annotationData26', 'maskCheck_fi', image_name[:-4] + '.png'))
+maskH_C = Image.open(os.path.join('annotationData26', 'maskTreat_in', image_name[:-4] + '.png'))
+maskS_C = Image.open(os.path.join('annotationData26', 'maskCheck_in', image_name[:-4] + '.png'))
 
 #########################
 image_overlayed_N = overlayMasks_incision(image_orig, maskH_N, maskS_N)

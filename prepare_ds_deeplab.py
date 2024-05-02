@@ -9,14 +9,28 @@ dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'fi
         'incision.consensus': 4}
 annotator = 'all'
 orig_path = '/data/DATA/incision/'+str(annotator) + '/'
-# orig_path = 'annotationData/'
+# orig_path = 'annotationData28/'
 dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_images'
 dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_masks'
-# dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/Batch10-4/image'
-# dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/Batch10-4/mask'
-
+# dest_path_orig = '/data/DATA/supervisely_format/Batch28/img'
+# dest_path_mask = '/data/DATA/supervisely_format/Batch28/mask'
 # moving original images
 orig_path_image = orig_path + 'image'
+
+try:
+    # Create directories if they don't exist
+    os.makedirs(dest_path_mask)
+    print(f"Directories created at: {dest_path_mask}")
+except FileExistsError:
+    print(f"Directories already exist at: {dest_path_mask}")
+
+try:
+    # Create directories if they don't exist
+    os.makedirs(dest_path_orig)
+    print(f"Directories created at: {dest_path_orig}")
+except FileExistsError:
+    print(f"Directories already exist at: {dest_path_orig}")
+
 for image in os.listdir(orig_path_image):
     # print(os.path.join(dest_path_orig, image))
     shutil.copy(os.path.join(orig_path_image, image), os.path.join(dest_path_orig, image))
@@ -35,6 +49,7 @@ path_mask_treat = os.path.join(orig_path, 'mask/Treat/')
 
 
 for mask_treat in os.listdir(path_mask_treat):
+
     mask = Image.open(os.path.join(path_mask_treat, mask_treat))
     mask = mask.convert('RGB')
     mask = reColor(mask, color2=(128, 0, 0))

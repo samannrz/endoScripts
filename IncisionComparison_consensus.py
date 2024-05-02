@@ -5,7 +5,7 @@ import os
 from functions import createDIR, overlayMasks_incision
 
 common_path = '/data/DATA/DELPHI_incision'
-common_path = 'annotationData'
+common_path = 'annotationData26'
 dest_folder = '/data/DATA/DELPHI_incision/consensus9'
 
 

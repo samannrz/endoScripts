@@ -8,7 +8,7 @@ import cv2
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch', help = 'batch number')
 parser.add_argument('--annotator',default= 'incision.consensus',help = 'the supervisely id of the annotator')
-parser.add_argument('--output',default= 'annotationData/',help = 'path of dest. folder')
+parser.add_argument('--output',default= 'annotationData26/',help = 'path of dest. folder')
 parser.add_argument('--outputtreat',default= 'maskTreat',help = 'path of dest. folder')
 parser.add_argument('--outputcheck',default= 'maskCheck',help = 'path of dest. folder')
 parser.add_argument('--project',default= [],help = 'supervisely projectname')
@@ -39,11 +39,14 @@ print(len(evals))
 api, tm = get_supervisely_team()
 ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
+
 for project in api.project.get_list(ws.id):  # for each project
     if project.name != args.project:
         continue
-    print('Hello')
     for ds in api.dataset.get_list(project.id):
+        if project.name =='Endometriosis_WS2':
+            if ds.name != 'Revise_Consensus':
+                continue
         evalfr = evals[0]
         for evalfr in evals:
             videos_in_ds = [vid_info.name for vid_info in api.video.get_list(ds.id)]
@@ -117,19 +120,12 @@ for project in api.project.get_list(ws.id):  # for each project
                     # maskCheck = Image.fromarray(maskCheck_array)
 
                     # save frame as png file
-                    if save_image:
-                        cv2.imwrite(data_folder + 'image/' + fr_names[0],
-                                    cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
-                    # save the masks
-
-                    cv2.imwrite(os.path.join(data_folder + maskTreatdir + '_' + annotator[:2],
+                    cv2.imwrite(os.path.join(data_folder, 'image' , fr_names[0]),
+                                cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
+                    cv2.imwrite(os.path.join(data_folder , maskTreatdir + '_' + annotator[:2],
                                              vidname + '_' + str(fr['index']).zfill(5) + '.png'),
                                 cv2.cvtColor(np.array(maskTreat), cv2.COLOR_BGR2RGB))
-                    # maskTreat.save(os.path.join(data_folder + maskTreatdir + '_' + annotator[:2],
-                    #                             vidname + '_' + str(fr['index']).zfill(5) + '.png'), 'PNG')
-                    # maskCheck.save(os.path.join(data_folder + maskCheckdir + '_' + annotator[:2],
-                    #                             vidname + '_' + str(fr['index']).zfill(5) + '.png'), 'PNG')
-                    cv2.imwrite(os.path.join(data_folder + maskCheckdir + '_' + annotator[:2],
+                    cv2.imwrite(os.path.join(data_folder , maskCheckdir + '_' + annotator[:2],
                                              vidname + '_' + str(fr['index']).zfill(5) + '.png'),
                                 cv2.cvtColor(np.array(maskCheck), cv2.COLOR_BGR2RGB))
 

@@ -11,7 +11,7 @@ for batch_num in [21]:
     if batch_num == 100:
         data_folder = '/data/DATA/DELPHI_incision/'  # The destination folder
     else:
-        data_folder = 'annotationData/'  # The destination folder
+        data_folder = 'annotationData26/'  # The destination folder
 
     maskHarddir = 'maskTreat'
     maskSecudir = 'maskCheck'

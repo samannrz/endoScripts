@@ -11,20 +11,23 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 26
+batch_num = 28
 # from IncisionDataFolderCreation import batch_num
-
-common_path = 'annotationData/'
+nb_ann = 6
+common_path = 'annotationData28/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
-machine_path = '/data/DATA/Incision_predictions/Batch26-model-consensus-Batch1-25/final'
+machine_path = '/data/DATA/Incision_predictions/Batch28-model-consensus-Batch1-25/final'
 dest_folder = 'ImgOut2'
 # machine_path = '/Users/saman/Documents/data/DATA/final'
-final_consensus_path  = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
-final_consensus_path  = 'final/'
+final_consensus_path = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
+final_consensus_path = 'final/'
 
 draw_machine_prediction = True
 final_consensus = False
+save_image = True
+
+
 
 def overlayMasks_incision(image_orig, mask1, mask2):
     # This function takes the two masks and overlay them to the image_orig
@@ -56,7 +59,6 @@ def initializeMask(size):
     return a
 
 
-nb_ann = 5
 images = os.listdir(common_path + '/image')
 createDIR('', dest_folder)
 lenimg = len(images)
@@ -67,7 +69,6 @@ print('There are %d images' % lenimg)
 batch_size = 2
 space_height = 150
 ep = 1e-15
-save_image = False
 
 
 def calculate_score(mask1, mask2):
@@ -122,7 +123,13 @@ def calculate_agreements(maskH_N, maskH_J, maskH_G, maskH_F, maskH_ER, maskH_EB,
           ]
     return T1, C1
 
-
+def calculate_agreements2(*args):
+    agreements = []
+    for mask1 in args:
+        for mask2 in args:
+            agreement_score = calculate_score(mask1, mask2)
+            agreements.append(agreement_score)
+    return agreements
 def create_heatmap(mask1, mask2, mask3, mask4, mask5, mask6, color_theme='red'):
     num_masks = 0
     heatmap = np.ones((mask1.shape[0], mask1.shape[1], 3))
@@ -138,15 +145,15 @@ def create_heatmap(mask1, mask2, mask3, mask4, mask5, mask6, color_theme='red'):
             if num_masks == 0:
                 # print(i,j)
                 heatmap[i, j] = colors[0]  # White color for unmasked pixels
-            elif num_masks == 1:
-                heatmap[i, j] = colors[1]  # Yellow color for pixels masked in one image
-            elif num_masks == 2:
-                heatmap[i, j] = colors[2]  # Orange color for pixels masked in two images
-            elif num_masks == 3:
-                heatmap[i, j] = colors[3]  # Red color for pixels masked in all three images
-            elif num_masks == 4:
-                heatmap[i, j] = colors[4]  # Red color for pixels masked in all three images
-            elif num_masks == 5:
+            elif num_masks == nb_ann-5:
+                heatmap[i, j] = colors[1]  # Blue color for pixels masked in one image
+            elif num_masks == nb_ann - 4:
+                heatmap[i, j] = colors[2]  # green color for pixels masked in two images
+            elif num_masks == nb_ann - 3:
+                heatmap[i, j] = colors[3]  # Orange color for pixels masked in all three images
+            elif num_masks == nb_ann - 2:
+                heatmap[i, j] = colors[4]  # Yellow color for pixels masked in all three images
+            elif num_masks == nb_ann - 1:
                 heatmap[i, j] = colors[5]  # Red color for pixels masked in all three images
             elif num_masks == nb_ann:
                 heatmap[i, j] = colors[6]  # Red color for pixels masked in all three images
@@ -160,7 +167,7 @@ def ref_score(*args):
         maskk = maskk.astype(float)
         if co == 0:
             ref = maskk
-            co+=1
+            co += 1
         else:
             ref = ref + maskk
 
@@ -172,15 +179,16 @@ def ref_score(*args):
 
         ref_norm = cv2.normalize(ref_one_out, None, 0, 1, cv2.NORM_MINMAX)
         ref_norm = ref_norm.flatten() / np.linalg.norm(ref_norm.flatten())
-        score.append(round( np.dot(ref_norm.flatten(), maskk.flatten()),2))
-        #print(np.dot(ref.flatten(), mask.flatten()))
+        score.append(round(np.dot(ref_norm.flatten(), maskk.flatten()), 2))
+        # print(np.dot(ref.flatten(), mask.flatten()))
     return score
+
 
 for j in range(math.ceil(lenimg / batch_size)):
     counter = 1
     batchstart = True
     hh = 0
-    print(j)
+    print('File: '+str(j))
 
     for i in range(j * batch_size, (j + 1) * batch_size):
         if i > lenimg - 1:
@@ -221,7 +229,6 @@ for j in range(math.ceil(lenimg / batch_size)):
         image_overlayed_ER = overlayMasks_incision(image_orig, maskH_ER, maskS_ER)
         image_overlayed_EB = overlayMasks_incision(image_orig, maskH_EB, maskS_EB)
 
-
         ## Calculation of agreement images ##########
 
         maskH_N_array = np.array(maskH_N.convert('1'))
@@ -238,12 +245,13 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskS_ER_array = np.array(maskS_ER.convert('1'))
         maskS_EB_array = np.array(maskS_EB.convert('1'))
 
-        heatmap_Treat = create_heatmap(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array, maskH_EB_array, 'red')
+        heatmap_Treat = create_heatmap(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array,
+                                       maskH_EB_array, 'red')
         heatmap_Check = create_heatmap(
             maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array, maskS_EB_array, 'red')
 
         dst = cv2.cvtColor(np.uint8(heatmap_Treat), cv2.COLOR_BGR2RGB)
-        cv2.imwrite('ahmap.png',dst)
+        cv2.imwrite('ahmap.png', dst)
 
         overlay = Image.fromarray(heatmap_Treat.astype('uint8'), 'RGB')
         bg_treat = image_orig.convert('RGB')
@@ -259,19 +267,17 @@ for j in range(math.ceil(lenimg / batch_size)):
         bg_treat.save('ztreat.png')
         bg_check.save('zcheck.png')
 
-        score_Treat = ref_score(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array, maskH_EB_array)
-        score_Check = ref_score(maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array, maskS_EB_array)
+        score_Treat = ref_score(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array,
+                                maskH_EB_array)
+        score_Check = ref_score(maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array,
+                                maskS_EB_array)
 
         print(score_Treat)
         print(score_Check)
         #############################
 
-
-
-
-        # Treat_rates[r, :], Check_rates[r, :] = calculate_agreements(maskH_N, maskH_J, maskH_G, maskH_F, maskH_ER,
-        #                                                             maskH_EB, maskS_N, maskS_J, maskS_G,
-        #                                                             maskS_F, maskS_ER, maskS_EB)
+        Treat_rates[r, :] = calculate_agreements2(maskH_N, maskH_J, maskH_G, maskH_F, maskH_ER, maskH_EB)
+        Check_rates[r, :] = calculate_agreements2(maskS_N, maskS_J, maskS_G, maskS_F, maskS_ER, maskS_EB)
         r += 1
         if not save_image:
             continue
@@ -313,14 +319,14 @@ for j in range(math.ceil(lenimg / batch_size)):
         im3.paste(image_overlayed_N, (0, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_J, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_G, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
-        # im3.paste(image_overlayed_F, (0, hh + 3 * space_height + 2 * HEIGHT - 200))
+        im3.paste(image_overlayed_F, (0, hh + 3 * space_height + 2 * HEIGHT - 200))
         im3.paste(image_overlayed_ER, (WIDTH + 10, hh + 3 * space_height + 2 * HEIGHT - 200))
         im3.paste(image_overlayed_EB, (2 * WIDTH + 20, hh + 3 * space_height + 2 * HEIGHT - 200))
         im3.paste(bg_treat, (0, hh + 4 * space_height + 3 * HEIGHT - 300))
         im3.paste(bg_check, (WIDTH + 10, hh + 4 * space_height + 3 * HEIGHT - 300))
         if final_consensus:
             image_cons = Image.open(os.path.join(final_consensus_path, images[i]))
-            im3.paste(image_cons.resize((1920, 1080)), (2*WIDTH + 20, hh + 4 * space_height + 3 * HEIGHT - 300))
+            im3.paste(image_cons.resize((1920, 1080)), (2 * WIDTH + 20, hh + 4 * space_height + 3 * HEIGHT - 300))
 
         if draw_machine_prediction:
             image_machine = Image.open(os.path.join(machine_path, images[i]))
@@ -329,67 +335,93 @@ for j in range(math.ceil(lenimg / batch_size)):
         draw = ImageDraw.Draw(im3)
         font = ImageFont.truetype("arial.ttf", 50)
 
-        draw.text((1 / 2 * WIDTH, hh + space_height + HEIGHT), 'Nicolas: '+str(score_Treat[0])+', '+str(score_Check[0]), fill=(240, 60, 240), font=font)
-        draw.text((3 / 2 * WIDTH + 10, hh + space_height + HEIGHT), 'Jean: '+str(score_Treat[1])+', '+str(score_Check[1]), fill=(240, 60, 240), font=font)
-        draw.text((5 / 2 * WIDTH + 20, hh + space_height + HEIGHT), 'Guiseppe: '+str(score_Treat[2])+', '+str(score_Check[2]), fill=(240, 60, 240), font=font)
-        # draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50), 'Filippo: '+str(score_Treat[3])+', '+str(score_Check[3]), fill=(240, 60, 240), font=font)
-        draw.text((3 / 2 * WIDTH + 10, hh + space_height + 2 * HEIGHT + 50), 'Ervin: '+str(score_Treat[4])+', '+str(score_Check[4]), fill=(240, 60, 240), font=font)
-        draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50), 'Ebbe: '+str(score_Treat[5])+', '+str(score_Check[5]), fill=(240, 60, 240), font=font)
-        draw.text((1 / 2 * WIDTH + 10, hh + space_height + 3 * HEIGHT + 100), 'Consensus Treat', fill=(240, 60, 240), font=font)
-        draw.text((3 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Consensus Check', fill=(240, 60, 240), font=font)
-        rr=15
-        # if j!=3 and j!=5:
-        #     index_Treat_max = score_Treat.index(np.nanmax(np.array(score_Treat)))
-        #     index_Check_max = score_Check.index(np.nanmax(np.array(score_Check)))
-        #
-        #     if index_Treat_max == 0:
-        #         draw.ellipse((1 / 2 * WIDTH-40 - rr, hh + space_height + HEIGHT+20- rr, 1 / 2 * WIDTH-40 + rr, hh + space_height + HEIGHT +20 + rr), fill=(255, 0, 0, 0))
-        #     if index_Treat_max == 1:
-        #         draw.ellipse((3 / 2 * WIDTH -30 - rr, hh + space_height + HEIGHT+20 - rr, 3 / 2 * WIDTH-30 + rr,hh + space_height + HEIGHT+20 + rr),
-        #                      fill=(255, 0, 0, 0))
-        #     if index_Treat_max == 2:
-        #         draw.ellipse((5 / 2 * WIDTH-20  - rr, hh + space_height + HEIGHT+20 - rr, 5 / 2 * WIDTH-20 + rr,hh + space_height + HEIGHT+20 + rr),
-        #                      fill=(255, 0, 0, 0))
-        #     if index_Treat_max == 3:
-        #         draw.ellipse((1 / 2 * WIDTH-40 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 1 / 2 * WIDTH -40+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
-        #                      fill=(255, 0, 0, 0))
-        #     if index_Treat_max == 4:
-        #         draw.ellipse((3 / 2 * WIDTH -30- rr, hh + space_height + 2 * HEIGHT + 70 - rr, 3 / 2 * WIDTH -30+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
-        #                      fill=(255, 0, 0, 0))
-        #     if index_Treat_max == 5:
-        #         draw.ellipse((5 / 2 * WIDTH-20 - rr, hh + space_height + 2*HEIGHT +70 - rr, 5 / 2 * WIDTH-20+ rr,hh + space_height + 2*HEIGHT+70 + rr),
-        #                      fill=(255, 0, 0, 0))
-        #
-        #
-        #     if index_Check_max == 0:
-        #         draw.ellipse((1 / 2 * WIDTH - rr, hh + space_height + HEIGHT+20- rr, 1 / 2 * WIDTH + rr, hh + space_height + HEIGHT+20 + rr), fill=(10, 240, 10, 0))
-        #     if index_Check_max == 1:
-        #         draw.ellipse((3 / 2 * WIDTH +10 - rr, hh + space_height + HEIGHT+20 - rr, 3 / 2 * WIDTH + rr,hh + space_height + HEIGHT+20 + rr),
-        #                      fill=(10, 240, 10, 0))
-        #     if index_Check_max == 2:
-        #         draw.ellipse((5 / 2 * WIDTH +20 - rr, hh + space_height + HEIGHT+20 - rr, 5 / 2 * WIDTH +20+ rr,hh + space_height + HEIGHT+20 + rr),
-        #                      fill=(10, 240, 10, 0))
-        #     if index_Check_max == 3:
-        #         draw.ellipse((1 / 2 * WIDTH - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 1 / 2 * WIDTH+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
-        #                      fill=(10, 240, 10, 0))
-        #     if index_Check_max == 4:
-        #         draw.ellipse((3 / 2 * WIDTH +10- rr, hh + space_height + 2 * HEIGHT + 70 - rr, 3 / 2 * WIDTH +10+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
-        #                      fill=(10, 240, 10, 0))
-        #     if index_Check_max == 5:
-        #         draw.ellipse((5 / 2 * WIDTH +20 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 5 / 2 * WIDTH +20+ rr,hh + space_height + 2 * HEIGHT + 70 + rr),
-        #                      fill=(10, 240, 10, 0))
+        draw.text((1 / 2 * WIDTH, hh + space_height + HEIGHT),
+                  'Nicolas: ' + str(score_Treat[0]) + ', ' + str(score_Check[0]), fill=(240, 60, 240), font=font)
+        draw.text((3 / 2 * WIDTH + 10, hh + space_height + HEIGHT),
+                  'Jean: ' + str(score_Treat[1]) + ', ' + str(score_Check[1]), fill=(240, 60, 240), font=font)
+        draw.text((5 / 2 * WIDTH + 20, hh + space_height + HEIGHT),
+                  'Guiseppe: ' + str(score_Treat[2]) + ', ' + str(score_Check[2]), fill=(240, 60, 240), font=font)
+        draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50), 'Filippo: '+str(score_Treat[3])+', '+str(score_Check[3]), fill=(240, 60, 240), font=font)
+        draw.text((3 / 2 * WIDTH + 10, hh + space_height + 2 * HEIGHT + 50),
+                  'Ervin: ' + str(score_Treat[4]) + ', ' + str(score_Check[4]), fill=(240, 60, 240), font=font)
+        draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50),
+                  'Ebbe: ' + str(score_Treat[5]) + ', ' + str(score_Check[5]), fill=(240, 60, 240), font=font)
+        draw.text((1 / 2 * WIDTH + 10, hh + space_height + 3 * HEIGHT + 100), 'Consensus Treat', fill=(240, 60, 240),
+                  font=font)
+        draw.text((3 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Consensus Check', fill=(240, 60, 240),
+                  font=font)
+        rr = 15
 
+        try:
+            index_Treat_max = score_Treat.index(np.nanmax(np.array(score_Treat)))
+        except:
+            index_Treat_max = float('nan')
+        try:
+            index_Check_max = score_Check.index(np.nanmax(np.array(score_Check)))
+        except:
+            index_Check_max = float('nan')
 
+        if math.isnan(index_Treat_max):
+            print('isnan')
+        elif index_Treat_max == 0:
+            draw.ellipse((1 / 2 * WIDTH - 40 - rr, hh + space_height + HEIGHT + 20 - rr, 1 / 2 * WIDTH - 40 + rr,
+                          hh + space_height + HEIGHT + 20 + rr), fill=(255, 0, 0, 0))
+        elif index_Treat_max == 1:
+            draw.ellipse((3 / 2 * WIDTH - 30 - rr, hh + space_height + HEIGHT + 20 - rr, 3 / 2 * WIDTH - 30 + rr,
+                          hh + space_height + HEIGHT + 20 + rr),
+                         fill=(255, 0, 0, 0))
+        elif index_Treat_max == 2:
+            draw.ellipse((5 / 2 * WIDTH - 20 - rr, hh + space_height + HEIGHT + 20 - rr, 5 / 2 * WIDTH - 20 + rr,
+                          hh + space_height + HEIGHT + 20 + rr),
+                         fill=(255, 0, 0, 0))
+        elif index_Treat_max == 3:
+            draw.ellipse((1 / 2 * WIDTH - 40 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 1 / 2 * WIDTH - 40 + rr,
+                          hh + space_height + 2 * HEIGHT + 70 + rr),
+                         fill=(255, 0, 0, 0))
+        elif index_Treat_max == 4:
+            draw.ellipse((3 / 2 * WIDTH - 30 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 3 / 2 * WIDTH - 30 + rr,
+                          hh + space_height + 2 * HEIGHT + 70 + rr),
+                         fill=(255, 0, 0, 0))
+        elif index_Treat_max == 5:
+            draw.ellipse((5 / 2 * WIDTH - 20 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 5 / 2 * WIDTH - 20 + rr,
+                          hh + space_height + 2 * HEIGHT + 70 + rr),
+                         fill=(255, 0, 0, 0))
 
+        if math.isnan(index_Check_max):
+            print('isnan')
+        elif index_Check_max == 0:
+            draw.ellipse((1 / 2 * WIDTH - rr, hh + space_height + HEIGHT + 20 - rr, 1 / 2 * WIDTH + rr,
+                          hh + space_height + HEIGHT + 20 + rr), fill=(10, 240, 10, 0))
+        elif index_Check_max == 1:
+            draw.ellipse((3 / 2 * WIDTH + 10 - rr, hh + space_height + HEIGHT + 20 - rr, 3 / 2 * WIDTH + rr,
+                          hh + space_height + HEIGHT + 20 + rr),
+                         fill=(10, 240, 10, 0))
+        elif index_Check_max == 2:
+            draw.ellipse((5 / 2 * WIDTH + 20 - rr, hh + space_height + HEIGHT + 20 - rr, 5 / 2 * WIDTH + 20 + rr,
+                          hh + space_height + HEIGHT + 20 + rr),
+                         fill=(10, 240, 10, 0))
+        elif index_Check_max == 3:
+            draw.ellipse((1 / 2 * WIDTH - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 1 / 2 * WIDTH + rr,
+                          hh + space_height + 2 * HEIGHT + 70 + rr),
+                         fill=(10, 240, 10, 0))
+        elif index_Check_max == 4:
+            draw.ellipse((3 / 2 * WIDTH + 10 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 3 / 2 * WIDTH + 10 + rr,
+                          hh + space_height + 2 * HEIGHT + 70 + rr),
+                         fill=(10, 240, 10, 0))
+        elif index_Check_max == 5:
+            draw.ellipse((5 / 2 * WIDTH + 20 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 5 / 2 * WIDTH + 20 + rr,
+                          hh + space_height + 2 * HEIGHT + 70 + rr),
+                         fill=(10, 240, 10, 0))
 
         if final_consensus:
-            draw.text((5 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'FINAL Consensus', fill=(240, 60, 240), font=font)
+            draw.text((5 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'FINAL Consensus',
+                      fill=(240, 60, 240), font=font)
 
         # Draw the text on the image
         imagename = images[i][:-4]
 
         namevid, _, frnumber = imagename.rpartition('_')
-        draw.text((0 / 2 * WIDTH, hh +100+ int(0 * HEIGHT)), namevid + '_' + frnumber, fill=(0, 0, 0), font=font)
+        draw.text((0 / 2 * WIDTH, hh + 100 + int(0 * HEIGHT)), namevid + '_' + frnumber, fill=(0, 0, 0), font=font)
         space_height = 150
 
         hh = hh + 4 * HEIGHT + space_height + 30
@@ -402,58 +434,6 @@ for j in range(math.ceil(lenimg / batch_size)):
     if save_image:
         cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg",
                     cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
+np.save('Check_rates'+str(batch_num)+'.npy', Check_rates)
+np.save('Treat_rates'+str(batch_num)+'.npy', Treat_rates)
 
-####################################################
-#### The Agreement Matrices between all annotators #####
-####################################################
-# Treat_matrix_flat = np.mean(Treat_rates, axis=0)
-# Treat_matrix = Treat_matrix_flat.reshape(6,6)
-# Check_matrix_flat = np.mean(Check_rates, axis=0)
-# Check_matrix = Check_matrix_flat.reshape(6,6)
-# ##################
-# Treat_matrix = np.tril(Treat_matrix)
-# # Create a figure and axis
-# fig, ax = plt.subplots()
-# # Create a heatmap with a custom color map
-# cax = ax.matshow(Treat_matrix, cmap='coolwarm', origin='lower')
-# # Add a color bar
-# cbar = plt.colorbar(cax)
-# # Add grid lines
-# ax.set_xticks(np.arange(Treat_matrix.shape[1]), minor=False)
-# ax.set_yticks(np.arange(Treat_matrix.shape[0]), minor=False)
-# ax.grid(which='minor', color='w', linestyle='-', linewidth=0)
-# # Set axis labels
-# ax.set_xticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
-# ax.set_yticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
-# for i in range(Treat_matrix.shape[0]):
-#     for j in range(Treat_matrix.shape[1]):
-#         if i>j:
-#             ax.text(j, i, str(round(Treat_matrix[i, j])), va='center', ha='center', color='black')
-#
-# # Set title
-# plt.title('Pair-wise agreement rate')
-# # Show the plot
-# plt.savefig('Treat_rates'+str(batch_num)+'.png')
-# ######################
-# Check_matrix = np.tril(Check_matrix)
-#
-# # Create a figure and axis
-# fig, ax = plt.subplots()
-# # Create a heatmap with a custom color map
-# cax = ax.matshow(Check_matrix, cmap='coolwarm', origin='lower')
-# # Add a color bar
-# cbar = plt.colorbar(cax)
-# # Add grid lines
-# ax.set_xticks(np.arange(Check_matrix.shape[1]), minor=False)
-# ax.set_yticks(np.arange(Check_matrix.shape[0]), minor=False)
-# ax.grid(which='minor', color='w', linestyle='-', linewidth=0)
-# # Set axis labels
-# ax.set_xticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
-# ax.set_yticklabels(['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe'])
-# for i in range(Check_matrix.shape[0]):
-#     for j in range(Check_matrix.shape[1]):
-#         if i>j:
-#             ax.text(j, i, str(round(Check_matrix[i, j])), va='center', ha='center', color='black')
-#
-# plt.title('Pair-wise agreement rate')
-# plt.savefig('Check_rates'+str(batch_num)+'.png')

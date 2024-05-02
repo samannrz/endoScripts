@@ -12,9 +12,9 @@ dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'fi
         'incision.consensus': 4}
 
 base_path = '/data/DATA/incision/'
-orig_path1 = os.path.join(base_path, str(1))
+orig_path1 = os.path.join(base_path, str(2))
 orig_path2 = os.path.join(base_path, str(3))
-savepath = os.path.join(base_path,'13')
+savepath = os.path.join(base_path,'23')
 
 
 if os.path.exists(savepath):
@@ -71,7 +71,6 @@ for name in images_intersect:
     mask_check = cv2.bitwise_or(cv2.bitwise_or(t1, t2), cv2.bitwise_or(t1, c2))
     mask_check = cv2.bitwise_or(mask_check, cv2.bitwise_or(t2, c1))
     mask_check = cv2.bitwise_or(mask_check, cv2.bitwise_or(c2, c1))
-
     cv2.imwrite(os.path.join(savepath, 'mask/Treat', name), mask_treat)
     cv2.imwrite(os.path.join(savepath, 'mask/Check', name), mask_check)
     shutil.copy(os.path.join(orig_path_image1, name), os.path.join(savepath, 'image', name))

@@ -9,10 +9,10 @@ list9 = [im[:-6] + im[-4:] for im in list_consensus_9]
 
 list8_9 = list(set(list8)) + list(set(list9))
 
-for im in os.listdir('/data/projects/IncisionDeepLab/input/incision/orig_data4/test_images'):
+for im in os.listdir('/data/projects/IncisionDeepLab/input/inference_data_1-28/test_with_consensus/test_masks'):
     # if im in list8_9:
-    os.remove('/data/projects/IncisionDeepLab/input/incision/orig_dataall/train_images/'+im)
-    os.remove('/data/projects/IncisionDeepLab/input/incision/orig_dataall/train_masks/' + im)
+    os.remove('/data/projects/IncisionDeepLab/input/incision/orig_dataall/valid_images/'+im)
+    os.remove('/data/projects/IncisionDeepLab/input/incision/orig_dataall/valid_masks/' + im)
     print(im, ' removed')
 
 # inference_path = '/data/projects/IncisionDeepLab/input/inference_data'

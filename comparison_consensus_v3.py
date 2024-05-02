@@ -5,10 +5,10 @@ import pandas as pd
 from functions import write_to_gsheet
 from statistics import mean
 
-common_path = 'annotationData/'
-batch_num = 25
+common_path = 'annotationData26/'
+batch_num = 26
 
-images = os.listdir(common_path + '/image')
+images = os.listdir(os.path.join(common_path, 'image'))
 lenimg = len(images)
 print('There are %d images' % lenimg)
 nameList = []

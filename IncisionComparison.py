@@ -12,7 +12,7 @@ from statistics import mean
 batch_num = 11
 # from IncisionDataFolderCreation import batch_num
 
-common_path = 'annotationData/'
+common_path = 'annotationData26/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
 machine_path = '/data/DATA/Incision_predictions/Batch11/all/final'
