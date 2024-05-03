@@ -1,17 +1,38 @@
+import os
+
 import matplotlib.pyplot as plt
-x= [1,2,3]
-# y = [mean(NSD_deeplab), mean(NSD_fasterViT), mean(NSD_maxFormer)]
-# y_error = [std(NSD_deeplab), std(NSD_fasterViT), std(NSD_maxFormer)]
-y=[3 ,4, 5]
-y1 = [1,2,3,4,5]
-y2 = [2,3,4,5,6]
-y3 = [3,4,5,6,7,8]
-y_error =[0.1,0.3,0.2]
+import json
+from statistics import mean as mean
+from statistics import stdev as std
+class_label = 'Check'
+metric = 'NSD'
 
-colors = ['black','red','blue']
-plt.errorbar(x,y,yerr = y_error,fmt= 'o',ecolor=('black','red','blue'),elinewidth = 1)
 
-for i, y in enumerate([y1,y2,y3]):
-    plt.scatter([x[i]] * len(y), y, color=colors[i], label=f'y{i+1}')
+x = [1, 1.5, 2]
+if metric == 'NSD':
+    with open('metrics/NSD_models_'+class_label, 'r') as f:
+        NSDs = json.load(f)
+if metric == 'DICE':
+    with open('metrics/DICE_models_'+class_label, 'r') as f:
+        NSDs = json.load(f)
+
+NSD_deeplab = NSDs[0]
+NSD_fasterViT = NSDs[1]
+NSD_maskFormer = NSDs[2]
+
+y = [mean(NSD_deeplab), mean(NSD_fasterViT), mean(NSD_maskFormer)]
+y_error = [std(NSD_deeplab) ** 2, std(NSD_fasterViT) ** 2, std(NSD_maskFormer) ** 2]
+
+colors = ['black', 'red', 'blue']
+colors2 = ['gray', 'pink', 'cyan']
+
+for i in range(3):
+    plt.errorbar(x[i], y[i], yerr=y_error[i], fmt='o', ecolor=colors[i], elinewidth=3, barsabove=True, capsize=6,
+                 capthick=2)
+
+for i, y in enumerate(NSDs):
+    plt.scatter([x[i]] * len(y), y, color=colors2[i], marker='x')
+
+plt.xticks(x, ['DeeplabV3', 'FasterViT', 'Mask2Former'])
 # Show plot
-plt.show()
+plt.savefig('metrics/'+class_label+ '_' + metric)

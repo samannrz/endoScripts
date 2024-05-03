@@ -869,50 +869,101 @@ dict ={ 'evals':[
 #
 # 	]
 # }
-######### Batch 28 #############
+# ######### Batch 28 #############
+# dict ={ 'evals':[
+# 		{'frame':'bsp1_GY_20230601_045_VID001_trim2.mp4',
+# 		 'index': [542]
+# 		},
+# 		{'frame':'FCF1_GY_20221125_046_VID002_trim1.mp4',
+# 		 'index': [412]
+# 		},
+# 		{'frame':'FCF1_GY_20230208_067_VID001_trim1.mp4',
+# 		 'index': [8]
+# 		},
+# 		{'frame':'FCF1_GY_20230208_067_VID001_trim1.mp4',
+# 		 'index': [71]
+# 		},
+# 		{'frame':'FCF1_GY_20230209_068_VID002_trim1.mp4',
+# 		 'index': [355]
+# 		},
+# 		{'frame':'FCF1_GY_20230214_069_VID001_trim1.mp4',
+# 		 'index': [210]
+# 		},
+# 		{'frame':'FCF1_GY_20230221_070_VID001_trim1.mp4',
+# 		 'index': [25]
+# 		},
+# 		{'frame':'FCF1_GY_20230227_072_VID001_trim1.mp4',
+# 		 'index': [86]
+# 		},
+# 		{'frame':'FCF1_GY_20230221_070_VID001_trim1.mp4',
+# 		 'index': [312]
+# 		},
+# 		{'frame':'FCF1_GY_20230227_072_VID001_trim1.mp4',
+# 		 'index': [41]
+# 		},
+# 		{'frame':'FCF1_GY_20230301_074_VID002_trim1.mp4',
+# 		 'index': [0]
+# 		},
+# 		{'frame':'FCF1_GY_20230227_072_VID002_trim4.mp4',
+# 		 'index': [22]
+# 		},
+# 		{'frame':'2021-12-02_023054_VID001_Trim.mp4',
+# 		 'index': [0]
+# 		},
+# 		{'frame':'2020-11-16_004658_VID001_Trim.mp4',
+# 		 'index': [679]
+# 		}
+# 	]
+# }
+####### Batch 29 ##########
+######### Batch TEMPLATE #############
 dict ={ 'evals':[
-		{'frame':'bsp1_GY_20230601_045_VID001_trim2.mp4',
-		 'index': [542]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'FCF1_GY_20221125_046_VID002_trim1.mp4',
-		 'index': [412]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'FCF1_GY_20230208_067_VID001_trim1.mp4',
-		 'index': [8]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'FCF1_GY_20230208_067_VID001_trim1.mp4',
-		 'index': [71]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'FCF1_GY_20230209_068_VID002_trim1.mp4',
-		 'index': [355]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'FCF1_GY_20230214_069_VID001_trim1.mp4',
-		 'index': [210]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'FCF1_GY_20230221_070_VID001_trim1.mp4',
-		 'index': [25]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'FCF1_GY_20230227_072_VID001_trim1.mp4',
-		 'index': [86]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'FCF1_GY_20230221_070_VID001_trim1.mp4',
-		 'index': [312]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'FCF1_GY_20230227_072_VID001_trim1.mp4',
-		 'index': [41]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'FCF1_GY_20230301_074_VID002_trim1.mp4',
-		 'index': [0]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'FCF1_GY_20230227_072_VID002_trim4.mp4',
-		 'index': [22]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'2021-12-02_023054_VID001_Trim.mp4',
-		 'index': [0]
+		{'frame':'',
+		 'index': []
 		},
-		{'frame':'2020-11-16_004658_VID001_Trim.mp4',
-		 'index': [679]
+		{'frame':'',
+		 'index': []
+		},
+		{'frame':'',
+		 'index': []
 		}
+
 	]
 }
 ######################
