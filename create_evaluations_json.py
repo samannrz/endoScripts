@@ -918,59 +918,55 @@ dict ={ 'evals':[
 ####### Batch 29 ##########
 ######### Batch TEMPLATE #############
 dict ={ 'evals':[
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230323_076_VID001_trim1.mp4',
+		 'index': [167]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230323_076_VID001_trim3.mp4',
+		 'index': [200]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230426_078_VID001_trim1.mp4',
+		 'index': [128]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230428_077_VID001_trim1.mp4',
+		 'index': [1439]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230428_077_VID001_trim1.mp4',
+		 'index': [0]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230510_079_VID002_trim1.mp4',
+		 'index': [311]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230517_081_VID001_trim1.mp4',
+		 'index': [450]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230519_083_VID002_trim1.mp4',
+		 'index': [483]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230519_083_VID002_trim1.mp4',
+		 'index': [363]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230524_082_VID001_trim1.mp4',
+		 'index': [77]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230526_085_VID001_trim1.mp4',
+		 'index': [92]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'FCF1_GY_20230531_084_VID002_trim1.mp4',
+		 'index': [205]
 		},
-		{'frame':'',
-		 'index': []
+		{'frame':'2022-03-31_055215_VID001_Trim.mp4',
+		 'index': [96]
 		},
-		{'frame':'',
-		 'index': []
-		},
-		{'frame':'',
-		 'index': []
+		{'frame':'2022-03-31_072450_VID001_Trim_3.mp4',
+		 'index': [44]
 		}
-
 	]
 }
 ######################
 import json
 
 json_object = json.dumps(dict, indent=4)
-batch_num = '28'
+batch_num = '29'
 # Writing to sample.json
 with open('Evaluations_json/'+'Evaluation' + str(batch_num) + '.json', 'w') as outfile:
     outfile.write(json_object)
