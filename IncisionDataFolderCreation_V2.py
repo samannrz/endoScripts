@@ -8,10 +8,10 @@ import cv2
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch', help = 'batch number')
 parser.add_argument('--annotator',default= 'incision.consensus',help = 'the supervisely id of the annotator')
-parser.add_argument('--output',default= 'annotationData26/',help = 'path of dest. folder')
+parser.add_argument('--output',default= 'annotationData/',help = 'path of dest. folder')
 parser.add_argument('--outputtreat',default= 'maskTreat',help = 'path of dest. folder')
 parser.add_argument('--outputcheck',default= 'maskCheck',help = 'path of dest. folder')
-parser.add_argument('--project',default= [],help = 'supervisely projectname')
+parser.add_argument('--project',default= 'Endometriosis_WS10',help = 'supervisely projectname')
 
 
 args = parser.parse_args()
@@ -44,7 +44,7 @@ for project in api.project.get_list(ws.id):  # for each project
     if project.name != args.project:
         continue
     for ds in api.dataset.get_list(project.id):
-        if project.name =='Endometriosis_WS2':
+        if project.name =='Endometriosis_WS4':
             if ds.name != 'Revise_Consensus':
                 continue
         evalfr = evals[0]
