@@ -1,5 +1,7 @@
 # This script goes through all the supervisely videos and extracts all the check and treat masks of the selected annotators
 # Please define a list of the annotators that you wish to create the data: ANNOTATORS = []
+import os
+
 from functions import *
 import numpy
 from PIL import Image, ImageDraw
@@ -9,9 +11,9 @@ ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
 ANNOTATOR_DICT = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
                   'Ervin.Kallfa': 5, 'ebbe.thinggaard': 6, 'incision.consensus': 4}
-ANNOTATOR = 2
+ANNOTATOR = 6
 print(ANNOTATOR)
-dest_path = '/data/DATA/incision/bad'
+dest_path = '/data/DATA/annotator-consensus'
 # dest_path = '/Users/saman/Documents/data/DATA/incision/'
 
 createDIR(dest_path, str(ANNOTATOR))
@@ -44,7 +46,7 @@ for project in api.project.get_list(ws.id):  # for each project
     for ds in api.dataset.get_list(project.id):
         print(project.name)
         print(ds.name)
-        saveasbad = 0
+        saveasbad = 1
         for vd in api.video.get_list(ds.id):
             if ANNOTATOR == 2 and vd.name in buggy_videos:
                 saveasbad = 1
@@ -57,7 +59,7 @@ for project in api.project.get_list(ws.id):  # for each project
 
             frames = annotation['frames']  # frame is the annotation info (type: list of dict) on that frame
             for fr in frames:
-                if fr['index'] in to_discuss:
+                if fr['index'] not in to_discuss:
                     continue
                 img_treat = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']), (0, 0, 0))
                 img_check = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']), (0, 0, 0))
@@ -68,10 +70,10 @@ for project in api.project.get_list(ws.id):  # for each project
                     annotator = fig['labelerLogin']
                     if classobj != 'To Treat' and classobj != 'To Check':
                         continue
-                    if ANNOTATOR_DICT.get(annotator) is None:
-                        continue
-                    if ANNOTATOR_DICT[annotator] != ANNOTATOR:
-                        continue
+                    # if ANNOTATOR_DICT.get(annotator) is None:
+                    #     continue
+                    # if ANNOTATOR_DICT[annotator] != ANNOTATOR:
+                    #     continue
                     frcoor = fig['geometry']['points']['exterior']
                     polygon = [tuple(coor) for coor in frcoor]
 
@@ -81,18 +83,21 @@ for project in api.project.get_list(ws.id):  # for each project
                     if classobj == 'To Check':
                         ImageDraw.Draw(img_check).polygon(polygon, fill=COLOR_DICT[classobj])
                     SAVE_SIGNAL = True
+
                 if SAVE_SIGNAL and saveasbad==1:
                     if vd.name in buggy_videos:
                         list_bugs.append(vd.name)
 
                     fr_names, fr_extracted = get_frames_from_api(api, vd.id, vd.name, [fr['index']])
-                    if not os.path.exists(os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0])):
-                        cv2.imwrite(os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0]),
-                                    cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
+                    if fr_names[0] in os.listdir("/data/projects/IncisionDeepLab/input/inference_data_1-28/test_with_consensus/test_images"):
 
-                        img_check.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Check', fr_names[0]))
-                        img_treat.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Treat', fr_names[0]))
-                        print(vd.name, fr['index'], ': SAVED')
+                        if not os.path.exists(os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0])):
+                            cv2.imwrite(os.path.join(dest_path, str(ANNOTATOR), 'image', fr_names[0]),
+                                        cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
+
+                            img_check.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Check', fr_names[0]))
+                            img_treat.save(os.path.join(dest_path, str(ANNOTATOR), 'mask', 'Treat', fr_names[0]))
+                            print(vd.name, fr['index'], ': SAVED')
 
     print('\n')
 for i in list_bugs:

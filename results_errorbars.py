@@ -4,39 +4,58 @@ import matplotlib.pyplot as plt
 import json
 from statistics import mean as mean
 from statistics import stdev as std
-class_label = 'Check'
+
+class_label = 'Treat'
 metric = 'DICE'
 train_data = 'consensus'
 plt.subplots(figsize=(3, 4))
 
-x = [1, 1.5, 2]
+x_Treat = [1, 2, 3]
+x_Check = [1.2, 2.2, 3.2]
+
 if metric == 'NSD':
-    with open('metrics/json_results/NSD_models_'+ train_data + '_' + class_label, 'r') as f:
-        NSDs = json.load(f)
+    with open('metrics/json_results/NSD_models_' + train_data + '_' + 'Treat', 'r') as f:
+        NSDs_Treat = json.load(f)
+    with open('metrics/json_results/NSD_models_' + train_data + '_' + 'Check', 'r') as f:
+        NSDs_Check = json.load(f)
 if metric == 'DICE':
-    with open('metrics/json_results/DICE_models_'+ train_data + '_' + class_label, 'r') as f:
-        NSDs = json.load(f)
+    with open('metrics/json_results/DICE_models_' + train_data + '_' + 'Treat', 'r') as f:
+        NSDs_Treat = json.load(f)
+    with open('metrics/json_results/DICE_models_' + train_data + '_' + 'Check', 'r') as f:
+        NSDs_Check = json.load(f)
 
-NSD_deeplab = NSDs[0]
-NSD_fasterViT = NSDs[1]
-NSD_maskFormer = NSDs[2]
+NSD_deeplab_Treat = NSDs_Treat[0]
+NSD_fasterViT_Treat = NSDs_Treat[1]
+NSD_maskFormer_Treat = NSDs_Treat[2]
+NSD_deeplab_Check = NSDs_Check[0]
+NSD_fasterViT_Check = NSDs_Check[1]
+NSD_maskFormer_Check = NSDs_Check[2]
 
-y = [mean(NSD_deeplab), mean(NSD_fasterViT), mean(NSD_maskFormer)]
-y_error = [std(NSD_deeplab) ** 2, std(NSD_fasterViT) ** 2, std(NSD_maskFormer) ** 2]
+y_Treat = [mean(NSD_deeplab_Treat), mean(NSD_fasterViT_Treat), mean(NSD_maskFormer_Treat)]
+y_Check = [mean(NSD_deeplab_Check), mean(NSD_fasterViT_Check), mean(NSD_maskFormer_Check)]
+
+y_error_Treat = [std(NSD_deeplab_Treat) ** 2, std(NSD_fasterViT_Treat) ** 2, std(NSD_maskFormer_Treat) ** 2]
+y_error_Check = [std(NSD_deeplab_Check) ** 2, std(NSD_fasterViT_Check) ** 2, std(NSD_maskFormer_Check) ** 2]
 
 colors = ['black', 'red', 'blue']
 colors2 = ['gray', 'pink', 'cyan']
 
 for i in range(3):
-    plt.errorbar(x[i], y[i], yerr=y_error[i], fmt='o', ecolor=colors[i], elinewidth=3, barsabove=True, capsize=6,
-                 capthick=2)
+    plt.errorbar(x_Treat[i], y_Treat[i], yerr=y_error_Treat[i], fmt='o', ecolor='red', elinewidth=3, barsabove=True,
+                 capsize=6, capthick=2)
+    plt.errorbar(x_Check[i], y_Check[i], yerr=y_error_Check[i], fmt='o', ecolor='green', elinewidth=3, barsabove=True,
+                 capsize=6, capthick=2)
 
-for i, y in enumerate(NSDs):
-    plt.scatter([x[i]] * len(y), y, color=colors2[i], marker='x')
+for i, y in enumerate(NSDs_Treat):
+    plt.scatter([x_Treat[i]] * len(y), y, color='pink', marker='x')
+for i, y in enumerate(NSDs_Check):
+    plt.scatter([x_Check[i]] * len(y), y, color='lightgreen', marker='x')
+    print(i)
 
-plt.xticks(x, ['DeeplabV3', 'FasterViT', 'Mask2Former'])
+plt.xticks(x_Treat, ['DeeplabV3', 'FasterViT', 'Mask2Former'])
 plt.ylabel(metric)
-plt.grid(axis = 'y',linestyle = '--')
+plt.grid(axis='y', linestyle='--')
 
 # Show plot
-plt.savefig('metrics/figures/'+metric+ '_' +train_data + '_' + class_label,orientation='portrait',bbox_inches = 'tight')
+plt.savefig('metrics/figures/' + metric + '_' + train_data , orientation='portrait',
+            bbox_inches='tight')
