@@ -5,15 +5,16 @@ import json
 from statistics import mean as mean
 from statistics import stdev as std
 class_label = 'Check'
-metric = 'NSD'
-
+metric = 'DICE'
+train_data = 'consensus'
+plt.subplots(figsize=(3, 4))
 
 x = [1, 1.5, 2]
 if metric == 'NSD':
-    with open('metrics/NSD_models_'+class_label, 'r') as f:
+    with open('metrics/json_results/NSD_models_'+ train_data + '_' + class_label, 'r') as f:
         NSDs = json.load(f)
 if metric == 'DICE':
-    with open('metrics/DICE_models_'+class_label, 'r') as f:
+    with open('metrics/json_results/DICE_models_'+ train_data + '_' + class_label, 'r') as f:
         NSDs = json.load(f)
 
 NSD_deeplab = NSDs[0]
@@ -34,5 +35,8 @@ for i, y in enumerate(NSDs):
     plt.scatter([x[i]] * len(y), y, color=colors2[i], marker='x')
 
 plt.xticks(x, ['DeeplabV3', 'FasterViT', 'Mask2Former'])
+plt.ylabel(metric)
+plt.grid(axis = 'y',linestyle = '--')
+
 # Show plot
-plt.savefig('metrics/'+class_label+ '_' + metric)
+plt.savefig('metrics/figures/'+metric+ '_' +train_data + '_' + class_label,orientation='portrait',bbox_inches = 'tight')

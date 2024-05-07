@@ -8,14 +8,14 @@ from overlay_mask import reColor
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'incision.consensus': 4}
 annotator = 'all'
-orig_path = '/data/DATA/incision/'+str(annotator) + '/'
-# orig_path = 'annotationData28/'
-dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_images'
-dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_masks'
-# dest_path_orig = '/data/DATA/supervisely_format/Batch28/img'
-# dest_path_mask = '/data/DATA/supervisely_format/Batch28/mask'
+# orig_path = '/data/DATA/incision/'+str(annotator) + '/'
+orig_path = 'annotationData'
+# dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_images'
+# dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_masks'
+dest_path_orig = '/data/DATA/supervisely_format/Batch29/img'
+dest_path_mask = '/data/DATA/supervisely_format/Batch29/mask'
 # moving original images
-orig_path_image = orig_path + 'image'
+orig_path_image = os.path.join(orig_path , 'image')
 
 try:
     # Create directories if they don't exist

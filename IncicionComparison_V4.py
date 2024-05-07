@@ -11,21 +11,23 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-batch_num = 28
+
+batch_num = 29
 # from IncisionDataFolderCreation import batch_num
-nb_ann = 6
-common_path = 'annotationData28/'
+nb_ann = 5
+common_path = 'annotationData/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
-machine_path = '/data/DATA/Incision_predictions/Batch28-model-consensus-Batch1-25/final'
+machine_path = '/data/DATA/Incision_predictions/Batch29-Mask2Former-consensus-Batch1-28/final'
 dest_folder = 'ImgOut2'
 # machine_path = '/Users/saman/Documents/data/DATA/final'
-final_consensus_path = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
-final_consensus_path = 'final/'
+# final_consensus_path = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
+# final_consensus_path = 'final/'
 
 draw_machine_prediction = True
 final_consensus = False
 save_image = True
+draw_STAPLE = True
 
 
 
@@ -220,7 +222,11 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskS_ER = Image.open(os.path.join(common_path, 'maskCheck_Er', images[i][:-4] + '.png'))
         maskH_EB = Image.open(os.path.join(common_path, 'maskTreat_eb', images[i][:-4] + '.png'))
         maskS_EB = Image.open(os.path.join(common_path, 'maskCheck_eb', images[i][:-4] + '.png'))
+        if draw_STAPLE:
+            if images[i][:-4] == 'FCF1_GY_20230428_077_VID001_trim1'
 
+            maskH_STAPLE = Image.open(os.path.join('/data/DATA/STAPLE/Batch29/mask/Treat', images[i][:-14] + '.png'))
+            maskS_STAPLE = Image.open(os.path.join('/data/DATA/STAPLE/Batch29/mask/Check', images[i][:-14] + '.png'))
         #########################
         image_overlayed_N = overlayMasks_incision(image_orig, maskH_N, maskS_N)
         image_overlayed_J = overlayMasks_incision(image_orig, maskH_J, maskS_J)
@@ -228,6 +234,9 @@ for j in range(math.ceil(lenimg / batch_size)):
         image_overlayed_F = overlayMasks_incision(image_orig, maskH_F, maskS_F)
         image_overlayed_ER = overlayMasks_incision(image_orig, maskH_ER, maskS_ER)
         image_overlayed_EB = overlayMasks_incision(image_orig, maskH_EB, maskS_EB)
+        if draw_STAPLE:
+            image_overlayed_STAPLE = overlayMasks_incision(image_orig, maskH_STAPLE, maskS_STAPLE)
+
 
         ## Calculation of agreement images ##########
 
@@ -276,8 +285,8 @@ for j in range(math.ceil(lenimg / batch_size)):
         print(score_Check)
         #############################
 
-        Treat_rates[r, :] = calculate_agreements2(maskH_N, maskH_J, maskH_G, maskH_F, maskH_ER, maskH_EB)
-        Check_rates[r, :] = calculate_agreements2(maskS_N, maskS_J, maskS_G, maskS_F, maskS_ER, maskS_EB)
+        Treat_rates[r, :] = calculate_agreements2(maskH_N, maskH_J, maskH_G, maskH_ER, maskH_EB)
+        Check_rates[r, :] = calculate_agreements2(maskS_N, maskS_J, maskS_G, maskS_ER, maskS_EB)
         r += 1
         if not save_image:
             continue
@@ -303,6 +312,9 @@ for j in range(math.ceil(lenimg / batch_size)):
             image_overlayed_F = image_overlayed_F.resize(newsize)
             image_overlayed_EB = image_overlayed_EB.resize(newsize)
             image_overlayed_ER = image_overlayed_ER.resize(newsize)
+            if draw_STAPLE:
+                image_overlayed_STAPLE = image_overlayed_ER.resize(newsize)
+
             bg_check = bg_check.resize(newsize)
             bg_treat = bg_treat.resize(newsize)
 
@@ -319,11 +331,13 @@ for j in range(math.ceil(lenimg / batch_size)):
         im3.paste(image_overlayed_N, (0, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_J, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_G, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
-        im3.paste(image_overlayed_F, (0, hh + 3 * space_height + 2 * HEIGHT - 200))
+        #im3.paste(image_overlayed_F, (0, hh + 3 * space_height + 2 * HEIGHT - 200))
         im3.paste(image_overlayed_ER, (WIDTH + 10, hh + 3 * space_height + 2 * HEIGHT - 200))
         im3.paste(image_overlayed_EB, (2 * WIDTH + 20, hh + 3 * space_height + 2 * HEIGHT - 200))
         im3.paste(bg_treat, (0, hh + 4 * space_height + 3 * HEIGHT - 300))
         im3.paste(bg_check, (WIDTH + 10, hh + 4 * space_height + 3 * HEIGHT - 300))
+        if draw_STAPLE:
+            im3.paste(image_overlayed_STAPLE, (2*WIDTH + 20, hh + 4 * space_height + 3 * HEIGHT - 300))
         if final_consensus:
             image_cons = Image.open(os.path.join(final_consensus_path, images[i]))
             im3.paste(image_cons.resize((1920, 1080)), (2 * WIDTH + 20, hh + 4 * space_height + 3 * HEIGHT - 300))
@@ -341,7 +355,7 @@ for j in range(math.ceil(lenimg / batch_size)):
                   'Jean: ' + str(score_Treat[1]) + ', ' + str(score_Check[1]), fill=(240, 60, 240), font=font)
         draw.text((5 / 2 * WIDTH + 20, hh + space_height + HEIGHT),
                   'Guiseppe: ' + str(score_Treat[2]) + ', ' + str(score_Check[2]), fill=(240, 60, 240), font=font)
-        draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50), 'Filippo: '+str(score_Treat[3])+', '+str(score_Check[3]), fill=(240, 60, 240), font=font)
+        #draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50), 'Filippo: '+str(score_Treat[3])+', '+str(score_Check[3]), fill=(240, 60, 240), font=font)
         draw.text((3 / 2 * WIDTH + 10, hh + space_height + 2 * HEIGHT + 50),
                   'Ervin: ' + str(score_Treat[4]) + ', ' + str(score_Check[4]), fill=(240, 60, 240), font=font)
         draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50),
@@ -350,6 +364,10 @@ for j in range(math.ceil(lenimg / batch_size)):
                   font=font)
         draw.text((3 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Consensus Check', fill=(240, 60, 240),
                   font=font)
+        if draw_STAPLE:
+            draw.text((5 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Suggestion by STAPLE',
+                      fill=(240, 60, 240),
+                      font=font)
         rr = 15
 
         try:

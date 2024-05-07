@@ -5,13 +5,10 @@ import os
 from functions import createDIR, overlayMasks_incision
 
 
-common_path = '/Users/saman/Documents/data/DATA/incision/4/Batch25'
-dest_folder = '/Users/saman/Documents/data/DATA/incision/4/Batch25/final'
-dest_folder = '/data/projects/IncisionDeepLab/outputs/outputs_consensus_Batch1-25/test_consensus_inference/final_ref'
-dest_folder = '/data/DATA/incision/bad/2/final'
+dest_folder = '/data/DATA/supervisely_format/Batch29/final'
 
-common_path_image ='/data/DATA/incision/bad/2'
-common_path_mask = '/data/DATA/incision/bad/2'
+common_path_image ='annotationData/'
+common_path_mask = 'annotationData/'
 
 image_folder_name ='image'
 mask_folder_name ='mask'
