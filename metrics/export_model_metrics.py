@@ -3,7 +3,11 @@ import os
 
 class_label = 'Treat'
 common_path = '/data/DATA/Incision_predictions/test-1-28_'
+<<<<<<< HEAD
 train_data = 'consensus'
+=======
+train_data = 'all'
+>>>>>>> 50694583d2ed8aec19ff33c4735999824f28aa5a
 mask_pred_path_deeplab = os.path.join(common_path + 'Deeplab_' + train_data, 'mask', class_label)
 mask_pred_path_fasterViT = os.path.join(common_path + 'FasterViT_' + train_data, 'mask', class_label)
 mask_pred_path_mask2Former = os.path.join(common_path + 'Mask2Former_' + train_data, 'mask', class_label)
