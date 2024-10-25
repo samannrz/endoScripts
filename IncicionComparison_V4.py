@@ -12,13 +12,13 @@ from overlay_mask import reColor
 from statistics import mean
 
 
-batch_num = 29
+batch_num = 210
 # from IncisionDataFolderCreation import batch_num
 nb_ann = 5
-common_path = 'annotationData/'
+common_path = 'annotationData210/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
-machine_path = '/data/DATA/Incision_predictions/Batch29-Mask2Former-consensus-Batch1-28/final'
+machine_path = '/data/DATA/Incision_predictions/Batch210-model-consensus-all/final'
 dest_folder = 'ImgOut2'
 # machine_path = '/Users/saman/Documents/data/DATA/final'
 # final_consensus_path = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
@@ -223,10 +223,8 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskH_EB = Image.open(os.path.join(common_path, 'maskTreat_eb', images[i][:-4] + '.png'))
         maskS_EB = Image.open(os.path.join(common_path, 'maskCheck_eb', images[i][:-4] + '.png'))
         if draw_STAPLE:
-            if images[i][:-4] == 'FCF1_GY_20230428_077_VID001_trim1'
-
-            maskH_STAPLE = Image.open(os.path.join('/data/DATA/STAPLE/Batch29/mask/Treat', images[i][:-14] + '.png'))
-            maskS_STAPLE = Image.open(os.path.join('/data/DATA/STAPLE/Batch29/mask/Check', images[i][:-14] + '.png'))
+            maskH_STAPLE = Image.open(os.path.join('/data/DATA/STAPLE/Batch210/mask/Treat', images[i][:]))
+            maskS_STAPLE = Image.open(os.path.join('/data/DATA/STAPLE/Batch210/mask/Check', images[i][:]))
         #########################
         image_overlayed_N = overlayMasks_incision(image_orig, maskH_N, maskS_N)
         image_overlayed_J = overlayMasks_incision(image_orig, maskH_J, maskS_J)
