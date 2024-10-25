@@ -1,4 +1,6 @@
 # in this version the consensensus of annottaors are also plot as heatmaps
+import argparse
+
 import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
@@ -11,11 +13,14 @@ import datetime
 from overlay_mask import reColor
 from statistics import mean
 
-
-batch_num = 210
+parser = argparse.ArgumentParser()
+parser.add_argument('--batch', help = 'batch number')
+parser.add_argument('--input',help = 'path of dest. folder')
+args = parser.parse_args()
+batch_num = args.batch
 # from IncisionDataFolderCreation import batch_num
-nb_ann = 5
-common_path = 'annotationData210/'
+nb_ann = 6
+common_path = args.input
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
 machine_path = '/data/DATA/Incision_predictions/Batch210-model-consensus-all/final'
@@ -23,11 +28,11 @@ dest_folder = 'ImgOut2'
 # machine_path = '/Users/saman/Documents/data/DATA/final'
 # final_consensus_path = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
 # final_consensus_path = 'final/'
-
-draw_machine_prediction = True
+heatmap_creation=False
+draw_machine_prediction = False
 final_consensus = False
-save_image = True
-draw_STAPLE = True
+save_image = False
+draw_STAPLE = False
 
 
 
@@ -251,40 +256,40 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskS_F_array = np.array(maskS_F.convert('1'))
         maskS_ER_array = np.array(maskS_ER.convert('1'))
         maskS_EB_array = np.array(maskS_EB.convert('1'))
-
-        heatmap_Treat = create_heatmap(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array,
+        if heatmap_creation:
+            heatmap_Treat = create_heatmap(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array,
                                        maskH_EB_array, 'red')
-        heatmap_Check = create_heatmap(
-            maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array, maskS_EB_array, 'red')
+            heatmap_Check = create_heatmap(
+                maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array, maskS_EB_array, 'red')
 
-        dst = cv2.cvtColor(np.uint8(heatmap_Treat), cv2.COLOR_BGR2RGB)
-        cv2.imwrite('ahmap.png', dst)
+            dst = cv2.cvtColor(np.uint8(heatmap_Treat), cv2.COLOR_BGR2RGB)
+            cv2.imwrite('ahmap.png', dst)
 
-        overlay = Image.fromarray(heatmap_Treat.astype('uint8'), 'RGB')
-        bg_treat = image_orig.convert('RGB')
-        mask = overlay.convert('L')
-        mask = mask.point(lambda p: 200 if p < 250 else 0)  # if the point is white it is become transparent
-        bg_treat.paste(overlay, None, mask)  # paste the overlay to image when a mask exists
+            overlay = Image.fromarray(heatmap_Treat.astype('uint8'), 'RGB')
+            bg_treat = image_orig.convert('RGB')
+            mask = overlay.convert('L')
+            mask = mask.point(lambda p: 200 if p < 250 else 0)  # if the point is white it is become transparent
+            bg_treat.paste(overlay, None, mask)  # paste the overlay to image when a mask exists
 
-        overlay = Image.fromarray(heatmap_Check.astype('uint8'), 'RGB')
-        bg_check = image_orig.convert('RGB')
-        mask = overlay.convert('L')
-        mask = mask.point(lambda p: 200 if p < 250 else 0)  # if the point is white it is become transparent
-        bg_check.paste(overlay, None, mask)  # paste the overlay to image when a mask exists
-        bg_treat.save('ztreat.png')
-        bg_check.save('zcheck.png')
+            overlay = Image.fromarray(heatmap_Check.astype('uint8'), 'RGB')
+            bg_check = image_orig.convert('RGB')
+            mask = overlay.convert('L')
+            mask = mask.point(lambda p: 200 if p < 250 else 0)  # if the point is white it is become transparent
+            bg_check.paste(overlay, None, mask)  # paste the overlay to image when a mask exists
+            bg_treat.save('ztreat.png')
+            bg_check.save('zcheck.png')
 
-        score_Treat = ref_score(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array,
-                                maskH_EB_array)
-        score_Check = ref_score(maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array,
-                                maskS_EB_array)
+        # score_Treat = ref_score(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array,
+        #                         maskH_EB_array)
+        # score_Check = ref_score(maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array,
+        #                         maskS_EB_array)
 
-        print(score_Treat)
-        print(score_Check)
+        # print(score_Treat)
+        # print(score_Check)
         #############################
 
-        Treat_rates[r, :] = calculate_agreements2(maskH_N, maskH_J, maskH_G, maskH_ER, maskH_EB)
-        Check_rates[r, :] = calculate_agreements2(maskS_N, maskS_J, maskS_G, maskS_ER, maskS_EB)
+        Treat_rates[r, :] = calculate_agreements2(maskH_N, maskH_J, maskH_G, maskH_F,maskH_ER, maskH_EB)
+        Check_rates[r, :] = calculate_agreements2(maskS_N, maskS_J, maskS_G, maskS_F,maskS_ER, maskS_EB)
         r += 1
         if not save_image:
             continue

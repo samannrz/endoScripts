@@ -1,3 +1,5 @@
+import argparse
+
 import cv2
 import numpy as np
 import os
@@ -5,8 +7,13 @@ import pandas as pd
 from functions import write_to_gsheet
 from statistics import mean
 
-common_path = 'annotationData26/'
-batch_num = 26
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--batch', help = 'batch number')
+parser.add_argument('--input',help = 'path of dest. folder')
+args = parser.parse_args()
+batch_num = args.batch
+common_path = args.input
 
 images = os.listdir(os.path.join(common_path, 'image'))
 lenimg = len(images)
@@ -149,7 +156,7 @@ data_df = pd.DataFrame(
      'EK Merge': Merge_C_Er_stat, 'ET Treat': Treat_C_Eb_stat, 'ET Check': Check_C_Eb_stat,
      'ET Merge': Merge_C_Eb_stat})
 sfpath = 'keycode/my-gpysheets-3d8d13442005.json'
-data_df.to_pickle('c_batch' + str(batch_num) + '.pkl')
-print('c_batch' + str(batch_num) + '.pkl saved')
+data_df.to_pickle('pkl_files/c_batch' + str(batch_num) + '.pkl')
+print('pkl_files/c_batch' + str(batch_num) + '.pkl saved')
 sheetID = '1PeZuOl_tUKS_j6-5-DDoOd9b-iUVVEZC9Ff9cZ7jp-0'
 write_to_gsheet(sfpath, sheetID, str(batch_num), data_df)

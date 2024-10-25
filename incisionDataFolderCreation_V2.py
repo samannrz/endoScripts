@@ -35,7 +35,7 @@ createDIR(data_folder, maskCheckdir + '_' + annotator[:2])
 json_eval = open('Evaluations_json/'+'Evaluation' + str(batch_num) + '.json')
 eval = json.load(json_eval)
 evals = eval['evals']
-print(len(evals))
+print(str(len(evals))+' images')
 api, tm = get_supervisely_team()
 ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
