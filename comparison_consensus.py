@@ -227,7 +227,6 @@ data_df = pd.DataFrame(
      'FF Merge': MCFstat, 'JLP Treat': HCJstat, 'JLP Check': SCJstat,
      'JLP Merge': MCJstat})
 sfpath = 'keycode/my-gpysheets-3d8d13442005.json'
-# sheetID = '1HiWuZGv5_Y_BjxnV2gIgDN2VA7WVawuvUd545Wr5FlY'
 # sheetName = str(datetime.date.today()) + '-Batch' + str(batch_num)
 # write_to_gsheet(sfpath, sheetID, sheetName, data_df)
 data_df.to_pickle('c_batch' + str(batch_num) + '.pkl')
