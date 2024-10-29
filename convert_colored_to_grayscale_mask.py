@@ -13,7 +13,7 @@ def reColor(mask, color1=(128, 0, 0), color2=(100, 0, 0)):  # this function repl
     data[black_areas.T] = color2  # Transpose back needed
     return data
 
-mask_path = '/data/DATA/supervisely_format/Batch28/mask'
+mask_path = '/data/DATA/supervisely_format/Batch210/mask'
 for mask in os.listdir(mask_path):
     image = cv2.imread(os.path.join(mask_path, mask))
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)

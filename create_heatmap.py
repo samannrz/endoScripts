@@ -3,17 +3,26 @@ import os.path
 import cv2
 from overlay_mask import *
 import numpy as np
-image_dir = 'annotationData28/image'
+common_path = 'annotationData21'
+image_dir = 'annotationData21/image'
 dest_folder = 'heatmap2/'
 colors = ([0,0,128],[0,0,255],[0,128,0],[255,255,0],[255,165,0],[255,0,0])
+colors = [
+    [0, 0, 128],    # Dark Blue
+    [0, 0, 255],    # Blue
+    [0, 128, 0],    # Green
+    [255, 255, 0],  # Yellow
+    [255, 165, 0],  # Orange
+    [255, 0, 0]     # Red
+]
 for image_name in os.listdir(image_dir):
     # Load the three black and white masks
-    mask1_dir = 'annotationData28/maskTreat_ni'
-    mask2_dir = 'annotationData28/maskTreat_Je'
-    mask3_dir = 'annotationData28/maskTreat_gi'
-    mask4_dir = 'annotationData28/maskTreat_fi'
-    mask5_dir = 'annotationData28/maskTreat_Er'
-    mask6_dir = 'annotationData28/maskTreat_eb'
+    mask1_dir = os.path.join(common_path,'maskTreat_ni')
+    mask2_dir = os.path.join(common_path,'maskTreat_Je')
+    mask3_dir = os.path.join(common_path,'maskTreat_Er')
+    mask4_dir = os.path.join(common_path,'maskTreat_eb')
+    mask5_dir = os.path.join(common_path,'maskTreat_gi')
+    mask6_dir = os.path.join(common_path,'maskTreat_fi')
 
 
     mask1 = np.array(Image.open(os.path.join(mask1_dir, image_name)).convert('1'), dtype=np.uint8)
@@ -60,8 +69,17 @@ import matplotlib.pyplot as plt
 
 # Define the heatmap colors
 colors = [
+    [80, 80, 178],  # Modified Dark Blue
+    [80, 80, 255],  # Modified Blue
+    [80, 255, 80],  # Modified Green
+    [255, 255, 80], # Modified Yellow
+    [255, 205, 80], # Modified Orange
+    [255, 80, 80]   # Modified Red
+]
+colors = [
     tuple(colors[0]), tuple(colors[1]),tuple(colors[2]),tuple(colors[3]),tuple(colors[4]),tuple(colors[5])
 ]
+
 
 # Define the percentages corresponding to each color
 percentages = [16, 33, 50, 66, 83, 100]
@@ -76,6 +94,6 @@ ax.set_yticklabels([])
 
 # Add percentages to each color
 for i, percentage in enumerate(percentages):
-    ax.text(i, 0, f'{percentage}%', ha='center', va='center', color='white')
+    ax.text(i, 0, f'{percentage}%', ha='center', va='center', color='black')
 
 plt.savefig(os.path.join(dest_folder,'color_bar.png'), bbox_inches='tight')

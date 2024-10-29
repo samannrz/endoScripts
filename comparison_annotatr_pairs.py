@@ -1,18 +1,19 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-batch_num = 28
+batch_num = 21
 nb_ann = 6
 NAME_LIST = ['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe']
-Treat_rates = np.load('Treat_rates'+str(batch_num)+'.npy')
-Check_rates = np.load('Check_rates'+str(batch_num)+'.npy')
-print(Treat_rates)
+Treat_rates = np.load('Rates_agreement/Treat_rates'+str(batch_num)+'.npy')
+Check_rates = np.load('Rates_agreement/Check_rates'+str(batch_num)+'.npy')
+#print(Treat_rates)
 
 ###################################################
 ### The Agreement Matrices between all annotators #####
 ###################################################
 Treat_matrix_flat = np.mean(Treat_rates, axis=0)
 Treat_matrix = Treat_matrix_flat.reshape(nb_ann, nb_ann)
+
 Check_matrix_flat = np.mean(Check_rates, axis=0)
 Check_matrix = Check_matrix_flat.reshape(nb_ann, nb_ann)
 ##################
