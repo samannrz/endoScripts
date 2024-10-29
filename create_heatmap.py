@@ -60,7 +60,7 @@ for image_name in os.listdir(image_dir):
     overlay = Image.fromarray(heatmap.astype('uint8'), 'RGB')
 
     mask = overlay.convert('L')
-    mask = mask.point(lambda p: 80 if p < 250 else 0)  # if the point is white it is become transparent
+    mask = mask.point(lambda p: 90 if p < 250 else 0)  # if the point is white it is become transparent
     bg.paste(overlay, None, mask)  # paste the overlay to image when a mask exists
     bg.save(dest_folder + image_name)
 
