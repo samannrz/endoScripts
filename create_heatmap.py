@@ -84,7 +84,7 @@ colors = [
 percentages = [16, 33, 50, 66, 83, 100]
 color_array = [[colors[i]] for i in range(len(colors))]  # Each color in its own row
 
-fig, ax = plt.subplots(figsize=(2, 10))  # Adjust figsize for better appearance
+fig, ax = plt.subplots(figsize=(1.5, 6))  # Adjust figsize for better appearance
 ax.imshow(color_array, aspect='auto')  # Use the 2D array of colors
 
 # Hide ticks and labels
@@ -95,7 +95,7 @@ ax.set_yticklabels([])
 
 # Add percentages to each color
 for i, percentage in enumerate(percentages):
-    ax.text(0, i, f'{percentage}%', ha='center', va='center', color='black')
+    ax.text(0, i, f'{percentage}%', ha='center', va='center', color='black',fontsize=14)
 
 # Save the figure
 plt.savefig(os.path.join(dest_folder, 'color_bar.png'), bbox_inches='tight', dpi=300)

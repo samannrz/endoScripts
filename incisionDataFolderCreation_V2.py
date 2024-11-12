@@ -1,25 +1,27 @@
 import argparse
 import json
 import shutil
+import sys
 
 from functions import *
 from PIL import Image, ImageDraw
 import cv2
-parser = argparse.ArgumentParser()
-parser.add_argument('--batch', help = 'batch number')
-parser.add_argument('--annotator',default= 'incision.consensus',help = 'the supervisely id of the annotator')
-parser.add_argument('--output',default= 'annotationData/',help = 'path of dest. folder')
-parser.add_argument('--outputtreat',default= 'maskTreat',help = 'path of dest. folder')
-parser.add_argument('--outputcheck',default= 'maskCheck',help = 'path of dest. folder')
-parser.add_argument('--project',default= 'Endometriosis_WS10',help = 'supervisely projectname')
 
+parser = argparse.ArgumentParser()
+parser.add_argument('--batch', help='batch number')
+parser.add_argument('--annotator', default='incision.consensus', help='the supervisely id of the annotator')
+parser.add_argument('--output', default='annotationData/', help='path of dest. folder')
+parser.add_argument('--outputtreat', default='maskTreat', help='path of dest. folder')
+parser.add_argument('--outputcheck', default='maskCheck', help='path of dest. folder')
+parser.add_argument('--project', default='Endometriosis_WS10', help='supervisely projectname')
 
 args = parser.parse_args()
 annotator = args.annotator
 batch_num = args.batch
 # batch_num = 3
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
-        'Ervin.Kallfa': 4, 'ebbe.thinggaard': 5, 'incision.consensus': 6}
+        'Ervin.Kallfa': 4, 'ebbe.thinggaard': 5, 'incision.consensus': 6, 'oscar.perch': 7, 'anne-sofie.petersen': 8,
+        'gry.olsen': 9, 'j.incision.consensus': 10}
 # annotator ='incision.consensus'
 print(annotator)
 data_folder = args.output  # The destination folder
@@ -32,19 +34,18 @@ createDIR(data_folder, 'image')
 createDIR(data_folder, maskTreatdir + '_' + annotator[:2])
 createDIR(data_folder, maskCheckdir + '_' + annotator[:2])
 
-json_eval = open('Evaluations_json/'+'Evaluation' + str(batch_num) + '.json')
+json_eval = open('Evaluations_json/' + 'Evaluation' + str(batch_num) + '.json')
 eval = json.load(json_eval)
 evals = eval['evals']
-print(str(len(evals))+' images')
+print(str(len(evals)) + ' images')
 api, tm = get_supervisely_team()
 ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
-
 
 for project in api.project.get_list(ws.id):  # for each project
     if project.name != args.project:
         continue
     for ds in api.dataset.get_list(project.id):
-        if project.name =='Endometriosis_WS4':
+        if project.name == 'Endometriosis_WS4':
             if ds.name != 'Revise_Consensus':
                 continue
         evalfr = evals[0]
@@ -55,6 +56,8 @@ for project in api.project.get_list(ws.id):  # for each project
                 annotation = api.video.annotation.download(video_api.id)
                 frames = annotation['frames']  # frame is the annotation info (type: list of dict) on that frame
                 vidname = evalfr['frame']
+                # if vidname != '2020-11-16_004658_VID001_Trim.mp4':
+                #     continue
                 # extract the image frame
                 fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
                 cv2.imwrite(data_folder + 'image/' + fr_names[0],
@@ -89,6 +92,12 @@ for project in api.project.get_list(ws.id):  # for each project
                         frcoor = fig['geometry']['points']['exterior']
 
                         polygon = [tuple(coor) for coor in frcoor]
+                        try:
+                            dict[annotator]
+                        except:
+                            print('ERROR: No Annotator:' + annotator)
+                            sys.exit(1)
+
                         if dict[Annotator] != dict[annotator]:
                             continue
                         else:
@@ -97,12 +106,10 @@ for project in api.project.get_list(ws.id):  # for each project
                                 drawTreat.polygon(polygon, fill=(255, 255, 255))
                                 # Convert the image to a mask
                                 maskTreat = image_Treat.convert("L")
-                                Hardexists = True
                             elif classobj == 'To Check':
                                 # Draw the polygon on the image
                                 drawCheck.polygon(polygon, fill=(255, 255, 255))
                                 maskCheck = image_Check.convert("L")
-                                Secuexists = True
                     # save masks and images
                     vidname = evalfr['frame']
                     # extract the image frame
@@ -120,17 +127,20 @@ for project in api.project.get_list(ws.id):  # for each project
                     # maskCheck = Image.fromarray(maskCheck_array)
 
                     # save frame as png file
-                    cv2.imwrite(os.path.join(data_folder, 'image' , fr_names[0]),
+                    if os.path.exists(os.path.join(data_folder, maskCheckdir + '_' + annotator[:2],
+                                                   vidname + '_' + str(fr['index']).zfill(5) + '.png')):
+                        continue
+                    cv2.imwrite(os.path.join(data_folder, 'image', fr_names[0]),
                                 cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
-                    cv2.imwrite(os.path.join(data_folder , maskTreatdir + '_' + annotator[:2],
+                    cv2.imwrite(os.path.join(data_folder, maskTreatdir + '_' + annotator[:2],
                                              vidname + '_' + str(fr['index']).zfill(5) + '.png'),
                                 cv2.cvtColor(np.array(maskTreat), cv2.COLOR_BGR2RGB))
-                    cv2.imwrite(os.path.join(data_folder , maskCheckdir + '_' + annotator[:2],
+                    cv2.imwrite(os.path.join(data_folder, maskCheckdir + '_' + annotator[:2],
                                              vidname + '_' + str(fr['index']).zfill(5) + '.png'),
                                 cv2.cvtColor(np.array(maskCheck), cv2.COLOR_BGR2RGB))
+                    #print(vidname)
 
                     counter += 1
 
 print('Batch_num ' + str(batch_num) + ' : ' + str(
     counter) + ' images, masks are saved in ' + data_folder + ' : ' + annotator)
-
