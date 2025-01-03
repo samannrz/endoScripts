@@ -6,9 +6,12 @@ from functions import createDIR, overlayMasks_incision
 
 
 dest_folder = '/data/DATA/supervisely_format/Batch210/final'
-dest_folder = '/data/DATA/Incision_predictions/Batch210/final'
-common_path_image ='annotationData210/'
-common_path_mask = 'annotationData210/'
+dest_folder = '/data/DATA/Incision_predictions/Batch211-FasterViT/final'
+dest_folder = '/data/DATA/STAPLE/Batch211/final'
+dest_folder = '/data/DATA/consensus-temp'
+common_path_image ='annotationData29/'
+#common_path_mask = '/data/DATA/Incision_predictions/Batch211-FasterViT/'
+common_path_mask = 'annotationData29/masks'
 
 image_folder_name ='image'
 mask_folder_name ='mask'
@@ -31,14 +34,13 @@ for i in range(lenimg):
     mask_Check = initializeMask(image_orig.size)
 
     try:
-        mask_Treat = Image.open(os.path.join(common_path_mask
-                                             , mask_folder_name,'Treat', images[i][:-4] + '.png'))
+        mask_Treat = Image.open(os.path.join(common_path_mask, mask_folder_name,'Treat', images[i][:-4] + '.png'))
     except:
-        print('There is no Hard Zone on Nicolas\'s annot on ' + images[i][:-4])
+        print('There is no Treat Zone' + images[i][:-4])
     try:
         mask_Check = Image.open(os.path.join(common_path_mask, mask_folder_name,'Check', images[i][:-4] + '.png'))
     except:
-        print('There is no Security Zone on Nicolas\'s annot on ' + images[i][:-4])
+        print('There is no Check Zone' + images[i][:-4])
 
     image_overlayed = overlayMasks_incision(image_orig, mask_Treat, mask_Check)
 

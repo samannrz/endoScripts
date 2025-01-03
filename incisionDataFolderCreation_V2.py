@@ -3,6 +3,9 @@ import json
 import shutil
 import sys
 
+from pyasn1.debug import Printer
+from supervisely import ProjectMeta
+
 from functions import *
 from PIL import Image, ImageDraw
 import cv2
@@ -46,11 +49,12 @@ for project in api.project.get_list(ws.id):  # for each project
         continue
     for ds in api.dataset.get_list(project.id):
         if project.name == 'Endometriosis_WS4':
-            if ds.name != 'Revise_Consensus':
+            if ds.name == 'Revise_Consensus':
                 continue
         evalfr = evals[0]
         for evalfr in evals:
             videos_in_ds = [vid_info.name for vid_info in api.video.get_list(ds.id)]
+
             if evalfr['frame'] in videos_in_ds:
                 video_api = api.video.get_info_by_name(ds.id, evalfr['frame'])
                 annotation = api.video.annotation.download(video_api.id)
@@ -64,8 +68,8 @@ for project in api.project.get_list(ws.id):  # for each project
                             cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
                 if len(frames) < 1:  # if there is no annotation on the video
                     continue  # go to the next jsonfile (and next video)
-
                 for fr in frames:
+
                     image_Treat = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
                                             (0, 0, 0))
                     image_Check = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
@@ -77,15 +81,20 @@ for project in api.project.get_list(ws.id):  # for each project
 
                     maskTreat = image_Treat.convert("L")
                     maskCheck = image_Check.convert("L")
-
+                    # if vidname == 'FCF1_GY_20230323_076_VID001_trim2.mp4':
+                    #     print(fr['index'])
+                    #     print(evalfr['index'])
                     if fr['index'] not in evalfr['index']:
                         continue
 
                     figures = fr['figures']
                     for fig in figures:
+                        #print(fig.keys())
                         # find the class of the polygon
                         classobj = findClass(fig['objectId'], annotation['objects'])
                         Annotator = fig['labelerLogin']
+                        if Annotator == 'saman.noorzadeh':
+                            Annotator = 'Jean-Luc.Pouly'
                         if dict.get(Annotator) is None:
                             continue
 
@@ -98,8 +107,10 @@ for project in api.project.get_list(ws.id):  # for each project
                             print('ERROR: No Annotator:' + annotator)
                             sys.exit(1)
 
+
                         if dict[Annotator] != dict[annotator]:
                             continue
+
                         else:
                             if classobj == 'To Treat':
                                 # Draw the polygon on the image
@@ -110,6 +121,7 @@ for project in api.project.get_list(ws.id):  # for each project
                                 # Draw the polygon on the image
                                 drawCheck.polygon(polygon, fill=(255, 255, 255))
                                 maskCheck = image_Check.convert("L")
+
                     # save masks and images
                     vidname = evalfr['frame']
                     # extract the image frame
@@ -127,15 +139,18 @@ for project in api.project.get_list(ws.id):  # for each project
                     # maskCheck = Image.fromarray(maskCheck_array)
 
                     # save frame as png file
-                    if os.path.exists(os.path.join(data_folder, maskCheckdir + '_' + annotator[:2],
-                                                   vidname + '_' + str(fr['index']).zfill(5) + '.png')):
-                        continue
+
+
                     cv2.imwrite(os.path.join(data_folder, 'image', fr_names[0]),
                                 cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
-                    cv2.imwrite(os.path.join(data_folder, maskTreatdir + '_' + annotator[:2],
+                    if not os.path.exists(os.path.join(data_folder, maskTreatdir + '_' + annotator[:2],
+                                                       vidname + '_' + str(fr['index']).zfill(5) + '.png')):
+                        cv2.imwrite(os.path.join(data_folder, maskTreatdir + '_' + annotator[:2],
                                              vidname + '_' + str(fr['index']).zfill(5) + '.png'),
                                 cv2.cvtColor(np.array(maskTreat), cv2.COLOR_BGR2RGB))
-                    cv2.imwrite(os.path.join(data_folder, maskCheckdir + '_' + annotator[:2],
+                    if not os.path.exists(os.path.join(data_folder, maskCheckdir + '_' + annotator[:2],
+                                                       vidname + '_' + str(fr['index']).zfill(5) + '.png')):
+                        cv2.imwrite(os.path.join(data_folder, maskCheckdir + '_' + annotator[:2],
                                              vidname + '_' + str(fr['index']).zfill(5) + '.png'),
                                 cv2.cvtColor(np.array(maskCheck), cv2.COLOR_BGR2RGB))
                     #print(vidname)

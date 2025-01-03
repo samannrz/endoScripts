@@ -77,6 +77,20 @@ def write_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_df):
     wks_write.set_dataframe(data_df, (1, 1), encoding='utf-8', fit=True, copy_index=True)
     wks_write.frozen_rows = 1
 
+def write_ndarray_to_gsheet(service_file_path, spreadsheet_id, sheet_name, data_array):
+    """
+    this function takes data_df and writes it under spreadsheet_id
+    and sheet_name using your credentials under service_file_path
+    """
+    gc = pygsheets.authorize(service_file=service_file_path)
+    sh = gc.open_by_key(spreadsheet_id)
+    try:
+        sh.add_worksheet(sheet_name)
+    except:
+        pass
+    wks_write = sh.worksheet_by_title(sheet_name)
+    return wks_write
+
 def overlayMasks_incision(image_orig, mask1, mask2):
     # This function takes the two masks and overlay them to the image_orig
     bg = image_orig.convert('RGB')

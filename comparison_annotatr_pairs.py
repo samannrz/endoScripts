@@ -7,6 +7,7 @@ NAME_LIST = ['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe']
 Treat_rates = np.load('Rates_agreement/Treat_rates'+str(batch_num)+'.npy')
 Check_rates = np.load('Rates_agreement/Check_rates'+str(batch_num)+'.npy')
 #print(Treat_rates)
+print(type(Treat_rates))
 
 ###################################################
 ### The Agreement Matrices between all annotators #####

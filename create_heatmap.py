@@ -84,7 +84,7 @@ colors = [
 percentages = [16, 33, 50, 66, 83, 100]
 color_array = [[colors[i]] for i in range(len(colors))]  # Each color in its own row
 
-fig, ax = plt.subplots(figsize=(1.5, 6))  # Adjust figsize for better appearance
+fig, ax = plt.subplots(figsize=(1.5, 12))  # Adjust figsize for better appearance
 ax.imshow(color_array, aspect='auto')  # Use the 2D array of colors
 
 # Hide ticks and labels
