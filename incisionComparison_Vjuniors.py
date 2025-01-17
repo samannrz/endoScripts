@@ -188,8 +188,8 @@ for j in range(math.ceil(lenimg / batch_size)):
         # print(score_Check)
         #############################
 
-        #Treat_rates[r, :] = calculate_agreements2(maskH_O, maskH_A, maskH_G)
-        #Check_rates[r, :] = calculate_agreements2(maskS_O, maskS_A, maskS_G)
+        Treat_rates[r, :] = calculate_agreements2(maskH_O, maskH_A, maskH_G)
+        Check_rates[r, :] = calculate_agreements2(maskS_O, maskS_A, maskS_G)
         r += 1
         if not save_image:
             continue
@@ -277,6 +277,7 @@ for j in range(math.ceil(lenimg / batch_size)):
     if save_image:
         cv2.imwrite(dest_folder + '/J_Batch' + str(int(batch_num)-2) + '-Comparison' + str(j + 1) + ".jpg",
                     cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
-np.save('Rates_agreement/Check_rates_j'+str(batch_num)+'.npy', Check_rates)
-np.save('Rates_agreement/Treat_rates_j'+str(batch_num)+'.npy', Treat_rates)
+np.save('Rates_agreement/Check_ratesj'+str(batch_num)+'.npy', Check_rates)
+np.save('Rates_agreement/Treat_ratesj'+str(batch_num)+'.npy', Treat_rates)
 
+np.save('Rates_agreement/videos'+str(batch_num)+'.npy', namevid)

@@ -12,7 +12,8 @@ def check_and_move_files(folder1, folder2):
         # Check if the file exists in folder2
         if file1 not in folder2_files:
             # Move the file to the new folder
-            os.remove(os.path.join(folder1, file1))
+            # os.remove(os.path.join(folder1, file1))
+            print('action')
 
 # Paths to the folders
 folder2 = "/data/projects/IncisionDeepLab/input/inference_data_1-28/test_with_consensus/test_images"

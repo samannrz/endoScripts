@@ -19,13 +19,13 @@ nb_ann = 6
 N_ROWS = 3 # number of rows for visualization of annotations
 
 machine_path = '/data/DATA/Incision_predictions/Batch211-FasterViT/final'
-path_mask_STAPLE = '/data/DATA/STAPLE/Batch211/mask/'
+path_mask_STAPLE = '/data/DATA/STAPLE/Batch' + str(batch_num)+'/mask/'
 # final_consensus_path = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
 
 dest_folder = 'ImgOut2'
 
 heatmap_creation=False
-draw_machine_prediction = True
+draw_machine_prediction = False
 final_consensus = False
 save_image = True
 draw_STAPLE = True
@@ -53,8 +53,8 @@ def get_STAPLE_vote(SHEET_ID):
     return dictionary
 
 if draw_STAPLE:
-    dict_STAPLE = get_STAPLE_vote('1rnBw01GEjJ70Fga2BJuClUEXzGcsq5cnTlaPG2meCC4')
-
+    dict_STAPLE = get_STAPLE_vote('11qCPsISVRrRuxHynjuu02Ey78dAckWYpZQZGGmzIDh4')
+    print(dict_STAPLE)
 
 def overlayMasks_incision(image_orig, mask1, mask2):
     # This function takes the two masks and overlay them to the image_orig
@@ -237,14 +237,14 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskH_EB = initializeMask(image_orig.size)
         maskS_EB = initializeMask(image_orig.size)
 
-        maskH_N = Image.open(os.path.join(common_path, 'maskTreat_ni', images[i][:-4] + '.png'))
-        maskS_N = Image.open(os.path.join(common_path, 'maskCheck_ni', images[i][:-4] + '.png'))
+        #maskH_N = Image.open(os.path.join(common_path, 'maskTreat_ni', images[i][:-4] + '.png'))
+        #maskS_N = Image.open(os.path.join(common_path, 'maskCheck_ni', images[i][:-4] + '.png'))
         maskH_J = Image.open(os.path.join(common_path, 'maskTreat_Je', images[i][:-4] + '.png'))
         maskS_J = Image.open(os.path.join(common_path, 'maskCheck_Je', images[i][:-4] + '.png'))
         maskH_G = Image.open(os.path.join(common_path, 'maskTreat_gi', images[i][:-4] + '.png'))
         maskS_G = Image.open(os.path.join(common_path, 'maskCheck_gi', images[i][:-4] + '.png'))
-        maskH_F = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
-        maskS_F = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
+        #maskH_F = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
+        #maskS_F = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
         maskH_ER = Image.open(os.path.join(common_path, 'maskTreat_Er', images[i][:-4] + '.png'))
         maskS_ER = Image.open(os.path.join(common_path, 'maskCheck_Er', images[i][:-4] + '.png'))
         maskH_EB = Image.open(os.path.join(common_path, 'maskTreat_eb', images[i][:-4] + '.png'))
@@ -332,7 +332,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         draw = ImageDraw.Draw(im3)
         font = ImageFont.truetype("arial.ttf", 50)
 
-        im3.paste(image_overlayed_N, (0, hh + 2 * space_height + HEIGHT - 100))
+       # im3.paste(image_overlayed_N, (0, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_J, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_G, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
         #im3.paste(image_overlayed_F, (0, hh + 3 * space_height + 2 * HEIGHT - 200))

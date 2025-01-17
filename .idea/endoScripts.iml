@@ -15,21 +15,21 @@
       <excludeFolder url="file://$MODULE_DIR$/Exam" />
       <excludeFolder url="file://$MODULE_DIR$/ImgOut" />
       <excludeFolder url="file://$MODULE_DIR$/ImgOut2" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData/Er" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData/Je" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData/STAPLE" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData/eb" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData/gi" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData/mask_in" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData/ni" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData210" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData210/maskCheck_Eb" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData210/maskTreat_Eb" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData26" />
-      <excludeFolder url="file://$MODULE_DIR$/annotationData27/maskCheck_in" />
       <excludeFolder url="file://$MODULE_DIR$/heatmap" />
       <excludeFolder url="file://$MODULE_DIR$/heatmap2" />
       <excludeFolder url="file://$MODULE_DIR$/keycode" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData/Er" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData/Je" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData/STAPLE" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData/eb" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData/gi" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData/mask_in" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData/ni" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData210" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData210/maskCheck_Eb" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData210/maskTreat_Eb" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData26" />
+      <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData27/maskCheck_in" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.9 (general_env)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

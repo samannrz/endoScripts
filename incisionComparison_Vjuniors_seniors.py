@@ -16,7 +16,7 @@ parser.add_argument('--input',help = 'path of dest. folder')
 args = parser.parse_args()
 batch_num = args.batch
 # from IncisionDataFolderCreation import batch_num
-nb_ann = 3
+nb_ann = 2
 common_path = args.input
 dest_folder = 'ImgOut'
 
@@ -150,6 +150,9 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskS_ju_array = np.array(maskS_ju.convert('1'))
         maskS_in_array = np.array(maskS_in.convert('1'))
 
+        Treat_rates[r, :] = calculate_agreements2(maskH_in, maskH_ju)
+        Check_rates[r, :] = calculate_agreements2(maskS_in, maskS_ju)
+
         r += 1
         if not save_image:
             continue
@@ -210,6 +213,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         cv2.imwrite(dest_folder + '/J_Batch' + str(int(batch_num)-2) + '-Comparison_consensus_juniors_seniors' + str(j + 1) + ".jpg",
                     cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
 batch_num = str(int(batch_num) -2)
+print(Check_rates)
 np.save('Rates_agreement/Check_rates_juniors_seniors'+str(batch_num)+'.npy', Check_rates)
 np.save('Rates_agreement/Treat_rates_juniors_seniors'+str(batch_num)+'.npy', Treat_rates)
 

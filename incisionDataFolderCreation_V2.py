@@ -63,6 +63,7 @@ for project in api.project.get_list(ws.id):  # for each project
                 # if vidname != '2020-11-16_004658_VID001_Trim.mp4':
                 #     continue
                 # extract the image frame
+
                 fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
                 cv2.imwrite(data_folder + 'image/' + fr_names[0],
                             cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))

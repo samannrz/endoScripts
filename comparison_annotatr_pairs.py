@@ -1,13 +1,18 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
-batch_num = 21
-nb_ann = 6
+batch_num = 3
+nb_ann = 3
 NAME_LIST = ['Nicolas', 'Jean', 'Giuseppe', 'Filippo', 'Ervin', 'Ebbe']
-Treat_rates = np.load('Rates_agreement/Treat_rates'+str(batch_num)+'.npy')
-Check_rates = np.load('Rates_agreement/Check_rates'+str(batch_num)+'.npy')
+NAME_LIST_juniors = ['Oscar', 'Anne.Sofie', 'Gry']
+NAME_LIST = NAME_LIST_juniors
+juniorsornot = ''
+juniorsornot = 'j'
+
+Treat_rates = np.load('Rates_agreement/Treat_rates'+juniorsornot+str(batch_num)+'.npy')
+Check_rates = np.load('Rates_agreement/Check_rates'+juniorsornot+str(batch_num)+'.npy')
 #print(Treat_rates)
-print(type(Treat_rates))
+print((Treat_rates))
 
 ###################################################
 ### The Agreement Matrices between all annotators #####
@@ -63,4 +68,4 @@ for i in range(Check_matrix.shape[0]):
             ax.text(j, i, str(round(Check_matrix[i, j])), va='center', ha='center', color='black')
 
 plt.title('Pair-wise agreement rate')
-plt.savefig('Check_rates' + str(batch_num) + '.png')
+plt.savefig('Check_rates' +juniorsornot+ str(batch_num) + '.png')

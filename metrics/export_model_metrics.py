@@ -2,12 +2,12 @@ import json
 import os
 
 class_label = 'Treat'
-common_path = '/data/DATA/Incision_predictions/test-1-28_'
+common_path = '/data/DATA/Incision_predictions/test-1-213'
 train_data = 'consensus'
-train_data = 'all'
-mask_pred_path_deeplab = os.path.join(common_path + 'Deeplab_' + train_data, 'mask', class_label)
-mask_pred_path_fasterViT = os.path.join(common_path + 'FasterViT_' + train_data, 'mask', class_label)
-mask_pred_path_mask2Former = os.path.join(common_path + 'Mask2Former_' + train_data, 'mask', class_label)
+# train_data = 'all'
+mask_pred_path_deeplab = os.path.join(common_path , 'Deeplab' , train_data, 'mask', class_label)
+mask_pred_path_fasterViT = os.path.join(common_path , 'FasterViT' , train_data, 'mask', class_label)
+mask_pred_path_mask2Former = os.path.join(common_path , 'Mask2Former' , train_data, 'mask', class_label)
 
 mask_gt_path = '/data/DATA/incision/4/mask/' + class_label
 

@@ -21,7 +21,7 @@ def copy_folders(starting_With, path_src, path_dest):
 
 # Example usage:
 CLASS = 'Treat'
-batch_num = 11
+batch_num = 13
 starting_With = 'mask'+CLASS  # Replace with your prefix
 path_src = "annotationData"+ '2'+str(batch_num)  # Replace with your source directory
 path_dest = '/data/projects/STAPLE-develop/staple/gt_vols/'+CLASS  # Replace with your destination directory

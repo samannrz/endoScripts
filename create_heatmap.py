@@ -3,8 +3,8 @@ import os.path
 import cv2
 from overlay_mask import *
 import numpy as np
-common_path = 'annotationData21'
-image_dir = 'annotationData21/image'
+common_path = 'annotationDatas/annotationData21'
+image_dir = 'annotationDatas/annotationData21/image'
 dest_folder = 'heatmap2/'
 colors = ([0,0,128],[0,0,255],[0,128,0],[255,255,0],[255,165,0],[255,0,0])
 colors = [
