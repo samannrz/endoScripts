@@ -7,7 +7,7 @@ from PIL import Image
 from overlay_mask import reColor
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'incision.consensus': 4}
-annotator = '4'
+annotator = 'all'
 orig_path = '/data/DATA/incision/'+str(annotator) + '/'
 # orig_path = 'annotationData210'
 dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_images'

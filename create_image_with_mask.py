@@ -7,11 +7,11 @@ from functions import createDIR, overlayMasks_incision
 
 dest_folder = '/data/DATA/supervisely_format/Batch210/final'
 dest_folder = '/data/DATA/Incision_predictions/Batch211-FasterViT/final'
-dest_folder = '/data/DATA/STAPLE/Batch213/final'
+dest_folder = '/data/DATA/STAPLE/Batch214/final'
 #dest_folder = '/data/DATA/consensus-temp'
-common_path_image = 'annotationDatas/annotationData213/'
+common_path_image = 'annotationDatas/annotationData214/'
 #common_path_mask = '/data/DATA/Incision_predictions/Batch211-FasterViT/'
-common_path_mask = '/data/DATA/STAPLE/Batch213'
+common_path_mask = '/data/DATA/STAPLE/Batch214'
 
 image_folder_name ='image'
 mask_folder_name ='mask'

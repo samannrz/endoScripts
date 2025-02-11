@@ -44,7 +44,7 @@ def get_STAPLE_vote(SHEET_ID):
 
     # Get data from row 1 (names) and row 7 (numbers)
     names = worksheet.get_row(1)  # Get data from row 1
-    numbers = worksheet.get_row(7)  # Get data from row 7
+    numbers = worksheet.get_row(6)  # Get data from row 7
 
     # Create a dictionary from the two rows
     dictionary = {name: int(number) for name, number in zip(names, numbers) if name and number}
@@ -53,7 +53,7 @@ def get_STAPLE_vote(SHEET_ID):
     return dictionary
 
 if draw_STAPLE:
-    dict_STAPLE = get_STAPLE_vote('11qCPsISVRrRuxHynjuu02Ey78dAckWYpZQZGGmzIDh4')
+    dict_STAPLE = get_STAPLE_vote('1EExamxHJh5Sg3pIWagfLk1Da6xe-TT43F3V-G5dqHuU')
     print(dict_STAPLE)
 
 def overlayMasks_incision(image_orig, mask1, mask2):
@@ -237,8 +237,8 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskH_EB = initializeMask(image_orig.size)
         maskS_EB = initializeMask(image_orig.size)
 
-        #maskH_N = Image.open(os.path.join(common_path, 'maskTreat_ni', images[i][:-4] + '.png'))
-        #maskS_N = Image.open(os.path.join(common_path, 'maskCheck_ni', images[i][:-4] + '.png'))
+        maskH_N = Image.open(os.path.join(common_path, 'maskTreat_ni', images[i][:-4] + '.png'))
+        maskS_N = Image.open(os.path.join(common_path, 'maskCheck_ni', images[i][:-4] + '.png'))
         maskH_J = Image.open(os.path.join(common_path, 'maskTreat_Je', images[i][:-4] + '.png'))
         maskS_J = Image.open(os.path.join(common_path, 'maskCheck_Je', images[i][:-4] + '.png'))
         maskH_G = Image.open(os.path.join(common_path, 'maskTreat_gi', images[i][:-4] + '.png'))
@@ -286,11 +286,11 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskmerge_ER_array = np.maximum(maskS_ER_array,maskH_ER_array)
         maskmerge_EB_array = np.maximum(maskS_EB_array,maskH_EB_array)
         #############################
-        Treat_rates[r, :] = calculate_agreements2(maskH_N, maskH_J, maskH_G, maskH_F,maskH_ER, maskH_EB)
-        Check_rates[r, :] = calculate_agreements2(maskS_N, maskS_J, maskS_G, maskS_F,maskS_ER, maskS_EB)
-        Merge_rates[r, :] = calculate_agreements2(Image.fromarray(maskmerge_N_array), Image.fromarray(maskmerge_J_array),
-                                                  Image.fromarray(maskmerge_G_array), Image.fromarray(maskmerge_F_array),
-                                                  Image.fromarray(maskmerge_ER_array), Image.fromarray(maskmerge_EB_array))
+        # Treat_rates[r, :] = calculate_agreements2(maskH_N, maskH_J, maskH_G, maskH_F,maskH_ER, maskH_EB)
+        # Check_rates[r, :] = calculate_agreements2(maskS_N, maskS_J, maskS_G, maskS_F,maskS_ER, maskS_EB)
+        # Merge_rates[r, :] = calculate_agreements2(Image.fromarray(maskmerge_N_array), Image.fromarray(maskmerge_J_array),
+        #                                           Image.fromarray(maskmerge_G_array), Image.fromarray(maskmerge_F_array),
+        #                                           Image.fromarray(maskmerge_ER_array), Image.fromarray(maskmerge_EB_array))
 
         r += 1
         if not save_image:
@@ -332,7 +332,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         draw = ImageDraw.Draw(im3)
         font = ImageFont.truetype("arial.ttf", 50)
 
-       # im3.paste(image_overlayed_N, (0, hh + 2 * space_height + HEIGHT - 100))
+        im3.paste(image_overlayed_N, (0, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_J, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_G, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
         #im3.paste(image_overlayed_F, (0, hh + 3 * space_height + 2 * HEIGHT - 200))

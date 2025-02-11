@@ -8,11 +8,11 @@ CLASSES_DICT = {
 image_path = '/data/projects/datasets/LesionDatasetImages'
 label_path = '/data/projects/datasets/LesionLabelsYOLO'
 NUM_TO_VISUALIZE = 20
-detect_path = '/data/projects/yolov5/runs/detect/exp2-31/'
-image_path = '/data/TESTwithAntoine/video2/image/'
-label_path = '/data/TESTwithAntoine/video2/YOLOLabel'
+detect_path = '/data/projects/yolov5/runs/detect/exp5/'
+#image_path = '/data/TESTwithAntoine/video2/image/'
+#label_path = '/data/TESTwithAntoine/video2/YOLOLabel'
 NUM_TO_VISUALIZE = 20
-detect_path = '/data/TESTwithAntoine/video2/detect/exp1/images/'
+#detect_path = '/data/TESTwithAntoine/video2/detect/exp1/images/'
 
 
 def find_key(num):
@@ -22,6 +22,7 @@ def find_key(num):
 
 
 def visualize_sample(image, annot_file):
+    print(annot_file)
     img_width = len(image[0])
     img_height = len(image)
     with open(annot_file) as f:
@@ -53,5 +54,6 @@ images = os.listdir(detect_path)
 
 for i in range(len(images)):
     image_name = images[i]
-    visualize_sample(cv2.imread(os.path.join(detect_path, image_name)),
+    if not os.path.isdir(os.path.join(detect_path, image_name)):
+        visualize_sample(cv2.imread(os.path.join(detect_path, image_name)),
                      os.path.join(label_path, image_name[:-4] + '.txt'))

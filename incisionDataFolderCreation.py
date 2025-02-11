@@ -1,221 +1,163 @@
+import argparse
 import json
 import shutil
+import sys
+
+from dotenv import load_dotenv
+from pyasn1.debug import Printer
+from supervisely import ProjectMeta
 
 from functions import *
 from PIL import Image, ImageDraw
 import cv2
 
-# batch_num = 3
-for batch_num in [21]:
+parser = argparse.ArgumentParser('To extract images and annotations of a batch')
+parser.add_argument('--batch', help='Enter batch number')
+parser.add_argument('--annotator', help='Enter the supervisely id of the annotator: e.g. nicolas.bourdel')
+parser.add_argument('--output', default='annotationData/', help='Enter path of dest. folder or skip')
+parser.add_argument('--outputtreat', default='maskTreat', help='Enter path of dest. folder or skip')
+parser.add_argument('--outputcheck', default='maskCheck', help='Enter path of dest. folder or skip')
+parser.add_argument('--project', default='Endometriosis_WS10', help='supervisely projectname')
 
-    if batch_num == 100:
-        data_folder = '/data/DATA/DELPHI_incision/'  # The destination folder
-    else:
-        data_folder = 'annotationData26/'  # The destination folder
+args = parser.parse_args()
+annotator = args.annotator
+batch_num = args.batch
+dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
+        'Ervin.Kallfa': 4, 'ebbe.thinggaard': 5, 'incision.consensus': 6, 'oscar.perch': 7, 'anne-sofie.petersen': 8,
+        'gry.olsen': 9, 'j.incision.consensus': 10}
+# annotator ='incision.consensus'
+print(annotator)
+data_folder = args.output  # The destination folder
+maskTreatdir = args.outputtreat
+maskCheckdir = args.outputcheck
 
-    maskHarddir = 'maskTreat'
-    maskSecudir = 'maskCheck'
-    dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
-            'incision.consensus': 4}
+counter = 0
 
-    counter = 0
-    shutil.rmtree(data_folder)
-    createDIR(data_folder, 'image')
-    for firstname in [s[0].upper() for s in list(dict.keys())]:
-        createDIR(data_folder, maskHarddir + firstname)
-        createDIR(data_folder, maskSecudir + firstname)
-    if batch_num == 100:
-        json_eval = open('Evaluation_all' + '.json')
-    else:
-        json_eval = open('Evaluation' + str(batch_num) + '.json')
-    eval = json.load(json_eval)
-    evals = eval['evals']
-    print(len(evals))
-    api, tm = get_supervisely_team()
-    ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
+createDIR(data_folder, 'image')
+createDIR(data_folder, maskTreatdir + '_' + annotator[:2])
+createDIR(data_folder, maskCheckdir + '_' + annotator[:2])
 
-    for project in api.project.get_list(ws.id):  # for each project
-        # if project.name != 'Endometriosis_WS8' and project.name != 'Endometriosis_WS7':
-        #     continue
-        for ds in api.dataset.get_list(project.id):
-            evalfr = evals[0]
-            for evalfr in evals:
-                videos_in_ds = [vid_info.name for vid_info in api.video.get_list(ds.id)]
-                if evalfr['frame'] in videos_in_ds:
-                    video_api = api.video.get_info_by_name(ds.id, evalfr['frame'])
-                    annotation = api.video.annotation.download(video_api.id)
-                    frames = annotation['frames']  # frame is the annotation info (type: list of dict) on that frame
-                    if len(frames) < 1:  # if there is no annotation on the video
-                        continue  # go to the next jsonfile (and next video)
-                    for fr in frames:
-                        # Create an image with a white background
-                        image_HardN = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                                (0, 0, 0))
-                        image_SecuN = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                                (0, 0, 0))
-                        image_HardJ = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                                (0, 0, 0))
-                        image_SecuJ = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                                (0, 0, 0))
-                        image_HardG = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                                (0, 0, 0))
-                        image_SecuG = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                                (0, 0, 0))
-                        image_HardF = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                                (0, 0, 0))
-                        image_SecuF = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                                (0, 0, 0))
-                        image_HardC = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                                (0, 0, 0))
-                        image_SecuC = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
-                                                (0, 0, 0))
+json_eval = open('Evaluations_json/' + 'Evaluation' + str(batch_num) + '.json')
+eval = json.load(json_eval)
+evals = eval['evals']
+print(str(len(evals)) + ' images')
+if sly.is_development():
+    load_dotenv(os.path.expanduser("~/supervisely.env"))
+api = sly.Api.from_env()
+tm = api.team.get_info_by_name('Endometriosis')
+ws = api.workspace.get_info_by_name(tm.id, 'Data annotation')
 
-                        #                 # Create a draw object
-                        drawHardN = ImageDraw.Draw(image_HardN)
-                        drawSecuN = ImageDraw.Draw(image_SecuN)
-                        drawHardJ = ImageDraw.Draw(image_HardJ)
-                        drawSecuJ = ImageDraw.Draw(image_SecuJ)
-                        drawHardG = ImageDraw.Draw(image_HardG)
-                        drawSecuG = ImageDraw.Draw(image_SecuG)
-                        drawHardF = ImageDraw.Draw(image_HardF)
-                        drawSecuF = ImageDraw.Draw(image_SecuF)
-                        drawHardC = ImageDraw.Draw(image_HardC)
-                        drawSecuC = ImageDraw.Draw(image_SecuC)
+for project in api.project.get_list(ws.id):  # for each project
+    if project.name != args.project:
+        continue
+    for ds in api.dataset.get_list(project.id):
+        if project.name == 'Endometriosis_WS4':
+            if ds.name == 'Revise_Consensus':
+                continue
+        evalfr = evals[0]
+        for evalfr in evals:
+            videos_in_ds = [vid_info.name for vid_info in api.video.get_list(ds.id)]
 
-                        maskHardN = image_HardN.convert("L")
-                        maskSecuN = image_SecuN.convert("L")
+            if evalfr['frame'] in videos_in_ds:
+                video_api = api.video.get_info_by_name(ds.id, evalfr['frame'])
+                annotation = api.video.annotation.download(video_api.id)
+                frames = annotation['frames']  # frame is the annotation info (type: list of dict) on that frame
+                vidname = evalfr['frame']
 
-                        maskHardJ = image_HardJ.convert("L")
-                        maskSecuJ = image_SecuJ.convert("L")
+                # if vidname != '2020-11-16_004658_VID001_Trim.mp4':
+                #     continue
+                # extract the image frame
 
-                        maskHardG = image_HardG.convert("L")
-                        maskSecuG = image_SecuG.convert("L")
+                fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
 
-                        maskHardF = image_HardF.convert("L")
-                        maskSecuF = image_SecuF.convert("L")
+                if len(frames) < 1:  # if there is no annotation on the video
+                    continue  # go to the next jsonfile (and next video)
+                for fr in frames:
 
-                        maskHardC = image_HardC.convert("L")
-                        maskSecuC = image_SecuC.convert("L")
+                    image_Treat = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
+                                            (0, 0, 0))
+                    image_Check = Image.new('RGB', (annotation['size']['width'], annotation['size']['height']),
+                                            (0, 0, 0))
 
-                        Hardexists = False
-                        Secuexists = False
-                        if fr['index'] not in evalfr['index']:
+                    # Create a draw object
+                    drawTreat = ImageDraw.Draw(image_Treat)
+                    drawCheck = ImageDraw.Draw(image_Check)
+
+                    maskTreat = image_Treat.convert("L")
+                    maskCheck = image_Check.convert("L")
+
+                    if fr['index'] not in evalfr['index']:
+                        continue
+
+                    figures = fr['figures']
+                    for fig in figures:
+                        #print(fig.keys())
+                        # find the class of the polygon
+                        classobj = findClass(fig['objectId'], annotation['objects'])
+                        Annotator = fig['labelerLogin']
+                        if Annotator == 'saman.noorzadeh':
+                            Annotator = 'Jean-Luc.Pouly'
+                        if dict.get(Annotator) is None:
                             continue
-                        # print(evalfr['frame'])
-                        # print(fr['index'])
-                        figures = fr['figures']
-                        for fig in figures:
-                            # find the class of the polygon
-                            classobj = findClass(fig['objectId'], annotation['objects'])
-                            Annotator = fig['labelerLogin']
-                            if dict.get(Annotator) is None:
-                                continue
-                            # print(evalfr['frame'] + ' ' + str(evalfr['index']) + ' ' + classobj + ' ' + Annotator)
-                            frcoor = fig['geometry']['points']['exterior']
-                            polygon = [tuple(coor) for coor in frcoor]
-                            if dict[Annotator] == 0:
-                                if classobj == 'To Treat':
-                                    # Draw the polygon on the image
-                                    drawHardN.polygon(polygon, fill=(255, 255, 255))
-                                    # Convert the image to a mask
-                                    maskHardN = image_HardN.convert("L")
-                                    Hardexists = True
-                                elif classobj == 'To Check':
-                                    # Draw the polygon on the image
-                                    drawSecuN.polygon(polygon, fill=(255, 255, 255))
-                                    maskSecuN = image_SecuN.convert("L")
-                                    Secuexists = True
-                            elif dict[Annotator] == 1:
-                                if classobj == 'To Treat':
-                                    # Draw the polygon on the image
-                                    drawHardJ.polygon(polygon, fill=(255, 255, 255))
-                                    # Convert the image to a mask
-                                    maskHardJ = image_HardJ.convert("L")
-                                    Hardexists = True
-                                elif classobj == 'To Check':
-                                    # Draw the polygon on the image
-                                    drawSecuJ.polygon(polygon, fill=(255, 255, 255))
-                                    maskSecuJ = image_SecuJ.convert("L")
-                                    Secuexists = True
-                            elif dict[Annotator] == 2:
-                                if classobj == 'To Treat':
-                                    # Draw the polygon on the image
-                                    drawHardG.polygon(polygon, fill=(255, 255, 255))
-                                    # Convert the image to a mask
-                                    maskHardG = image_HardG.convert("L")
-                                    Hardexists = True
-                                elif classobj == 'To Check':
-                                    # Draw the polygon on the image
-                                    drawSecuG.polygon(polygon, fill=(255, 255, 255))
-                                    maskSecuG = image_SecuG.convert("L")
-                                    Secuexists = True
-                            elif dict[Annotator] == 3:
-                                if classobj == 'To Treat':
-                                    # Draw the polygon on the image
-                                    drawHardF.polygon(polygon, fill=(255, 255, 255))
-                                    # Convert the image to a mask
-                                    maskHardF = image_HardF.convert("L")
-                                    Hardexists = True
-                                elif classobj == 'To Check':
-                                    # Draw the polygon on the image
-                                    drawSecuF.polygon(polygon, fill=(255, 255, 255))
-                                    maskSecuF = image_SecuF.convert("L")
-                                    Secuexists = True
-                            elif dict[Annotator] == 4:
-                                if classobj == 'To Treat':
-                                    # Draw the polygon on the image
-                                    drawHardC.polygon(polygon, fill=(255, 255, 255))
-                                    # Convert the image to a mask
-                                    maskHardC = image_HardC.convert("L")
-                                    Hardexists = True
-                                elif classobj == 'To Check':
-                                    # Draw the polygon on the image
-                                    drawSecuC.polygon(polygon, fill=(255, 255, 255))
-                                    maskSecuC = image_SecuC.convert("L")
-                                    Secuexists = True
 
-                        # save masks and images
-                        # extract the image frame
-                        fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
-                        vidname = evalfr['frame']
-                        # save frame as png file
-                        cv2.imwrite(data_folder + 'image/' + fr_names[0],
-                                    cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
-                        # save the masks
-                        if Hardexists:
-                            maskHardN.save(
-                                data_folder + maskHarddir + 'N/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
-                                'PNG')
-                            maskHardJ.save(
-                                data_folder + maskHarddir + 'J/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
-                                'PNG')
-                            maskHardG.save(
-                                data_folder + maskHarddir + 'G/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
-                                'PNG')
-                            maskHardF.save(
-                                data_folder + maskHarddir + 'F/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
-                                'PNG')
-                            maskHardC.save(
-                                data_folder + maskHarddir + 'I/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
-                                'PNG')
-                        if Secuexists:
-                            maskSecuN.save(
-                                data_folder + maskSecudir + 'N/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
-                                'PNG')
-                            maskSecuJ.save(
-                                data_folder + maskSecudir + 'J/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
-                                'PNG')
-                            maskSecuG.save(
-                                data_folder + maskSecudir + 'G/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
-                                'PNG')
-                            maskSecuF.save(
-                                data_folder + maskSecudir + 'F/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
-                                'PNG')  #
-                            maskSecuC.save(
-                                data_folder + maskSecudir + 'I/' + vidname + '_' + str(fr['index']).zfill(5) + '.png',
-                                'PNG')  #
-                        counter += 1
+                        frcoor = fig['geometry']['points']['exterior']
 
-    print('Batch_num ' + str(batch_num) + ' : ' + str(counter) + ' images, masks are saved in ' + data_folder)
-    # with open("comparison_consensus.py.py") as f:
-    #     exec(f.read())
+                        polygon = [tuple(coor) for coor in frcoor]
+                        try:
+                            dict[annotator]
+                        except:
+                            print('ERROR: No Annotator:' + annotator)
+                            sys.exit(1)
+
+
+                        if dict[Annotator] != dict[annotator]:
+                            continue
+
+                        else:
+                            if classobj == 'To Treat':
+                                # Draw the polygon on the image
+                                drawTreat.polygon(polygon, fill=(255, 255, 255))
+                                # Convert the image to a mask
+                                maskTreat = image_Treat.convert("L")
+                            elif classobj == 'To Check':
+                                # Draw the polygon on the image
+                                drawCheck.polygon(polygon, fill=(255, 255, 255))
+                                maskCheck = image_Check.convert("L")
+
+                    # save masks and images
+                    vidname = evalfr['frame']
+                    # extract the image frame
+                    fr_names, fr_extracted = get_frames_from_api(api, video_api.id, video_api.name, evalfr['index'])
+                    # maskCheck_array = np.array(maskCheck)
+                    # maskTreat_array = np.array(maskTreat)
+                    # # Perform pixel-wise logical AND
+                    # result_array = np.logical_and(maskCheck_array, maskTreat_array)
+                    # # Identify the indices where both masks are true
+                    # rows, cols = np.where(result_array)
+                    # background_value = 0
+                    # # Update 'maskCheck' at the identified pixels to the background value
+                    # maskCheck_array[rows, cols] = background_value
+                    # # Convert the updated NumPy array back to a PIL Image
+                    # maskCheck = Image.fromarray(maskCheck_array)
+
+                    # save frame as png file
+
+
+                    cv2.imwrite(os.path.join(data_folder, 'image', fr_names[0]),
+                                cv2.cvtColor(fr_extracted[0], cv2.COLOR_BGR2RGB))
+                    if not os.path.exists(os.path.join(data_folder, maskTreatdir + '_' + annotator[:2],
+                                                       vidname + '_' + str(fr['index']).zfill(5) + '.png')):
+                        cv2.imwrite(os.path.join(data_folder, maskTreatdir + '_' + annotator[:2],
+                                             vidname + '_' + str(fr['index']).zfill(5) + '.png'),
+                                cv2.cvtColor(np.array(maskTreat), cv2.COLOR_BGR2RGB))
+                    if not os.path.exists(os.path.join(data_folder, maskCheckdir + '_' + annotator[:2],
+                                                       vidname + '_' + str(fr['index']).zfill(5) + '.png')):
+                        cv2.imwrite(os.path.join(data_folder, maskCheckdir + '_' + annotator[:2],
+                                             vidname + '_' + str(fr['index']).zfill(5) + '.png'),
+                                cv2.cvtColor(np.array(maskCheck), cv2.COLOR_BGR2RGB))
+                    #print(vidname)
+
+                    counter += 1
+
+print('Batch_num ' + str(batch_num) + ' : ' + str(
+    counter) + ' images, masks are saved in ' + data_folder + ' : ' + annotator)

@@ -19,6 +19,10 @@ def calculate_metrics(mask_pred_path,mask_gt_path):
 
         a = compute_surface_distances(mask_gt, mask_pred, (1, 1))
         # NSD = compute_surface_dice_at_tolerance(a, tolerance_mm=100)
+        if mask_gt.shape[1] == 854 or mask_gt.shape[1] == 418:
+            mask_gt = mask_gt[:, :-1]
+        if mask_pred.shape[1] == 854 or mask_pred.shape[1] == 418:
+            mask_pred = mask_pred[:, :-1]
         NSD.append(compute_NSD(mask_gt, mask_pred, 20, 100))
         DICE.append(compute_dice_coefficient(mask_gt, mask_pred))
         IOU.append(calculate_iou(mask_gt, mask_pred))

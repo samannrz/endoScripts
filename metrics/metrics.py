@@ -219,6 +219,13 @@ def compute_surface_distances(mask_gt,
 
   # compute the bounding box of the masks to trim the volume to the smallest
   # possible processing subvolume
+
+  if mask_gt.shape[1] == 854 or mask_gt.shape[1] == 418:
+    mask_gt = mask_gt[:, :-1]
+  if mask_pred.shape[1] == 854 or mask_pred.shape[1] == 418:
+    mask_pred = mask_pred[:, :-1]
+
+
   bbox_min, bbox_max = _compute_bounding_box(mask_gt | mask_pred)
   # Both the min/max bbox are None at the same time, so we only check one.
   if bbox_min is None:

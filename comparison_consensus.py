@@ -10,13 +10,13 @@ from overlay_mask import reColor
 from statistics import mean
 
 
-common_path = 'annotationData26/'
+common_path = 'annotationData3/'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
 # machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
-machine_path = '/data/DATA/Incision_predictions/Batch11/all/final'
-dest_folder = 'ImgOut'
-draw_machine_prediction = False
-batch_num =22
+# machine_path = '/data/DATA/Incision_predictions/Batch11/all/final'
+# dest_folder = 'ImgOut'
+# draw_machine_prediction = False
+batch_num = 3
 
 def overlayMasks_incision(image_orig, mask1, mask2):
     # This function takes the two masks and overlay them to the image_orig
@@ -48,13 +48,11 @@ def initializeMask(size):
     return a
 
 
-images = os.listdir(common_path + '/image')
-createDIR('', dest_folder)
+images = os.listdir(os.path.join(common_path ,'image'))
+# createDIR('', dest_folder)
 lenimg = len(images)
 print('There are %d images' % lenimg)
-batch_size = 4
-space_height = 120
-ep = 1e-15
+
 nameList = []
 frameList = []
 
@@ -78,14 +76,9 @@ SCEbstat = []
 MCEbstat = []
 
 
-for j in range(math.ceil(lenimg / batch_size)):
+for i in range(lenimg):
     counter = 1
-    batchstart = True
-    hh = 0
-    print(j)
-    for i in range(j * batch_size, (j + 1) * batch_size):
-        if i > lenimg - 1:
-            break
+    if True:
         image_orig = Image.open(os.path.join(common_path, 'image', images[i]))
 
         maskH_N = initializeMask(image_orig.size)
@@ -98,46 +91,46 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskS_J = initializeMask(image_orig.size)
 
         try:
-            maskH_N = Image.open(os.path.join(common_path, 'maskTreatN', images[i][:-4] + '.png'))
+            maskH_N = Image.open(os.path.join(common_path, 'maskTreat_ni', images[i][:-4] + '.png'))
         except:
             print('There is no Hard Zone on Nicolas\'s annot on ' + images[i][:-4])
         try:
-            maskS_N = Image.open(os.path.join(common_path, 'maskCheckN', images[i][:-4] + '.png'))
+            maskS_N = Image.open(os.path.join(common_path, 'maskCheck_ni', images[i][:-4] + '.png'))
         except:
             print('There is no Security Zone on Nicolas\'s annot on ' + images[i][:-4])
         #### Jean Luc ####
         try:
-            maskH_J = Image.open(os.path.join(common_path, 'maskTreatJ', images[i][:-4] + '.png'))
+            maskH_J = Image.open(os.path.join(common_path, 'maskTreat_Je', images[i][:-4] + '.png'))
         except:
             print('There is no Hard Zone on Jean Luc\'s annot on ' + images[i][:-4])
         try:
-            maskS_J = Image.open(os.path.join(common_path, 'maskCheckJ', images[i][:-4] + '.png'))
+            maskS_J = Image.open(os.path.join(common_path, 'maskCheck_Je', images[i][:-4] + '.png'))
         except:
             print('There is no Security Zone on Jean Luc\'s annot on ' + images[i][:-4])
         #### Giuseppe ####
         try:
-            maskH_G = Image.open(os.path.join(common_path, 'maskTreatG', images[i][:-4] + '.png'))
+            maskH_G = Image.open(os.path.join(common_path, 'maskTreat_gi', images[i][:-4] + '.png'))
         except:
             print('There is no Hard Zone on Giuseppe\'s annot on ' + images[i][:-4])
         try:
-            maskS_G = Image.open(os.path.join(common_path, 'maskCheckG', images[i][:-4] + '.png'))
+            maskS_G = Image.open(os.path.join(common_path, 'maskCheck_gi', images[i][:-4] + '.png'))
         except:
             print('There is no Security Zone on Giuseppe\'s annot on ' + images[i][:-4])
         #### Filippo ####
         try:
-            maskH_F = Image.open(os.path.join(common_path, 'maskTreatF', images[i][:-4] + '.png'))
+            maskH_F = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
         except:
             print('There is no Hard Zone on Filippo\'s annot on ' + images[i][:-4])
         try:
-            maskS_F = Image.open(os.path.join(common_path, 'maskCheckF', images[i][:-4] + '.png'))
+            maskS_F = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
         except:
             print('There is no Security Zone on Filippo\'s annot on ' + images[i][:-4])
         try:
-            maskH_C = Image.open(os.path.join(common_path, 'maskTreatI', images[i][:-4] + '.png'))
+            maskH_C = Image.open(os.path.join(common_path, 'maskTreat_in', images[i][:-4] + '.png'))
         except:
             print('There is no Hard Zone on Consensus\'s annot on ' + images[i][:-4])
         try:
-            maskS_C = Image.open(os.path.join(common_path, 'maskCheckI', images[i][:-4] + '.png'))
+            maskS_C = Image.open(os.path.join(common_path, 'maskCheck_in', images[i][:-4] + '.png'))
         except:
             print('There is no Security Zone on Consensus\'s annot on ' + images[i][:-4])
 
@@ -164,9 +157,9 @@ for j in range(math.ceil(lenimg / batch_size)):
             epsilon = 1e-15
             intersection = np.logical_and(mask1, mask2)
             union = np.logical_or(mask1, mask2)
-            iou = np.sum(intersection) / (np.sum(union) + epsilon)
+            iou = (np.sum(intersection) / (np.sum(union) + epsilon))*100
             if np.sum(intersection) == 0 and np.sum(union) == 0:
-                iou = 1
+                iou = 100
             return iou
 
 
@@ -227,10 +220,13 @@ data_df = pd.DataFrame(
      'FF Merge': MCFstat, 'JLP Treat': HCJstat, 'JLP Check': SCJstat,
      'JLP Merge': MCJstat})
 sfpath = 'keycode/my-gpysheets-3d8d13442005.json'
-# sheetName = str(datetime.date.today()) + '-Batch' + str(batch_num)
-# write_to_gsheet(sfpath, sheetID, sheetName, data_df)
-data_df.to_pickle('c_batch' + str(batch_num) + '.pkl')
-print('c_batch' + str(batch_num) + '.pkl saved')
+sheetID = '1PeZuOl_tUKS_j6-5-DDoOd9b-iUVVEZC9Ff9cZ7jp-0'
 
-# sheetID = '1PeZuOl_tUKS_j6-5-DDoOd9b-iUVVEZC9Ff9cZ7jp-0'
-# write_to_gsheet(sfpath, sheetID, str(batch_num), data_df)
+sheetName = str(datetime.date.today()) + '-Batch' + str(batch_num)
+write_to_gsheet(sfpath, sheetID, sheetName, data_df)
+data_df.to_pickle('pkl_files/c_batch' + str(batch_num) + '.pkl')
+print('pkl_files/c_batch' + str(batch_num) + '.pkl saved')
+
+sheetName = str(datetime.date.today()) + '-Batch' + str(batch_num)
+
+write_to_gsheet(sfpath, sheetID, sheetName, data_df)
