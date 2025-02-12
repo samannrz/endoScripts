@@ -119,6 +119,10 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
                     # True Positive (correct detection)
                     confusion_matrix[gt_class, gt_class] += 1
                     class_counts[gt_class]["TP"] += 1
+                    if best_iou < 0.3 and best_iou>0.2:
+                        print(filename)
+                        print(iou)
+                        print(gt_class)
                 else:
                     # Misclassification (Class B detected as Class A)
                     confusion_matrix[gt_class, pred_class] += 1
@@ -169,7 +173,7 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
 ###################################
 ############################
 # MAIN
-THRESH = .6
+THRESH = .2
 folder_gt = "/data/projects/datasets/coco128-2023-06-28-2/labels/test"
 folder_detect = "/data/projects/yolov5/runs/detect/exp/labels"
 results, confusion_matrix = evaluate_detections(folder_gt, folder_detect,iou_threshold=THRESH)

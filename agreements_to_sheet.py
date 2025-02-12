@@ -4,6 +4,10 @@ import numpy as np
 from trimesh.util import tolist
 
 from functions import write_ndarray_to_gsheet
+############# Set the Parameters ##########
+juniorsornot = ''
+juniorsornot = 'j'
+###########################################
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch', help = 'batch number')
@@ -16,8 +20,7 @@ NAME_LIST_juniors = ['Oscar', 'Anne.Sofie', 'Gry']
 NAME_LIST_consensus = ['Juniors', 'Seniors']
 
 NAME_LIST = NAME_LIST_consensus
-juniorsornot = ''
-juniorsornot = 'j'
+
 
 
 # Treat_rates = np.load('Rates_agreement/Treat_rates'+juniorsornot+str(batch_num)+'.npy')

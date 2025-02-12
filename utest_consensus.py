@@ -20,10 +20,7 @@ for i in range(0,len(batches),N_BATCH_COMBINE):
             b=210
         if b+j == 30:
             b=209
-        # print(b+j)
-        if b+j == 12:
-            break
-        if (b+j)>210:
+        if b+j == 12 or (b+j)>210:
             break
         with open('pkl_files/c_batch'+str(b+j)+'.pkl', 'rb') as file:
             data = pickle.load(file)
@@ -33,7 +30,6 @@ for i in range(0,len(batches),N_BATCH_COMBINE):
             #print(data.iloc[:, dict[annotator]+0])
             annotator_treat.extend(data.iloc[:, dict[annotator]].tolist())
             annotator_check.extend(data.iloc[:, dict[annotator]+1].tolist())
-        # print(len(annotator_treat))
     annotator_treat_final.append(annotator_treat)
     annotator_check_final.append(annotator_check)
 print((annotator_treat_final[0]))
