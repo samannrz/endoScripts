@@ -209,18 +209,6 @@ plt.close()
 ##############################
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 json_keyfile = 'keycode/my-gpysheets-3d8d13442005.json'  # Replace with your JSON key file path
 sheet_name = "Evaluation Results"+ str(THRESH)+'-'+str(datetime.date.today()) # Replace with your Google Sheet name
 sheet_id = '1PbPw7fjmEQ1oxkJUGaGMgjEeLeD_62_q3XdSnzBnmkU'
