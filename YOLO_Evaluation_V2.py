@@ -61,15 +61,28 @@ class_names = {
 ############################
 #############################
 def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
+    """
+    Evaluate object detection results by comparing detected boxes to ground truth boxes.
 
+    Args:
+        folder_gt (str): Path to the folder containing ground truth annotation files.
+        folder_detect (str): Path to the folder containing detection result files.
+        iou_threshold (float): IoU threshold to consider a detection as a true positive.
+
+    Returns:
+        results (dict): A dictionary containing precision, recall, and F1-score for each class.
+        confusion_matrix (np.array): A confusion matrix of shape (num_classes + 1, num_classes + 1).
+    """
     # Add an extra class for background (last index)
     num_classes = len(class_names)
     background_class_id = num_classes  # Background class
     confusion_matrix = np.zeros((num_classes + 1, num_classes + 1), dtype=int)
 
+    # Initialize class counts for TP, FP, FN
     class_counts = {class_id: {"TP": 0, "FP": 0, "FN": 0} for class_id in class_names.keys()}
     class_counts[background_class_id] = {"TP": 0, "FP": 0, "FN": 0}  # Track background
 
+    # Iterate over all ground truth files
     for filename in os.listdir(folder_gt):
         if not filename.endswith(".txt"):
             continue
@@ -92,9 +105,11 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
                     class_id, x_center, y_center, width, height = map(float, line.strip().split())
                     detect_boxes.append([int(class_id), x_center, y_center, width, height])
 
+        # Track matched ground truth and detected boxes
         matched_gt = set()
         matched_detect = set()
 
+        # Match detected boxes to ground truth boxes
         for i, detect_box in enumerate(detect_boxes):
             best_iou = 0
             best_gt_idx = -1
@@ -105,18 +120,17 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
                     continue  # Skip already matched ground truths
 
                 iou = calculate_iou(detect_box[1:], gt_box[1:])
-                # if filename == 'P-0072_Video001_trim_2.mp4_01158.txt':
-                #     print(gt_box)
-                #     print(iou)
+                if filename == 'P-0072_Video001_trim_2.mp4_01158.txt':
+                    print(gt_box)
+                    print(iou)
                 if iou > best_iou:
                     best_iou = iou
                     best_gt_idx = j
 
             # If IoU is above threshold, we have a valid match
-
             if best_iou > iou_threshold:
-                matched_gt.add(best_gt_idx)
-                matched_detect.add(i)
+                matched_gt.add(best_gt_idx)  # Mark ground truth as matched
+                matched_detect.add(i)  # Mark detection as matched
                 gt_class = gt_boxes[best_gt_idx][0]
                 pred_class = detect_box[0]
 
@@ -124,10 +138,6 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
                     # True Positive (correct detection)
                     confusion_matrix[gt_class, gt_class] += 1
                     class_counts[gt_class]["TP"] += 1
-                    # if best_iou < 0.4:
-                    #     print(filename)
-                    #     print(iou)
-                    #     print(gt_class)
                 else:
                     # Misclassification (Class B detected as Class A)
                     confusion_matrix[gt_class, pred_class] += 1
@@ -155,8 +165,7 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
                 confusion_matrix[background_class_id, pred_class] += 1  # FP on background
                 class_counts[background_class_id]["FP"] += 1
 
-    print(class_counts[1])
-    # Calculate Precision, Recall, and F1-score
+    # Calculate Precision, Recall, and F1-score for each class
     results = {}
     for class_id, counts in class_counts.items():
         TP = counts["TP"]
@@ -172,10 +181,8 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
             "Recall": recall,
             "F1-score": f1_score,
         }
-    #confusion_matrix = (confusion_matrix / confusion_matrix.sum(axis=1, keepdims=True))*100
 
     return results, confusion_matrix
-###################################
 ############################
 # MAIN
 THRESH = .2
