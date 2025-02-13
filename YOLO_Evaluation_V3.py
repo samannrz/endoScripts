@@ -147,7 +147,7 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
                 # False positive (no IoU match)
                 pred_class = detect_box[0]
                 confusion_matrix[background_class_id, pred_class] += 1
-                class_counts[pred_class]["FP"] += 1
+                class_counts[gt_class]["FN"] += 1
 
         # False negatives (unmatched ground truths)
         for j, gt_box in enumerate(gt_boxes):

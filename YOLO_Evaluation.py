@@ -105,9 +105,7 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
                     continue  # Skip already matched ground truths
 
                 iou = calculate_iou(detect_box[1:], gt_box[1:])
-                # if filename == 'P-0072_Video001_trim_2.mp4_01158.txt':
-                #     print(gt_box)
-                #     print(iou)
+
                 if iou > best_iou:
                     best_iou = iou
                     best_gt_idx = j
@@ -124,6 +122,7 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
                     # True Positive (correct detection)
                     confusion_matrix[gt_class, gt_class] += 1
                     class_counts[gt_class]["TP"] += 1
+
                     # if best_iou < 0.4:
                     #     print(filename)
                     #     print(iou)
@@ -155,7 +154,7 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
                 confusion_matrix[background_class_id, pred_class] += 1  # FP on background
                 class_counts[background_class_id]["FP"] += 1
 
-    print(class_counts[1])
+    # print(class_counts[1])
     # Calculate Precision, Recall, and F1-score
     results = {}
     for class_id, counts in class_counts.items():
@@ -179,8 +178,8 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
 ############################
 # MAIN
 THRESH = .2
-folder_gt = "/data/projects/datasets/coco128-2023-06-28-2/labels/test"
-folder_detect = "/data/projects/yolov5/runs/detect/exp/labels"
+folder_gt = "/home/saman/Documents/test"
+folder_detect = "/home/saman/Documents/exp/labels"
 results, confusion_matrix = evaluate_detections(folder_gt, folder_detect,iou_threshold=THRESH)
 
 ###################################
