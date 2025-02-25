@@ -9,11 +9,18 @@ def calculate_metrics(mask_pred_path,mask_gt_path):
     NSD=[]
     IOU=[]
     DICE=[]
-    for filename in os.listdir(mask_pred_path):
-        mask_pred_path1 = os.path.join(mask_pred_path, filename)
-        mask_gt_path1 = os.path.join(mask_gt_path, filename)
+    if os.path.isdir(mask_pred_path):  # If it's a directory, process all files
+        filenames = os.listdir(mask_pred_path)
 
-        print(filename)
+    elif os.path.isfile(mask_pred_path):  # If it's a single file, process only that file
+        filenames = [os.path.basename(mask_pred_path)]
+        mask_gt_path = mask_gt_path  # Ensure mask_gt_path corresponds to the correct file
+    else:
+        raise ValueError("Invalid path: mask_pred_path must be a valid file or directory.")
+    for filename in filenames:
+        mask_pred_path1 = os.path.join(mask_pred_path, filename) if os.path.isdir(mask_pred_path) else mask_pred_path
+        mask_gt_path1 = os.path.join(mask_gt_path, filename) if os.path.isdir(mask_pred_path) else mask_gt_path
+
         mask_gt = cv2.imread(mask_gt_path1, cv2.IMREAD_GRAYSCALE).astype(bool)
         mask_pred = cv2.imread(mask_pred_path1, cv2.IMREAD_GRAYSCALE).astype(bool)
 
