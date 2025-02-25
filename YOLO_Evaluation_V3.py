@@ -139,15 +139,16 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
                     # Misclassification (wrong class)
                     confusion_matrix[gt_class, pred_class] += 1
                     class_counts[pred_class]["FP"] += 1
-                    if gt_class==1:
-                        print(filename)
-                        print(best_iou)
-                        print(gt_class)
+                    # if gt_class==1:
+                    #     print(filename)
+                    #     print(best_iou)
+                    #     print(gt_class)
             else:
                 # False positive (no IoU match)
                 pred_class = detect_box[0]
                 confusion_matrix[background_class_id, pred_class] += 1
-                class_counts[gt_class]["FN"] += 1
+                class_counts[pred_class]["FP"] += 1
+
 
         # False negatives (unmatched ground truths)
         for j, gt_box in enumerate(gt_boxes):
@@ -171,6 +172,11 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
         TP = counts["TP"]
         FP = counts["FP"]
         FN = counts["FN"]
+        if class_id ==8:
+            print(TP)
+            print(FP)
+            print(FN)
+
 
         precision = TP / (TP + FP) if (TP + FP) > 0 else 0
         recall = TP / (TP + FN) if (TP + FN) > 0 else 0
@@ -185,9 +191,11 @@ def evaluate_detections(folder_gt, folder_detect, iou_threshold=0.2):
     return results, confusion_matrix
 ############################
 # MAIN
-THRESH = .3
+THRESH = .5
 folder_gt = "/home/saman/Documents/test"
 folder_detect = "/home/saman/Documents/exp7/labels"
+folder_gt = "/data/projects/datasets/coco128-2023-06-28-2/labels/test"
+folder_detect = "/data/projects/yolov5/runs/detect/exp/labels"
 results, confusion_matrix = evaluate_detections(folder_gt, folder_detect,iou_threshold=THRESH)
 
 ###################################

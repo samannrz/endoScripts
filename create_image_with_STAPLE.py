@@ -53,8 +53,9 @@ def combine_images(path1, path2, output_path):
 path1 = 'annotationDatas/annotationData214/image'
 path2 = '/data/DATA/STAPLE/Batch214/final'
 output_path = "/data/DATA/temp-staple-image"
-
-# path1 = '/data/projects/IncisionDeepLab/input/incision/orig_data4/test_images'
+path2 = '/data/DATA/Incision_predictions/test-1-213/FasterViT/consensus/final'
+output_path = "/data/DATA/MC2"
+path1 = '/data/projects/IncisionDeepLab/input/incision/orig_data4/test_images'
 # path2 = '/data/DATA/Incision_predictions/test-1-213/Mask2Former/all/final'
 # output_path = "/data/DATA/Z-Mask2Former"
 combine_images(path1, path2, output_path)

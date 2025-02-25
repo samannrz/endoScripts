@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from YOLO_Evaluation import evaluate_detections, class_names  # Import your function
-from incisionComparison_V4 import heatmap_Treat
+from YOLO_Evaluation_V3 import evaluate_detections, class_names  # Import your function
 
 # Define thresholds from 0.1 to 1 with 0.1 step
 thresholds = np.arange(0.1, 1.1, 0.1)
@@ -11,8 +10,8 @@ avg_precisions = []
 avg_recalls = []
 avg_f1_scores = []
 
-# folder_gt = "/data/projects/datasets/coco128-2023-06-28-2/labels/test"
-# folder_detect = "/data/projects/yolov5/runs/detect/exp/labels"
+folder_gt = "/data/projects/datasets/coco128-2023-06-28-2/labels/test"
+folder_detect = "/data/projects/yolov5/runs/detect/exp/labels"
 
 for thresh in thresholds:
     results, _ = evaluate_detections(folder_gt, folder_detect, iou_threshold=thresh)

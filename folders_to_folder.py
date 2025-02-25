@@ -22,9 +22,9 @@ def check_and_move_files(folder1, folder2, new_folder):
 
 
 # Paths to the folders
-folder1 = "/data/DATA/incision/4/image"
-folder2 = "/data/DATA/incision/10/image"
-new_folder = "/data/DATA/incision/4of10/image"
+folder1 = "/data/D"
+folder2 = "/data/projects/IncisionDeepLab/input/incision/orig_data4/test_images"
+new_folder = "/data/DATA/MCTEST"
 
 # Call the function
 check_and_move_files(folder1, folder2, new_folder)
