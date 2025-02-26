@@ -2,7 +2,7 @@ import pygsheets
 
 sheet_id = '11e7eDQZcPBAAgFsTG364kiMY7Jw8bftkvVUnbXVS7Zc'
 
-gc = pygsheets.authorize(service_file='../../keycode/my-gpysheets-3d8d13442005.json')
+gc = pygsheets.authorize(service_file='../../data/keycode/my-gpysheets-3d8d13442005.json')
 sh = gc.open_by_key(sheet_id)
 wks = sh[10]
 

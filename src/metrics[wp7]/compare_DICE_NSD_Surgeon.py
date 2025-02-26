@@ -6,7 +6,7 @@ from metrics_calculate import *
 
 
 ##### EXTRACT THE RESULTS OF THE SURGEON FROM THE RESPONDERS LINK IN GSHEET #####
-gc = pygsheets.authorize(service_account_file="../../keycode/my-gpysheets-3d8d13442005.json")
+gc = pygsheets.authorize(service_account_file="../../data/keycode/my-gpysheets-3d8d13442005.json")
 sh = gc.open_by_key("1LZMVcWstjOJrGDJMl5j5c93Bwh1wpn1kCSgSopSZIkc")
 wks = sh[0]
 
