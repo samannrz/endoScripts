@@ -4,6 +4,7 @@ data/Exam/
 data/keycode/
 data/ImgOut2/
 data/ImgOut3/
+annotator_module/annotator_workflow/annotationDatas
 
 data/annotationDatas/
 __pycache__/
