@@ -1,0 +1,94 @@
+{
+    "evals": [
+        {
+            "frame": "HBU1-GY-20230412_001_VID001_trim1.mp4",
+            "index": [
+                944
+            ]
+        },
+        {
+            "frame": "HBU1-GY-20230412_002_VID001_trim1.mp4",
+            "index": [
+                218
+            ]
+        },
+        {
+            "frame": "HBU1-GY-20230412_004_VID001_trim1.mp4",
+            "index": [
+                1662
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230407_003_VID001_trim3.mp4",
+            "index": [
+                247
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230407_004_VID001_trim1.mp4",
+            "index": [
+                96
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230425_003_VID001_trim1.mp4",
+            "index": [
+                680
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20220713_026_VID003_trim1.mp4",
+            "index": [
+                86
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20220725-028_VID002_trim1.mp4",
+            "index": [
+                753
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20220817_031_VID001_trim2.mp4",
+            "index": [
+                94
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20220819_032_VID002_anon_trim1.mp4",
+            "index": [
+                0
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20221014_038_VID001_anon_trim1.mp4",
+            "index": [
+                428
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20221017_040_VID001_anon_trim1.mp4",
+            "index": [
+                134
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20221026_044_VID002_anon_trim1.mp4",
+            "index": [
+                293
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20221123_045_VID004_anon_trim1.mp4",
+            "index": [
+                1748
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20230208_067_VID001_anon_trim1.mp4",
+            "index": [
+                5
+            ]
+        }
+    ]
+}

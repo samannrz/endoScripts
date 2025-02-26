@@ -1,0 +1,78 @@
+{
+    "evals": [
+        {
+            "frame": "surgery27_Video_001_trim1.mp4",
+            "index": [
+                422
+            ]
+        },
+        {
+            "frame": "Surgery28_2021-08-26_075748_VID002_Trim.mp4",
+            "index": [
+                1600
+            ]
+        },
+        {
+            "frame": "Surgery31_Ch2_001_V_Trim.mp4",
+            "index": [
+                66
+            ]
+        },
+        {
+            "frame": "surgery32_ch1_video_01_trim1.mp4",
+            "index": [
+                234
+            ]
+        },
+
+        {
+            "frame": "Surgery35_2021-09-16_064524_VID001_Trim.mp4",
+            "index": [
+                908
+            ]
+        },
+        {
+            "frame": "surgery37_Video_001_trim.mp4",
+            "index": [
+                166
+            ]
+        },
+
+        {
+            "frame": "surgery41_Video_001_trim1.mp4",
+            "index": [
+                245
+            ]
+        },
+        {
+            "frame": "2022-03-02_042629_VID001_11367_11595.mp4",
+            "index": [
+                47
+            ]
+        },
+        {
+            "frame": "2022-03-16_032148_VID001_5570_6820.mp4",
+            "index": [
+                1591
+            ]
+        },
+        {
+            "frame": "2022-03-23_001702_VID001_0_227.mp4",
+            "index": [
+                0
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20220608-022_VID001_anon_0_760.mkv",
+            "index": [
+                89
+            ]
+        },
+        {
+            "frame": "FCF1_GY_20220613-025_VID001_anon_12913_13673.mp4",
+            "index": [
+                472
+            ]
+        }
+    ]
+}

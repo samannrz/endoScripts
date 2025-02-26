@@ -1,0 +1,82 @@
+{
+    "evals": [
+        {
+            "frame": "bsp1_GY_20230601_005_VID003_trim6.mp4",
+            "index": [
+                15
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_006_VID001_trim1.mp4",
+            "index": [
+                292
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_008_VID001_trim3.mp4",
+            "index": [
+                102
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_014_VID002_trim1.mp4",
+            "index": [
+                72
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_015_VID001_trim1.mp4",
+            "index": [
+                0
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_018_VID001_trim3.mp4",
+            "index": [
+                184
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_024_VID002_trim1.mp4",
+            "index": [
+                155
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_025_VID001_trim1.mp4",
+            "index": [
+                207
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_026_VID001_trim1.mp4",
+            "index": [
+                352
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_030_VID002_trim2.mp4",
+            "index": [
+                3043
+            ]
+        },
+        {
+            "frame": "IBO1_GY_20220505_001_VID001_trim1.mp4",
+            "index": [
+                30
+            ]
+        },
+        {
+            "frame": "IBO1_GY_20220505_001_VID002_trim3.mp4",
+            "index": [
+                92
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_022_VID002_trim1.mp4",
+            "index": [
+                286
+            ]
+        }
+    ]
+}
