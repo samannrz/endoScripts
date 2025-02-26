@@ -5,8 +5,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import math
 import os
-from src.functions import createDIR
-from overlay_mask import reColor
+from functions import createDIR, reColor
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch', help = 'batch number')
@@ -36,7 +35,7 @@ def get_STAPLE_vote(SHEET_ID):
     import pygsheets
 
     # Authenticate using the credentials.json file
-    gc = pygsheets.authorize(service_file='keycode/my-gpysheets-3d8d13442005.json')
+    gc = pygsheets.authorize(service_file='../../../data/keycode/my-gpysheets-3d8d13442005.json')
 
     # Open the Google Sheet
     spreadsheet = gc.open_by_key(SHEET_ID)  # Replace with your spreadsheet ID
