@@ -4,7 +4,7 @@ import sys
 
 from dotenv import load_dotenv
 import supervisely_lib as sly
-from functions import createDIR
+from src.functions import createDIR
 from PIL import Image, ImageDraw
 import cv2
 def main():
