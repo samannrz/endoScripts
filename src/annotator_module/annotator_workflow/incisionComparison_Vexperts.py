@@ -1,4 +1,3 @@
-# in this version the consensensus of annottaors are also plot as heatmaps
 import argparse
 
 import cv2
@@ -6,33 +5,55 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import math
 import os
-from src.functions import createDIR
-from overlay_mask import reColor
+from functions import createDIR, reColor
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch', help = 'batch number')
 parser.add_argument('--input',help = 'path of dest. folder')
 args = parser.parse_args()
 batch_num = args.batch
-# from IncisionDataFolderCreation import batch_num
-nb_ann = 6
 common_path = args.input
-# machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7/inference_results'
-# machine_path = '/data/projects/IncisionDeepLab/outputs_consensus_Batch3-7_mobilenet/inference_results'
+### Parameters to be defined ###
+nb_ann = 6
+N_ROWS = 3 # number of rows for visualization of annotations
+
 machine_path = '/data/DATA/Incision_predictions/Batch211-FasterViT/final'
-path_mask_STAPLE = '/data/DATA/STAPLE/Batch211/mask/'
-dest_folder = 'ImgOut2'
-vidname=[]
-# machine_path = '/Users/saman/Documents/data/DATA/final'
+path_mask_STAPLE = '/data/DATA/STAPLE/Batch' + str(batch_num)+'/mask/'
 # final_consensus_path = '/Users/saman/Documents/data/DATA/incision/4/Batch24/final'
-# final_consensus_path = 'final/'
+
+dest_folder = 'ImgOut2'
+
 heatmap_creation=False
-draw_machine_prediction = True
+draw_machine_prediction = False
 final_consensus = False
 save_image = True
 draw_STAPLE = True
+###
+vidname=[]
 
+def get_STAPLE_vote(SHEET_ID):
+    import pygsheets
 
+    # Authenticate using the credentials.json file
+    gc = pygsheets.authorize(service_file='../../../data/keycode/my-gpysheets-3d8d13442005.json')
+
+    # Open the Google Sheet
+    spreadsheet = gc.open_by_key(SHEET_ID)  # Replace with your spreadsheet ID
+    worksheet = spreadsheet.sheet1  # Open the first sheet
+
+    # Get data from row 1 (names) and row 7 (numbers)
+    names = worksheet.get_row(1)  # Get data from row 1
+    numbers = worksheet.get_row(6)  # Get data from row 7
+
+    # Create a dictionary from the two rows
+    dictionary = {name: int(number) for name, number in zip(names, numbers) if name and number}
+
+    # Print the resulting dictionary
+    return dictionary
+
+if draw_STAPLE:
+    dict_STAPLE = get_STAPLE_vote('1EExamxHJh5Sg3pIWagfLk1Da6xe-TT43F3V-G5dqHuU')
+    print(dict_STAPLE)
 
 def overlayMasks_incision(image_orig, mask1, mask2):
     # This function takes the two masks and overlay them to the image_orig
@@ -221,8 +242,8 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskS_J = Image.open(os.path.join(common_path, 'maskCheck_Je', images[i][:-4] + '.png'))
         maskH_G = Image.open(os.path.join(common_path, 'maskTreat_gi', images[i][:-4] + '.png'))
         maskS_G = Image.open(os.path.join(common_path, 'maskCheck_gi', images[i][:-4] + '.png'))
-        maskH_F = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
-        maskS_F = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
+        #maskH_F = Image.open(os.path.join(common_path, 'maskTreat_fi', images[i][:-4] + '.png'))
+        #maskS_F = Image.open(os.path.join(common_path, 'maskCheck_fi', images[i][:-4] + '.png'))
         maskH_ER = Image.open(os.path.join(common_path, 'maskTreat_Er', images[i][:-4] + '.png'))
         maskS_ER = Image.open(os.path.join(common_path, 'maskCheck_Er', images[i][:-4] + '.png'))
         maskH_EB = Image.open(os.path.join(common_path, 'maskTreat_eb', images[i][:-4] + '.png'))
@@ -263,48 +284,13 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskmerge_F_array = np.maximum(maskS_F_array,maskH_F_array)
         maskmerge_ER_array = np.maximum(maskS_ER_array,maskH_ER_array)
         maskmerge_EB_array = np.maximum(maskS_EB_array,maskH_EB_array)
-
-        if heatmap_creation:
-            heatmap_Treat = create_heatmap(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array,
-                                       maskH_EB_array, 'red')
-            heatmap_Check = create_heatmap(
-                maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array, maskS_EB_array, 'red')
-
-            dst = cv2.cvtColor(np.uint8(heatmap_Treat), cv2.COLOR_BGR2RGB)
-            cv2.imwrite('ahmap.png', dst)
-
-            overlay = Image.fromarray(heatmap_Treat.astype('uint8'), 'RGB')
-            bg_treat = image_orig.convert('RGB')
-            mask = overlay.convert('L')
-            mask = mask.point(lambda p: 200 if p < 250 else 0)  # if the point is white it is become transparent
-            bg_treat.paste(overlay, None, mask)  # paste the overlay to image when a mask exists
-
-            overlay = Image.fromarray(heatmap_Check.astype('uint8'), 'RGB')
-            bg_check = image_orig.convert('RGB')
-            mask = overlay.convert('L')
-            mask = mask.point(lambda p: 200 if p < 250 else 0)  # if the point is white it is become transparent
-            bg_check.paste(overlay, None, mask)  # paste the overlay to image when a mask exists
-            bg_treat.save('ztreat.png')
-            bg_check.save('zcheck.png')
-
-        # score_Treat = ref_score(maskH_N_array, maskH_J_array, maskH_G_array, maskH_F_array, maskH_ER_array,
-        #                         maskH_EB_array)
-        # score_Check = ref_score(maskS_N_array, maskS_J_array, maskS_G_array, maskS_F_array, maskS_ER_array,
-        #                         maskS_EB_array)
-
-        # print(score_Treat)
-        # print(score_Check)
         #############################
-
         Treat_rates[r, :] = calculate_agreements2(maskH_N, maskH_J, maskH_G, maskH_F,maskH_ER, maskH_EB)
         Check_rates[r, :] = calculate_agreements2(maskS_N, maskS_J, maskS_G, maskS_F,maskS_ER, maskS_EB)
         Merge_rates[r, :] = calculate_agreements2(Image.fromarray(maskmerge_N_array), Image.fromarray(maskmerge_J_array),
                                                   Image.fromarray(maskmerge_G_array), Image.fromarray(maskmerge_F_array),
                                                   Image.fromarray(maskmerge_ER_array), Image.fromarray(maskmerge_EB_array))
-        maskH_J.save('NI_H.png'+str(counter)+'.png')
-        maskS_J.save('NI_S.png'+str(counter)+'.png')
-        Image.fromarray(maskmerge_J_array).save('NI_M.png'+str(counter)+'.png')
-        vidname.append(images[i])
+
         r += 1
         if not save_image:
             continue
@@ -314,12 +300,12 @@ for j in range(math.ceil(lenimg / batch_size)):
             if j > math.floor(lenimg / batch_size) - 1:
                 im3 = Image.new("RGB", (
                     3 * 1920 + 20,
-                    4 * (lenimg % batch_size) * 1080 + space_height * (lenimg % batch_size)),
+                    N_ROWS * (lenimg % batch_size) * 1080 + space_height * (lenimg % batch_size)),
                                 (255, 255, 255))
             else:
                 im3 = Image.new("RGB", (
                     3 * 1920 + 20,
-                    4 * batch_size * 1080 + space_height * (batch_size + 1)),
+                    N_ROWS * batch_size * 1080 + space_height * (batch_size + 1)),
                                 (255, 255, 255))
 
         if image_overlayed_N.width < 1920:
@@ -331,10 +317,7 @@ for j in range(math.ceil(lenimg / batch_size)):
             image_overlayed_EB = image_overlayed_EB.resize(newsize)
             image_overlayed_ER = image_overlayed_ER.resize(newsize)
             if draw_STAPLE:
-                image_overlayed_STAPLE = image_overlayed_ER.resize(newsize)
-
-            bg_check = bg_check.resize(newsize)
-            bg_treat = bg_treat.resize(newsize)
+                image_overlayed_STAPLE = image_overlayed_STAPLE.resize(newsize)
 
             image_orig = image_orig.resize(newsize)
 
@@ -345,109 +328,68 @@ for j in range(math.ceil(lenimg / batch_size)):
             im3.paste(image_orig, (int(0.49 * WIDTH), hh + space_height))
         else:
             im3.paste(image_orig, (int(1 * WIDTH), hh + space_height))
+        draw = ImageDraw.Draw(im3)
+        font = ImageFont.truetype("arial.ttf", 50)
 
         im3.paste(image_overlayed_N, (0, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_J, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_G, (2 * WIDTH + 20, hh + 2 * space_height + HEIGHT - 100))
         #im3.paste(image_overlayed_F, (0, hh + 3 * space_height + 2 * HEIGHT - 200))
-        im3.paste(image_overlayed_ER, (WIDTH + 10, hh + 3 * space_height + 2 * HEIGHT - 200))
-        im3.paste(image_overlayed_EB, (2 * WIDTH + 20, hh + 3 * space_height + 2 * HEIGHT - 200))
-        im3.paste(bg_treat, (0, hh + 4 * space_height + 3 * HEIGHT - 300))
-        im3.paste(bg_check, (WIDTH + 10, hh + 4 * space_height + 3 * HEIGHT - 300))
+        im3.paste(image_overlayed_ER, (0, hh + 3 * space_height + 2 * HEIGHT - 200))
+        im3.paste(image_overlayed_EB, (WIDTH + 10, hh + 3 * space_height + 2 * HEIGHT - 200))
+        draw.text((1 / 2 * WIDTH, hh + space_height + HEIGHT),
+                  'Nicolas: ', fill=(240, 60, 240), font=font)
+        draw.text((3 / 2 * WIDTH + 10, hh + space_height + HEIGHT),
+                  'Jean: ', fill=(240, 60, 240), font=font)
+        draw.text((5 / 2 * WIDTH + 20, hh + space_height + HEIGHT),
+                  'Guiseppe: ', fill=(240, 60, 240), font=font)
+        #draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50), 'Filippo', fill=(240, 60, 240), font=font)
+        draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50),
+                  'Ervin: ' , fill=(240, 60, 240), font=font)
+        draw.text((3 / 2 * WIDTH + 10, hh + space_height + 2 * HEIGHT + 50),
+                  'Ebbe: ' , fill=(240, 60, 240), font=font)
+
         if draw_STAPLE:
-            im3.paste(image_overlayed_STAPLE, (2*WIDTH + 20, hh + 4 * space_height + 3 * HEIGHT - 300))
+            draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50), 'Suggestion by STAPLE',
+                      fill=(240, 60, 240),font=font)
+        if draw_STAPLE:
+            im3.paste(image_overlayed_STAPLE, (2*WIDTH + 20, hh + 3 * space_height + 2 * HEIGHT - 200))
+            image_width, image_height = image_overlayed_STAPLE.size
+            paste_position = (2 * WIDTH + 20, hh + 3 * space_height + 2 * HEIGHT - 200)
+            box_coords = (
+                paste_position[0],  # Left
+                paste_position[1],  # Top
+                paste_position[0] + image_width,  # Right
+                paste_position[1] + image_height  # Bottom
+            )
+
+            # Draw the green rectangle around the pasted image
+            draw = ImageDraw.Draw(im3)
+            draw.rectangle(box_coords, outline="green", width=30)
+
         if final_consensus:
             image_cons = Image.open(os.path.join(final_consensus_path, images[i]))
             im3.paste(image_cons.resize((1920, 1080)), (2 * WIDTH + 20, hh + 4 * space_height + 3 * HEIGHT - 300))
 
         if draw_machine_prediction:
             image_machine = Image.open(os.path.join(machine_path, images[i]))
-            im3.paste(image_machine.resize((1920, 1080)), (round(1.51 * WIDTH), hh + space_height))
+            image_machine = image_machine.resize((1920, 1080))
+            im3.paste(image_machine, (round(1.51 * WIDTH), hh + space_height))
+            image_width, image_height = image_overlayed_STAPLE.size
+            paste_position = (round(1.51 * WIDTH), hh + space_height)
+            box_coords = (
+                paste_position[0],  # Left
+                paste_position[1],  # Top
+                paste_position[0] + image_width,  # Right
+                paste_position[1] + image_height  # Bottom
+            )
+
+            # Draw the green rectangle around the pasted image
+            draw = ImageDraw.Draw(im3)
+            draw.rectangle(box_coords, outline="blue", width=30)
 
         draw = ImageDraw.Draw(im3)
         font = ImageFont.truetype("arial.ttf", 50)
-
-        draw.text((1 / 2 * WIDTH, hh + space_height + HEIGHT),
-                  'Nicolas: ' + str(score_Treat[0]) + ', ' + str(score_Check[0]), fill=(240, 60, 240), font=font)
-        draw.text((3 / 2 * WIDTH + 10, hh + space_height + HEIGHT),
-                  'Jean: ' + str(score_Treat[1]) + ', ' + str(score_Check[1]), fill=(240, 60, 240), font=font)
-        draw.text((5 / 2 * WIDTH + 20, hh + space_height + HEIGHT),
-                  'Guiseppe: ' + str(score_Treat[2]) + ', ' + str(score_Check[2]), fill=(240, 60, 240), font=font)
-        #draw.text((1 / 2 * WIDTH, hh + space_height + 2 * HEIGHT + 50), 'Filippo: '+str(score_Treat[3])+', '+str(score_Check[3]), fill=(240, 60, 240), font=font)
-        draw.text((3 / 2 * WIDTH + 10, hh + space_height + 2 * HEIGHT + 50),
-                  'Ervin: ' + str(score_Treat[4]) + ', ' + str(score_Check[4]), fill=(240, 60, 240), font=font)
-        draw.text((5 / 2 * WIDTH + 20, hh + space_height + 2 * HEIGHT + 50),
-                  'Ebbe: ' + str(score_Treat[5]) + ', ' + str(score_Check[5]), fill=(240, 60, 240), font=font)
-        draw.text((1 / 2 * WIDTH + 10, hh + space_height + 3 * HEIGHT + 100), 'Consensus Treat', fill=(240, 60, 240),
-                  font=font)
-        draw.text((3 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Consensus Check', fill=(240, 60, 240),
-                  font=font)
-        if draw_STAPLE:
-            draw.text((5 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'Suggestion by STAPLE',
-                      fill=(240, 60, 240),
-                      font=font)
-        rr = 15
-
-        try:
-            index_Treat_max = score_Treat.index(np.nanmax(np.array(score_Treat)))
-        except:
-            index_Treat_max = float('nan')
-        try:
-            index_Check_max = score_Check.index(np.nanmax(np.array(score_Check)))
-        except:
-            index_Check_max = float('nan')
-
-        if math.isnan(index_Treat_max):
-            print('isnan')
-        elif index_Treat_max == 0:
-            draw.ellipse((1 / 2 * WIDTH - 40 - rr, hh + space_height + HEIGHT + 20 - rr, 1 / 2 * WIDTH - 40 + rr,
-                          hh + space_height + HEIGHT + 20 + rr), fill=(255, 0, 0, 0))
-        elif index_Treat_max == 1:
-            draw.ellipse((3 / 2 * WIDTH - 30 - rr, hh + space_height + HEIGHT + 20 - rr, 3 / 2 * WIDTH - 30 + rr,
-                          hh + space_height + HEIGHT + 20 + rr),
-                         fill=(255, 0, 0, 0))
-        elif index_Treat_max == 2:
-            draw.ellipse((5 / 2 * WIDTH - 20 - rr, hh + space_height + HEIGHT + 20 - rr, 5 / 2 * WIDTH - 20 + rr,
-                          hh + space_height + HEIGHT + 20 + rr),
-                         fill=(255, 0, 0, 0))
-        elif index_Treat_max == 3:
-            draw.ellipse((1 / 2 * WIDTH - 40 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 1 / 2 * WIDTH - 40 + rr,
-                          hh + space_height + 2 * HEIGHT + 70 + rr),
-                         fill=(255, 0, 0, 0))
-        elif index_Treat_max == 4:
-            draw.ellipse((3 / 2 * WIDTH - 30 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 3 / 2 * WIDTH - 30 + rr,
-                          hh + space_height + 2 * HEIGHT + 70 + rr),
-                         fill=(255, 0, 0, 0))
-        elif index_Treat_max == 5:
-            draw.ellipse((5 / 2 * WIDTH - 20 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 5 / 2 * WIDTH - 20 + rr,
-                          hh + space_height + 2 * HEIGHT + 70 + rr),
-                         fill=(255, 0, 0, 0))
-
-        if math.isnan(index_Check_max):
-            print('isnan')
-        elif index_Check_max == 0:
-            draw.ellipse((1 / 2 * WIDTH - rr, hh + space_height + HEIGHT + 20 - rr, 1 / 2 * WIDTH + rr,
-                          hh + space_height + HEIGHT + 20 + rr), fill=(10, 240, 10, 0))
-        elif index_Check_max == 1:
-            draw.ellipse((3 / 2 * WIDTH + 10 - rr, hh + space_height + HEIGHT + 20 - rr, 3 / 2 * WIDTH + rr,
-                          hh + space_height + HEIGHT + 20 + rr),
-                         fill=(10, 240, 10, 0))
-        elif index_Check_max == 2:
-            draw.ellipse((5 / 2 * WIDTH + 20 - rr, hh + space_height + HEIGHT + 20 - rr, 5 / 2 * WIDTH + 20 + rr,
-                          hh + space_height + HEIGHT + 20 + rr),
-                         fill=(10, 240, 10, 0))
-        elif index_Check_max == 3:
-            draw.ellipse((1 / 2 * WIDTH - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 1 / 2 * WIDTH + rr,
-                          hh + space_height + 2 * HEIGHT + 70 + rr),
-                         fill=(10, 240, 10, 0))
-        elif index_Check_max == 4:
-            draw.ellipse((3 / 2 * WIDTH + 10 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 3 / 2 * WIDTH + 10 + rr,
-                          hh + space_height + 2 * HEIGHT + 70 + rr),
-                         fill=(10, 240, 10, 0))
-        elif index_Check_max == 5:
-            draw.ellipse((5 / 2 * WIDTH + 20 - rr, hh + space_height + 2 * HEIGHT + 70 - rr, 5 / 2 * WIDTH + 20 + rr,
-                          hh + space_height + 2 * HEIGHT + 70 + rr),
-                         fill=(10, 240, 10, 0))
 
         if final_consensus:
             draw.text((5 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'FINAL Consensus',
@@ -458,9 +400,13 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         namevid, _, frnumber = imagename.rpartition('_')
         draw.text((0 / 2 * WIDTH, hh + 100 + int(0 * HEIGHT)), namevid + '_' + frnumber, fill=(0, 0, 0), font=font)
+        if draw_STAPLE:
+            font = ImageFont.truetype("arial.ttf", 200)
+            draw.text((0 / 2 * WIDTH+50, hh + 400 + int(0 * HEIGHT)), str(dict_STAPLE[namevid + '_' + frnumber+'.png'])
+, fill=(0, 0, 0), font=font)
         space_height = 150
 
-        hh = hh + 4 * HEIGHT + space_height + 30
+        hh = hh + N_ROWS * HEIGHT + space_height + 30
 
         counter += 1
 

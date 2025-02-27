@@ -11,3 +11,4 @@ __pycache__/
 *.pyo
 /src/annotator_module/annotator_workflow/annotationDatas/
 /src/annotator_module/annotator_workflow/ImgOut2/
+/src/annotator_module/annotator_workflow/ImgOut/

@@ -1,11 +1,12 @@
+from dotenv import load_dotenv
+
 from src.functions import *
 from PIL import Image, ImageDraw, ImageFont
 import cv2
 
 exam_dataset_id = 2739  # V1-Session1=2739 V1-Session2=2765
 data_folder = 'Exam/'  # The destination folder
-consensus_path = '/Users/saman/Downloads/consensus_2'
-consensus_path = '/data/DATA/DELPHI_incision/all_consensus'
+consensus_path = '/data/DATA/incision/4'
 
 annotator_examed = 'anne-sofie.petersen'
 annotator_ref = 'saman.noorzadeh'
@@ -22,7 +23,10 @@ createDIR(data_folder, maskHarddir + annotator_examed[0])
 createDIR(data_folder, maskHarddir + annotator_ref[0])
 createDIR(data_folder, maskSecudir + annotator_examed[0])
 createDIR(data_folder, maskSecudir + annotator_ref[0])
-api, tm = get_supervisely_team()
+if sly.is_development():
+    load_dotenv(os.path.expanduser("~/supervisely.env"))
+api = sly.Api.from_env()
+tm = api.team.get_info_by_name('Endometriosis')
 AR_list = []
 images = os.listdir(consensus_path)
 for vd in api.video.get_list(exam_dataset_id):

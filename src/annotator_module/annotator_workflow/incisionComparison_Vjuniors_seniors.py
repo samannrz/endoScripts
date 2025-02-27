@@ -7,8 +7,7 @@ from PIL import Image, ImageDraw, ImageFont
 import math
 import os
 
-from src.functions import createDIR
-from overlay_mask import reColor
+from functions import createDIR,reColor
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch', help = 'batch number')
@@ -189,7 +188,7 @@ for j in range(math.ceil(lenimg / batch_size)):
 
 
         draw = ImageDraw.Draw(im3)
-        font = ImageFont.truetype("arial.ttf", 70)
+        font = ImageFont.truetype("../../arial.ttf", 70)
 
         draw.text((1 / 2 * WIDTH, hh + space_height + HEIGHT),'Juniors: ', fill=(240, 60, 240), font=font)
         draw.text((3 / 2 * WIDTH + 10, hh + space_height + HEIGHT),'Experts: ', fill=(240, 60, 240), font=font)

@@ -1,7 +1,17 @@
+'''
+if you want to extract STAPLE from your annotations, you have to copy the files to the STAPLE project
+Args:
+    CLASS: define Treat or Check
+    batch_num: define the batch number
+'''
 import os
 import shutil
+CLASS = 'Treat'
+batch_num = 7
+path_src = "annotationDatas/annotationData"+str(batch_num)  # Replace with your source directory
+path_dest = '/data/projects/STAPLE-develop/staple/gt_vols/'+CLASS  # Replace with your destination directory
 
-
+starting_With = 'mask'+CLASS  # Replace with your prefix
 def copy_folders(starting_With, path_src, path_dest):
     # Make sure the destination path exists
     if not os.path.exists(path_dest):
@@ -18,12 +28,5 @@ def copy_folders(starting_With, path_src, path_dest):
             shutil.copytree(folder_path, dest_folder)
             print(f"Copied: {folder_name}")
 
-
-# Example usage:
-CLASS = 'Treat'
-batch_num = 14
-starting_With = 'mask'+CLASS  # Replace with your prefix
-path_src = "annotationDatas/annotationData"+ '2'+str(batch_num)  # Replace with your source directory
-path_dest = '/data/projects/STAPLE-develop/staple/gt_vols/'+CLASS  # Replace with your destination directory
-
-copy_folders(starting_With, path_src, path_dest)
+if __name__ == '__main':
+    copy_folders(starting_With, path_src, path_dest)

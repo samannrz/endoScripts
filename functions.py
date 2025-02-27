@@ -31,12 +31,12 @@ def find(name, path):
         if name in files:
             return os.path.join(root, name)
 
-# import cv2
-# def extractFrame(video, frame_number):
-#     vidcap = cv2.VideoCapture(video)
-#     vidcap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
-#     res, frame = vidcap.read()
-#     return frame
+import cv2
+def extractFrame(video, frame_number):
+    vidcap = cv2.VideoCapture(video)
+    vidcap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+    res, frame = vidcap.read()
+    return frame
 
 
 def findClass(key, objects):
@@ -113,23 +113,18 @@ def overlayMasks_incision(image_orig, mask1, mask2):
     bg.paste(overlay_final, None, mask_final)
     return bg
 
-def find_missing_images(source, destination):
-    """
-    Checks 2 folders. Copies the files from source to destination, if they are nonexistqnt
-    Args:
-        source: a path of the first folder
-        destination: the path of the second folder
-    """
-    images_source = set(os.listdir(source))
-    images_destination = set(os.listdir(destination))
+def find_missing_images(folder1, folder2):
+    # Get the list of images in folder1 and folder2
+    images_folder1 = set(os.listdir(folder1))
+    images_folder2 = set(os.listdir(folder2))
 
     # Find the missing images
-    missing_images = images_source - images_destination
+    missing_images = images_folder1 - images_folder2
 
-    # Copy missing images from source to destination
+    # Copy missing images from folder1 to folder2
     for image in missing_images:
-        source_path = os.path.join(source, image)
-        destination_path = os.path.join(destination, image)
+        source_path = os.path.join(folder1, image)
+        destination_path = os.path.join(folder2, image)
         shutil.copy2(source_path, destination_path)
-        print(f"Copying {image} from {source} to {destination}")
+        print(f"Copying {image} from {folder1} to {folder2}")
 
