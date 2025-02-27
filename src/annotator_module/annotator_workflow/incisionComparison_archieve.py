@@ -4,8 +4,7 @@ from PIL import Image, ImageDraw, ImageFont
 import math
 import os
 import pandas as pd
-from src.functions import createDIR
-from overlay_mask import reColor
+from src.functions import createDIR,reColor
 from statistics import mean
 
 batch_num = 11

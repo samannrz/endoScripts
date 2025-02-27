@@ -5,7 +5,7 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import math
 import os
-from functions import createDIR, reColor
+from src.functions import createDIR, reColor
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch', help = 'batch number')

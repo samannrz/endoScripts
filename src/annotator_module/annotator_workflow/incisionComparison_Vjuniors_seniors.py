@@ -1,13 +1,10 @@
 # in this version the consensensus of annottaors are also plot as heatmaps
 import argparse
 
-import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-import math
-import os
-
-from functions import createDIR,reColor
+import math, os, cv2
+from src.functions import createDIR,reColor
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--batch', help = 'batch number')

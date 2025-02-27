@@ -1092,7 +1092,7 @@ import json
 
 json_object = json.dumps(dict, indent=4)
 batch_num = '211'
-# Writing to sample.json
+# Writing to .json file
 with open('Evaluations_json/'+'Evaluation' + str(batch_num) + '.json', 'w') as outfile:
     outfile.write(json_object)
 

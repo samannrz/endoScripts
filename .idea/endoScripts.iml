@@ -31,7 +31,7 @@
       <excludeFolder url="file://$MODULE_DIR$/annotationDatas/annotationData27/maskCheck_in" />
       <excludeFolder url="file://$MODULE_DIR$/data/keycode" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.12 virtualenv at /data/myenvs/endoenv" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.9 (general_env)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="PyDocumentationSettings">

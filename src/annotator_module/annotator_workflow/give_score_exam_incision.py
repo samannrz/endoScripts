@@ -1,12 +1,24 @@
-from dotenv import load_dotenv
+'''
+After an Exam, the results are saved and calculated through this script
+Args:
+    exam_dataset_id
+    data_folder: the path of the destination folder to save the results
+    consensus_path: this should contain the consensus(reference) images (just for their names) which are saved somewhere
+Returns:
+    float: the calculated score is printed out
+    the results are saved in data_folder
 
-from src.functions import *
+'''
+from dotenv import load_dotenv
+from src.functions import createDIR, findClass, get_frames_from_api
+import supervisely_lib as sly
 from PIL import Image, ImageDraw, ImageFont
-import cv2
+import cv2, os, shutil
+
 
 exam_dataset_id = 2739  # V1-Session1=2739 V1-Session2=2765
 data_folder = 'Exam/'  # The destination folder
-consensus_path = '/data/DATA/incision/4'
+consensus_path = '/data/DATA/incision/4/image'
 
 annotator_examed = 'anne-sofie.petersen'
 annotator_ref = 'saman.noorzadeh'
@@ -30,9 +42,8 @@ tm = api.team.get_info_by_name('Endometriosis')
 AR_list = []
 images = os.listdir(consensus_path)
 for vd in api.video.get_list(exam_dataset_id):
-    # print(vd.name)
     index = [im for im in images if im.startswith(vd.name)]
-    index = int(index[0][-11:-6])
+    index = int(index[0][-9:-4])
 
     video_api = api.video.get_info_by_name(exam_dataset_id, vd.name)
     annotation = api.video.annotation.download(video_api.id)
@@ -153,14 +164,14 @@ for i in range(len(images)):
     maskS_ref_array = np.array(maskS_ref.convert('1'))
 
     try:
-        # score of Hard zones with ANNOT.1 & ref
+        # score of Hard zones with ANNOT & ref
         AR_treat = round((np.count_nonzero(maskH_ann_array & maskH_ref_array) / np.count_nonzero(
             maskH_ref_array | maskH_ann_array)) * 100, 2)
     except ZeroDivisionError:
         AR_treat = 1
 
     try:
-        # score of Check zones with ANNOT.1 & Nicolas
+        # score of Check zones with ANNOT & ref
         AR_check = round((np.count_nonzero(maskS_ann_array & maskS_ref_array) / np.count_nonzero(
             maskS_ann_array | maskS_ref_array)) * 100, 2)
     except ZeroDivisionError:
