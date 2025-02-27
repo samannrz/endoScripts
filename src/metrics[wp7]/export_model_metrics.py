@@ -21,7 +21,7 @@ print('fasterViT Done')
 NSD_mask2Former, DICE_mask2Former, IOU_mask2Former = calculate_metrics(mask_pred_path_mask2Former, mask_gt_path)
 print('Mask2Former Done')
 
-with open('json_results'+Version+'/NSD_models_' + train_data + '_' + class_label, 'w') as f1:
+with open('json_results/'+Version+'/NSD_models_' + train_data + '_' + class_label, 'w') as f1:
     json.dump((NSD_deeplab, NSD_fasterViT, NSD_mask2Former), f1)
 
 with open('json_results/'+Version+'/DICE_models_' + train_data + '_' + class_label, 'w') as f2:

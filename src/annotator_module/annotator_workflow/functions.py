@@ -4,8 +4,6 @@ import shutil
 import numpy as np
 import pygsheets
 from PIL import Image
-
-from .plotting.overlay_mask import reColor
 import supervisely_lib as sly
 
 def createDIR(*args):
