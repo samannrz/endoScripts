@@ -1,3 +1,14 @@
+'''
+This scripts acreats in the base_dest folder the annoations of specific images for one annotator
+for an example usage: I wanted to compare their performance best on specific images
+
+Args:
+    annotator: define the annotator number
+    base_source: where all the annotator images are so that some are seleted
+    base_dest: where to save the annotations
+    test_images_folder: which images are you intending to save
+
+'''
 import os
 import shutil
 

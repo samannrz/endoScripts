@@ -96,7 +96,7 @@ plt.ylabel("NSD")
 plt.title("SURGEON vs NSD")
 
 plt.tight_layout()
-plt.savefig("METRICS_CORRELATION.png", dpi=300, bbox_inches='tight')
+plt.savefig("figures/METRICS_CORRELATION.png", dpi=300, bbox_inches='tight')
 
 ############
 import matplotlib.pyplot as plt
@@ -115,5 +115,5 @@ plt.title("Comparison of METRICS")
 plt.legend()
 plt.grid(True)
 
-plt.savefig("METRICS_vs_IMAGE.png", dpi=300, bbox_inches='tight')
+plt.savefig("figures/METRICS_vs_IMAGE.png", dpi=300, bbox_inches='tight')
 
