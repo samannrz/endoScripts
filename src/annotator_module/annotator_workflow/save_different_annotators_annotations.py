@@ -10,7 +10,7 @@ Args:
 import os
 import shutil
 from PIL import Image
-from src.functions import overlayMasks_incision
+from functions import overlayMasks_incision
 
 common_path = 'annotationDatas/annotationData7'
 dest_folder = '/data/DATA/TEST_save_diff_annot'

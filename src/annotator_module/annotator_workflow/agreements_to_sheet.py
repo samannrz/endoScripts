@@ -2,7 +2,7 @@ import argparse
 
 import numpy as np
 
-from src.functions import write_ndarray_to_gsheet
+from functions import write_ndarray_to_gsheet
 ############# Set the Parameters ##########
 juniorsornot = ''
 juniorsornot = 'j'

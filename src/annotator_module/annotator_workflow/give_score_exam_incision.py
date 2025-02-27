@@ -10,7 +10,7 @@ Returns:
 
 '''
 from dotenv import load_dotenv
-from src.functions import createDIR, findClass, get_frames_from_api
+from functions import createDIR, findClass, get_frames_from_api
 import supervisely_lib as sly
 from PIL import Image, ImageDraw, ImageFont
 import cv2, os, shutil
