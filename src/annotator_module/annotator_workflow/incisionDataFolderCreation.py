@@ -22,7 +22,7 @@ def main():
     batch_num = args.batch
     dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
             'Ervin.Kallfa': 4, 'ebbe.thinggaard': 5, 'incision.consensus': 6, 'oscar.perch': 7, 'anne-sofie.petersen': 8,
-            'gry.olsen': 9, 'j.incision.consensus': 10, 'mina.zamani':11,'saman.noorzadeh':12}
+            'gry.olsen': 9, 'j.incision.consensus': 10, 'mina.zamani':11,'saman.noorzadeh':12,'test.annotator':13}
     # annotator ='incision.consensus'
     print(annotator)
     data_folder = args.output  # The destination folder
