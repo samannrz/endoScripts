@@ -329,7 +329,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         else:
             im3.paste(image_orig, (int(1 * WIDTH), hh + space_height))
         draw = ImageDraw.Draw(im3)
-        font = ImageFont.truetype("arial.ttf", 50)
+        font = ImageFont.truetype("../../arial.ttf", 50)
 
         im3.paste(image_overlayed_N, (0, hh + 2 * space_height + HEIGHT - 100))
         im3.paste(image_overlayed_J, (WIDTH + 10, hh + 2 * space_height + HEIGHT - 100))
@@ -389,7 +389,7 @@ for j in range(math.ceil(lenimg / batch_size)):
             draw.rectangle(box_coords, outline="blue", width=30)
 
         draw = ImageDraw.Draw(im3)
-        font = ImageFont.truetype("arial.ttf", 50)
+        font = ImageFont.truetype("../../arial.ttf", 50)
 
         if final_consensus:
             draw.text((5 / 2 * WIDTH + 20, hh + space_height + 3 * HEIGHT + 100), 'FINAL Consensus',
