@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 import supervisely_lib as sly
 from functions import createDIR
 from PIL import Image, ImageDraw
-import cv2
+import cv2, os
+
 def main():
     parser = argparse.ArgumentParser('To extract images and annotations of a batch')
     parser.add_argument('--batch', help='Enter batch number')
