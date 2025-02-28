@@ -6,8 +6,8 @@ Args:
 '''
 
 # Define the range of rows to read (e.g., rows 30 to 310)
-start_row = 300
-end_row = 322
+start_row = 314
+end_row = 320
 frame_col = 1   # Column index for 'video nale' (A = 1, B = 2, etc.)
 index_col = 6   # Column index for 'annotated frames'
 import pygsheets, re
@@ -36,7 +36,7 @@ for frame, index in zip(frames, indexes):
 # save the populated dictionary
 import json
 json_object = json.dumps(data, indent=4)
-batch_num = '216'
+batch_num = '15'
 # Writing to .json
 with open('../../../data/Evaluations_json/'+'Evaluation' + str(batch_num) + '.json', 'w') as outfile:
     outfile.write(json_object)

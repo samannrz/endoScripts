@@ -1,0 +1,46 @@
+{
+    "evals": [
+        {
+            "frame": "bsp1_GY_20230601_075_VID001_trim3.mp4",
+            "index": [
+                493
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_076_VID001_trim4.mp4",
+            "index": [
+                81
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_077_VID001_trim3.mp4",
+            "index": [
+                245
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_077_VID002_trim2.mp4",
+            "index": [
+                131
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_078_VID003_trim3.mp4",
+            "index": [
+                34
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_078_VID004_trim2.mp4",
+            "index": [
+                147
+            ]
+        },
+        {
+            "frame": "bsp1_GY_20230601_078_VID005_trim1.mp4",
+            "index": [
+                109
+            ]
+        }
+    ]
+}
