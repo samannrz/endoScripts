@@ -18,6 +18,15 @@ def createDIR(*args):
         os.makedirs(path)
         print("The " + name_dir + " directory is created!")
         return path
+def reColor(mask, color1=(255, 255, 255), color2=(255, 0, 0)):  # this function replaces color1 with color2 in mask
+    data = np.array(mask)  # "data" is a height x width x 4 numpy array
+    red, green, blue = data.T  # Temporarily unpack the bands for readability
+
+    # Replace white with red... (leaves alpha values alone...)
+    black_areas = (red == color1[0]) & (blue == color1[2]) & (green == color1[1])
+    data[black_areas.T] = color2  # Transpose back needed
+    mask2 = Image.fromarray(data)
+    return mask2
 
 
 def find(name, path):

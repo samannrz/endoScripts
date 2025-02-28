@@ -36,7 +36,15 @@ def findClass(key, objects):
         if key == obj['id']:
             return obj['classTitle']
 
+def reColor(mask, color1=(255, 255, 255), color2=(255, 0, 0)):  # this function replaces color1 with color2 in mask
+    data = np.array(mask)  # "data" is a height x width x 4 numpy array
+    red, green, blue = data.T  # Temporarily unpack the bands for readability
 
+    # Replace white with red... (leaves alpha values alone...)
+    black_areas = (red == color1[0]) & (blue == color1[2]) & (green == color1[1])
+    data[black_areas.T] = color2  # Transpose back needed
+    mask2 = Image.fromarray(data)
+    return mask2
 
 def get_frames_from_api(api, video_id, video_name, frames_to_convert):
     image_names = []
