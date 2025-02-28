@@ -27,7 +27,7 @@ heatmap_creation=False
 draw_machine_prediction = False
 final_consensus = False
 save_image = True
-draw_STAPLE = True
+draw_STAPLE = False
 ###
 vidname=[]
 
@@ -285,11 +285,11 @@ for j in range(math.ceil(lenimg / batch_size)):
         maskmerge_ER_array = np.maximum(maskS_ER_array,maskH_ER_array)
         maskmerge_EB_array = np.maximum(maskS_EB_array,maskH_EB_array)
         #############################
-        Treat_rates[r, :] = calculate_agreements2(maskH_N, maskH_J, maskH_G, maskH_F,maskH_ER, maskH_EB)
-        Check_rates[r, :] = calculate_agreements2(maskS_N, maskS_J, maskS_G, maskS_F,maskS_ER, maskS_EB)
-        Merge_rates[r, :] = calculate_agreements2(Image.fromarray(maskmerge_N_array), Image.fromarray(maskmerge_J_array),
-                                                  Image.fromarray(maskmerge_G_array), Image.fromarray(maskmerge_F_array),
-                                                  Image.fromarray(maskmerge_ER_array), Image.fromarray(maskmerge_EB_array))
+        # Treat_rates[r, :] = calculate_agreements2(maskH_N, maskH_J, maskH_G, maskH_F,maskH_ER, maskH_EB)
+        # Check_rates[r, :] = calculate_agreements2(maskS_N, maskS_J, maskS_G, maskS_F,maskS_ER, maskS_EB)
+        # Merge_rates[r, :] = calculate_agreements2(Image.fromarray(maskmerge_N_array), Image.fromarray(maskmerge_J_array),
+        #                                           Image.fromarray(maskmerge_G_array), Image.fromarray(maskmerge_F_array),
+        #                                           Image.fromarray(maskmerge_ER_array), Image.fromarray(maskmerge_EB_array))
 
         r += 1
         if not save_image:
