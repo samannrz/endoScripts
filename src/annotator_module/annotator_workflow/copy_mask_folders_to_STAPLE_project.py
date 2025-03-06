@@ -7,7 +7,7 @@ Args:
 import os
 import shutil
 CLASS = 'Treat'
-batch_num = 7
+batch_num = 214
 path_src = "annotationDatas/annotationData"+str(batch_num)  # Replace with your source directory
 path_dest = '/data/projects/STAPLE-develop/staple/gt_vols/'+CLASS  # Replace with your destination directory
 
@@ -28,5 +28,5 @@ def copy_folders(starting_With, path_src, path_dest):
             shutil.copytree(folder_path, dest_folder)
             print(f"Copied: {folder_name}")
 
-if __name__ == '__main':
-    copy_folders(starting_With, path_src, path_dest)
+
+copy_folders(starting_With, path_src, path_dest)

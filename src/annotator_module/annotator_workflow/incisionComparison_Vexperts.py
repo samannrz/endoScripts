@@ -27,7 +27,7 @@ heatmap_creation=False
 draw_machine_prediction = False
 final_consensus = False
 save_image = True
-draw_STAPLE = False
+draw_STAPLE = True
 ###
 vidname=[]
 
@@ -401,7 +401,7 @@ for j in range(math.ceil(lenimg / batch_size)):
         namevid, _, frnumber = imagename.rpartition('_')
         draw.text((0 / 2 * WIDTH, hh + 100 + int(0 * HEIGHT)), namevid + '_' + frnumber, fill=(0, 0, 0), font=font)
         if draw_STAPLE:
-            font = ImageFont.truetype("arial.ttf", 200)
+            font = ImageFont.truetype("../../arial.ttf", 200)
             draw.text((0 / 2 * WIDTH+50, hh + 400 + int(0 * HEIGHT)), str(dict_STAPLE[namevid + '_' + frnumber+'.png'])
 , fill=(0, 0, 0), font=font)
         space_height = 150
