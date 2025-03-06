@@ -7,8 +7,8 @@ from statistics import stdev as std
 plt.subplots(figsize=(3, 4))
 
 Version = 'V2'
-metric = 'NSD' # DICE
-train_data = 'all' # consensus
+metric = 'DICE' # DICE
+train_data = 'consensus' # consensus
 plt.subplots(figsize=(4, 3))
 
 x_Treat = [1, 2, 3]
