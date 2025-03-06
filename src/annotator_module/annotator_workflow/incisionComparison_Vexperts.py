@@ -417,10 +417,10 @@ for j in range(math.ceil(lenimg / batch_size)):
 
         cv2.imwrite(dest_folder + '/Batch' + str(batch_num) + '-Comparison' + str(j + 1) + ".jpg",
                     cv2.cvtColor(np.array(im3), cv2.COLOR_BGR2RGB))
-np.save('../../data/Rates_agreement/Check_rates'+str(batch_num)+'.npy', Check_rates)
-np.save('../../data/Rates_agreement/Treat_rates'+str(batch_num)+'.npy', Treat_rates)
-np.save('../../data/Rates_agreement/Merge_rates'+str(batch_num)+'.npy', Treat_rates)
+np.save('../../../data/Rates_agreement/Check_rates'+str(batch_num)+'.npy', Check_rates)
+np.save('../../../data/Rates_agreement/Treat_rates'+str(batch_num)+'.npy', Treat_rates)
+np.save('../../../data/Rates_agreement/Merge_rates'+str(batch_num)+'.npy', Treat_rates)
 
-np.save('../../data/Rates_agreement/videos'+str(batch_num)+'.npy', vidname)
+np.save('../../../data/Rates_agreement/videos'+str(batch_num)+'.npy', vidname)
 
 
