@@ -4,16 +4,15 @@ import shutil
 import numpy as np
 from PIL import Image
 
-from overlay_mask import reColor
+from functions import reColor
 dict = {'nicolas.bourdel': 0, 'Jean-Luc.Pouly': 1, 'giuseppe.giacomello': 2, 'filippo.ferrari': 3,
         'incision.consensus': 4}
-annotator = 'all'
+annotator = 0
 orig_path = '/data/DATA/incision/'+str(annotator) + '/'
-# orig_path = 'annotationData210'
+
 dest_path_orig = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_images'
 dest_path_mask = '/data/projects/IncisionDeepLab/input/incision/orig_data'+str(annotator)+'/train_masks'
-# dest_path_orig = '/data/DATA/supervisely_format/Batch210/img'
-# dest_path_mask = '/data/DATA/supervisely_format/Batch210/mask'
+
 # moving original images
 orig_path_image = os.path.join(orig_path , 'image')
 

@@ -15,7 +15,7 @@ values = {
 #     'Check Inst.': [3413, 363, 61]
 # }
 
-# Parameters for plotting
+# Parameters for plot
 x = np.arange(len(categories))  # the label locations
 width = 0.25  # the width of the bars
 

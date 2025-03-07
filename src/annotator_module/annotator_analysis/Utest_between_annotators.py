@@ -3,8 +3,8 @@ from set_batches import *
 
 
 for batch_num in [21,22,23,24,25]:
-    Treat_rates = np.load('Rates_agreement/Treat_rates'+str(batch_num)+'.npy')
-    Check_rates = np.load('Rates_agreement/Check_rates'+str(batch_num)+'.npy')
+    Treat_rates = np.load('../../../data/Rates_agreement/Treat_rates'+str(batch_num)+'.npy')
+    Check_rates = np.load('../../../data/Rates_agreement/Check_rates'+str(batch_num)+'.npy')
     n_images = len (Treat_rates)
 #    print(n_images)
     N_J_treat_12345 = N_J_treat_12345 + [Treat_rates[i][1] for i in range(n_images)]
@@ -309,12 +309,12 @@ print(f"P-value: {p_value}")
 statistic, p_value = mannwhitneyu(remove_0_100(J_B_merge_12345), remove_0_100(J_B_merge_78910), alternative='less')
 print(f"P-value: {p_value}")
 
-
-from scipy.stats import brunnermunzel
-statistic, p_value = brunnermunzel(remove_0_100(J_B_treat_12345), remove_0_100(J_B_treat_78910))
-print(p_value)
-statistic, p_value = brunnermunzel(remove_0_100(J_B_check_12345), remove_0_100(J_B_check_78910))
-print(p_value)
-statistic, p_value = brunnermunzel(remove_0_100(J_B_merge_12345), remove_0_100(J_B_merge_78910))
-print(p_value)
-
+#
+# from scipy.stats import brunnermunzel
+# statistic, p_value = brunnermunzel(remove_0_100(J_B_treat_12345), remove_0_100(J_B_treat_78910))
+# print(p_value)
+# statistic, p_value = brunnermunzel(remove_0_100(J_B_check_12345), remove_0_100(J_B_check_78910))
+# print(p_value)
+# statistic, p_value = brunnermunzel(remove_0_100(J_B_merge_12345), remove_0_100(J_B_merge_78910))
+# print(p_value)
+#

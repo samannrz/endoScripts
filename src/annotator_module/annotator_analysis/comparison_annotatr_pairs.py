@@ -9,8 +9,8 @@ NAME_LIST = NAME_LIST_juniors
 juniorsornot = ''
 juniorsornot = 'j'
 
-Treat_rates = np.load('Rates_agreement/Treat_rates'+juniorsornot+str(batch_num)+'.npy')
-Check_rates = np.load('Rates_agreement/Check_rates'+juniorsornot+str(batch_num)+'.npy')
+Treat_rates = np.load('../../../data/Rates_agreement/Treat_rates'+juniorsornot+str(batch_num)+'.npy')
+Check_rates = np.load('../../../data/Rates_agreement/Check_rates'+juniorsornot+str(batch_num)+'.npy')
 #print(Treat_rates)
 print((Treat_rates))
 
