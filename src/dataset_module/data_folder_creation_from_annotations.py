@@ -4,7 +4,7 @@ import os
 from dotenv import load_dotenv
 from PIL import Image, ImageDraw
 import supervisely as sly
-from src.functions import createDIR,findClass, get_frames_from_api
+from functions import createDIR,findClass, get_frames_from_api
 import cv2
 import numpy as np
 

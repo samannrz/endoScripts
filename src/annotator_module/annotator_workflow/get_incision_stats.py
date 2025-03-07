@@ -174,7 +174,7 @@ def main():
          'Giuseppe Imgs': GiuList, 'Filippo Imgs': FilList, 'Jean-Luc Imgs': JeaList, 'Nicolas Imgs': NicList,
          'Ervin Imgs': ErvList,'Ebbe Imgs': EbbList,
          'Consensus': consensusList, '1 Ann': byOneList, '2 Ann': byTwoList, '3 Ann': byThreeList, '4 Ann': byFourList})
-    sfpath = 'keycode/my-gpysheets-3d8d13442005.json'
+    sfpath = '../../../data/keycode/my-gpysheets-3d8d13442005.json'
     sheetID = '1NJRSg0Y1YIj7E217yw-_X7lof7KOlxtTugF4NeVXPA8'
     sheetName = str(datetime.date.today())
     write_to_gsheet(sfpath, sheetID, sheetName, data_df)

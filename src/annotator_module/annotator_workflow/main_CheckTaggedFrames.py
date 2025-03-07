@@ -77,7 +77,7 @@ data_df = pd.DataFrame(
     {'Video Name': nameList, 'Project': projects, 'dataset': datasets, 'num of tags': numTagged,
      'Frames to Tag': Fr2Tag, 'Frames to discuss': Fr22Tag, 'Who':tagger})
 
-sfpath = 'keycode/my-gpysheets-3d8d13442005.json'
+sfpath = '../../../data/keycode/my-gpysheets-3d8d13442005.json'
 sheetID = '1cflPYtcE0J2K92iTiNixPUvAsGM4aeGEhBIhCSojcGQ'
 sheetName = teamName + '_' + workspaceName + '_' + str(datetime.date.today())
 write_to_gsheet(sfpath, sheetID, sheetName, data_df)

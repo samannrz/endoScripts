@@ -3,12 +3,8 @@ import os
 from src.functions import overlayMasks_incision
 
 
-dest_folder = '/data/DATA/supervisely_format/Batch210/final'
-dest_folder = '/data/DATA/Incision_predictions/Batch211-FasterViT/final'
-dest_folder = '/data/DATA/STAPLE/Batch214/final'
-dest_folder = '/data/DATA/TESTS'
-common_path_image = '/data/DATA/incision/4'
-#common_path_mask = '/data/DATA/Incision_predictions/Batch211-FasterViT/'
+dest_folder = '/data/DATA/ZZZZ'
+common_path_image = '/data/projects/endoScripts/src/annotator_module/annotator_workflow/annotationDatas/annotationData214'
 common_path_mask = common_path_image
 
 
