@@ -11,7 +11,7 @@ Version = 'V2'
 mask_pred_path_deeplab_expert = os.path.join(common_path , 'Deeplab' , train_data1, 'mask', class_label)
 mask_pred_path_deeplab_junior = os.path.join(common_path , 'Deeplab' , train_data2, 'mask', class_label)
 
-mask_gt_path = '/data/DATA/incision/4/mask/' + class_label
+mask_gt_path = '/data/DATA/incision/test40/mask/'+ class_label
 
 from metrics_calculate import *
 

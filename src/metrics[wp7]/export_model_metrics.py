@@ -2,16 +2,17 @@ import json
 import os
 
 class_label = 'Treat'
+print(class_label)
 common_path = '/data/DATA/Incision_predictions/test-1-213'
 #train_data = 'consensus'
-train_data = 'consensus'
+train_data = 'all'
 Version = 'V2'
 mask_pred_path_deeplab = os.path.join(common_path , 'Deeplab' , train_data, 'mask', class_label)
 mask_pred_path_fasterViT = os.path.join(common_path , 'FasterViT' , train_data, 'mask', class_label)
 mask_pred_path_mask2Former = os.path.join(common_path , 'Mask2Former' , train_data, 'mask', class_label)
 
 mask_gt_path = '/data/DATA/incision/4/mask/' + class_label
-
+mask_gt_path = '/data/DATA/incision/test40/mask/'+ class_label
 from metrics_calculate import *
 
 NSD_deeplab, DICE_deeplab, IOU_deeplab = calculate_metrics(mask_pred_path_deeplab, mask_gt_path)

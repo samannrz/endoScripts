@@ -50,8 +50,8 @@ def combine_images(path1, path2, output_path):
             print(f"Error processing {image_name}: {e}")
 
 # Example usage
-path1 = 'annotationDatas/annotationData214/image'
-path2 = '/data/DATA/STAPLE/Batch214/final'
-output_path = "/data/DATA/temp-staple-image"
+path1 = '/data/projects/IncisionDeepLab/input/incision/orig_data4/test_images'
+path2 = '/data/DATA/Incision_predictions/test-1-213/Deeplab/all/selected_finals'
+output_path = "/data/DATA/ZWZW"
 
 combine_images(path1, path2, output_path)

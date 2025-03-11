@@ -61,6 +61,8 @@ for project in api.project.get_list(ws.id):  # for each project
     for ds in api.dataset.get_list(project.id):
         print(project.name)
         print(ds.name)
+        if project.name!='Endometriosis_WS10':
+            continue
         saveasbad = 1
         for vd in api.video.get_list(ds.id):
             # if ANNOTATOR == 3 and vd.name in buggy_videos:

@@ -2,14 +2,14 @@ import json
 Version = 'V2'
 ############ EXport expert models ##########
 for class_label in ['Treat', 'Check']:
-    mask_e1_path = '/data/DATA/annotator-consensus/0/mask/' + class_label
-    mask_e2_path = '/data/DATA/annotator-consensus/1/mask/' + class_label
-    mask_e3_path = '/data/DATA/annotator-consensus/5/mask/' + class_label
-    mask_e4_path = '/data/DATA/annotator-consensus/6/mask/' + class_label
-    mask_j1_path = '/data/DATA/annotator-consensus/2/mask/' + class_label
-    mask_j2_path = '/data/DATA/annotator-consensus/3/mask/' + class_label
+    mask_e1_path = '/data/DATA/annotator-consensus2/0/mask/' + class_label
+    mask_e2_path = '/data/DATA/annotator-consensus2/1/mask/' + class_label
+    mask_e3_path = '/data/DATA/annotator-consensus2/5/mask/' + class_label
+    mask_e4_path = '/data/DATA/annotator-consensus2/6/mask/' + class_label
+    mask_j1_path = '/data/DATA/annotator-consensus2/2/mask/' + class_label
+    mask_j2_path = '/data/DATA/annotator-consensus2/3/mask/' + class_label
 
-    mask_gt_path = '/data/DATA/incision/4/mask/' + class_label
+    mask_gt_path = '/data/DATA/incision/test40/mask/'+ class_label
 
     from metrics_calculate import *
 
